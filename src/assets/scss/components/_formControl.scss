@@ -1,0 +1,39 @@
+.form-control {
+  label {
+    @apply pointer-events-none left-2 top-1/2;
+    &.small {
+      transform: translateY(-12px);
+      font-size: 17px;
+    }
+    &.medium {
+      transform: translateY(-15px);
+      font-size: 20px;
+    }
+    &.large {
+      transform: translateY(-18px);
+      font-size: 22px;
+    }
+  }
+  input {
+    &::placeholder {
+      color: transparent;
+    }
+    &:focus,
+    &:not(:placeholder-shown) {
+      & + label {
+        &.small {
+          transform: translateY(-19px);
+          font-size: 12px;
+        }
+        &.medium {
+          transform: translateY(-22px);
+          font-size: 12px;
+        }
+        &.large {
+          transform: translateY(-22px);
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

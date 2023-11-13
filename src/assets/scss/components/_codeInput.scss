@@ -1,0 +1,26 @@
+.codeInput {
+  & > div {
+    input {
+      &::placeholder {
+        @apply text-transparent;
+      }
+      @apply border-[1px] border-gray-1;
+      &:not(:placeholder-shown) {
+        @apply border-primary-3;
+        @apply z-10;
+      }
+      &:focus {
+        @apply z-10 border-primary-3 shadow-none outline-none ring-0;
+      }
+    }
+    &:first-child > input {
+      @apply rounded-bl-md rounded-tl-md;
+    }
+    &:not(:first-child) > input {
+      @apply -ml-[2px];
+    }
+    &:last-child > input {
+      @apply rounded-br-md rounded-tr-md;
+    }
+  }
+}

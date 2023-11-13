@@ -1,0 +1,12 @@
+.avatar {
+  @apply rounded-full;
+  &.small {
+    @apply h-8 w-8;
+  }
+  &.medium {
+    @apply h-10 w-10;
+  }
+  &.large {
+    @apply h-12 w-12;
+  }
+}
