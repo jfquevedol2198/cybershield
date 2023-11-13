@@ -28,6 +28,7 @@ export default {
           2: "var(--gray-color-2)",
           3: "var(--gray-color-3)",
           4: "var(--gray-color-4)",
+          5: "var(--gray-color-5)",
         },
         black: "var(--black-color)",
         white: "var(--white-color)",

@@ -13,6 +13,7 @@ const Sidebar = () => {
     <div className="sidebar">
       {SIDEBAR_ITEMS.map((menu) => {
         const Icon = menu.Icon;
+        const isActive = location.pathname.indexOf(`/${menu.path}`) === 0;
         if (menu.children && menu.children.length > 0) {
           return (
             <Fragment key={menu.path}>
@@ -22,9 +23,7 @@ const Sidebar = () => {
                     <Disclosure.Button
                       className={clsx(
                         "flex w-full justify-between px-5 py-2 text-left text-base font-medium text-gray-1",
-                        location.pathname.indexOf(`/${menu.path}`) > -1
-                          ? "bg-background text-gray-4"
-                          : ""
+                        isActive ? "bg-background text-gray-4" : ""
                       )}
                     >
                       <div className="flex flex-row items-center gap-2">
@@ -35,9 +34,7 @@ const Sidebar = () => {
                         className={clsx(
                           "h-5 w-5",
                           open ? "rotate-180 transform" : "",
-                          location.pathname.indexOf(`/${menu.path}`) > -1
-                            ? "text-primary-3"
-                            : "text-gray-1"
+                          isActive ? "text-primary-3" : "text-gray-1"
                         )}
                       />
                     </Disclosure.Button>
@@ -75,9 +72,7 @@ const Sidebar = () => {
             <div
               className={clsx(
                 "flex w-full justify-between px-5 py-2 text-left text-base font-medium text-gray-1",
-                location.pathname.indexOf(`/${menu.path}`) > -1
-                  ? "bg-background text-gray-4"
-                  : ""
+                isActive ? "bg-background text-gray-4" : ""
               )}
             >
               <div className="flex flex-row items-center gap-2">
