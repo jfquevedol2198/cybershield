@@ -10,7 +10,10 @@ export function mockLogin(mock) {
       }
       return [401, { message: "Password does not match" }];
     }
-    return [404, { message: "User not found" }];
+    return [
+      404,
+      { message: "The information you entered doesn’t match our records." },
+    ];
   });
 }
 

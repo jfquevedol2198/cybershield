@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 import api from "../../api";
+import Alarm, { AlarmType } from "../../components/Alarm";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
@@ -19,6 +20,7 @@ const schema = z.object({
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const getDefaultValues = () => {
@@ -34,6 +36,7 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     try {
+      setError(null);
       setIsLoading(true);
 
       const {
@@ -50,9 +53,9 @@ const Login = () => {
     } catch (error) {
       const { response } = error;
       if (response) {
-        snack.error(response.data.message);
+        setError(response.data.message);
       } else {
-        snack.error(error.message);
+        setError(error.message);
       }
     } finally {
       setIsLoading(false);
@@ -65,6 +68,9 @@ const Login = () => {
       <p className="mb-4 text-[1.625rem] font-bold not-italic text-gray-4">
         Log in
       </p>
+      {error && (
+        <Alarm message={error} type={AlarmType.error} className="mb-4" />
+      )}
       <form onSubmit={onHandleSubmit} className="mb-4">
         <FormControl
           className="mb-4"
