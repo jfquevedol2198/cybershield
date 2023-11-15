@@ -106,7 +106,7 @@ export const SIDEBAR_ITEMS = [
 export const createRoutes = () => [
   {
     path: "/",
-    element: <Navigate to="/dashboard/risk-management" replace={true} />,
+    element: <Navigate to="/login" replace={true} />,
   },
   {
     path: "/login",
