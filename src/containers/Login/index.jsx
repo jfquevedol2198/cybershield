@@ -49,7 +49,7 @@ const Login = () => {
       snack.success("Successfully logged in!");
       setCookieValue(AUTH_TOKEN, token, 2, "hour");
 
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       const { response } = error;
       if (response) {
