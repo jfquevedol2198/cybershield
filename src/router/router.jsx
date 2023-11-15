@@ -24,7 +24,7 @@ export const SIDEBAR_ITEMS = [
     path: "risk-management",
     title: "Risk Management",
     Icon: RiskManagementIcon,
-    Component: Template,
+    Component: RiskManagement,
   },
   {
     path: "compliance",

@@ -48,11 +48,12 @@ const Sidebar = () => {
                             <div className="flex flex-row items-center gap-2">
                               <div className="flex flex-row items-center gap-2">
                                 <div className="flex h-6 w-6 items-center justify-center">
-                                  {location.pathname.indexOf(
-                                    `/${subMenu.path}`
-                                  ) > -1 && (
-                                    <span className="h-2 w-2 rounded-full bg-background" />
-                                  )}
+                                  {isActive &&
+                                    location.pathname.indexOf(
+                                      `/${subMenu.path}`
+                                    ) > -1 && (
+                                      <span className="h-2 w-2 rounded-full bg-background" />
+                                    )}
                                 </div>
                                 {subMenu.title}
                               </div>

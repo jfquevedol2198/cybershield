@@ -4,14 +4,6 @@ import PropTypes from "prop-types";
 
 import { riskLevelStyles, variantStyles } from "../../utils/tag-styles";
 
-export const RiskLevel = {
-  low: "low",
-  medium: "medium",
-  high: "high",
-  critical: "critical",
-  none: "none",
-};
-
 export const TagVariant = {
   active: "active",
   filled: "filled",
@@ -28,7 +20,7 @@ const Tag = ({ riskLevel, variant, label, onRemove }) => {
           riskLevelStyles[riskLevel]
         )}
       >
-        {RiskLevel[riskLevel]}
+        {riskLevel}
       </div>
     );
   }
@@ -55,7 +47,10 @@ Tag.defaultProps = {
 };
 
 Tag.propTypes = {
-  riskLevel: PropTypes.string,
+  riskLevel: PropTypes.shape({
+    label: PropTypes.string,
+    color: PropTypes.string,
+  }),
   variant: PropTypes.string,
   label: PropTypes.string,
   onRemove: PropTypes.func,

@@ -37,7 +37,7 @@ const Button = ({
         {isLoading && (
           <span
             className={clsx(
-              "inline-block h-4 w-4 animate-spin rounded-full border-[3px] border-current border-t-transparent text-white"
+              "inline-block h-4 w-4 animate-spin rounded-full border-[3px] border-current border-t-transparent"
             )}
             role="status"
             aria-label="loading"
