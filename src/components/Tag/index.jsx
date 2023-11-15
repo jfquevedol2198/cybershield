@@ -17,10 +17,10 @@ const Tag = ({ riskLevel, variant, label, onRemove }) => {
       <div
         className={clsx(
           "flex h-6 w-[75px] items-center justify-center rounded-full text-sm capitalize",
-          riskLevelStyles[riskLevel]
+          riskLevelStyles[riskLevel.label]
         )}
       >
-        {riskLevel}
+        {riskLevel.label}
       </div>
     );
   }

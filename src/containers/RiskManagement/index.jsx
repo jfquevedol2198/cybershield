@@ -29,9 +29,9 @@ const RiskManagement = () => {
           <span className="text-[1.625rem] font-bold text-gray-4">
             Global Risk
           </span>
-          <Tag riskLevel={RiskLevel.critical.label} />
+          <Tag riskLevel={RiskLevel.critical} />
         </div>
-        <div className="text-gray-5 text-right text-sm font-medium">
+        <div className="text-right text-sm font-medium text-gray-5">
           LAST SCAN 30
           <br />
           Nov 2023 | 20:00:58

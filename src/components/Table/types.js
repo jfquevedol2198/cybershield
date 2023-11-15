@@ -1,16 +1,18 @@
 import PropTypes from "prop-types";
 
-export const ColumnType = {
-  title: PropTypes.string,
-  dataIndex: PropTypes.string,
-  key: PropTypes.string,
-  render: PropTypes.func,
-  sort: PropTypes.boolean,
-  sortDataType: PropTypes.number,
-  colSpan: PropTypes.number,
-  className: PropTypes.string,
-  align: PropTypes.string,
-};
+export const ColumnType = PropTypes.arrayOf(
+  PropTypes.shape({
+    title: PropTypes.string,
+    dataIndex: PropTypes.string,
+    key: PropTypes.string,
+    render: PropTypes.func,
+    sort: PropTypes.bool,
+    sortDataType: PropTypes.string,
+    colSpan: PropTypes.number,
+    className: PropTypes.string,
+    align: PropTypes.string,
+  })
+);
 
 export const TablePropType = {
   columns: ColumnType,

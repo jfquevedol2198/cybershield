@@ -105,6 +105,10 @@ export const SIDEBAR_ITEMS = [
 
 export const createRoutes = () => [
   {
+    path: "/",
+    element: <Navigate to="/dashboard/risk-management" replace={true} />,
+  },
+  {
     path: "/login",
     Component: Login,
   },
@@ -129,20 +133,20 @@ export const createRoutes = () => [
     Component: AuthCodeVerify,
   },
   {
-    path: "/",
+    path: "/dashboard",
     loader: authorizationLoader(),
     Component: App,
     children: [
       {
         index: true,
-        element: <Navigate to="/risk-management" replace={true} />,
+        element: <Navigate to="/dashboard/risk-management" replace={true} />,
       },
       ...SIDEBAR_ITEMS.map((item) => ({
-        path: `/${item.path}`,
+        path: `/dashboard/${item.path}`,
         Component: item.Component,
         children: item.children?.length
           ? item.children.map((subItem) => ({
-              path: `/${item.path}/${subItem.path}`,
+              path: `/dashboard/${item.path}/${subItem.path}`,
               Component: subItem.Component,
             }))
           : undefined,

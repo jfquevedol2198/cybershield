@@ -10,7 +10,7 @@ const ColorBar = ({ data }) => {
     <div className="flex h-[0.625rem] w-full flex-row overflow-hidden rounded-full bg-white">
       {data.map((v, i) => (
         <div
-          key={`color-{i}`}
+          key={`color-${i}`}
           className={clsx(
             "h-full",
             `bg-${RiskLevel[getRiskLevel((4 - i) * 25)].color}`

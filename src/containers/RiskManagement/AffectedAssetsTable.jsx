@@ -1,6 +1,6 @@
 import Table from "../../components/Table";
 import Tag from "../../components/Tag";
-import { getRiskLevel } from "../../utils/risk";
+import { RiskLevel, getRiskLevel } from "../../utils/risk";
 
 const data = [
   { id: 122, name: "C9300-24-T-A", type: "Network Device", risk: 76 },
@@ -52,7 +52,7 @@ const columns = [
     title: "Risk",
     dataIndex: "risk",
     key: "risk",
-    render: (value) => <Tag riskLevel={getRiskLevel(value)} />,
+    render: (value) => <Tag riskLevel={RiskLevel[getRiskLevel(value)]} />,
     sortDataType: "number",
     colSpan: 1,
     className: "",
