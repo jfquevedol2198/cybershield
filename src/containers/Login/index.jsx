@@ -47,6 +47,7 @@ const Login = () => {
       });
 
       snack.success("Successfully logged in!");
+      console.log("token = " + token);
       setCookieValue(AUTH_TOKEN, token, 2, "hour");
 
       await delay(1000);
