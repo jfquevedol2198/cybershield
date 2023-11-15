@@ -42,7 +42,7 @@ const Sidebar = () => {
                       {menu.children.map((subMenu) => (
                         <NormalButton
                           key={subMenu.path}
-                          href={`/${menu.path}/${subMenu.path}`}
+                          href={`/dashboard/${menu.path}/${subMenu.path}`}
                         >
                           <div className="flex w-full justify-between px-5 py-2 text-left text-base font-medium text-gray-1">
                             <div className="flex flex-row items-center gap-2">
@@ -69,7 +69,7 @@ const Sidebar = () => {
           );
         }
         return (
-          <NormalButton key={menu.path} href={`/${menu.path}`}>
+          <NormalButton key={menu.path} href={`/dashboard/${menu.path}`}>
             <div
               className={clsx(
                 "flex w-full justify-between px-5 py-2 text-left text-base font-medium text-gray-1",
