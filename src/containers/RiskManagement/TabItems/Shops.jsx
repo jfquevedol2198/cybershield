@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 
+import ShopCard from "../../../components/ShopCard";
+
 export const TabShops = ({ value }) => {
   return (
     <div className="w-25 h-[6.875rem]">
@@ -14,5 +16,18 @@ TabShops.propTypes = {
 };
 
 export const PanelShops = () => {
-  return <div className="">Shops</div>;
+  return (
+    <div className="flex h-full flex-col">
+      <div className="mb-5 border-b-[1px] border-background pb-5 text-base font-normal text-gray-5">
+        Track cyber security risk per threat category for better priorization of
+        your mitigation efforts.
+      </div>{" "}
+      <div className="h-full flex-auto overflow-y-auto">
+        <ShopCard category="Texas Refinery" score={92} />
+        <ShopCard category="Supervisory" score={92} />
+        <ShopCard category="Corporate IT" score={92} />
+        <ShopCard category="Oil Wells" score={92} />
+      </div>
+    </div>
+  );
 };

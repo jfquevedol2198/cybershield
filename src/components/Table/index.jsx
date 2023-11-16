@@ -39,13 +39,18 @@ const Table = ({
       {dataSource.map((data, index) => (
         <div
           key={`row-${index}`}
-          className="table-header flex flex-row flex-nowrap border-b-[1px] border-gray-1"
+          className="table-header flex flex-row flex-nowrap items-center border-b-[1px] border-gray-1"
         >
           {columns.map((column) => (
             <div
               key={column.key}
               className={clsx(
-                "cell flex items-center px-1 py-3 text-base font-bold text-gray-4"
+                "cell flex flex-row px-1 py-3 text-base font-bold text-gray-4",
+                column.align === "left"
+                  ? "justify-start"
+                  : column.align === "right"
+                  ? "justify-end"
+                  : "justify-center"
               )}
               style={{
                 width: `${((column.colSpan / totalColSpan) * 100).toFixed(2)}%`,

@@ -1,5 +1,11 @@
 import { ArrowUpIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 import PropTypes from "prop-types";
+
+import Button from "../../../components/Button";
+import Table from "../../../components/Table";
+import { ButtonVariant } from "../../../utils";
+import { RiskLevel, getRiskLevel } from "../../../utils/risk";
 
 export const TabAlerts = ({ value }) => {
   return (
@@ -18,6 +24,162 @@ TabAlerts.propTypes = {
   value: PropTypes.number,
 };
 
+const data = [
+  {
+    id: 1,
+    type: "Default Cre",
+    ip: "192.168.1.1",
+    cell: "Test",
+    age: 200,
+    risk: 90,
+  },
+  {
+    id: 2,
+    type: "Default Cre",
+    ip: "192.168.1.1",
+    cell: "Test",
+    age: 200,
+    risk: 90,
+  },
+  {
+    id: 3,
+    type: "Default Cre",
+    ip: "192.168.1.1",
+    cell: "Test",
+    age: 200,
+    risk: 90,
+  },
+  {
+    id: 4,
+    type: "Default Cre",
+    ip: "192.168.1.1",
+    cell: "Test",
+    age: 200,
+    risk: 90,
+  },
+  {
+    id: 5,
+    type: "Default Cre",
+    ip: "192.168.1.1",
+    cell: "Test",
+    age: 200,
+    risk: 90,
+  },
+  {
+    id: 6,
+    type: "Default Cre",
+    ip: "192.168.1.1",
+    cell: "Test",
+    age: 200,
+    risk: 90,
+  },
+  {
+    id: 7,
+    type: "Default Cre",
+    ip: "192.168.1.1",
+    cell: "Test",
+    age: 200,
+    risk: 90,
+  },
+  {
+    id: 8,
+    type: "Default Cre",
+    ip: "192.168.1.1",
+    cell: "Test",
+    age: 200,
+    risk: 90,
+  },
+  {
+    id: 9,
+    type: "Default Cre",
+    ip: "192.168.1.1",
+    cell: "Test",
+    age: 200,
+    risk: 90,
+  },
+  {
+    id: 10,
+    type: "Default Cre",
+    ip: "192.168.1.1",
+    cell: "Test",
+    age: 200,
+    risk: 90,
+  },
+];
+
+const columns = [
+  {
+    title: "",
+    dataIndex: "risk",
+    key: "risk",
+    sortDataType: "number",
+    colSpan: 0.3,
+    className: "",
+    render: (value) => (
+      <span
+        className={clsx(
+          "flex h-8 w-2 flex-[0_0_8px] rounded-full",
+          `bg-${RiskLevel[getRiskLevel(value)].color}`
+        )}
+      />
+    ),
+    align: "left",
+  },
+  {
+    title: "Type",
+    dataIndex: "type",
+    key: "type",
+    sortDataType: "string",
+    colSpan: 1,
+    className: "",
+    align: "left",
+  },
+  {
+    title: "Cell",
+    dataIndex: "cell",
+    key: "cell",
+    sortDataType: "number",
+    colSpan: 1,
+    className: "",
+    align: "left",
+  },
+  {
+    title: "Age",
+    dataIndex: "age",
+    key: "age",
+    sortDataType: "number",
+    colSpan: 0.5,
+    className: "",
+    align: "left",
+  },
+  {
+    title: "",
+    dataIndex: "",
+    key: "action",
+    colSpan: 1,
+    render: () => <Button variant={ButtonVariant.outline}>GO TO ALERT</Button>,
+    align: "center",
+  },
+];
+
 export const PanelAlerts = () => {
-  return <div className="">Alerts</div>;
+  return (
+    <div className="flex h-full flex-col">
+      <div className="mb-5 flex flex-row items-center justify-between border-b-[1px] border-background pb-5 text-base font-normal text-gray-5">
+        <div>
+          <div className="mb-1 text-base font-medium text-gray-5">
+            Assigned to users
+          </div>
+          <div>
+            <span className="text-[1.75rem] text-gray-5">4</span>{" "}
+            <span className="text-base text-gray-5">/70</span>
+          </div>
+        </div>
+        <Button variant={ButtonVariant.filled}>VIEW OPEN ALERTS</Button>
+      </div>
+      <div className="h-full flex-auto overflow-y-auto">
+        <Table dataSource={data} columns={columns} />
+      </div>
+    </div>
+  );
 };
