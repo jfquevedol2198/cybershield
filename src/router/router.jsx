@@ -10,6 +10,7 @@ import { ReactComponent as SecureRemoteManagementIcon } from "../assets/images/s
 import Error404 from "../containers/404";
 import { App } from "../containers/App";
 import ForgotPassword from "../containers/ForgotPassword";
+import Vulnerabilities from "../containers/Investigate/Vulnerabilities";
 import Login from "../containers/Login";
 import AuthCodeVerify from "../containers/MFA/AuthCodeVerify";
 import Scan from "../containers/MFA/Scan";
@@ -64,7 +65,6 @@ export const SIDEBAR_ITEMS = [
     path: "investigate",
     title: "Investigate",
     Icon: InvestigateIcon,
-    Component: Template,
     children: [
       {
         path: "alerts",
@@ -79,7 +79,7 @@ export const SIDEBAR_ITEMS = [
       {
         path: "vulnerabilities",
         title: "Vulnerabilities",
-        Component: Template,
+        Component: Vulnerabilities,
       },
     ],
   },

@@ -14,3 +14,16 @@ export const DropdownSelectDataType = {
   data: PropTypes.arrayOf(DropdownSelectItemDataType),
   onSelect: PropTypes.func,
 };
+
+export const DonutChartItemDataType = PropTypes.shape({
+  value: PropTypes.number,
+  onClick: PropTypes.func,
+});
+
+export const DonutChartDataType = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  innerRadius: PropTypes.number,
+  outerRadius: PropTypes.number,
+  data: PropTypes.arrayOf(DonutChartItemDataType),
+};

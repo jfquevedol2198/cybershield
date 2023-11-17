@@ -86,7 +86,7 @@ const RiskManagement = () => {
               </span>
               <DropdownSelect data={Period} onSelect={() => {}} />
             </div>
-            <div className="mt-6">
+            <div className="mt-6 overflow-hidden">
               <RiskLineChart />
             </div>
           </div>

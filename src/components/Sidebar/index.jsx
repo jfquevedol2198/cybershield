@@ -13,7 +13,8 @@ const Sidebar = () => {
     <div className="sidebar">
       {SIDEBAR_ITEMS.map((menu) => {
         const Icon = menu.Icon;
-        const isActive = location.pathname.indexOf(`/${menu.path}`) === 0;
+        const isActive =
+          location.pathname.indexOf(`/dashboard/${menu.path}`) === 0;
         if (menu.children && menu.children.length > 0) {
           return (
             <Fragment key={menu.path}>

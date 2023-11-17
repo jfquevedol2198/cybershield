@@ -1,23 +1,28 @@
 export const RiskLevel = {
+  none: {
+    order: 0,
+    label: "none",
+    color: "gray-1",
+  },
   low: {
+    order: 1,
     label: "low",
     color: "risk-4",
   },
   medium: {
+    order: 2,
     label: "medium",
     color: "risk-3",
   },
   high: {
+    order: 3,
     label: "high",
     color: "risk-2",
   },
   critical: {
+    order: 4,
     label: "critical",
     color: "risk-1",
-  },
-  none: {
-    label: "none",
-    color: "gray-1",
   },
 };
 

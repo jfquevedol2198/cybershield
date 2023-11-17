@@ -38,6 +38,7 @@ export default {
           3: "var(--risk-color-3)",
           4: "var(--risk-color-4)",
         },
+        green: "var(--green-color)",
         link: "var(--link-color)",
         success: "var(--success-color)",
         info: "var(--info-color)",
