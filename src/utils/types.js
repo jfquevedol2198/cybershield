@@ -27,3 +27,10 @@ export const DonutChartDataType = {
   outerRadius: PropTypes.number,
   data: PropTypes.arrayOf(DonutChartItemDataType),
 };
+
+export const StackedAreaChartDataType = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  colors: PropTypes.shape(PropTypes.any),
+  data: PropTypes.arrayOf(PropTypes.any),
+};

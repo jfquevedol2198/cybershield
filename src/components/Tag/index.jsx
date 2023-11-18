@@ -20,7 +20,7 @@ const Tag = ({ riskLevel, variant, label, onRemove }) => {
           riskLevelStyles[riskLevel.label]
         )}
       >
-        {riskLevel.label}
+        {label || riskLevel.label}
       </div>
     );
   }
