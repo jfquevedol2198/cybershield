@@ -107,7 +107,7 @@ const Vulnerabilities = () => {
         </div>
         <div className="flex flex-row items-center gap-4">
           <Button variant={ButtonVariant.outline}>
-            Export vulnerabilities list
+            EXPORT VULNERABILITIES LIST
           </Button>
           <NormalButton variant={ButtonVariant.icon} className="h-full">
             <MagnifyingGlassIcon className="h-6 w-6" />

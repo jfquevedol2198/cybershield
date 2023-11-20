@@ -9,6 +9,7 @@ import { ReactComponent as RiskManagementIcon } from "../assets/images/risk-mana
 import { ReactComponent as SecureRemoteManagementIcon } from "../assets/images/secure-remote-management.svg";
 import Error404 from "../containers/404";
 import { App } from "../containers/App";
+import Assets from "../containers/Assets";
 import ForgotPassword from "../containers/ForgotPassword";
 import Vulnerabilities from "../containers/Investigate/Vulnerabilities";
 import Login from "../containers/Login";
@@ -86,7 +87,7 @@ export const SIDEBAR_ITEMS = [
   {
     path: "assets",
     title: "Assets",
-    Component: Template,
+    Component: Assets,
     Icon: AssetsIcon,
   },
   {
