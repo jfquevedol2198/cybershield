@@ -1,5 +1,6 @@
 import Table from "../../components/Table";
 import Tag from "../../components/Tag";
+import { SortDataType } from "../../utils";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
 
 const data = [
@@ -25,7 +26,7 @@ const columns = [
     title: "Asset ID",
     dataIndex: "id",
     key: "id",
-    sortDataType: "number",
+    sortDataType: SortDataType.Number,
     colSpan: 1,
     className: "",
     align: "left",
@@ -34,7 +35,7 @@ const columns = [
     title: "Name",
     dataIndex: "name",
     key: "name",
-    sortDataType: "string",
+    sortDataType: SortDataType.String,
     colSpan: 2,
     className: "",
     align: "left",
@@ -43,7 +44,7 @@ const columns = [
     title: "Type",
     dataIndex: "type",
     key: "type",
-    sortDataType: "number",
+    sortDataType: SortDataType.Number,
     colSpan: 2.5,
     className: "",
     align: "left",
@@ -53,7 +54,7 @@ const columns = [
     dataIndex: "risk",
     key: "risk",
     render: (value) => <Tag riskLevel={RiskLevel[getRiskLevel(value)]} />,
-    sortDataType: "number",
+    sortDataType: SortDataType.Number,
     colSpan: 1,
     className: "",
     align: "left",

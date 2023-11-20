@@ -3,7 +3,8 @@ import {
   FunnelIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 import Button from "../../../components/Button";
 import NormalButton from "../../../components/NormalButton";
@@ -82,6 +83,19 @@ const colors = {
 };
 
 const Vulnerabilities = () => {
+  const stackAreaChartRef = useRef(null);
+  const [width, setWidth] = useState(0);
+  const debounced = useDebouncedCallback(() => {
+    setWidth(stackAreaChartRef.current.clientWidth);
+    console.log(stackAreaChartRef.current.clientWidth);
+  }, 500);
+
+  useEffect(() => {
+    setWidth(stackAreaChartRef.current.clientWidth);
+    window.addEventListener("resize", debounced);
+    return window.removeEventListener("resize", () => {});
+  }, []);
+
   return (
     <Fragment>
       {/* Header */}
@@ -103,90 +117,97 @@ const Vulnerabilities = () => {
           </NormalButton>
         </div>
       </div>
-      <div className="flex flex-row items-start justify-start gap-4 px-7 py-4">
-        <div className="flex min-w-[220px] flex-col items-center bg-white p-4">
-          <div className="mb-2 text-base font-bold">Total Vulnerabilities</div>
-          <DonutChart
-            width={100}
-            height={100}
-            innerRadius={40}
-            outerRadius={50}
-            data={data}
-          />
-          <div className="mt-2 flex flex-row items-center justify-center gap-1 text-base text-green">
-            <ArrowDownIcon className="h-3" />
-            15%
-          </div>
-        </div>
-        <div className="flex flex-col items-center bg-white p-4">
-          <div className="flex w-full flex-row items-center justify-between">
-            <span className="text-base font-bold">
-              Vulnerabilities status timeline
-            </span>
-            <div className="flex flex-row items-center gap-2 text-sm font-light">
-              {Object.keys(colors).map((key) => {
-                return (
-                  <div key={key} className="flex flex-row items-center gap-1">
-                    <span
-                      className="h-3 w-3 rounded-full"
-                      style={{ backgroundColor: `var(${colors[key]})` }}
-                    />
-                    <span>{key}</span>
-                  </div>
-                );
-              })}
+      <div className="w-full overflow-x-auto">
+        <div className="flex min-w-[90rem] flex-row items-start justify-start gap-4 px-7 py-4">
+          <div className="flex min-w-[220px] flex-col items-center bg-white p-4">
+            <div className="mb-2 text-base font-bold">
+              Total Vulnerabilities
+            </div>
+            <DonutChart
+              width={100}
+              height={100}
+              innerRadius={40}
+              outerRadius={50}
+              data={data}
+            />
+            <div className="mt-2 flex flex-row items-center justify-center gap-1 text-base text-green">
+              <ArrowDownIcon className="h-3" />
+              15%
             </div>
           </div>
+          <div
+            className="flex flex-auto flex-col items-center bg-white p-4"
+            ref={stackAreaChartRef}
+          >
+            <div className="flex w-full flex-row items-center justify-between">
+              <span className="text-base font-bold">
+                Vulnerabilities status timeline
+              </span>
+              <div className="flex flex-row items-center gap-2 text-sm font-light">
+                {Object.keys(colors).map((key) => {
+                  return (
+                    <div key={key} className="flex flex-row items-center gap-1">
+                      <span
+                        className="h-3 w-3 rounded-full"
+                        style={{ backgroundColor: `var(${colors[key]})` }}
+                      />
+                      <span>{key}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
 
-          <StackedAreaChart
-            width={700}
-            height={140}
-            data={dataArea}
-            colors={colors}
-          />
-        </div>
-        <div className="flex flex-col items-center bg-white p-4 pb-3">
-          <div className="flex w-full flex-row items-center justify-between">
-            <span className="text-base font-bold">
-              Vulnerability prioritization by
-            </span>
-            <div className="flex flex-row items-center gap-2 text-sm font-light">
-              <Tag variant={TagVariant.active} label="CVSS Score" />
-              <Tag riskLevel={RiskLevel.none} label="CVE ID" />
-              <Tag variant={TagVariant.active} label="Group" />
-            </div>
+            <StackedAreaChart
+              width={width - 32}
+              height={140}
+              data={dataArea}
+              colors={colors}
+            />
           </div>
-          <div className="mt-2 grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-2">
-            <PrioritizationItem
-              percent={38}
-              name="CVE 2016-2021"
-              count={2642}
-            />
-            <PrioritizationItem
-              percent={38}
-              name="CVE 2016-2021"
-              count={2642}
-            />
-            <PrioritizationItem
-              percent={38}
-              name="CVE 2016-2021"
-              count={2642}
-            />
-            <PrioritizationItem
-              percent={38}
-              name="CVE 2016-2021"
-              count={2642}
-            />
-            <PrioritizationItem
-              percent={38}
-              name="CVE 2016-2021"
-              count={2642}
-            />
-            <PrioritizationItem
-              percent={38}
-              name="CVE 2016-2021"
-              count={2642}
-            />
+          <div className="flex min-w-fit flex-col items-center bg-white p-4 pb-3">
+            <div className="flex w-full flex-row items-center justify-between">
+              <span className="text-base font-bold">
+                Vulnerability prioritization by
+              </span>
+              <div className="flex flex-row items-center gap-2 text-sm font-light">
+                <Tag variant={TagVariant.active} label="CVSS Score" />
+                <Tag riskLevel={RiskLevel.none} label="CVE ID" />
+                <Tag variant={TagVariant.active} label="Group" />
+              </div>
+            </div>
+            <div className="mt-2 grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-2">
+              <PrioritizationItem
+                percent={38}
+                name="CVE 2016-2021"
+                count={2642}
+              />
+              <PrioritizationItem
+                percent={38}
+                name="CVE 2016-2021"
+                count={2642}
+              />
+              <PrioritizationItem
+                percent={38}
+                name="CVE 2016-2021"
+                count={2642}
+              />
+              <PrioritizationItem
+                percent={38}
+                name="CVE 2016-2021"
+                count={2642}
+              />
+              <PrioritizationItem
+                percent={38}
+                name="CVE 2016-2021"
+                count={2642}
+              />
+              <PrioritizationItem
+                percent={38}
+                name="CVE 2016-2021"
+                count={2642}
+              />
+            </div>
           </div>
         </div>
       </div>

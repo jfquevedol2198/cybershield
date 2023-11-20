@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import Button from "../../../components/Button";
 import Table from "../../../components/Table";
-import { ButtonVariant } from "../../../utils";
+import { ButtonVariant, SortDataType } from "../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
 
 export const TabInsights = ({ value }) => {
@@ -51,7 +51,7 @@ const columns = [
     title: "",
     dataIndex: "risk",
     key: "risk",
-    sortDataType: "number",
+    sortDataType: SortDataType.Number,
     colSpan: 0.2,
     className: "",
     render: (value) => (
@@ -68,7 +68,7 @@ const columns = [
     title: "Type",
     dataIndex: "type",
     key: "type",
-    sortDataType: "string",
+    sortDataType: SortDataType.String,
     colSpan: 1,
     className: "",
     align: "left",
@@ -77,7 +77,7 @@ const columns = [
     title: "Related Alerts",
     dataIndex: "alerts",
     key: "alerts",
-    sortDataType: "number",
+    sortDataType: SortDataType.Number,
     colSpan: 0.7,
     className: "",
     align: "left",
@@ -86,7 +86,7 @@ const columns = [
     title: "Cell",
     dataIndex: "cell",
     key: "cell",
-    sortDataType: "number",
+    sortDataType: SortDataType.Number,
     colSpan: 1,
     className: "",
     align: "left",
@@ -95,7 +95,7 @@ const columns = [
     title: "Age",
     dataIndex: "age",
     key: "age",
-    sortDataType: "number",
+    sortDataType: SortDataType.Number,
     colSpan: 0.5,
     className: "",
     align: "left",

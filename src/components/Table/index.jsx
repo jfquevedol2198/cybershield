@@ -1,4 +1,5 @@
 import {
+  ArrowDownIcon,
   ArrowUpIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -6,6 +7,8 @@ import {
 import clsx from "clsx";
 import { useMemo, useState } from "react";
 
+import { SortDirection } from "../../utils";
+import { sortFunc } from "../../utils/sort";
 import NormalButton from "../NormalButton";
 import { TablePropType } from "./types";
 
@@ -20,6 +23,7 @@ const Table = ({
   title,
 }) => {
   const [currPage, setCurrPage] = useState(1);
+  const [sorts, setSorts] = useState([]);
   const totalPages = useMemo(
     () => Math.ceil(dataSource.length / rowsPerPage),
     [dataSource.length, rowsPerPage]
@@ -30,26 +34,85 @@ const Table = ({
     return { totalColSpan };
   }, [columns]);
 
+  const sortedData = useMemo(() => {
+    let data = dataSource;
+    for (const sort of sorts) {
+      data = sortFunc(data, sort);
+    }
+    return data;
+  }, [dataSource, sorts]);
+
+  const onSort = (key, sortType, sortDirection) => {
+    const prevSort = sorts.filter((sort) => sort.key === key)[0];
+    const _sorts = [
+      ...sorts.filter((sort) => sort.key !== key),
+      prevSort
+        ? {
+            ...prevSort,
+            direction:
+              prevSort.direction === SortDirection.DESC
+                ? SortDirection.ASC
+                : SortDirection.DESC,
+          }
+        : {
+            key,
+            type: sortType,
+            direction: sortDirection,
+          },
+    ];
+    setSorts(_sorts);
+  };
+
   return (
     <>
       <div className="w-full">
         <div className="table-header flex flex-row flex-nowrap border-b-[1px] border-gray-1 bg-white">
-          {columns.map((column) => (
-            <div
-              key={column.key}
-              className={clsx(
-                "cell flex items-center gap-1 px-2 py-3 text-base font-bold text-gray-4"
-              )}
-              style={{
-                width: `${((column.colSpan / totalColSpan) * 100).toFixed(2)}%`,
-              }}
-            >
-              <span>{column.title}</span>
-              {column.sort && <ArrowUpIcon className="h-4" />}
-            </div>
-          ))}
+          {columns.map((column) => {
+            const sort = sorts.filter(
+              (sort) => sort.key === column.dataIndex
+            )[0];
+            return (
+              <div
+                key={column.key}
+                className={clsx(
+                  "cell flex items-center gap-1 px-2 py-3 text-base font-bold text-gray-4"
+                )}
+                style={{
+                  width: `${((column.colSpan / totalColSpan) * 100).toFixed(
+                    2
+                  )}%`,
+                }}
+              >
+                <span>{column.title}</span>
+                {column.sort &&
+                  (sort && sort.direction === SortDirection.ASC ? (
+                    <ArrowUpIcon
+                      className="h-4 cursor-pointer"
+                      onClick={() =>
+                        onSort(
+                          column.dataIndex,
+                          column.sortDataType,
+                          SortDirection.DESC
+                        )
+                      }
+                    />
+                  ) : (
+                    <ArrowDownIcon
+                      className="h-4 cursor-pointer"
+                      onClick={() =>
+                        onSort(
+                          column.dataIndex,
+                          column.sortDataType,
+                          SortDirection.ASC
+                        )
+                      }
+                    />
+                  ))}
+              </div>
+            );
+          })}
         </div>
-        {dataSource.map((data, index) => (
+        {sortedData.map((data, index) => (
           <div
             key={`row-${index}`}
             className="table-header flex flex-row flex-nowrap items-center border-b-[1px] border-gray-1 bg-white px-2 hover:bg-gray-1"

@@ -9,6 +9,7 @@ export const TabRisk = () => {
       <div className="text-center">Risk</div>
       <div className="flex items-center justify-center">
         <GaugeChart percent={92} />
+        {/* <GaugeEchart percent={92} /> */}
       </div>
       <div className="absolute right-3 top-3 flex flex-row items-center justify-center gap-1 text-base text-risk-2">
         <ArrowUpIcon className="h-3" />

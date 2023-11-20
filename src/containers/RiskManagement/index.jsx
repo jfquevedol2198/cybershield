@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 import Button from "../../components/Button";
 import ColorBar from "../../components/ColorBar";
@@ -42,6 +43,19 @@ const Period = [
 ];
 
 const RiskManagement = () => {
+  const riskLineChartRef = useRef(null);
+  const [width, setWidth] = useState(0);
+  const debounced = useDebouncedCallback(() => {
+    setWidth(riskLineChartRef.current.clientWidth);
+    console.log(riskLineChartRef.current.clientWidth);
+  }, 500);
+
+  useEffect(() => {
+    setWidth(riskLineChartRef.current.clientWidth);
+    window.addEventListener("resize", debounced);
+    return window.removeEventListener("resize", () => {});
+  }, []);
+
   return (
     <Fragment>
       {/* Header */}
@@ -86,8 +100,8 @@ const RiskManagement = () => {
               </span>
               <DropdownSelect data={Period} onSelect={() => {}} />
             </div>
-            <div className="mt-6 overflow-hidden">
-              <RiskLineChart />
+            <div className="mt-6 overflow-hidden" ref={riskLineChartRef}>
+              <RiskLineChart width={width} height={250} />
             </div>
           </div>
         </div>

@@ -8,7 +8,10 @@ const MainLayout = () => (
     <Header />
     <div className="dashboard-content flex h-full w-full flex-row">
       <Sidebar />
-      <div className="flex-1 bg-background px-5 py-8">
+      <div
+        className="flex-auto bg-background px-5 py-8"
+        style={{ width: "calc(100vw - 256px)" }}
+      >
         <Outlet />
       </div>
     </div>

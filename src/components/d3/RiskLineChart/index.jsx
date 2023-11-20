@@ -1,6 +1,8 @@
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 
+import { RiskLineChartDataType } from "../../../utils/types";
+
 const data = [
   { date: "04/09", close: 50 },
   { date: "05/09", close: 60 },
@@ -35,7 +37,7 @@ const yAxisDomains = [
 ];
 
 //chart component
-const RiskLineChart = () => {
+const RiskLineChart = ({ width, height }) => {
   //refs
   const svgRef = useRef();
 
@@ -61,10 +63,12 @@ const RiskLineChart = () => {
   };
 
   useEffect(() => {
-    const width = 700;
-    const height = 250;
-    var margin = { top: 20, right: 0, bottom: 50, left: 100 };
+    var margin = { top: 20, right: 30, bottom: 50, left: 100 };
     const svg = d3.select(svgRef.current);
+    svg.selectAll(".dot").remove();
+    svg.selectAll(".line").remove();
+    svg.selectAll("text").remove();
+    svg.selectAll("path").remove();
 
     svg
       .attr("width", width)
@@ -163,9 +167,11 @@ const RiskLineChart = () => {
       .attr("font-family", "Roboto")
       .attr("font-weight", "300")
       .text((d) => d.label);
-  }, []);
+  }, [width]);
 
   return <svg ref={svgRef}></svg>;
 };
+
+RiskLineChart.propTypes = RiskLineChartDataType;
 
 export default RiskLineChart;

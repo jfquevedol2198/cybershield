@@ -34,3 +34,8 @@ export const StackedAreaChartDataType = {
   colors: PropTypes.shape(PropTypes.any),
   data: PropTypes.arrayOf(PropTypes.any),
 };
+
+export const RiskLineChartDataType = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+};

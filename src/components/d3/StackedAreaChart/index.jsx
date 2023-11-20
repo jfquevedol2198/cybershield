@@ -149,7 +149,7 @@ const StackedAreaChart = ({ width, height, data, colors }) => {
       .attr("font-family", "Roboto")
       .attr("font-weight", "300")
       .text((d) => d);
-  }, [data]);
+  }, [data, width]);
 
   return <svg ref={svgRef}></svg>;
 };
