@@ -98,7 +98,9 @@ const RiskManagement = () => {
               <span className="text-xl font-bold text-gray-4">
                 Risk over time
               </span>
-              <DropdownSelect data={Period} onSelect={() => {}} />
+              <div className="w-50">
+                <DropdownSelect data={Period} onSelect={() => {}} />
+              </div>
             </div>
             <div className="mt-6 overflow-hidden" ref={riskLineChartRef}>
               <RiskLineChart width={width} height={250} />

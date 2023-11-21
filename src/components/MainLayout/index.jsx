@@ -9,8 +9,8 @@ const MainLayout = () => (
     <div className="dashboard-content flex h-full w-full flex-row">
       <Sidebar />
       <div
-        className="flex-auto bg-background px-5 py-8"
-        style={{ width: "calc(100vw - 256px)" }}
+        className="flex-auto overflow-y-auto bg-background px-5 py-8"
+        style={{ width: "calc(100vw - 256px)", height: "calc(100vh - 52px)" }}
       >
         <Outlet />
       </div>

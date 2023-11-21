@@ -5,7 +5,8 @@ import {
   PhoneIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import clsx from "clsx";
+import { Link, useLocation } from "react-router-dom";
 
 import { ReactComponent as ChatSupportSvg } from "../../assets/images/chatsupport.svg";
 import { ReactComponent as KnowledgeSvg } from "../../assets/images/knowledge.svg";
@@ -17,6 +18,8 @@ import DropdownButton from "../DropdownButton";
 import NormalButton from "../NormalButton";
 
 const Header = () => {
+  const location = useLocation();
+  const isSetting = location.pathname.indexOf("/settings") > -1;
   return (
     <div className="header">
       <div className="left">
@@ -26,8 +29,12 @@ const Header = () => {
       </div>
       <div className="right h-full">
         <div className="flex h-full flex-row items-center">
-          <div className="h-full">
-            <NormalButton variant={ButtonVariant.icon} className="h-full">
+          <div className={clsx("h-full", isSetting && "bg-secondary-4")}>
+            <NormalButton
+              variant={ButtonVariant.icon}
+              className="h-full px-3"
+              href="/dashboard/settings"
+            >
               <Cog8ToothIcon className="h-6 w-6" />
             </NormalButton>
           </div>

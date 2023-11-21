@@ -47,17 +47,15 @@ const Sidebar = () => {
                         >
                           <div className="flex w-full justify-between px-5 py-2 text-left text-base font-medium text-gray-1">
                             <div className="flex flex-row items-center gap-2">
-                              <div className="flex flex-row items-center gap-2">
-                                <div className="flex h-6 w-6 items-center justify-center">
-                                  {isActive &&
-                                    location.pathname.indexOf(
-                                      `/${subMenu.path}`
-                                    ) > -1 && (
-                                      <span className="h-2 w-2 rounded-full bg-background" />
-                                    )}
-                                </div>
-                                {subMenu.title}
+                              <div className="flex h-6 w-6 items-center justify-center">
+                                {isActive &&
+                                  location.pathname.indexOf(
+                                    `/${subMenu.path}`
+                                  ) > -1 && (
+                                    <span className="h-2 w-2 rounded-full bg-background" />
+                                  )}
                               </div>
+                              {subMenu.title}
                             </div>
                           </div>
                         </NormalButton>

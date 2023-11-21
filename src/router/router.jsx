@@ -17,6 +17,10 @@ import AuthCodeVerify from "../containers/MFA/AuthCodeVerify";
 import Scan from "../containers/MFA/Scan";
 import { Register } from "../containers/Register";
 import RiskManagement from "../containers/RiskManagement";
+import Settings from "../containers/Settings";
+import TimeRefresh from "../containers/Settings/TimeRefresh";
+import UploadLogo from "../containers/Settings/UploadLogo";
+import Users from "../containers/Settings/Users";
 import Template from "../containers/Template";
 import UpdatePassword from "../containers/UpdatePassword";
 import { authorizationLoader } from "./authorizationLoader";
@@ -104,6 +108,24 @@ export const SIDEBAR_ITEMS = [
   },
 ];
 
+export const SETTINGS_SIDEBAR_ITEMS = [
+  {
+    path: "time-refresh",
+    title: "Time refresh",
+    Component: TimeRefresh,
+  },
+  {
+    path: "upload-logo",
+    title: "Organization Logo",
+    Component: UploadLogo,
+  },
+  {
+    path: "users",
+    title: "Users",
+    Component: Users,
+  },
+];
+
 export const createRoutes = () => [
   {
     path: "/",
@@ -152,6 +174,14 @@ export const createRoutes = () => [
             }))
           : undefined,
       })),
+      {
+        path: "/dashboard/settings",
+        Component: Settings,
+        children: SETTINGS_SIDEBAR_ITEMS.map((item) => ({
+          path: `/dashboard/settings/${item.path}`,
+          Component: item.Component,
+        })),
+      },
     ],
   },
   {
