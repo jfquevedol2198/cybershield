@@ -72,7 +72,7 @@ const FormControl = React.forwardRef(
                   ref={ref}
                   {...rest}
                   className={clsx(
-                    "absolute -left-full flex w-0 w-full items-center rounded border bg-white shadow-input"
+                    "absolute -left-full flex w-0 items-center rounded border bg-white shadow-input"
                   )}
                   value={selected?.value}
                   placeholder="dropdown"
@@ -133,11 +133,9 @@ const FormControl = React.forwardRef(
                   }}
                 >
                   <Listbox.Button className="absolute left-3 z-10 flex w-[7rem] cursor-pointer flex-row items-center gap-1 bg-white py-2 text-left sm:text-sm">
-                    <img
-                      className="block w-6 truncate shadow-dropdown"
-                      src={selected?.flag}
-                      alt=""
-                    />
+                    <span className="bg-transparent text-xl">
+                      {selected?.flag}
+                    </span>
                     <span className="pointer-events-none flex items-center">
                       <ChevronDownIcon
                         className="h-5 w-3 text-black"
@@ -188,11 +186,9 @@ const FormControl = React.forwardRef(
                                   : "font-normal"
                               }`}
                             >
-                              <img
-                                className="block w-6 truncate shadow-dropdown"
-                                src={country.flag}
-                                alt=""
-                              />
+                              <span className="bg-transparent text-xl">
+                                {country.flag}
+                              </span>
                               {country.name} (+{country.area})
                             </div>
                           )}

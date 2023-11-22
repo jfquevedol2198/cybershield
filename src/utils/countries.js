@@ -1,1732 +1,1484 @@
-import adSvg from "../assets/flags/ad.Svg";
-import aeSvg from "../assets/flags/ae.Svg";
-import afSvg from "../assets/flags/af.Svg";
-import agSvg from "../assets/flags/ag.Svg";
-import aiSvg from "../assets/flags/ai.Svg";
-import alSvg from "../assets/flags/al.Svg";
-import amSvg from "../assets/flags/am.Svg";
-import aoSvg from "../assets/flags/ao.Svg";
-import aqSvg from "../assets/flags/aq.Svg";
-import arSvg from "../assets/flags/ar.Svg";
-import asSvg from "../assets/flags/as.Svg";
-import atSvg from "../assets/flags/at.Svg";
-import auSvg from "../assets/flags/au.Svg";
-import awSvg from "../assets/flags/aw.Svg";
-import axSvg from "../assets/flags/ax.Svg";
-import azSvg from "../assets/flags/az.Svg";
-import baSvg from "../assets/flags/ba.Svg";
-import bbSvg from "../assets/flags/bb.Svg";
-import bdSvg from "../assets/flags/bd.Svg";
-import beSvg from "../assets/flags/be.Svg";
-import bfSvg from "../assets/flags/bf.Svg";
-import bgSvg from "../assets/flags/bg.Svg";
-import bhSvg from "../assets/flags/bh.Svg";
-import biSvg from "../assets/flags/bi.Svg";
-import bjSvg from "../assets/flags/bj.Svg";
-import blSvg from "../assets/flags/bl.Svg";
-import bmSvg from "../assets/flags/bm.Svg";
-import bnSvg from "../assets/flags/bn.Svg";
-import boSvg from "../assets/flags/bo.Svg";
-import bqSvg from "../assets/flags/bq.Svg";
-import brSvg from "../assets/flags/br.Svg";
-import bsSvg from "../assets/flags/bs.Svg";
-import btSvg from "../assets/flags/bt.Svg";
-import bwSvg from "../assets/flags/bw.Svg";
-import bySvg from "../assets/flags/by.Svg";
-import bzSvg from "../assets/flags/bz.Svg";
-import caSvg from "../assets/flags/ca.Svg";
-import ccSvg from "../assets/flags/cc.Svg";
-import cdSvg from "../assets/flags/cd.Svg";
-import cfSvg from "../assets/flags/cf.Svg";
-import cgSvg from "../assets/flags/cg.Svg";
-import chSvg from "../assets/flags/ch.Svg";
-import ciSvg from "../assets/flags/ci.Svg";
-import ckSvg from "../assets/flags/ck.Svg";
-import clSvg from "../assets/flags/cl.Svg";
-import cmSvg from "../assets/flags/cm.Svg";
-import cnSvg from "../assets/flags/cn.Svg";
-import coSvg from "../assets/flags/co.Svg";
-import crSvg from "../assets/flags/cr.Svg";
-import cuSvg from "../assets/flags/cu.Svg";
-import cvSvg from "../assets/flags/cv.Svg";
-import cwSvg from "../assets/flags/cw.Svg";
-import cxSvg from "../assets/flags/cx.Svg";
-import cySvg from "../assets/flags/cy.Svg";
-import czSvg from "../assets/flags/cz.Svg";
-import deSvg from "../assets/flags/de.Svg";
-import djSvg from "../assets/flags/dj.Svg";
-import dkSvg from "../assets/flags/dk.Svg";
-import dmSvg from "../assets/flags/dm.Svg";
-import doSvg from "../assets/flags/do.Svg";
-import dzSvg from "../assets/flags/dz.Svg";
-import ecSvg from "../assets/flags/ec.Svg";
-import eeSvg from "../assets/flags/ee.Svg";
-import egSvg from "../assets/flags/eg.Svg";
-import ehSvg from "../assets/flags/eh.Svg";
-import erSvg from "../assets/flags/er.Svg";
-import esSvg from "../assets/flags/es.Svg";
-import etSvg from "../assets/flags/et.Svg";
-import fiSvg from "../assets/flags/fi.Svg";
-import fjSvg from "../assets/flags/fj.Svg";
-import fkSvg from "../assets/flags/fk.Svg";
-import fmSvg from "../assets/flags/fm.Svg";
-import foSvg from "../assets/flags/fo.Svg";
-import frSvg from "../assets/flags/fr.Svg";
-import gaSvg from "../assets/flags/ga.Svg";
-import gbSvg from "../assets/flags/gb.Svg";
-import gdSvg from "../assets/flags/gd.Svg";
-import geSvg from "../assets/flags/ge.Svg";
-import gfSvg from "../assets/flags/gf.Svg";
-import ggSvg from "../assets/flags/gg.Svg";
-import ghSvg from "../assets/flags/gh.Svg";
-import giSvg from "../assets/flags/gi.Svg";
-import glSvg from "../assets/flags/gl.Svg";
-import gmSvg from "../assets/flags/gm.Svg";
-import gnSvg from "../assets/flags/gn.Svg";
-import gpSvg from "../assets/flags/gp.Svg";
-import gqSvg from "../assets/flags/gq.Svg";
-import grSvg from "../assets/flags/gr.Svg";
-import gtSvg from "../assets/flags/gt.Svg";
-import guSvg from "../assets/flags/gu.Svg";
-import gwSvg from "../assets/flags/gw.Svg";
-import gySvg from "../assets/flags/gy.Svg";
-import hkSvg from "../assets/flags/hk.Svg";
-import hmSvg from "../assets/flags/hm.Svg";
-import hnSvg from "../assets/flags/hn.Svg";
-import hrSvg from "../assets/flags/hr.Svg";
-import htSvg from "../assets/flags/ht.Svg";
-import huSvg from "../assets/flags/hu.Svg";
-import idSvg from "../assets/flags/id.Svg";
-import ieSvg from "../assets/flags/ie.Svg";
-import ilSvg from "../assets/flags/il.Svg";
-import imSvg from "../assets/flags/im.Svg";
-import inSvg from "../assets/flags/in.Svg";
-import ioSvg from "../assets/flags/io.Svg";
-import iqSvg from "../assets/flags/iq.Svg";
-import irSvg from "../assets/flags/ir.Svg";
-import isSvg from "../assets/flags/is.Svg";
-import itSvg from "../assets/flags/it.Svg";
-import jeSvg from "../assets/flags/je.Svg";
-import jmSvg from "../assets/flags/jm.Svg";
-import joSvg from "../assets/flags/jo.Svg";
-import jpSvg from "../assets/flags/jp.Svg";
-import keSvg from "../assets/flags/ke.Svg";
-import kgSvg from "../assets/flags/kg.Svg";
-import khSvg from "../assets/flags/kh.Svg";
-import kiSvg from "../assets/flags/ki.Svg";
-import kmSvg from "../assets/flags/km.Svg";
-import knSvg from "../assets/flags/kn.Svg";
-import kpSvg from "../assets/flags/kp.Svg";
-import krSvg from "../assets/flags/kr.Svg";
-import kwSvg from "../assets/flags/kw.Svg";
-import kySvg from "../assets/flags/ky.Svg";
-import kzSvg from "../assets/flags/kz.Svg";
-import laSvg from "../assets/flags/la.Svg";
-import lbSvg from "../assets/flags/lb.Svg";
-import lcSvg from "../assets/flags/lc.Svg";
-import liSvg from "../assets/flags/li.Svg";
-import lkSvg from "../assets/flags/lk.Svg";
-import lrSvg from "../assets/flags/lr.Svg";
-import lsSvg from "../assets/flags/ls.Svg";
-import ltSvg from "../assets/flags/lt.Svg";
-import luSvg from "../assets/flags/lu.Svg";
-import lvSvg from "../assets/flags/lv.Svg";
-import lySvg from "../assets/flags/ly.Svg";
-import maSvg from "../assets/flags/ma.Svg";
-import mcSvg from "../assets/flags/mc.Svg";
-import mdSvg from "../assets/flags/md.Svg";
-import meSvg from "../assets/flags/me.Svg";
-import mfSvg from "../assets/flags/mf.Svg";
-import mgSvg from "../assets/flags/mg.Svg";
-import mhSvg from "../assets/flags/mh.Svg";
-import mkSvg from "../assets/flags/mk.Svg";
-import mlSvg from "../assets/flags/ml.Svg";
-import mmSvg from "../assets/flags/mm.Svg";
-import mnSvg from "../assets/flags/mn.Svg";
-import moSvg from "../assets/flags/mo.Svg";
-import mpSvg from "../assets/flags/mp.Svg";
-import mqSvg from "../assets/flags/mq.Svg";
-import mrSvg from "../assets/flags/mr.Svg";
-import msSvg from "../assets/flags/ms.Svg";
-import mtSvg from "../assets/flags/mt.Svg";
-import muSvg from "../assets/flags/mu.Svg";
-import mvSvg from "../assets/flags/mv.Svg";
-import mwSvg from "../assets/flags/mw.Svg";
-import mxSvg from "../assets/flags/mx.Svg";
-import mySvg from "../assets/flags/my.Svg";
-import mzSvg from "../assets/flags/mz.Svg";
-import naSvg from "../assets/flags/na.Svg";
-import ncSvg from "../assets/flags/nc.Svg";
-import neSvg from "../assets/flags/ne.Svg";
-import nfSvg from "../assets/flags/nf.Svg";
-import ngSvg from "../assets/flags/ng.Svg";
-import niSvg from "../assets/flags/ni.Svg";
-import nlSvg from "../assets/flags/nl.Svg";
-import noSvg from "../assets/flags/no.Svg";
-import npSvg from "../assets/flags/np.Svg";
-import nrSvg from "../assets/flags/nr.Svg";
-import nuSvg from "../assets/flags/nu.Svg";
-import nzSvg from "../assets/flags/nz.Svg";
-import omSvg from "../assets/flags/om.Svg";
-import paSvg from "../assets/flags/pa.Svg";
-import peSvg from "../assets/flags/pe.Svg";
-import pfSvg from "../assets/flags/pf.Svg";
-import pgSvg from "../assets/flags/pg.Svg";
-import phSvg from "../assets/flags/ph.Svg";
-import pkSvg from "../assets/flags/pk.Svg";
-import plSvg from "../assets/flags/pl.Svg";
-import pmSvg from "../assets/flags/pm.Svg";
-import pnSvg from "../assets/flags/pn.Svg";
-import prSvg from "../assets/flags/pr.Svg";
-import psSvg from "../assets/flags/ps.Svg";
-import ptSvg from "../assets/flags/pt.Svg";
-import pwSvg from "../assets/flags/pw.Svg";
-import pySvg from "../assets/flags/py.Svg";
-import qaSvg from "../assets/flags/qa.Svg";
-import reSvg from "../assets/flags/re.Svg";
-import roSvg from "../assets/flags/ro.Svg";
-import rsSvg from "../assets/flags/rs.Svg";
-import ruSvg from "../assets/flags/ru.Svg";
-import rwSvg from "../assets/flags/rw.Svg";
-import saSvg from "../assets/flags/sa.Svg";
-import sbSvg from "../assets/flags/sb.Svg";
-import scSvg from "../assets/flags/sc.Svg";
-import sdSvg from "../assets/flags/sd.Svg";
-import seSvg from "../assets/flags/se.Svg";
-import sgSvg from "../assets/flags/sg.Svg";
-import shSvg from "../assets/flags/sh.Svg";
-import siSvg from "../assets/flags/si.Svg";
-import sjSvg from "../assets/flags/sj.Svg";
-import skSvg from "../assets/flags/sk.Svg";
-import slSvg from "../assets/flags/sl.Svg";
-import smSvg from "../assets/flags/sm.Svg";
-import snSvg from "../assets/flags/sn.Svg";
-import soSvg from "../assets/flags/so.Svg";
-import srSvg from "../assets/flags/sr.Svg";
-import ssSvg from "../assets/flags/ss.Svg";
-import stSvg from "../assets/flags/st.Svg";
-import svSvg from "../assets/flags/sv.Svg";
-import sxSvg from "../assets/flags/sx.Svg";
-import sySvg from "../assets/flags/sy.Svg";
-import szSvg from "../assets/flags/sz.Svg";
-import tcSvg from "../assets/flags/tc.Svg";
-import tdSvg from "../assets/flags/td.Svg";
-import tgSvg from "../assets/flags/tg.Svg";
-import thSvg from "../assets/flags/th.Svg";
-import tjSvg from "../assets/flags/tj.Svg";
-import tkSvg from "../assets/flags/tk.Svg";
-import tlSvg from "../assets/flags/tl.Svg";
-import tmSvg from "../assets/flags/tm.Svg";
-import tnSvg from "../assets/flags/tn.Svg";
-import toSvg from "../assets/flags/to.Svg";
-import trSvg from "../assets/flags/tr.Svg";
-import ttSvg from "../assets/flags/tt.Svg";
-import tvSvg from "../assets/flags/tv.Svg";
-import twSvg from "../assets/flags/tw.Svg";
-import tzSvg from "../assets/flags/tz.Svg";
-import uaSvg from "../assets/flags/ua.Svg";
-import ugSvg from "../assets/flags/ug.Svg";
-import umSvg from "../assets/flags/um.Svg";
-import usSvg from "../assets/flags/us.Svg";
-import uySvg from "../assets/flags/uy.Svg";
-import uzSvg from "../assets/flags/uz.Svg";
-import vaSvg from "../assets/flags/va.Svg";
-import vcSvg from "../assets/flags/vc.Svg";
-import veSvg from "../assets/flags/ve.Svg";
-import vgSvg from "../assets/flags/vg.Svg";
-import viSvg from "../assets/flags/vi.Svg";
-import vnSvg from "../assets/flags/vn.Svg";
-import vuSvg from "../assets/flags/vu.Svg";
-import wfSvg from "../assets/flags/wf.Svg";
-import wsSvg from "../assets/flags/ws.Svg";
-import xkSvg from "../assets/flags/xk.Svg";
-import yeSvg from "../assets/flags/ye.Svg";
-import ytSvg from "../assets/flags/yt.Svg";
-import zaSvg from "../assets/flags/za.Svg";
-import zmSvg from "../assets/flags/zm.Svg";
-import zwSvg from "../assets/flags/zw.Svg";
-
 export default [
   {
     code: "AD",
     name: "Andorra",
     area: "376",
-    flag: adSvg,
+    flag: "🇦🇩",
   },
   {
     code: "AE",
     name: "United Arab Emirates",
     area: "971",
-    flag: aeSvg,
+    flag: "🇦🇪",
   },
   {
     code: "AF",
     name: "Afghanistan",
     area: "93",
-    flag: afSvg,
+    flag: "🇦🇫",
   },
   {
     code: "AG",
     name: "Antigua and Barbuda",
     area: "1-268",
-    flag: agSvg,
+    flag: "🇦🇬",
   },
   {
     code: "AI",
     name: "Anguilla",
     area: "1-264",
-    flag: aiSvg,
+    flag: "🇦🇮",
   },
   {
     code: "AL",
     name: "Albania",
     area: "355",
-    flag: alSvg,
+    flag: "🇦🇱",
   },
   {
     code: "AM",
     name: "Armenia",
     area: "374",
-    flag: amSvg,
+    flag: "🇦🇲",
   },
   {
     code: "AO",
     name: "Angola",
     area: "244",
-    flag: aoSvg,
+    flag: "🇦🇴",
   },
   {
     code: "AQ",
     name: "Antarctica",
     area: "672",
-    flag: aqSvg,
+    flag: "🇦🇶",
   },
   {
     code: "AR",
     name: "Argentina",
     area: "54",
-    flag: arSvg,
+    flag: "🇦🇷",
   },
   {
     code: "AS",
     name: "American Samoa",
     area: "1-684",
-    flag: asSvg,
+    flag: "🇦🇸",
   },
   {
     code: "AT",
     name: "Austria",
     area: "43",
-    flag: atSvg,
+    flag: "🇦🇹",
   },
   {
     code: "AU",
     name: "Australia",
     area: "61",
-    flag: auSvg,
+    flag: "🇦🇺",
   },
   {
     code: "AW",
     name: "Aruba",
     area: "297",
-    flag: awSvg,
+    flag: "🇦🇼",
   },
   {
     code: "AX",
     name: "Åland Islands",
     area: "358-18",
-    flag: axSvg,
+    flag: "🇦🇽",
   },
   {
     code: "AZ",
     name: "Azerbaijan",
     area: "994",
-    flag: azSvg,
+    flag: "🇦🇿",
   },
   {
     code: "BA",
     name: "Bosnia and Herzegovina",
     area: "387",
-    flag: baSvg,
+    flag: "🇧🇦",
   },
   {
     code: "BB",
     name: "Barbados",
     area: "1-246",
-    flag: bbSvg,
+    flag: "🇧🇧",
   },
   {
     code: "BD",
     name: "Bangladesh",
     area: "880",
-    flag: bdSvg,
+    flag: "🇧🇩",
   },
   {
     code: "BE",
     name: "Belgium",
     area: "32",
-    flag: beSvg,
+    flag: "🇧🇪",
   },
   {
     code: "BF",
     name: "Burkina Faso",
     area: "226",
-    flag: bfSvg,
+    flag: "🇧🇫",
   },
   {
     code: "BG",
     name: "Bulgaria",
     area: "359",
-    flag: bgSvg,
+    flag: "🇧🇬",
   },
   {
     code: "BH",
     name: "Bahrain",
     area: "973",
-    flag: bhSvg,
+    flag: "🇧🇭",
   },
   {
     code: "BI",
     name: "Burundi",
     area: "257",
-    flag: biSvg,
+    flag: "🇧🇮",
   },
   {
     code: "BJ",
     name: "Benin",
     area: "229",
-    flag: bjSvg,
+    flag: "🇧🇯",
   },
   {
     code: "BL",
     name: "Saint Barthélemy",
     area: "590",
-    flag: blSvg,
+    flag: "🇧🇱",
   },
   {
     code: "BM",
     name: "Bermuda",
     area: "1-441",
-    flag: bmSvg,
+    flag: "🇧🇲",
   },
   {
     code: "BN",
     name: "Brunei Darussalam",
     area: "673",
-    flag: bnSvg,
+    flag: "🇧🇳",
   },
   {
     code: "BO",
     name: "Bolivia, Plurinational State of",
     area: "591",
-    flag: boSvg,
+    flag: "🇧🇴",
   },
   {
     code: "BQ",
     name: "Caribbean Netherlands",
     area: "599",
-    flag: bqSvg,
+    flag: "🇧🇶",
   },
   {
     code: "BR",
     name: "Brazil",
     area: "55",
-    flag: brSvg,
+    flag: "🇧🇷",
   },
   {
     code: "BS",
     name: "Bahamas",
     area: "1-242",
-    flag: bsSvg,
+    flag: "🇧🇸",
   },
   {
     code: "BT",
     name: "Bhutan",
     area: "975",
-    flag: btSvg,
+    flag: "🇧🇹",
   },
   {
     code: "BW",
     name: "Botswana",
     area: "267",
-    flag: bwSvg,
+    flag: "🇧🇼",
   },
   {
     code: "BY",
     name: "Belarus",
     area: "375",
-    flag: bySvg,
+    flag: "🇧🇾",
   },
   {
     code: "BZ",
     name: "Belize",
     area: "501",
-    flag: bzSvg,
+    flag: "🇧🇿",
   },
   {
     code: "CA",
     name: "Canada",
     area: "1",
-    flag: caSvg,
+    flag: "🇨🇦",
   },
   {
     code: "CC",
     name: "Cocos (Keeling) Islands",
     area: "61",
-    flag: ccSvg,
+    flag: "🇨🇨",
   },
   {
     code: "CD",
     name: "Congo, the Democratic Republic of the",
     area: "243",
-    flag: cdSvg,
+    flag: "🇨🇩",
   },
   {
     code: "CF",
     name: "Central African Republic",
     area: "236",
-    flag: cfSvg,
+    flag: "🇨🇫",
   },
   {
     code: "CG",
     name: "Republic of the Congo",
     area: "242",
-    flag: cgSvg,
+    flag: "🇨🇬",
   },
   {
     code: "CH",
     name: "Switzerland",
     area: "41",
-    flag: chSvg,
+    flag: "🇨🇭",
   },
   {
     code: "CI",
     name: "Côte d'Ivoire",
     area: "225",
-    flag: ciSvg,
+    flag: "🇨🇮",
   },
   {
     code: "CK",
     name: "Cook Islands",
     area: "682",
-    flag: ckSvg,
+    flag: "🇨🇰",
   },
   {
     code: "CL",
     name: "Chile",
     area: "56",
-    flag: clSvg,
+    flag: "🇨🇱",
   },
   {
     code: "CM",
     name: "Cameroon",
     area: "237",
-    flag: cmSvg,
+    flag: "🇨🇲",
   },
   {
     code: "CN",
     name: "China (People's Republic of China)",
     area: "86",
-    flag: cnSvg,
+    flag: "🇨🇳",
   },
   {
     code: "CO",
     name: "Colombia",
     area: "57",
-    flag: coSvg,
+    flag: "🇨🇴",
   },
   {
     code: "CR",
     name: "Costa Rica",
     area: "506",
-    flag: crSvg,
+    flag: "🇨🇷",
   },
   {
     code: "CU",
     name: "Cuba",
     area: "53",
-    flag: cuSvg,
+    flag: "🇨🇺",
   },
   {
     code: "CV",
     name: "Cape Verde",
     area: "238",
-    flag: cvSvg,
+    flag: "🇨🇻",
   },
   {
     code: "CW",
     name: "Curaçao",
     area: "599",
-    flag: cwSvg,
+    flag: "🇨🇼",
   },
   {
     code: "CX",
     name: "Christmas Island",
     area: "61",
-    flag: cxSvg,
+    flag: "🇨🇽",
   },
   {
     code: "CY",
     name: "Cyprus",
     area: "357",
-    flag: cySvg,
+    flag: "🇨🇾",
   },
   {
     code: "CZ",
     name: "Czech Republic",
     area: "420",
-    flag: czSvg,
+    flag: "🇨🇿",
   },
   {
     code: "DE",
     name: "Germany",
     area: "49",
-    flag: deSvg,
+    flag: "🇩🇪",
   },
   {
     code: "DJ",
     name: "Djibouti",
     area: "253",
-    flag: djSvg,
+    flag: "🇩🇯",
   },
   {
     code: "DK",
     name: "Denmark",
     area: "45",
-    flag: dkSvg,
+    flag: "🇩🇰",
   },
   {
     code: "DM",
     name: "Dominica",
     area: "1-767",
-    flag: dmSvg,
+    flag: "🇩🇲",
   },
   {
     code: "DO",
     name: "Dominican Republic",
     area: "1-809 and 1-829",
-    flag: doSvg,
+    flag: "🇩🇴",
   },
   {
     code: "DZ",
     name: "Algeria",
     area: "213",
-    flag: dzSvg,
+    flag: "🇩🇿",
   },
   {
     code: "EC",
     name: "Ecuador",
     area: "593",
-    flag: ecSvg,
+    flag: "🇪🇨",
   },
   {
     code: "EE",
     name: "Estonia",
     area: "372",
-    flag: eeSvg,
+    flag: "🇪🇪",
   },
   {
     code: "EG",
     name: "Egypt",
     area: "20",
-    flag: egSvg,
+    flag: "🇪🇬",
   },
   {
     code: "EH",
     name: "Western Sahara",
     area: "212",
-    flag: ehSvg,
+    flag: "🇪🇭",
   },
   {
     code: "ER",
     name: "Eritrea",
     area: "291",
-    flag: erSvg,
+    flag: "🇪🇷",
   },
   {
     code: "ES",
     name: "Spain",
     area: "34",
-    flag: esSvg,
+    flag: "🇪🇸",
   },
   {
     code: "ET",
     name: "Ethiopia",
     area: "251",
-    flag: etSvg,
+    flag: "🇪🇹",
   },
   {
     code: "FI",
     name: "Finland",
     area: "358",
-    flag: fiSvg,
+    flag: "🇫🇮",
   },
   {
     code: "FJ",
     name: "Fiji",
     area: "679",
-    flag: fjSvg,
+    flag: "🇫🇯",
   },
   {
     code: "FK",
     name: "Falkland Islands (Malvinas)",
     area: "500",
-    flag: fkSvg,
+    flag: "🇫🇰",
   },
   {
     code: "FM",
     name: "Micronesia, Federated States of",
     area: "691",
-    flag: fmSvg,
+    flag: "🇫🇲",
   },
   {
     code: "FO",
     name: "Faroe Islands",
     area: "298",
-    flag: foSvg,
+    flag: "🇫🇴",
   },
   {
     code: "FR",
     name: "France",
     area: "33",
-    flag: frSvg,
+    flag: "🇫🇷",
   },
   {
     code: "GA",
     name: "Gabon",
     area: "241",
-    flag: gaSvg,
+    flag: "🇬🇦",
   },
   {
     code: "GB",
     name: "United Kingdom",
     area: "44",
-    flag: gbSvg,
+    flag: "🇬🇧",
   },
   {
     code: "GD",
     name: "Grenada",
     area: "1-473",
-    flag: gdSvg,
+    flag: "🇬🇩",
   },
   {
     code: "GE",
     name: "Georgia",
     area: "995",
-    flag: geSvg,
+    flag: "🇬🇪",
   },
   {
     code: "GF",
     name: "French Guiana",
     area: "594",
-    flag: gfSvg,
+    flag: "🇬🇫",
   },
   {
     code: "GG",
     name: "Guernsey",
     area: "44-1481",
-    flag: ggSvg,
+    flag: "🇬🇬",
   },
   {
     code: "GH",
     name: "Ghana",
     area: "233",
-    flag: ghSvg,
+    flag: "🇬🇭",
   },
   {
     code: "GI",
     name: "Gibraltar",
     area: "350",
-    flag: giSvg,
+    flag: "🇬🇮",
   },
   {
     code: "GL",
     name: "Greenland",
     area: "299",
-    flag: glSvg,
+    flag: "🇬🇱",
   },
   {
     code: "GM",
     name: "Gambia",
     area: "220",
-    flag: gmSvg,
+    flag: "🇬🇲",
   },
   {
     code: "GN",
     name: "Guinea",
     area: "224",
-    flag: gnSvg,
+    flag: "🇬🇳",
   },
   {
     code: "GP",
     name: "Guadeloupe",
     area: "590",
-    flag: gpSvg,
+    flag: "🇬🇵",
   },
   {
     code: "GQ",
     name: "Equatorial Guinea",
     area: "240",
-    flag: gqSvg,
+    flag: "🇬🇶",
   },
   {
     code: "GR",
     name: "Greece",
     area: "30",
-    flag: grSvg,
+    flag: "🇬🇷",
   },
   {
     code: "GT",
     name: "Guatemala",
     area: "502",
-    flag: gtSvg,
+    flag: "🇬🇹",
   },
   {
     code: "GU",
     name: "Guam",
     area: "1-671",
-    flag: guSvg,
+    flag: "🇬🇺",
   },
   {
     code: "GW",
     name: "Guinea-Bissau",
     area: "245",
-    flag: gwSvg,
+    flag: "🇬🇼",
   },
   {
     code: "GY",
     name: "Guyana",
     area: "592",
-    flag: gySvg,
+    flag: "🇬🇾",
   },
   {
     code: "HK",
     name: "Hong Kong",
     area: "852",
-    flag: hkSvg,
+    flag: "🇭🇰",
   },
   {
     code: "HM",
     name: "Heard Island and McDonald Islands",
     area: " ",
-    flag: hmSvg,
+    flag: "🇭🇲",
   },
   {
     code: "HN",
     name: "Honduras",
     area: "504",
-    flag: hnSvg,
+    flag: "🇭🇳",
   },
   {
     code: "HR",
     name: "Croatia",
     area: "385",
-    flag: hrSvg,
+    flag: "🇭🇷",
   },
   {
     code: "HT",
     name: "Haiti",
     area: "509",
-    flag: htSvg,
+    flag: "🇭🇹",
   },
   {
     code: "HU",
     name: "Hungary",
     area: "36",
-    flag: huSvg,
+    flag: "🇭🇺",
   },
   {
     code: "ID",
     name: "Indonesia",
     area: "62",
-    flag: idSvg,
+    flag: "🇮🇩",
   },
   {
     code: "IE",
     name: "Ireland",
     area: "353",
-    flag: ieSvg,
+    flag: "🇮🇪",
   },
   {
     code: "IL",
     name: "Israel",
     area: "972",
-    flag: ilSvg,
+    flag: "🇮🇱",
   },
   {
     code: "IM",
     name: "Isle of Man",
     area: "44-1624",
-    flag: imSvg,
+    flag: "🇮🇲",
   },
   {
     code: "IN",
     name: "India",
     area: "91",
-    flag: inSvg,
+    flag: "🇮🇳",
   },
   {
     code: "IO",
     name: "British Indian Ocean Territory",
     area: "246",
-    flag: ioSvg,
+    flag: "🇮🇴",
   },
   {
     code: "IQ",
     name: "Iraq",
     area: "964",
-    flag: iqSvg,
+    flag: "🇮🇶",
   },
   {
     code: "IR",
     name: "Iran, Islamic Republic of",
     area: "98",
-    flag: irSvg,
+    flag: "🇮🇷",
   },
   {
     code: "IS",
     name: "Iceland",
     area: "354",
-    flag: isSvg,
+    flag: "🇮🇸",
   },
   {
     code: "IT",
     name: "Italy",
     area: "39",
-    flag: itSvg,
+    flag: "🇮🇹",
   },
   {
     code: "JE",
     name: "Jersey",
     area: "44-1534",
-    flag: jeSvg,
+    flag: "🇯🇪",
   },
   {
     code: "JM",
     name: "Jamaica",
     area: "1-876",
-    flag: jmSvg,
+    flag: "🇯🇲",
   },
   {
     code: "JO",
     name: "Jordan",
     area: "962",
-    flag: joSvg,
+    flag: "🇯🇴",
   },
   {
     code: "JP",
     name: "Japan",
     area: "81",
-    flag: jpSvg,
+    flag: "🇯🇵",
   },
   {
     code: "KE",
     name: "Kenya",
     area: "254",
-    flag: keSvg,
+    flag: "🇰🇪",
   },
   {
     code: "KG",
     name: "Kyrgyzstan",
     area: "996",
-    flag: kgSvg,
+    flag: "🇰🇬",
   },
   {
     code: "KH",
     name: "Cambodia",
     area: "855",
-    flag: khSvg,
+    flag: "🇰🇭",
   },
   {
     code: "KI",
     name: "Kiribati",
     area: "686",
-    flag: kiSvg,
+    flag: "🇰🇮",
   },
   {
     code: "KM",
     name: "Comoros",
     area: "269",
-    flag: kmSvg,
+    flag: "🇰🇲",
   },
   {
     code: "KN",
     name: "Saint Kitts and Nevis",
     area: "1-869",
-    flag: knSvg,
+    flag: "🇰🇳",
   },
   {
     code: "KP",
     name: "Korea, Democratic People's Republic of",
     area: "850",
-    flag: kpSvg,
+    flag: "🇰🇵",
   },
   {
     code: "KR",
     name: "Korea, Republic of",
     area: "82",
-    flag: krSvg,
+    flag: "🇰🇷",
   },
   {
     code: "KW",
     name: "Kuwait",
     area: "965",
-    flag: kwSvg,
+    flag: "🇰🇼",
   },
   {
     code: "KY",
     name: "Cayman Islands",
     area: "1-345",
-    flag: kySvg,
+    flag: "🇰🇾",
   },
   {
     code: "KZ",
     name: "Kazakhstan",
     area: "7",
-    flag: kzSvg,
+    flag: "🇰🇿",
   },
   {
     code: "LA",
     name: "Laos (Lao People's Democratic Republic)",
     area: "856",
-    flag: laSvg,
+    flag: "🇱🇦",
   },
   {
     code: "LB",
     name: "Lebanon",
     area: "961",
-    flag: lbSvg,
+    flag: "🇱🇧",
   },
   {
     code: "LC",
     name: "Saint Lucia",
     area: "1-758",
-    flag: lcSvg,
+    flag: "🇱🇨",
   },
   {
     code: "LI",
     name: "Liechtenstein",
     area: "423",
-    flag: liSvg,
+    flag: "🇱🇮",
   },
   {
     code: "LK",
     name: "Sri Lanka",
     area: "94",
-    flag: lkSvg,
+    flag: "🇱🇰",
   },
   {
     code: "LR",
     name: "Liberia",
     area: "231",
-    flag: lrSvg,
+    flag: "🇱🇷",
   },
   {
     code: "LS",
     name: "Lesotho",
     area: "266",
-    flag: lsSvg,
+    flag: "🇱🇸",
   },
   {
     code: "LT",
     name: "Lithuania",
     area: "370",
-    flag: ltSvg,
+    flag: "🇱🇹",
   },
   {
     code: "LU",
     name: "Luxembourg",
     area: "352",
-    flag: luSvg,
+    flag: "🇱🇺",
   },
   {
     code: "LV",
     name: "Latvia",
     area: "371",
-    flag: lvSvg,
+    flag: "🇱🇻",
   },
   {
     code: "LY",
     name: "Libya",
     area: "218",
-    flag: lySvg,
+    flag: "🇱🇾",
   },
   {
     code: "MA",
     name: "Morocco",
     area: "212",
-    flag: maSvg,
+    flag: "🇲🇦",
   },
   {
     code: "MC",
     name: "Monaco",
     area: "377",
-    flag: mcSvg,
+    flag: "🇲🇨",
   },
   {
     code: "MD",
     name: "Moldova, Republic of",
     area: "373",
-    flag: mdSvg,
+    flag: "🇲🇩",
   },
   {
     code: "ME",
     name: "Montenegro",
     area: "382",
-    flag: meSvg,
+    flag: "🇲🇪",
   },
   {
     code: "MF",
     name: "Saint Martin",
     area: "590",
-    flag: mfSvg,
+    flag: "🇲🇫",
   },
   {
     code: "MG",
     name: "Madagascar",
     area: "261",
-    flag: mgSvg,
+    flag: "🇲🇬",
   },
   {
     code: "MH",
     name: "Marshall Islands",
     area: "692",
-    flag: mhSvg,
+    flag: "🇲🇭",
   },
   {
     code: "MK",
     name: "North Macedonia",
     area: "389",
-    flag: mkSvg,
+    flag: "🇲🇰",
   },
   {
     code: "ML",
     name: "Mali",
     area: "223",
-    flag: mlSvg,
+    flag: "🇲🇱",
   },
   {
     code: "MM",
     name: "Myanmar",
     area: "95",
-    flag: mmSvg,
+    flag: "🇲🇲",
   },
   {
     code: "MN",
     name: "Mongolia",
     area: "976",
-    flag: mnSvg,
+    flag: "🇲🇳",
   },
   {
     code: "MO",
     name: "Macao",
     area: "853",
-    flag: moSvg,
+    flag: "🇲🇴",
   },
   {
     code: "MP",
     name: "Northern Mariana Islands",
     area: "1-670",
-    flag: mpSvg,
+    flag: "🇲🇵",
   },
   {
     code: "MQ",
     name: "Martinique",
     area: "596",
-    flag: mqSvg,
+    flag: "🇲🇶",
   },
   {
     code: "MR",
     name: "Mauritania",
     area: "222",
-    flag: mrSvg,
+    flag: "🇲🇷",
   },
   {
     code: "MS",
     name: "Montserrat",
     area: "1-664",
-    flag: msSvg,
+    flag: "🇲🇸",
   },
   {
     code: "MT",
     name: "Malta",
     area: "356",
-    flag: mtSvg,
+    flag: "🇲🇹",
   },
   {
     code: "MU",
     name: "Mauritius",
     area: "230",
-    flag: muSvg,
+    flag: "🇲🇺",
   },
   {
     code: "MV",
     name: "Maldives",
     area: "960",
-    flag: mvSvg,
+    flag: "🇲🇻",
   },
   {
     code: "MW",
     name: "Malawi",
     area: "265",
-    flag: mwSvg,
+    flag: "🇲🇼",
   },
   {
     code: "MX",
     name: "Mexico",
     area: "52",
-    flag: mxSvg,
+    flag: "🇲🇽",
   },
   {
     code: "MY",
     name: "Malaysia",
     area: "60",
-    flag: mySvg,
+    flag: "🇲🇾",
   },
   {
     code: "MZ",
     name: "Mozambique",
     area: "258",
-    flag: mzSvg,
+    flag: "🇲🇿",
   },
   {
     code: "NA",
     name: "Namibia",
     area: "264",
-    flag: naSvg,
+    flag: "🇳🇦",
   },
   {
     code: "NC",
     name: "New Caledonia",
     area: "687",
-    flag: ncSvg,
+    flag: "🇳🇨",
   },
   {
     code: "NE",
     name: "Niger",
     area: "227",
-    flag: neSvg,
+    flag: "🇳🇪",
   },
   {
     code: "NF",
     name: "Norfolk Island",
     area: "672",
-    flag: nfSvg,
+    flag: "🇳🇫",
   },
   {
     code: "NG",
     name: "Nigeria",
     area: "234",
-    flag: ngSvg,
+    flag: "🇳🇬",
   },
   {
     code: "NI",
     name: "Nicaragua",
     area: "505",
-    flag: niSvg,
+    flag: "🇳🇮",
   },
   {
     code: "NL",
     name: "Netherlands",
     area: "31",
-    flag: nlSvg,
+    flag: "🇳🇱",
   },
   {
     code: "NO",
     name: "Norway",
     area: "47",
-    flag: noSvg,
+    flag: "🇳🇴",
   },
   {
     code: "NP",
     name: "Nepal",
     area: "977",
-    flag: npSvg,
+    flag: "🇳🇵",
   },
   {
     code: "NR",
     name: "Nauru",
     area: "674",
-    flag: nrSvg,
+    flag: "🇳🇷",
   },
   {
     code: "NU",
     name: "Niue",
     area: "683",
-    flag: nuSvg,
+    flag: "🇳🇺",
   },
   {
     code: "NZ",
     name: "New Zealand",
     area: "64",
-    flag: nzSvg,
+    flag: "🇳🇿",
   },
   {
     code: "OM",
     name: "Oman",
     area: "968",
-    flag: omSvg,
+    flag: "🇴🇲",
   },
   {
     code: "PA",
     name: "Panama",
     area: "507",
-    flag: paSvg,
+    flag: "🇵🇦",
   },
   {
     code: "PE",
     name: "Peru",
     area: "51",
-    flag: peSvg,
+    flag: "🇵🇪",
   },
   {
     code: "PF",
     name: "French Polynesia",
     area: "689",
-    flag: pfSvg,
+    flag: "🇵🇫",
   },
   {
     code: "PG",
     name: "Papua New Guinea",
     area: "675",
-    flag: pgSvg,
+    flag: "🇵🇬",
   },
   {
     code: "PH",
     name: "Philippines",
     area: "63",
-    flag: phSvg,
+    flag: "🇵🇭",
   },
   {
     code: "PK",
     name: "Pakistan",
     area: "92",
-    flag: pkSvg,
+    flag: "🇵🇰",
   },
   {
     code: "PL",
     name: "Poland",
     area: "48",
-    flag: plSvg,
+    flag: "🇵🇱",
   },
   {
     code: "PM",
     name: "Saint Pierre and Miquelon",
     area: "508",
-    flag: pmSvg,
+    flag: "🇵🇲",
   },
   {
     code: "PN",
     name: "Pitcairn",
     area: "870",
-    flag: pnSvg,
+    flag: "🇵🇳",
   },
   {
     code: "PR",
     name: "Puerto Rico",
     area: "1-787",
-    flag: prSvg,
+    flag: "🇵🇷",
   },
   {
     code: "PS",
     name: "Palestine",
     area: "970",
-    flag: psSvg,
+    flag: "🇵🇸",
   },
   {
     code: "PT",
     name: "Portugal",
     area: "351",
-    flag: ptSvg,
+    flag: "🇵🇹",
   },
   {
     code: "PW",
     name: "Palau",
     area: "680",
-    flag: pwSvg,
+    flag: "🇵🇼",
   },
   {
     code: "PY",
     name: "Paraguay",
     area: "595",
-    flag: pySvg,
+    flag: "🇵🇾",
   },
   {
     code: "QA",
     name: "Qatar",
     area: "974",
-    flag: qaSvg,
+    flag: "🇶🇦",
   },
   {
     code: "RE",
     name: "Réunion",
     area: "262",
-    flag: reSvg,
+    flag: "🇷🇪",
   },
   {
     code: "RO",
     name: "Romania",
     area: "40",
-    flag: roSvg,
+    flag: "🇷🇴",
   },
   {
     code: "RS",
     name: "Serbia",
     area: "381",
-    flag: rsSvg,
+    flag: "🇷🇸",
   },
   {
     code: "RU",
     name: "Russian Federation",
     area: "7",
-    flag: ruSvg,
+    flag: "🇷🇺",
   },
   {
     code: "RW",
     name: "Rwanda",
     area: "250",
-    flag: rwSvg,
+    flag: "🇷🇼",
   },
   {
     code: "SA",
     name: "Saudi Arabia",
     area: "966",
-    flag: saSvg,
+    flag: "🇸🇦",
   },
   {
     code: "SB",
     name: "Solomon Islands",
     area: "677",
-    flag: sbSvg,
+    flag: "🇸🇧",
   },
   {
     code: "SC",
     name: "Seychelles",
     area: "248",
-    flag: scSvg,
+    flag: "🇸🇨",
   },
   {
     code: "SD",
     name: "Sudan",
     area: "249",
-    flag: sdSvg,
+    flag: "🇸🇩",
   },
   {
     code: "SE",
     name: "Sweden",
     area: "46",
-    flag: seSvg,
+    flag: "🇸🇪",
   },
   {
     code: "SG",
     name: "Singapore",
     area: "65",
-    flag: sgSvg,
+    flag: "🇸🇬",
   },
   {
     code: "SH",
     name: "Saint Helena, Ascension and Tristan da Cunha",
     area: "290",
-    flag: shSvg,
+    flag: "🇸🇭",
   },
   {
     code: "SI",
     name: "Slovenia",
     area: "386",
-    flag: siSvg,
+    flag: "🇸🇮",
   },
   {
     code: "SJ",
     name: "Svalbard and Jan Mayen Islands",
     area: "47",
-    flag: sjSvg,
+    flag: "🇸🇯",
   },
   {
     code: "SK",
     name: "Slovakia",
     area: "421",
-    flag: skSvg,
+    flag: "🇸🇰",
   },
   {
     code: "SL",
     name: "Sierra Leone",
     area: "232",
-    flag: slSvg,
+    flag: "🇸🇱",
   },
   {
     code: "SM",
     name: "San Marino",
     area: "378",
-    flag: smSvg,
+    flag: "🇸🇲",
   },
   {
     code: "SN",
     name: "Senegal",
     area: "221",
-    flag: snSvg,
+    flag: "🇸🇳",
   },
   {
     code: "SO",
     name: "Somalia",
     area: "252",
-    flag: soSvg,
+    flag: "🇸🇴",
   },
   {
     code: "SR",
     name: "Suriname",
     area: "597",
-    flag: srSvg,
+    flag: "🇸🇷",
   },
   {
     code: "SS",
     name: "South Sudan",
     area: "211",
-    flag: ssSvg,
+    flag: "🇸🇸",
   },
   {
     code: "ST",
     name: "Sao Tome and Principe",
     area: "239",
-    flag: stSvg,
+    flag: "🇸🇹",
   },
   {
     code: "SV",
     name: "El Salvador",
     area: "503",
-    flag: svSvg,
+    flag: "🇸🇻",
   },
   {
     code: "SX",
     name: "Sint Maarten (Dutch part)",
     area: "599",
-    flag: sxSvg,
+    flag: "🇸🇽",
   },
   {
     code: "SY",
     name: "Syrian Arab Republic",
     area: "963",
-    flag: sySvg,
+    flag: "🇸🇾",
   },
   {
     code: "SZ",
     name: "Swaziland",
     area: "268",
-    flag: szSvg,
+    flag: "🇸🇿",
   },
   {
     code: "TC",
     name: "Turks and Caicos Islands",
     area: "1-649",
-    flag: tcSvg,
+    flag: "🇹🇨",
   },
   {
     code: "TD",
     name: "Chad",
     area: "235",
-    flag: tdSvg,
+    flag: "🇹🇩",
   },
   {
     code: "TG",
     name: "Togo",
     area: "228",
-    flag: tgSvg,
+    flag: "🇹🇬",
   },
   {
     code: "TH",
     name: "Thailand",
     area: "66",
-    flag: thSvg,
+    flag: "🇹🇭",
   },
   {
     code: "TJ",
     name: "Tajikistan",
     area: "992",
-    flag: tjSvg,
+    flag: "🇹🇯",
   },
   {
     code: "TK",
     name: "Tokelau",
     area: "690",
-    flag: tkSvg,
+    flag: "🇹🇰",
   },
   {
     code: "TL",
     name: "Timor-Leste",
     area: "670",
-    flag: tlSvg,
+    flag: "🇹🇱",
   },
   {
     code: "TM",
     name: "Turkmenistan",
     area: "993",
-    flag: tmSvg,
+    flag: "🇹🇲",
   },
   {
     code: "TN",
     name: "Tunisia",
     area: "216",
-    flag: tnSvg,
+    flag: "🇹🇳",
   },
   {
     code: "TO",
     name: "Tonga",
     area: "676",
-    flag: toSvg,
+    flag: "🇹🇴",
   },
   {
     code: "TR",
     name: "Turkey",
     area: "90",
-    flag: trSvg,
+    flag: "🇹🇷",
   },
   {
     code: "TT",
     name: "Trinidad and Tobago",
     area: "1-868",
-    flag: ttSvg,
+    flag: "🇹🇹",
   },
   {
     code: "TV",
     name: "Tuvalu",
     area: "688",
-    flag: tvSvg,
+    flag: "🇹🇻",
   },
   {
     code: "TW",
     name: "Taiwan (Republic of China)",
     area: "886",
-    flag: twSvg,
+    flag: "🇹🇼",
   },
   {
     code: "TZ",
     name: "Tanzania, United Republic of",
     area: "255",
-    flag: tzSvg,
+    flag: "🇹🇿",
   },
   {
     code: "UA",
     name: "Ukraine",
     area: "380",
-    flag: uaSvg,
+    flag: "🇺🇦",
   },
   {
     code: "UG",
     name: "Uganda",
     area: "256",
-    flag: ugSvg,
+    flag: "🇺🇬",
   },
   {
     code: "UM",
     name: "US Minor Outlying Islands",
     area: "1",
-    flag: umSvg,
+    flag: "🇺🇲",
   },
   {
     code: "US",
     name: "United States",
     area: "1",
-    flag: usSvg,
+    flag: "🇺🇸",
   },
   {
     code: "UY",
     name: "Uruguay",
     area: "598",
-    flag: uySvg,
+    flag: "🇺🇾",
   },
   {
     code: "UZ",
     name: "Uzbekistan",
     area: "998",
-    flag: uzSvg,
+    flag: "🇺🇿",
   },
   {
     code: "VA",
     name: "Holy See (Vatican City State)",
     area: "379",
-    flag: vaSvg,
+    flag: "🇻🇦",
   },
   {
     code: "VC",
     name: "Saint Vincent and the Grenadines",
     area: "1-784",
-    flag: vcSvg,
+    flag: "🇻🇨",
   },
   {
     code: "VE",
     name: "Venezuela, Bolivarian Republic of",
     area: "58",
-    flag: veSvg,
+    flag: "🇻🇪",
   },
   {
     code: "VG",
     name: "Virgin Islands, British",
     area: "1-284",
-    flag: vgSvg,
+    flag: "🇻🇬",
   },
   {
     code: "VI",
     name: "Virgin Islands, U.S.",
     area: "1-340",
-    flag: viSvg,
+    flag: "🇻🇮",
   },
   {
     code: "VN",
     name: "Vietnam",
     area: "84",
-    flag: vnSvg,
+    flag: "🇻🇳",
   },
   {
     code: "VU",
     name: "Vanuatu",
     area: "678",
-    flag: vuSvg,
+    flag: "🇻🇺",
   },
   {
     code: "WF",
     name: "Wallis and Futuna Islands",
     area: "681",
-    flag: wfSvg,
+    flag: "🇼🇫",
   },
   {
     code: "WS",
     name: "Samoa",
     area: "685",
-    flag: wsSvg,
+    flag: "🇼🇸",
   },
   {
     code: "XK",
     name: "Kosovo",
     area: "383",
-    flag: xkSvg,
+    flag: "🇽🇰",
   },
   {
     code: "YE",
     name: "Yemen",
     area: "967",
-    flag: yeSvg,
+    flag: "🇾🇪",
   },
   {
     code: "YT",
     name: "Mayotte",
     area: "262",
-    flag: ytSvg,
+    flag: "🇾🇹",
   },
   {
     code: "ZA",
     name: "South Africa",
     area: "27",
-    flag: zaSvg,
+    flag: "🇿🇦",
   },
   {
     code: "ZM",
     name: "Zambia",
     area: "260",
-    flag: zmSvg,
+    flag: "🇿🇲",
   },
   {
     code: "ZW",
     name: "Zimbabwe",
     area: "263",
-    flag: zwSvg,
+    flag: "🇿🇼",
   },
 ];
