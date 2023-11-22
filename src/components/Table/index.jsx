@@ -135,7 +135,9 @@ const Table = ({
                 }}
               >
                 {column.render && column.render(data[column.dataIndex], data)}
-                {!column.render && <span>{data[column.dataIndex]}</span>}
+                {!column.render && (
+                  <span className="truncate">{data[column.dataIndex]}</span>
+                )}
               </div>
             ))}
           </div>

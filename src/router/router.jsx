@@ -42,12 +42,11 @@ export const SIDEBAR_ITEMS = [
     path: "factory-1",
     title: "Factory 1",
     Icon: Factory1Icon,
-    Component: Template,
     children: [
       {
         path: "site-dashboard",
         title: "Site Dashboard",
-        Component: Template,
+        Component: RiskManagement,
       },
       {
         path: "shops",

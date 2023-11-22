@@ -1,6 +1,6 @@
 .form-control {
   label {
-    @apply pointer-events-none left-2 top-1/2;
+    @apply pointer-events-none top-1/2;
     &.small {
       transform: translateY(-12px);
       font-size: 17px;
@@ -35,5 +35,9 @@
         }
       }
     }
+  }
+  .input-icon {
+    @apply absolute right-2 top-1/2;
+    transform: translateY(-50%);
   }
 }
