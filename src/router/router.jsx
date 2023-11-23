@@ -10,6 +10,9 @@ import { ReactComponent as SecureRemoteManagementIcon } from "../assets/images/s
 import Error404 from "../containers/404";
 import { App } from "../containers/App";
 import Assets from "../containers/Assets";
+import FactoryAssets from "../containers/Factory/Assets";
+import FactoryCells from "../containers/Factory/Cells";
+import FactoryShops from "../containers/Factory/Shops";
 import ForgotPassword from "../containers/ForgotPassword";
 import Vulnerabilities from "../containers/Investigate/Vulnerabilities";
 import Login from "../containers/Login";
@@ -51,17 +54,17 @@ export const SIDEBAR_ITEMS = [
       {
         path: "shops",
         title: "Shops",
-        Component: Template,
+        Component: FactoryShops,
       },
       {
         path: "cells",
         title: "Cells",
-        Component: Template,
+        Component: FactoryCells,
       },
       {
         path: "assets",
         title: "Assets",
-        Component: Template,
+        Component: FactoryAssets,
       },
     ],
   },
