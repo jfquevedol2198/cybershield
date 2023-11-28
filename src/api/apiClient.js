@@ -4,7 +4,14 @@ import {
   updatePasswordApi,
   verifyCodeApi,
 } from "./auth";
-import { assets, cells, shops, vulnerabilities } from "./dashboard";
+import {
+  alerts,
+  assets,
+  cells,
+  insights,
+  shops,
+  vulnerabilities,
+} from "./dashboard";
 
 export const createApiClient = (httpClient) => {
   const apiClient = {
@@ -16,6 +23,8 @@ export const createApiClient = (httpClient) => {
     ...shops(httpClient),
     ...cells(httpClient),
     ...vulnerabilities(httpClient),
+    ...alerts(httpClient),
+    ...insights(httpClient),
   };
   return apiClient;
 };

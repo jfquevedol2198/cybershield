@@ -1,0 +1,38 @@
+[
+  {
+    "insightId": "1",
+    "type": "Industrial Control Systems",
+    "score": 1,
+    "status": "New",
+    "updatedTime": "2023-01-03 12:25",
+    "cell": "-",
+    "relatedAlerts": "5"
+  },
+  {
+    "insightId": "2",
+    "type": "Network Events",
+    "score": 0.6,
+    "status": "New",
+    "updatedTime": "2023-02-05 14:45",
+    "cell": "-",
+    "relatedAlerts": "5"
+  },
+  {
+    "insightId": "3",
+    "type": "Industrial Control Systems",
+    "score": 0.4,
+    "status": "New",
+    "updatedTime": "2023-03-09 19:25",
+    "cell": "-",
+    "relatedAlerts": "3"
+  },
+  {
+    "insightId": "4",
+    "type": "Application",
+    "score": 0.2,
+    "status": "New",
+    "updatedTime": "2023-05-14 01:15",
+    "cell": "-",
+    "relatedAlerts": "2"
+  }
+]

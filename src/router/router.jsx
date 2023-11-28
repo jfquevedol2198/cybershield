@@ -14,6 +14,8 @@ import FactoryAssets from "../containers/Factory/Assets";
 import FactoryCells from "../containers/Factory/Cells";
 import FactoryShops from "../containers/Factory/Shops";
 import ForgotPassword from "../containers/ForgotPassword";
+import Alerts from "../containers/Investigate/Alerts";
+import Insights from "../containers/Investigate/Insights";
 import Vulnerabilities from "../containers/Investigate/Vulnerabilities";
 import Login from "../containers/Login";
 import AuthCodeVerify from "../containers/MFA/AuthCodeVerify";
@@ -76,12 +78,12 @@ export const SIDEBAR_ITEMS = [
       {
         path: "alerts",
         title: "Alerts",
-        Component: Template,
+        Component: Alerts,
       },
       {
         path: "insights",
         title: "Insights",
-        Component: Template,
+        Component: Insights,
       },
       {
         path: "vulnerabilities",

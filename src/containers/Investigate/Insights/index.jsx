@@ -3,7 +3,6 @@ import {
   FunnelIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import _ from "lodash";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -11,13 +10,11 @@ import api from "../../../api";
 import Button from "../../../components/Button";
 import NormalButton from "../../../components/NormalButton";
 import PrioritizationItem from "../../../components/PrioritizationItem";
-import Tag, { TagVariant } from "../../../components/Tag";
 import DonutChart from "../../../components/d3/DonutChart";
 import StackedAreaChart from "../../../components/d3/StackedAreaChart";
 import { ButtonVariant } from "../../../utils";
 import { groupByKey } from "../../../utils/parse";
-import { RiskLevel } from "../../../utils/risk";
-import VulnerabilityTable from "./VulnerabilityTable";
+import InsightsTable from "./InsightsTable";
 
 const dataArea = [
   {
@@ -78,14 +75,14 @@ const colors = {
   Rejected: "--gray-color-2",
 };
 
-const Vulnerabilities = () => {
+const Insights = () => {
   const stackAreaChartRef = useRef(null);
   const [width, setWidth] = useState(0);
 
   const [loading, setLoading] = useState(false);
-  const [vulnerabilities, setVulnerabilities] = useState([]);
+  const [insights, setInsights] = useState([]);
   const [riskData, setRiskData] = useState([]);
-  const [groupByCveID, setGroupByCveID] = useState([]);
+  const [groupByType, setGroupByType] = useState([]);
 
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
@@ -97,14 +94,14 @@ const Vulnerabilities = () => {
       setLoading(true);
       const {
         data: { data },
-      } = await api.getVulnerabilities();
-      const vulnerabilities = _.get(data, "vulnerabilities") || [];
-      setVulnerabilities(vulnerabilities);
-      setGroupByCveID(groupByKey(vulnerabilities, "cveName"));
+      } = await api.getInsights();
+      const insights = data;
+      setInsights(insights);
+      setGroupByType(groupByKey(insights, "type"));
 
-      const riskData = vulnerabilities.reduce(
+      const riskData = insights.reduce(
         (_data, vul) => {
-          const severity = vul.cveScore;
+          const severity = vul.score * 10;
           if (severity > 0 && severity <= 3.5) {
             _data.low++;
           } else if (severity > 3.5 && severity <= 5.5) {
@@ -140,13 +137,11 @@ const Vulnerabilities = () => {
       <div className="mb-3 flex flex-row items-center justify-between bg-background px-8">
         <div className="flex flex-row items-center gap-2">
           <span className="text-[1.625rem] font-bold text-gray-4">
-            Vulnerabilities
+            Insights
           </span>
         </div>
         <div className="flex flex-row items-center gap-4">
-          <Button variant={ButtonVariant.outline}>
-            EXPORT VULNERABILITIES LIST
-          </Button>
+          <Button variant={ButtonVariant.outline}>EXPORT INSIGHTS LIST</Button>
           <NormalButton variant={ButtonVariant.icon} className="h-full">
             <MagnifyingGlassIcon className="h-6 w-6" />
           </NormalButton>
@@ -158,9 +153,7 @@ const Vulnerabilities = () => {
       <div className="w-full overflow-x-auto">
         <div className="flex min-w-[90rem] flex-row items-start justify-start gap-4 px-7 py-4">
           <div className="flex min-w-[220px] flex-col items-center bg-white p-4">
-            <div className="mb-2 text-base font-bold">
-              Total Vulnerabilities
-            </div>
+            <div className="mb-2 text-base font-bold">Total Insights</div>
             <DonutChart
               width={100}
               height={100}
@@ -179,7 +172,7 @@ const Vulnerabilities = () => {
           >
             <div className="flex w-full flex-row items-center justify-between">
               <span className="text-base font-bold">
-                Vulnerabilities status timeline
+                Insights status timeline
               </span>
               <div className="flex flex-row items-center gap-2 text-sm font-light">
                 {Object.keys(colors).map((key) => {
@@ -205,14 +198,7 @@ const Vulnerabilities = () => {
           </div>
           <div className="flex h-[12.25rem] w-[33.25rem] min-w-fit flex-col items-center bg-white p-4 pb-3">
             <div className="flex w-full flex-row items-center justify-between">
-              <span className="text-base font-bold">
-                Vulnerability prioritization by
-              </span>
-              <div className="flex flex-row items-center gap-2 text-sm font-light">
-                <Tag variant={TagVariant.active} label="CVSS Score" />
-                <Tag riskLevel={RiskLevel.none} label="CVE ID" />
-                <Tag variant={TagVariant.active} label="Group" />
-              </div>
+              <span className="text-base font-bold">Insight types</span>
             </div>
             {loading && (
               <div className="flex h-full w-full items-center justify-center">
@@ -221,7 +207,7 @@ const Vulnerabilities = () => {
             )}
             {!loading && (
               <div className="mt-2 grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-2">
-                {groupByCveID.map((group) => (
+                {groupByType.map((group) => (
                   <PrioritizationItem
                     key={group.type}
                     isReverse
@@ -237,10 +223,10 @@ const Vulnerabilities = () => {
       </div>
       {/* Content */}
       <div className="gap-4 px-7 py-4">
-        <VulnerabilityTable data={vulnerabilities} loading={loading} />
+        <InsightsTable data={insights} loading={loading} />
       </div>
     </Fragment>
   );
 };
 
-export default Vulnerabilities;
+export default Insights;

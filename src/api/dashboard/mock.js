@@ -1,6 +1,10 @@
 import _ from "lodash";
 
+import alertsPage0Json from "../__mock__/alerts_page0.json";
+import alertsPage1Json from "../__mock__/alerts_page1.json";
+import alertsPage2Json from "../__mock__/alerts_page2.json";
 import assetsJson from "../__mock__/assets.json";
+import insightsJson from "../__mock__/insights.json";
 import sitesJson from "../__mock__/sites.json";
 import vulnerabilitiesJson from "../__mock__/vulnerabilities.json";
 
@@ -69,4 +73,40 @@ export function mockGetShops(mock) {
 
 export function mockGetVulnerabilities(mock) {
   mock.onGet("/vulnerabilities").reply(200, { data: vulnerabilitiesJson });
+}
+
+export function mockGetAlerts(mock) {
+  mock.onPost("/alerts").reply(({ data }) => {
+    const { page = 0 } = JSON.parse(data || "{}");
+    const alerts =
+      page === 0
+        ? alertsPage0Json
+        : page === 1
+        ? alertsPage1Json
+        : alertsPage2Json;
+
+    return [
+      200,
+      {
+        data: {
+          ...alerts,
+          alerts: alerts.alerts.map((alert) => {
+            const asset = _.find(
+              assetsJson.assets,
+              (asset) => asset.id === alert.destinationAssetId
+            );
+            return {
+              ...alert,
+              assetName: _.get(asset, "name") || "-",
+              cell: _.get(asset, "level2[0].name"),
+            };
+          }),
+        },
+      },
+    ];
+  });
+}
+
+export function mockGetInsights(mock) {
+  mock.onGet("/insights").reply(200, { data: insightsJson });
 }

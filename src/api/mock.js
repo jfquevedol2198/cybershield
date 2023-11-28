@@ -7,8 +7,10 @@ import {
   mockUpdatePassword,
 } from "./auth/mock";
 import {
+  mockGetAlerts,
   mockGetAssets,
   mockGetCells,
+  mockGetInsights,
   mockGetShops,
   mockGetVulnerabilities,
 } from "./dashboard/mock";
@@ -27,4 +29,6 @@ export const createMocks = (apiClient, delayResponse = 2000) => {
   mockGetShops(mock);
   mockGetCells(mock);
   mockGetVulnerabilities(mock);
+  mockGetAlerts(mock);
+  mockGetInsights(mock);
 };

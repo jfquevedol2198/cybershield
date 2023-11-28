@@ -14,3 +14,35 @@ export const parseAssets = (data) =>
     lastSeenAt: dayjs(asset.firstSeen).format("DD MMM YYYY | HH:mm:ss"),
     location: asset.location || "-",
   }));
+
+export const parseAlerts = (data) =>
+  data.map((alert) => ({
+    id: alert.id,
+    type: _.get(alert, "subCategory.type.name") || "-",
+    severity: _.get(alert, "severity") * 10 || 0,
+    status: _.get(alert, "status") || "-",
+    alertTime: _.get(alert, "createdAt"),
+    assetName: _.get(alert, "assetName") || "-",
+    ip: _.get(alert, "destinationAssetIp") || "-",
+    cell: _.get(alert, "cell"),
+    updatedAt: _.get(alert, "updatedAt"),
+  }));
+
+export const groupByKey = (data, key) => {
+  const group = data.reduce((_group, value) => {
+    if (Object.keys(_group).indexOf(value[key]) !== -1) {
+      _group[value[key]]++;
+    } else {
+      _group[value[key]] = 1;
+    }
+    return _group;
+  }, {});
+  return Object.keys(group)
+    .map((value) => ({
+      type: value,
+      count: group[value],
+      percent: Math.floor((group[value] * 100) / data.length),
+    }))
+    .sort((b, a) => a.count - b.count)
+    .slice(0, 6);
+};

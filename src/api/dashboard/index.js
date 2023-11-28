@@ -21,3 +21,15 @@ export const vulnerabilities = (httpClient) => ({
     return httpClient.get("/vulnerabilities");
   },
 });
+
+export const alerts = (httpClient) => ({
+  getAlerts() {
+    return httpClient.post("/alerts");
+  },
+});
+
+export const insights = (httpClient) => ({
+  getInsights() {
+    return httpClient.get("/insights");
+  },
+});
