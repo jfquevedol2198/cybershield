@@ -1,0 +1,1669 @@
+{
+    "count": 36,
+    "currentPage": 2,
+    "totalPages": 3,
+    "alerts": [
+        {
+            "id": "5309764c-1965-4d97-9bde-077f7255b0e1",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:32.455940",
+            "updatedAt": "2023-09-27T13:29:32.455940",
+            "rawData": null,
+            "severity": 7.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "5309764c-1965-4d97-9bde-077f7255b0e1",
+            "source": "INTEL_DB",
+            "sourceDescription": "Denial Of Service In Siemens SIMATIC S7-300 CPUs and SINUMERIK Controller over Profinet",
+            "sourceEventTime": "2023-09-27T13:29:32.870943",
+            "machineId": "default_machine_id",
+            "numericId": 36,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "09747640-4be4-4d6f-a066-19edb8c1432d",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:31.960286",
+            "updatedAt": "2023-09-27T13:29:31.960286",
+            "rawData": null,
+            "severity": 7.8,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "09747640-4be4-4d6f-a066-19edb8c1432d",
+            "source": "INTEL_DB",
+            "sourceDescription": "Denial of service in Siemens PROFINET-IO Stack ",
+            "sourceEventTime": "2023-09-27T13:29:32.379523",
+            "machineId": "default_machine_id",
+            "numericId": 35,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "06146a33-a514-47ba-a676-e7ab4abb63f6",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:31.374925",
+            "updatedAt": "2023-09-27T13:29:31.374925",
+            "rawData": null,
+            "severity": 6.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "06146a33-a514-47ba-a676-e7ab4abb63f6",
+            "source": "INTEL_DB",
+            "sourceDescription": "Remote Denial of service in Siemens products using Profinet",
+            "sourceEventTime": "2023-09-27T13:29:31.880196",
+            "machineId": "default_machine_id",
+            "numericId": 34,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "bd9e5500-5a76-486a-8b6a-6946ef958e03",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:30.904540",
+            "updatedAt": "2023-09-27T13:29:30.904540",
+            "rawData": null,
+            "severity": 6.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "bd9e5500-5a76-486a-8b6a-6946ef958e03",
+            "source": "INTEL_DB",
+            "sourceDescription": "Remote Denial of service in Siemens products using Profinet",
+            "sourceEventTime": "2023-09-27T13:29:31.298863",
+            "machineId": "default_machine_id",
+            "numericId": 33,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "c405343e-32dd-463d-b75c-c263f305fa4e",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:30.395514",
+            "updatedAt": "2023-09-27T13:29:30.395514",
+            "rawData": null,
+            "severity": 5.9,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "c405343e-32dd-463d-b75c-c263f305fa4e",
+            "source": "INTEL_DB",
+            "sourceDescription": "Authentication bypass in Siemens SIMATIC S7-300/S7-400 CPU due to a Cryptographic issue.",
+            "sourceEventTime": "2023-09-27T13:29:30.834204",
+            "machineId": "default_machine_id",
+            "numericId": 32,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "8392db47-059b-4183-9a37-dcc77e4da67e",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:29.906998",
+            "updatedAt": "2023-09-27T13:29:29.906998",
+            "rawData": null,
+            "severity": 7.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "8392db47-059b-4183-9a37-dcc77e4da67e",
+            "source": "INTEL_DB",
+            "sourceDescription": "Remote Denial of service in Siemens SIMATIC S7-300/S7-400 CPU",
+            "sourceEventTime": "2023-09-27T13:29:30.324940",
+            "machineId": "default_machine_id",
+            "numericId": 31,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "e5190e5d-890b-4899-9c61-d92a3d3186c3",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:29.425016",
+            "updatedAt": "2023-09-27T13:29:29.425016",
+            "rawData": null,
+            "severity": 8.8,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "e5190e5d-890b-4899-9c61-d92a3d3186c3",
+            "source": "INTEL_DB",
+            "sourceDescription": "Cross site request forgery vulnerability in Siemens SIMATIC CP 343-1, SIMATIC CP 443-1 and Siemens SIMATIC S7-300/S7-400",
+            "sourceEventTime": "2023-09-27T13:29:29.833367",
+            "machineId": "default_machine_id",
+            "numericId": 30,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "a197708a-8fc4-4815-83ce-ea13647acdce",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:28.896114",
+            "updatedAt": "2023-09-27T13:29:28.896114",
+            "rawData": null,
+            "severity": 5.3,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "a197708a-8fc4-4815-83ce-ea13647acdce",
+            "source": "INTEL_DB",
+            "sourceDescription": "Cross site request forgery vulnerability in various Siemens SIMATIC products",
+            "sourceEventTime": "2023-09-27T13:29:29.342522",
+            "machineId": "default_machine_id",
+            "numericId": 29,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "d83ebd13-02ad-416c-ac69-7b4277cc4f27",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:28.355808",
+            "updatedAt": "2023-09-27T13:29:28.355808",
+            "rawData": null,
+            "severity": 7.8,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "d83ebd13-02ad-416c-ac69-7b4277cc4f27",
+            "source": "INTEL_DB",
+            "sourceDescription": "Remote denial of service in Siemens SIMATIC S7-300 using Crafted packet",
+            "sourceEventTime": "2023-09-27T13:29:28.809434",
+            "machineId": "default_machine_id",
+            "numericId": 28,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "30408976-1df5-438c-a4e9-97867a9679cd",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:27.697677",
+            "updatedAt": "2023-09-27T13:29:27.697677",
+            "rawData": null,
+            "severity": 3.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "30408976-1df5-438c-a4e9-97867a9679cd",
+            "source": "OTORIO - RAM2",
+            "sourceDescription": null,
+            "sourceEventTime": "2023-09-27T13:29:28.266421",
+            "machineId": "default_machine_id",
+            "numericId": 27,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "asset_inventory",
+                    "description": "Changes to asset parameters (versions, names, etc.)"
+                },
+                "subtype": {
+                    "name": "new_asset_discovered",
+                    "description": "An Asset Inventory New Asset Discovered cyber alert occurs when a new host is detected on a network. This alert is triggered when a system scans the network and detects a new device. This alert is important because it allows organizations to identify and secure any new devices that have been added to the network, preventing them from being used for malicious activities such as data theft or disruption of services. It is also important to ensure that any new assets adhere to the organization's policies and security protocols, to ensure that the network remains secure."
+                }
+            }
+        },
+        {
+            "id": "e7c6fc38-9fae-485f-a600-0ec01a097569",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:27.141838",
+            "updatedAt": "2023-09-27T13:29:27.141838",
+            "rawData": null,
+            "severity": 6.7,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "e7c6fc38-9fae-485f-a600-0ec01a097569",
+            "source": "INTEL_DB",
+            "sourceDescription": "Remote Code Execution in Siemens SIMATIC, SINAMICS, SINEC, SINEMA, SINUMERIK",
+            "sourceEventTime": "2023-09-27T13:29:27.616374",
+            "machineId": "default_machine_id",
+            "numericId": 26,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "e3bfbbc4-ec26-4dd9-8a9a-631784a7cd5c",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "b06f9641-98a0-41cb-ac0c-5cf11be64b00",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:26.557206",
+            "updatedAt": "2023-09-27T13:29:26.557206",
+            "rawData": null,
+            "severity": 7.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "b06f9641-98a0-41cb-ac0c-5cf11be64b00",
+            "source": "INTEL_DB",
+            "sourceDescription": "Denial-of-service condition in Siemens Industrial Real-Time (IRT) Devices",
+            "sourceEventTime": "2023-09-27T13:29:27.070153",
+            "machineId": "default_machine_id",
+            "numericId": 25,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "e3bfbbc4-ec26-4dd9-8a9a-631784a7cd5c",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "b8d4973c-38f6-4595-b40f-27504fd41ea3",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:26.014305",
+            "updatedAt": "2023-09-27T13:29:26.014305",
+            "rawData": null,
+            "severity": 7.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "b8d4973c-38f6-4595-b40f-27504fd41ea3",
+            "source": "INTEL_DB",
+            "sourceDescription": "Remote Denial of service in Siemens products using Profinet",
+            "sourceEventTime": "2023-09-27T13:29:26.474051",
+            "machineId": "default_machine_id",
+            "numericId": 24,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "e3bfbbc4-ec26-4dd9-8a9a-631784a7cd5c",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "c3fdfadc-4049-4ddd-9557-2f563e7e3938",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:25.411123",
+            "updatedAt": "2023-09-27T13:29:25.411123",
+            "rawData": null,
+            "severity": 3.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "c3fdfadc-4049-4ddd-9557-2f563e7e3938",
+            "source": "OTORIO - RAM2",
+            "sourceDescription": null,
+            "sourceEventTime": "2023-09-27T13:29:25.933381",
+            "machineId": "default_machine_id",
+            "numericId": 23,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "c82260a9-e4a6-49d5-b576-2c2f75ddc240",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "asset_inventory",
+                    "description": "Changes to asset parameters (versions, names, etc.)"
+                },
+                "subtype": {
+                    "name": "new_asset_discovered",
+                    "description": "An Asset Inventory New Asset Discovered cyber alert occurs when a new host is detected on a network. This alert is triggered when a system scans the network and detects a new device. This alert is important because it allows organizations to identify and secure any new devices that have been added to the network, preventing them from being used for malicious activities such as data theft or disruption of services. It is also important to ensure that any new assets adhere to the organization's policies and security protocols, to ensure that the network remains secure."
+                }
+            }
+        },
+        {
+            "id": "ad7bcb38-9df2-4423-8614-0d3559f1c235",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:24.843428",
+            "updatedAt": "2023-09-27T13:29:24.843428",
+            "rawData": null,
+            "severity": 6.7,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "ad7bcb38-9df2-4423-8614-0d3559f1c235",
+            "source": "INTEL_DB",
+            "sourceDescription": "Remote Code Execution in Siemens SIMATIC, SINAMICS, SINEC, SINEMA, SINUMERIK",
+            "sourceEventTime": "2023-09-27T13:29:25.319254",
+            "machineId": "default_machine_id",
+            "numericId": 22,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "7d1a73fe-3173-49eb-95d7-c7b9c82159a8",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "610bc8d4-e278-45a7-b85a-5d05f89a66d4",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:24.305072",
+            "updatedAt": "2023-09-27T13:29:24.305072",
+            "rawData": null,
+            "severity": 7.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "610bc8d4-e278-45a7-b85a-5d05f89a66d4",
+            "source": "INTEL_DB",
+            "sourceDescription": "Denial-of-service condition in Siemens Industrial Real-Time (IRT) Devices",
+            "sourceEventTime": "2023-09-27T13:29:24.755221",
+            "machineId": "default_machine_id",
+            "numericId": 21,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "7d1a73fe-3173-49eb-95d7-c7b9c82159a8",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "0a41096b-e4b4-427d-9e98-e350b5a5d6c2",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:23.747640",
+            "updatedAt": "2023-09-27T13:29:23.747640",
+            "rawData": null,
+            "severity": 7.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "0a41096b-e4b4-427d-9e98-e350b5a5d6c2",
+            "source": "INTEL_DB",
+            "sourceDescription": "Remote Denial of service in Siemens products using Profinet",
+            "sourceEventTime": "2023-09-27T13:29:24.219384",
+            "machineId": "default_machine_id",
+            "numericId": 20,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "7d1a73fe-3173-49eb-95d7-c7b9c82159a8",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "e74d963e-2dd9-4ea1-a6c6-aafe41811df0",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:22.875289",
+            "updatedAt": "2023-09-27T13:29:22.875289",
+            "rawData": null,
+            "severity": 3.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "e74d963e-2dd9-4ea1-a6c6-aafe41811df0",
+            "source": "OTORIO - RAM2",
+            "sourceDescription": null,
+            "sourceEventTime": "2023-09-27T13:29:23.654911",
+            "machineId": "default_machine_id",
+            "numericId": 19,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "e3bfbbc4-ec26-4dd9-8a9a-631784a7cd5c",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "asset_inventory",
+                    "description": "Changes to asset parameters (versions, names, etc.)"
+                },
+                "subtype": {
+                    "name": "new_asset_discovered",
+                    "description": "An Asset Inventory New Asset Discovered cyber alert occurs when a new host is detected on a network. This alert is triggered when a system scans the network and detects a new device. This alert is important because it allows organizations to identify and secure any new devices that have been added to the network, preventing them from being used for malicious activities such as data theft or disruption of services. It is also important to ensure that any new assets adhere to the organization's policies and security protocols, to ensure that the network remains secure."
+                }
+            }
+        },
+        {
+            "id": "4942e365-877f-405a-ac90-e86b00f306b5",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:21.883524",
+            "updatedAt": "2023-09-27T13:29:21.883524",
+            "rawData": null,
+            "severity": 3.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "4942e365-877f-405a-ac90-e86b00f306b5",
+            "source": "OTORIO - RAM2",
+            "sourceDescription": null,
+            "sourceEventTime": "2023-09-27T13:29:22.779182",
+            "machineId": "default_machine_id",
+            "numericId": 18,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "7d1a73fe-3173-49eb-95d7-c7b9c82159a8",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "asset_inventory",
+                    "description": "Changes to asset parameters (versions, names, etc.)"
+                },
+                "subtype": {
+                    "name": "new_asset_discovered",
+                    "description": "An Asset Inventory New Asset Discovered cyber alert occurs when a new host is detected on a network. This alert is triggered when a system scans the network and detects a new device. This alert is important because it allows organizations to identify and secure any new devices that have been added to the network, preventing them from being used for malicious activities such as data theft or disruption of services. It is also important to ensure that any new assets adhere to the organization's policies and security protocols, to ensure that the network remains secure."
+                }
+            }
+        },
+        {
+            "id": "9fbca62e-b631-46af-8362-1261fdd4b02b",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:21.135909",
+            "updatedAt": "2023-09-27T13:29:21.135909",
+            "rawData": null,
+            "severity": 3.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "9fbca62e-b631-46af-8362-1261fdd4b02b",
+            "source": "OTORIO - RAM2",
+            "sourceDescription": null,
+            "sourceEventTime": "2023-09-27T13:29:21.774119",
+            "machineId": "default_machine_id",
+            "numericId": 17,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "2e366995-cfb1-45bd-8d9f-41d3d3ab9210",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "asset_inventory",
+                    "description": "Changes to asset parameters (versions, names, etc.)"
+                },
+                "subtype": {
+                    "name": "new_asset_discovered",
+                    "description": "An Asset Inventory New Asset Discovered cyber alert occurs when a new host is detected on a network. This alert is triggered when a system scans the network and detects a new device. This alert is important because it allows organizations to identify and secure any new devices that have been added to the network, preventing them from being used for malicious activities such as data theft or disruption of services. It is also important to ensure that any new assets adhere to the organization's policies and security protocols, to ensure that the network remains secure."
+                }
+            }
+        },
+        {
+            "id": "5579bebf-f0b0-4828-a486-c16498dcf2e6",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:20.584128",
+            "updatedAt": "2023-09-27T13:29:20.584128",
+            "rawData": null,
+            "severity": 8.6,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "5579bebf-f0b0-4828-a486-c16498dcf2e6",
+            "source": "INTEL_DB",
+            "sourceDescription": "Denial of service in Cisco IOS and IOS XE Software, affects various Rockwell Automation Stratix products",
+            "sourceEventTime": "2023-09-27T13:29:21.067635",
+            "machineId": "default_machine_id",
+            "numericId": 16,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "52042bb8-d1eb-4e1f-9da7-6d9c7758769f",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:19.994396",
+            "updatedAt": "2023-09-27T13:29:19.994396",
+            "rawData": null,
+            "severity": 7.4,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "52042bb8-d1eb-4e1f-9da7-6d9c7758769f",
+            "source": "INTEL_DB",
+            "sourceDescription": "Denial of service in Cisco IOS and IOS XE Software, affects various Rockwell Automation Stratix products",
+            "sourceEventTime": "2023-09-27T13:29:20.486825",
+            "machineId": "default_machine_id",
+            "numericId": 15,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "25a6c092-5387-4fec-85c5-bed8de049011",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:19.064523",
+            "updatedAt": "2023-09-27T13:29:19.064523",
+            "rawData": null,
+            "severity": 8.6,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "25a6c092-5387-4fec-85c5-bed8de049011",
+            "source": "INTEL_DB",
+            "sourceDescription": "Denial of service of Precision Time Protocol in Cisco IOS Software , may cause  time synchronization issues. Affects various Rockwell Automation Stratix products",
+            "sourceEventTime": "2023-09-27T13:29:19.891135",
+            "machineId": "default_machine_id",
+            "numericId": 14,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "710e5e61-2118-4ffd-b7ac-d4b76870e5fb",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:18.372237",
+            "updatedAt": "2023-09-27T13:29:18.372237",
+            "rawData": null,
+            "severity": 8.6,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "710e5e61-2118-4ffd-b7ac-d4b76870e5fb",
+            "source": "INTEL_DB",
+            "sourceDescription": "Denial of service in Cisco IOS XE Software, affects various Rockwell Automation Stratix products",
+            "sourceEventTime": "2023-09-27T13:29:18.968777",
+            "machineId": "default_machine_id",
+            "numericId": 13,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "25b8eb02-ea8b-49be-8d8e-5e005cef3d14",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:17.882334",
+            "updatedAt": "2023-09-27T13:29:17.882334",
+            "rawData": null,
+            "severity": 8.6,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "25b8eb02-ea8b-49be-8d8e-5e005cef3d14",
+            "source": "INTEL_DB",
+            "sourceDescription": "Denial of service in Cisco IOS and IOS XE Software, affects various Rockwell Automation Stratix products",
+            "sourceEventTime": "2023-09-27T13:29:18.298462",
+            "machineId": "default_machine_id",
+            "numericId": 12,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "d434bdec-8be9-4f5b-b418-de35bd473c3e",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:17.188791",
+            "updatedAt": "2023-09-27T13:29:17.188791",
+            "rawData": null,
+            "severity": 6.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "d434bdec-8be9-4f5b-b418-de35bd473c3e",
+            "source": "INTEL_DB",
+            "sourceDescription": "Denial of service in Cisco IOS and IOS XE Software, affects various Rockwell Automation Stratix products",
+            "sourceEventTime": "2023-09-27T13:29:17.804787",
+            "machineId": "default_machine_id",
+            "numericId": 11,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "cb904579-660e-4c76-9239-0f05378aebc1",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:16.503937",
+            "updatedAt": "2023-09-27T13:29:16.503937",
+            "rawData": null,
+            "severity": 3.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "cb904579-660e-4c76-9239-0f05378aebc1",
+            "source": "OTORIO - RAM2",
+            "sourceDescription": null,
+            "sourceEventTime": "2023-09-27T13:29:17.082483",
+            "machineId": "default_machine_id",
+            "numericId": 10,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "asset_inventory",
+                    "description": "Changes to asset parameters (versions, names, etc.)"
+                },
+                "subtype": {
+                    "name": "new_asset_discovered",
+                    "description": "An Asset Inventory New Asset Discovered cyber alert occurs when a new host is detected on a network. This alert is triggered when a system scans the network and detects a new device. This alert is important because it allows organizations to identify and secure any new devices that have been added to the network, preventing them from being used for malicious activities such as data theft or disruption of services. It is also important to ensure that any new assets adhere to the organization's policies and security protocols, to ensure that the network remains secure."
+                }
+            }
+        },
+        {
+            "id": "b10582c1-c0e9-4c21-b817-f01b413e9e65",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:16.012962",
+            "updatedAt": "2023-09-27T13:29:16.012962",
+            "rawData": null,
+            "severity": 8.6,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "b10582c1-c0e9-4c21-b817-f01b413e9e65",
+            "source": "INTEL_DB",
+            "sourceDescription": "A malformed Class 3 common industrial protocol message with a cached connection can cause a denial-of-service condition in Rockwell Automation Logix Controllers, resulting in a major nonrecoverable fault. If the target device becomes unavailable, a user would have to clear the fault and redownload the user project file to bring the device back online.",
+            "sourceEventTime": "2023-09-27T13:29:16.424962",
+            "machineId": "default_machine_id",
+            "numericId": 9,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d480560a-acd0-4872-a01a-afb848086549",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "3403d25a-76be-48b2-9c92-88691b52e840",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:15.525466",
+            "updatedAt": "2023-09-27T13:29:15.525466",
+            "rawData": null,
+            "severity": 4.2,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "3403d25a-76be-48b2-9c92-88691b52e840",
+            "source": "INTEL_DB",
+            "sourceDescription": "The NXP A700X chip contains a vulnerability that may allow an attacker to physically extract ECC private keys. Expertise and specialized equipment are required to successfully open the package, extract, and process the side-channel leakage. Successful exploit of this vulnerability may allow an attacker to obtain the unique ECC private key for that chip only. The chip will also be physically damaged. For controllers, the current use of this unique key is only used during the initial deployment of CIP Security.",
+            "sourceEventTime": "2023-09-27T13:29:15.944330",
+            "machineId": "default_machine_id",
+            "numericId": 8,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d480560a-acd0-4872-a01a-afb848086549",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "e8843dcc-a9a7-456e-85f5-c09b80c73130",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:14.701541",
+            "updatedAt": "2023-09-27T13:29:14.701541",
+            "rawData": null,
+            "severity": 5.6,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "e8843dcc-a9a7-456e-85f5-c09b80c73130",
+            "source": "INTEL_DB",
+            "sourceDescription": "Information Disclosure in various microprocessors",
+            "sourceEventTime": "2023-09-27T13:29:15.443276",
+            "machineId": "default_machine_id",
+            "numericId": 7,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d480560a-acd0-4872-a01a-afb848086549",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "e879823e-1405-43c5-a7ba-267cacb98e7f",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:14.163880",
+            "updatedAt": "2023-09-27T13:29:14.163880",
+            "rawData": null,
+            "severity": 5.6,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "e879823e-1405-43c5-a7ba-267cacb98e7f",
+            "source": "INTEL_DB",
+            "sourceDescription": "Information Disclosure in various microprocessors",
+            "sourceEventTime": "2023-09-27T13:29:14.626084",
+            "machineId": "default_machine_id",
+            "numericId": 6,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d480560a-acd0-4872-a01a-afb848086549",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "4a35d97a-b874-46be-b116-96fa9674a7b2",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:13.637634",
+            "updatedAt": "2023-09-27T13:29:13.637634",
+            "rawData": null,
+            "severity": 5.6,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "4a35d97a-b874-46be-b116-96fa9674a7b2",
+            "source": "INTEL_DB",
+            "sourceDescription": "Information Disclosure in various microprocessors",
+            "sourceEventTime": "2023-09-27T13:29:14.093033",
+            "machineId": "default_machine_id",
+            "numericId": 5,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d480560a-acd0-4872-a01a-afb848086549",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "vulnerabilities",
+                    "description": "Alert on asset vulnerabilities, from RAM² and outer collectors"
+                },
+                "subtype": {
+                    "name": "vulnerabilities_discovered",
+                    "description": "A Vulnerabilities Discovered cyber alert is an alert that is triggered when a security scan discovers one or more vulnerabilities on a system or host. This alert informs the security team of the vulnerabilities discovered, the severity of the vulnerabilities, and any remediation steps that should be taken to mitigate the vulnerabilities. This alert is important to identify and address vulnerabilities quickly in order to reduce the chances of a successful attack."
+                }
+            }
+        },
+        {
+            "id": "821c8565-f303-40ab-99f0-582b070ede96",
+            "name": null,
+            "createdAt": "2023-09-27T13:29:12.617978",
+            "updatedAt": "2023-09-27T13:29:12.617978",
+            "rawData": null,
+            "severity": 3.5,
+            "description": null,
+            "destinationAssetIp": null,
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "821c8565-f303-40ab-99f0-582b070ede96",
+            "source": "OTORIO - RAM2",
+            "sourceDescription": null,
+            "sourceEventTime": "2023-09-27T13:29:13.537955",
+            "machineId": "default_machine_id",
+            "numericId": 4,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "d480560a-acd0-4872-a01a-afb848086549",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "asset_inventory",
+                    "description": "Changes to asset parameters (versions, names, etc.)"
+                },
+                "subtype": {
+                    "name": "new_asset_discovered",
+                    "description": "An Asset Inventory New Asset Discovered cyber alert occurs when a new host is detected on a network. This alert is triggered when a system scans the network and detects a new device. This alert is important because it allows organizations to identify and secure any new devices that have been added to the network, preventing them from being used for malicious activities such as data theft or disruption of services. It is also important to ensure that any new assets adhere to the organization's policies and security protocols, to ensure that the network remains secure."
+                }
+            }
+        },
+        {
+            "id": "757bc0fe-777e-4ed3-baad-b7003ecfdeba",
+            "name": null,
+            "createdAt": "2023-09-27T13:28:26.078768",
+            "updatedAt": "2023-09-27T13:28:26.078768",
+            "rawData": null,
+            "severity": 9.0,
+            "description": null,
+            "destinationAssetIp": "192.168.70.15",
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [
+                "192.168.70.15"
+            ],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "192.168.70.15_industrial_malware_Salary_Q2_update",
+            "source": "epo_demo",
+            "sourceDescription": null,
+            "sourceEventTime": "2023-09-27T13:28:23.495733",
+            "machineId": "default_machine_id",
+            "numericId": 3,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "709fd1e7-39f3-4e92-b095-db3ed3be777c",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "malware",
+                    "description": "Detection of malwares and infected files"
+                },
+                "subtype": {
+                    "name": "industrial_malware",
+                    "description": "Industrial Malware is malicious software specifically created to target and disrupt industrial systems, such as power grids, transportation systems, and manufacturing plants. It can be used to disrupt operations or to gain access to sensitive data. Industrial Malware can be spread through phishing emails, malicious downloads, and other malicious software. It is important to take proactive measures to protect industrial systems from Industrial Malware, including implementing robust cybersecurity protocols, regularly updating software and hardware, and training users on cybersecurity best practices."
+                }
+            }
+        },
+        {
+            "id": "0a38c097-c489-491f-a8e9-87ab53d25a7e",
+            "name": null,
+            "createdAt": "2023-09-27T13:28:26.078768",
+            "updatedAt": "2023-09-27T13:28:26.078768",
+            "rawData": null,
+            "severity": 3.0,
+            "description": null,
+            "destinationAssetIp": "192.168.70.16",
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [
+                "192.168.70.16"
+            ],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "192.168.70.16_edr_agent_not_fully_functional",
+            "source": "epo_demo",
+            "sourceDescription": null,
+            "sourceEventTime": "2023-09-27T13:28:23.495581",
+            "machineId": "default_machine_id",
+            "numericId": 2,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "43617601-9cdd-4d52-b3c9-6d7800f6f27d",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "system_exposure",
+                    "description": "An action is needed to improve the security status of the network or of an asset"
+                },
+                "subtype": {
+                    "name": "edr_agent_not_fully_functional",
+                    "description": "This cyber alert indicates that the EDR (Endpoint Detection and Response) agent installed on a host system is not fully functional. This means that the system is not being properly monitored for malicious or suspicious activity. Depending on the type of EDR agent, the system may not be able to detect malicious files, network traffic, or process behavior. This lack of monitoring may result in a compromised system and data breaches if malicious actors are able to exploit the system. It is important to investigate and resolve the issue in order to protect the system and any sensitive data stored on it."
+                }
+            }
+        },
+        {
+            "id": "9af598ba-a8ac-493a-8d71-5756e267b785",
+            "name": null,
+            "createdAt": "2023-09-27T13:28:26.078768",
+            "updatedAt": "2023-09-27T13:28:26.078768",
+            "rawData": null,
+            "severity": 3.0,
+            "description": null,
+            "destinationAssetIp": "192.168.100.35",
+            "reason": "New",
+            "statusDescription": null,
+            "status": "OPEN",
+            "destinationAssetIps": [
+                "192.168.100.35"
+            ],
+            "processName": null,
+            "service": null,
+            "action": null,
+            "success": null,
+            "sourceEventId": "192.168.70.21_edr_agent_not_fully_functional",
+            "source": "epo_demo",
+            "sourceDescription": null,
+            "sourceEventTime": "2023-09-27T13:28:23.495319",
+            "machineId": "default_machine_id",
+            "numericId": 1,
+            "networkGroup": {
+                "id": "287884bb-e8c9-4428-b58b-94e78a8301aa",
+                "name": "DEFAULT_GROUP"
+            },
+            "sourceAssetId": null,
+            "destinationAssetId": "1d4283f8-52c4-4327-b958-3fe83c6d4d9f",
+            "changedByUserId": null,
+            "assigneeUserId": null,
+            "subCategory": {
+                "category": {
+                    "name": "host_events",
+                    "description": "Events that occurs on one host, including vulnerabilities"
+                },
+                "type": {
+                    "name": "system_exposure",
+                    "description": "An action is needed to improve the security status of the network or of an asset"
+                },
+                "subtype": {
+                    "name": "edr_agent_not_fully_functional",
+                    "description": "This cyber alert indicates that the EDR (Endpoint Detection and Response) agent installed on a host system is not fully functional. This means that the system is not being properly monitored for malicious or suspicious activity. Depending on the type of EDR agent, the system may not be able to detect malicious files, network traffic, or process behavior. This lack of monitoring may result in a compromised system and data breaches if malicious actors are able to exploit the system. It is important to investigate and resolve the issue in order to protect the system and any sensitive data stored on it."
+                }
+            }
+        }
+    ]
+}

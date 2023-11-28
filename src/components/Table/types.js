@@ -22,4 +22,6 @@ export const TablePropType = {
   pagination: PropTypes.bool,
   rowClassName: PropTypes.string,
   title: PropTypes.string,
+  currentPage: PropTypes.number,
+  totalPages: PropTypes.number,
 };

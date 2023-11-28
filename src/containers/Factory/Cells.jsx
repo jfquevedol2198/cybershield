@@ -1,16 +1,43 @@
 import { FunnelIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
+import api from "../../api";
 import Button from "../../components/Button";
 import FactoryShopCell from "../../components/FactoryShopCell";
 import NormalButton from "../../components/NormalButton";
 import { ButtonVariant } from "../../utils";
+import { parseAssets } from "../../utils/parse";
 import AssetsTable from "../Assets/AssetsTable";
-import { cells } from "./data";
 
 const Cells = () => {
-  const [steps, setSteps] = useState([{ value: "All Cells" }]);
+  const [steps, setSteps] = useState([{ name: "All Cells", id: "all_cells" }]);
+  const [cells, setCells] = useState([]);
+  const [assets, setAssets] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetch = async () => {
+      setLoading(true);
+      const {
+        data: { data },
+      } = await api.getCells();
+      setCells(data);
+      setLoading(false);
+    };
+    fetch();
+  }, []);
+
+  const fetchAssets = async (cell) => {
+    setLoading(true);
+    const {
+      data: { data },
+    } = await api.getAssets({ cellId: cell.id });
+    setSteps([...steps, cell]);
+    setAssets(parseAssets(data));
+    setLoading(false);
+  };
+
   return (
     <Fragment>
       {/* Header */}
@@ -30,7 +57,7 @@ const Cells = () => {
                       )}
                       onClick={() => setSteps(steps.slice(0, index + 1))}
                     >
-                      {step.value}
+                      {step.name}
                     </span>
                     {index < steps.length - 1 && <span>&gt;</span>}
                   </div>
@@ -49,21 +76,21 @@ const Cells = () => {
           </NormalButton>
         </div>
       </div>
+      {loading && (
+        <div className="flex h-full w-full items-center justify-center">
+          Loading
+        </div>
+      )}
       <div className="mt-2 grid w-full grid-cols-1 gap-4 overflow-x-auto px-5 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {steps.length === 1 &&
           cells.map((shop) => {
             return (
-              <div
-                key={shop.description}
-                onClick={() =>
-                  setSteps([...steps, { ...shop, value: shop.description }])
-                }
-              >
+              <div key={shop.description} onClick={() => fetchAssets(shop)}>
                 <FactoryShopCell
-                  category={shop.category}
+                  name={shop.name}
                   description={shop.description}
-                  score={shop.score}
-                  state={shop.state}
+                  score={shop.riskScore * 100}
+                  location={shop.location}
                   assets={shop.assets}
                 />
               </div>
@@ -71,7 +98,7 @@ const Cells = () => {
           })}
       </div>
       <div className="mt-2 w-full overflow-x-auto px-5">
-        {steps.length === 2 && <AssetsTable />}
+        {steps.length === 2 && <AssetsTable data={assets} />}
       </div>
     </Fragment>
   );

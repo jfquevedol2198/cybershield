@@ -6,6 +6,12 @@ import {
   mockResetPassword,
   mockUpdatePassword,
 } from "./auth/mock";
+import {
+  mockGetAssets,
+  mockGetCells,
+  mockGetShops,
+  mockGetVulnerabilities,
+} from "./dashboard/mock";
 
 export const createMocks = (apiClient, delayResponse = 2000) => {
   const mock = new AxiosMockAdapter(apiClient, {
@@ -17,4 +23,8 @@ export const createMocks = (apiClient, delayResponse = 2000) => {
   mockResetPassword(mock);
   mockUpdatePassword(mock);
   mockCodeVerify(mock);
+  mockGetAssets(mock);
+  mockGetShops(mock);
+  mockGetCells(mock);
+  mockGetVulnerabilities(mock);
 };

@@ -1,34 +1,9 @@
+import PropTypes from "prop-types";
+
 import Table from "../../components/Table";
 import Tag from "../../components/Tag";
 import { SortDataType } from "../../utils";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
-
-const data = [
-  {
-    assetId: 122,
-    name: "C9300-24T-A",
-    type: "Network Device",
-    risk: 95,
-    mac: "00:0f:8f:9c:23:71",
-    ip: "192.168.100.25",
-    cell: "Internet Co...",
-    vendor: "Cisco",
-    lastSeenAt: "30 Nov 2023 | 20:00:58",
-    location: "Server room",
-  },
-  {
-    assetId: 102,
-    name: "Siemens",
-    type: "Controller",
-    risk: 95,
-    mac: "ac:64:17:09:7b:d3 +2",
-    ip: "192.168.100.91",
-    cell: "South Well",
-    vendor: "Siemens",
-    lastSeenAt: "30 Nov 2023 | 20:00:58",
-    location: "-",
-  },
-];
 
 const columns = [
   {
@@ -36,7 +11,7 @@ const columns = [
     dataIndex: "assetId",
     key: "assetId",
     sort: true,
-    sortDataType: SortDataType.Number,
+    sortDataType: SortDataType.String,
     colSpan: 1,
     className: "",
     align: "left",
@@ -46,7 +21,7 @@ const columns = [
     dataIndex: "name",
     key: "name",
     sort: true,
-    sortDataType: SortDataType.Number,
+    sortDataType: SortDataType.String,
     colSpan: 1,
     className: "",
     align: "left",
@@ -56,7 +31,7 @@ const columns = [
     dataIndex: "type",
     key: "type",
     sort: true,
-    sortDataType: SortDataType.Number,
+    sortDataType: SortDataType.String,
     colSpan: 1,
     className: "",
     align: "left",
@@ -130,8 +105,23 @@ const columns = [
   },
 ];
 
-const AssetsTable = () => {
-  return <Table columns={columns} dataSource={data} rowsPerPage={10} />;
+const AssetsTable = ({ currPage, totalPages, data, loading }) => {
+  return (
+    <Table
+      columns={columns}
+      dataSource={data}
+      currPage={currPage}
+      totalPages={totalPages}
+      loading={loading}
+    />
+  );
+};
+
+AssetsTable.propTypes = {
+  currPage: PropTypes.number,
+  totalPages: PropTypes.number,
+  data: PropTypes.arrayOf(PropTypes.any),
+  loading: PropTypes.bool,
 };
 
 export default AssetsTable;

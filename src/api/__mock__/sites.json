@@ -1,0 +1,113 @@
+{
+  "count": 1,
+  "sites": [
+    {
+      "id": "134e83b4-c3fe-11ed-afa1-0242ac120002",
+      "name": "Site",
+      "createdAt": "2023-09-27T12:17:32.585253",
+      "updatedAt": "2023-09-27T12:17:32.585253",
+      "externalId": null,
+      "description": null,
+      "location": "usa",
+      "level1": [
+        {
+          "id": "7223882a-e895-4cf8-8df2-830ed71ecb95",
+          "name": "Body Shop",
+          "createdAt": "2023-10-30T10:54:35.698141",
+          "updatedAt": "2023-10-30T10:54:35.698141",
+          "location": "Mannheim",
+          "description": "Body paint shop",
+          "riskScore": 0.88,
+          "level2": [
+            {
+              "id": "46c4e4fe-cb23-41a4-a730-e182a5b58985",
+              "name": "Welding Cell",
+              "createdAt": "2023-10-30T10:55:28.757562",
+              "updatedAt": "2023-10-30T10:55:28.757562",
+              "location": "Mannheim",
+              "description": "Welding cell in the Body shop",
+              "riskScore": 0.45,
+              "legalImpact": null,
+              "reputationalImpact": null,
+              "operationalImpact": null,
+              "productivityImpact": null,
+              "safetyImpact": null,
+              "financialImpact": null
+            },
+            {
+              "id": "c78219b2-5087-4efb-8705-279768152b28",
+              "name": "Painting Cell",
+              "createdAt": "2023-10-30T10:58:06.052497",
+              "updatedAt": "2023-10-30T10:58:06.052497",
+              "location": "Mannheim",
+              "description": "Painting cell in the Body shop",
+              "riskScore": 0.88,
+              "legalImpact": null,
+              "reputationalImpact": null,
+              "operationalImpact": null,
+              "productivityImpact": null,
+              "safetyImpact": null,
+              "financialImpact": null
+            }
+          ]
+        },
+        {
+          "id": "6a785c21-49f2-4e58-93f1-cbd1d7d7ecc9",
+          "name": "Shop 1",
+          "createdAt": "2023-10-16T16:49:58.275121",
+          "updatedAt": "2023-10-16T16:49:58.275121",
+          "location": "usa",
+          "description": "test",
+          "riskScore": 0.88,
+          "level2": [
+            {
+              "id": "36210269-de76-4296-9732-e03c7aec612d",
+              "name": "Cell 1",
+              "createdAt": "2023-10-16T16:51:19.126365",
+              "updatedAt": "2023-10-16T16:51:19.126365",
+              "location": "usa",
+              "description": "the cell",
+              "riskScore": 0.75,
+              "legalImpact": 3,
+              "reputationalImpact": 2,
+              "operationalImpact": 2,
+              "productivityImpact": 4,
+              "safetyImpact": 2,
+              "financialImpact": 3
+            },
+            {
+              "id": "9ffe1bd8-82fa-481d-b144-6057909aa234",
+              "name": "Cell 2",
+              "createdAt": "2023-10-30T10:56:36.018363",
+              "updatedAt": "2023-10-30T10:56:36.018363",
+              "location": "USA",
+              "description": "Cell 2",
+              "riskScore": 0.88,
+              "legalImpact": null,
+              "reputationalImpact": null,
+              "operationalImpact": null,
+              "productivityImpact": null,
+              "safetyImpact": null,
+              "financialImpact": null
+            },
+            {
+              "id": "1c0c638c-8430-41ea-b5f5-d7dd53cace41",
+              "name": "Cell 3",
+              "createdAt": "2023-10-30T10:56:49.311827",
+              "updatedAt": "2023-10-30T10:56:49.311827",
+              "location": "USA",
+              "description": "Cell 3",
+              "riskScore": 0.45,
+              "legalImpact": null,
+              "reputationalImpact": null,
+              "operationalImpact": null,
+              "productivityImpact": null,
+              "safetyImpact": null,
+              "financialImpact": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

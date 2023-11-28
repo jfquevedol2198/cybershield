@@ -3,9 +3,11 @@ import {
   FunnelIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
+import _ from "lodash";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
+import api from "../../../api";
 import Button from "../../../components/Button";
 import NormalButton from "../../../components/NormalButton";
 import PrioritizationItem from "../../../components/PrioritizationItem";
@@ -15,13 +17,6 @@ import StackedAreaChart from "../../../components/d3/StackedAreaChart";
 import { ButtonVariant } from "../../../utils";
 import { RiskLevel } from "../../../utils/risk";
 import VulnerabilityTable from "./VulnerabilityTable";
-
-const data = [
-  { riskLevel: "medium", value: 50 },
-  { riskLevel: "critical", value: 100 },
-  { riskLevel: "high", value: 30 },
-  { riskLevel: "low", value: 50 },
-];
 
 const dataArea = [
   {
@@ -85,12 +80,52 @@ const colors = {
 const Vulnerabilities = () => {
   const stackAreaChartRef = useRef(null);
   const [width, setWidth] = useState(0);
+
+  const [loading, setLoading] = useState(false);
+  const [vulnerabilities, setVulnerabilities] = useState([]);
+  const [riskData, setRiskData] = useState([]);
+
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
     console.log(stackAreaChartRef.current.clientWidth);
   }, 500);
 
   useEffect(() => {
+    const fetch = async () => {
+      setLoading(true);
+      const {
+        data: { data },
+      } = await api.getVulnerabilities();
+      const vulnerabilities = _.get(data, "vulnerabilities") || [];
+      setVulnerabilities(vulnerabilities);
+
+      const riskData = vulnerabilities.reduce(
+        (_data, vul) => {
+          const severity = vul.cveScore;
+          if (severity > 0 && severity <= 3.5) {
+            _data.low++;
+          } else if (severity > 3.5 && severity <= 5.5) {
+            _data.medium++;
+          } else if (severity > 5.5 && severity <= 7.5) {
+            _data.high++;
+          } else {
+            _data.critical++;
+          }
+          return _data;
+        },
+        { medium: 0, critical: 0, high: 0, low: 0 }
+      );
+      setRiskData([
+        { riskLevel: "low", value: riskData["low"] },
+        { riskLevel: "medium", value: riskData["medium"] },
+        { riskLevel: "high", value: riskData["high"] },
+        { riskLevel: "critical", value: riskData["critical"] },
+      ]);
+
+      setLoading(false);
+    };
+    fetch();
+
     setWidth(stackAreaChartRef.current.clientWidth);
     window.addEventListener("resize", debounced);
     return window.removeEventListener("resize", () => {});
@@ -128,7 +163,7 @@ const Vulnerabilities = () => {
               height={100}
               innerRadius={40}
               outerRadius={50}
-              data={data}
+              data={riskData}
             />
             <div className="mt-2 flex flex-row items-center justify-center gap-1 text-base text-green">
               <ArrowDownIcon className="h-3" />
@@ -213,7 +248,7 @@ const Vulnerabilities = () => {
       </div>
       {/* Content */}
       <div className="gap-4 px-7 py-4">
-        <VulnerabilityTable />
+        <VulnerabilityTable data={vulnerabilities} loading={loading} />
       </div>
     </Fragment>
   );

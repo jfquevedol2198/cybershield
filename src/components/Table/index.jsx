@@ -12,22 +12,8 @@ import { sortFunc } from "../../utils/sort";
 import NormalButton from "../NormalButton";
 import { TablePropType } from "./types";
 
-const PAGINATION_BUTTONS = 9;
-const Table = ({
-  columns,
-  dataSource,
-  rowsPerPage,
-  loading,
-  pagination,
-  rowClassName,
-  title,
-}) => {
-  const [currPage, setCurrPage] = useState(1);
+const Table = ({ columns, dataSource, totalPages, loading }) => {
   const [sorts, setSorts] = useState([]);
-  const totalPages = useMemo(
-    () => Math.ceil(dataSource.length / rowsPerPage),
-    [dataSource.length, rowsPerPage]
-  );
 
   const { totalColSpan } = useMemo(() => {
     const totalColSpan = columns.reduce((sum, col) => sum + col.colSpan, 0);
@@ -112,6 +98,11 @@ const Table = ({
             );
           })}
         </div>
+        {loading && (
+          <div className="flex w-full flex-row items-center justify-center bg-white py-10 text-black">
+            Loading...
+          </div>
+        )}
         {sortedData.map((data, index) => (
           <div
             key={`row-${index}`}
@@ -142,6 +133,11 @@ const Table = ({
             ))}
           </div>
         ))}
+        {!loading && sortedData.length === 0 && (
+          <div className="flex w-full flex-row items-center justify-center bg-white py-10 text-black">
+            No Data
+          </div>
+        )}
       </div>
       {totalPages > 1 && (
         <div className="mt-4 flex w-full flex-row items-center justify-end gap-2">

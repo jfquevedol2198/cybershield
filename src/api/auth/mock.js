@@ -1,9 +1,9 @@
-import users from "../__mock__/users.js";
+import usersJson from "../__mock__/users.json";
 
 export function mockLogin(mock) {
   mock.onPost("/login").reply(({ data }) => {
     const { email, password } = JSON.parse(data);
-    const me = users.find((user) => user.email === email);
+    const me = usersJson.find((user) => user.email === email);
     if (me) {
       if (me.password === password) {
         return [200, { token: `AUTH_TOKEN_${email}` }];
@@ -20,7 +20,7 @@ export function mockLogin(mock) {
 export function mockResetPassword(mock) {
   mock.onPost("/forgot-password").reply(({ data }) => {
     const { email } = JSON.parse(data);
-    const me = users.find((user) => user.email === email);
+    const me = usersJson.find((user) => user.email === email);
     if (me) {
       return [200, { message: "Email has been sent!" }];
     }

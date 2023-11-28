@@ -1,0 +1,2014 @@
+{
+    "count": 82,
+    "currentPage": 0,
+    "totalPages": 1,
+    "vulnerabilities": [
+        {
+            "id": "40b959a9-c556-4044-93a5-4fddebd7e37b",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2017-5715",
+            "cveScore": 5.6,
+            "comment": null,
+            "type": "Side-Channel Attack",
+            "operationalRisk": null,
+            "impact": "Information Disclosure",
+            "releaseDate": "2018-01-04",
+            "affectedAssets": [
+                {
+                    "assetId": "d480560a-acd0-4872-a01a-afb848086549"
+                },
+                {
+                    "assetId": "c5931efe-960e-460a-8d2d-83539b63c520"
+                }
+            ]
+        },
+        {
+            "id": "0d4a5783-1ee0-485e-b710-7c9379d18d50",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2017-5753",
+            "cveScore": 5.6,
+            "comment": null,
+            "type": "Side-Channel Attack",
+            "operationalRisk": null,
+            "impact": "Information Disclosure",
+            "releaseDate": "2018-01-04",
+            "affectedAssets": [
+                {
+                    "assetId": "d480560a-acd0-4872-a01a-afb848086549"
+                },
+                {
+                    "assetId": "c5931efe-960e-460a-8d2d-83539b63c520"
+                }
+            ]
+        },
+        {
+            "id": "ac82a180-7b5e-4796-8f2a-1642b96f17a4",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2017-5754",
+            "cveScore": 5.6,
+            "comment": null,
+            "type": "Side-Channel Attack",
+            "operationalRisk": null,
+            "impact": "Information Disclosure",
+            "releaseDate": "2018-01-04",
+            "affectedAssets": [
+                {
+                    "assetId": "d480560a-acd0-4872-a01a-afb848086549"
+                },
+                {
+                    "assetId": "c5931efe-960e-460a-8d2d-83539b63c520"
+                }
+            ]
+        },
+        {
+            "id": "b5101f32-985d-434f-8811-b9b524185ac3",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2021-3011(1)",
+            "cveScore": 4.2,
+            "comment": null,
+            "type": "Man In The Middle",
+            "operationalRisk": null,
+            "impact": "Authentication Bypass",
+            "releaseDate": "2021-01-07",
+            "affectedAssets": [
+                {
+                    "assetId": "d480560a-acd0-4872-a01a-afb848086549"
+                },
+                {
+                    "assetId": "c5931efe-960e-460a-8d2d-83539b63c520"
+                }
+            ]
+        },
+        {
+            "id": "eb6aa889-673b-470c-998f-20a58a338808",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2022-1797",
+            "cveScore": 8.6,
+            "comment": null,
+            "type": "Uncontrolled Resource Consumption",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2022-06-02",
+            "affectedAssets": [
+                {
+                    "assetId": "d480560a-acd0-4872-a01a-afb848086549"
+                },
+                {
+                    "assetId": "c5931efe-960e-460a-8d2d-83539b63c520"
+                }
+            ]
+        },
+        {
+            "id": "4918a35a-eaf4-4b79-8a83-39b0f342e5cd",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-0466",
+            "cveScore": 6.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2018-10-05",
+            "affectedAssets": [
+                {
+                    "assetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08"
+                },
+                {
+                    "assetId": "0e529609-2f2e-4f7d-910d-7803d2b0e1d1"
+                }
+            ]
+        },
+        {
+            "id": "63632ef2-ddec-4f32-8912-4b4cc7fdc993",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-0467",
+            "cveScore": 8.6,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2018-10-05",
+            "affectedAssets": [
+                {
+                    "assetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08"
+                },
+                {
+                    "assetId": "0e529609-2f2e-4f7d-910d-7803d2b0e1d1"
+                }
+            ]
+        },
+        {
+            "id": "20db7cd0-92a0-4580-8038-1c0ebc5b57bd",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-0470",
+            "cveScore": 8.6,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2018-10-05",
+            "affectedAssets": [
+                {
+                    "assetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08"
+                },
+                {
+                    "assetId": "0e529609-2f2e-4f7d-910d-7803d2b0e1d1"
+                }
+            ]
+        },
+        {
+            "id": "c0f77c2b-7990-498a-9717-c9130f93f31d",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-0473",
+            "cveScore": 8.6,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Other",
+            "releaseDate": "2018-10-05",
+            "affectedAssets": [
+                {
+                    "assetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08"
+                },
+                {
+                    "assetId": "0e529609-2f2e-4f7d-910d-7803d2b0e1d1"
+                }
+            ]
+        },
+        {
+            "id": "3f16d5c7-ca68-44d6-8570-ab3adece31d2",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-15373",
+            "cveScore": 7.4,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2018-10-05",
+            "affectedAssets": [
+                {
+                    "assetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08"
+                },
+                {
+                    "assetId": "0e529609-2f2e-4f7d-910d-7803d2b0e1d1"
+                }
+            ]
+        },
+        {
+            "id": "40d257e2-d297-47b2-88f5-8b5469147fad",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-15377",
+            "cveScore": 8.6,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2018-10-05",
+            "affectedAssets": [
+                {
+                    "assetId": "73abec4b-f22f-4ecd-bbff-11a1d8046e08"
+                },
+                {
+                    "assetId": "0e529609-2f2e-4f7d-910d-7803d2b0e1d1"
+                }
+            ]
+        },
+        {
+            "id": "418c0bed-18b8-4e21-8cfe-8a3bab44bdae",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2017-12741",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2017-12-26",
+            "affectedAssets": [
+                {
+                    "assetId": "7d1a73fe-3173-49eb-95d7-c7b9c82159a8"
+                },
+                {
+                    "assetId": "e3bfbbc4-ec26-4dd9-8a9a-631784a7cd5c"
+                },
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "5f9a0c42-bc38-4654-ae18-9ba57b924a82"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                },
+                {
+                    "assetId": "d630c341-d05e-453f-b535-0d5bf41764ef"
+                }
+            ]
+        },
+        {
+            "id": "df7e9772-d903-4a47-aac1-9e46e71d346b",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-10923",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2019-10-10",
+            "affectedAssets": [
+                {
+                    "assetId": "7d1a73fe-3173-49eb-95d7-c7b9c82159a8"
+                },
+                {
+                    "assetId": "e3bfbbc4-ec26-4dd9-8a9a-631784a7cd5c"
+                },
+                {
+                    "assetId": "5f9a0c42-bc38-4654-ae18-9ba57b924a82"
+                },
+                {
+                    "assetId": "d630c341-d05e-453f-b535-0d5bf41764ef"
+                }
+            ]
+        },
+        {
+            "id": "6999565d-1891-4557-9881-27775bc603df",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-7580",
+            "cveScore": 6.7,
+            "comment": null,
+            "type": "Misconfiguration",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2020-06-10",
+            "affectedAssets": [
+                {
+                    "assetId": "7d1a73fe-3173-49eb-95d7-c7b9c82159a8"
+                },
+                {
+                    "assetId": "e3bfbbc4-ec26-4dd9-8a9a-631784a7cd5c"
+                },
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "5f9a0c42-bc38-4654-ae18-9ba57b924a82"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                },
+                {
+                    "assetId": "d630c341-d05e-453f-b535-0d5bf41764ef"
+                }
+            ]
+        },
+        {
+            "id": "27c5d0c0-7bdf-40e3-99dd-55904f388166",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2015-2177",
+            "cveScore": 7.8,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2015-03-07",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                }
+            ]
+        },
+        {
+            "id": "97f6d9ec-9565-4d24-8b7d-9258e7305bb3",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2016-8672",
+            "cveScore": 5.3,
+            "comment": null,
+            "type": "Cryptographic Issue",
+            "operationalRisk": null,
+            "impact": "Cross Site Request Forgery",
+            "releaseDate": "2016-11-23",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                }
+            ]
+        },
+        {
+            "id": "947803c2-59af-4fcc-b729-8920c237e88a",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2016-8673",
+            "cveScore": 8.8,
+            "comment": null,
+            "type": "Cross Site Request Forgery",
+            "operationalRisk": null,
+            "impact": "Cross Site Request Forgery",
+            "releaseDate": "2016-11-23",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                }
+            ]
+        },
+        {
+            "id": "0737f607-d740-4bba-aea8-1aea9e26273e",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2016-9158",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2016-12-17",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                }
+            ]
+        },
+        {
+            "id": "12de2d61-c48f-4e68-9287-eaa5df4bd5e7",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2016-9159",
+            "cveScore": 5.9,
+            "comment": null,
+            "type": "Cryptographic Issue",
+            "operationalRisk": null,
+            "impact": "Authentication Bypass",
+            "releaseDate": "2016-12-17",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                }
+            ]
+        },
+        {
+            "id": "d91d9fab-7591-46a6-8c37-cfe2fd741395",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2017-2680",
+            "cveScore": 6.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2017-05-11",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "5fe4096e-166d-45b7-a94f-dfa34c4ba5b7",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2017-2681",
+            "cveScore": 6.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2017-05-11",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "6ac3d556-83ed-4c7e-9a43-6232e8bd57eb",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-13946",
+            "cveScore": 7.8,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2020-02-11",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "e228e828-860f-4673-a183-9c5fb5b6dc47",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-18336",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2020-10-03",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                }
+            ]
+        },
+        {
+            "id": "84208df4-4e8b-4d1d-b30f-d01309dcdc66",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-19300",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Uncontrolled Resource Consumption",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2020-04-14",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                }
+            ]
+        },
+        {
+            "id": "33a324e9-dac2-4542-b43d-92d92e200327",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-15783",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2020-11-12",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                }
+            ]
+        },
+        {
+            "id": "34e0a022-0168-4d2e-91dc-9b5690a5a5a1",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-15791",
+            "cveScore": 6.5,
+            "comment": null,
+            "type": "Cryptographic Issue",
+            "operationalRisk": null,
+            "impact": "Account Takeover",
+            "releaseDate": "2020-09-09",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                }
+            ]
+        },
+        {
+            "id": "a6bb39c0-8ec4-4322-8a5c-0e83981e78f6",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2021-33737",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Buffer Overflow",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2021-09-14",
+            "affectedAssets": [
+                {
+                    "assetId": "d98c1791-2876-4f53-9d2a-31c3c8404c00"
+                },
+                {
+                    "assetId": "36440431-e848-434a-816e-edf6dba931b4"
+                }
+            ]
+        },
+        {
+            "id": "a9df17b2-256a-4aa5-99f4-35a662afdfae",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2017-3737",
+            "cveScore": 5.9,
+            "comment": null,
+            "type": "Logic Bug",
+            "operationalRisk": null,
+            "impact": "Information Disclosure",
+            "releaseDate": "2017-12-07",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                }
+            ]
+        },
+        {
+            "id": "600eb6ee-0f84-4c9a-b817-4b60eabf79a3",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-13800",
+            "cveScore": 7.3,
+            "comment": null,
+            "type": "Cross Site Request Forgery",
+            "operationalRisk": null,
+            "impact": "Cross Site Request Forgery",
+            "releaseDate": "2018-10-10",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                }
+            ]
+        },
+        {
+            "id": "fb7f6b2d-7e01-4a78-9737-3fef6d6e723e",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-13815",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2018-12-13",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                }
+            ]
+        },
+        {
+            "id": "b2c0fea5-db8a-4e5c-8364-76e334bc35c0",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-10929",
+            "cveScore": 5.9,
+            "comment": null,
+            "type": "Man In The Middle",
+            "operationalRisk": null,
+            "impact": "Modify Network Traffic",
+            "releaseDate": "2019-08-13",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                }
+            ]
+        },
+        {
+            "id": "b8ca5687-2681-4c89-afa2-9397694e7705",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-10936",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2019-10-10",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                }
+            ]
+        },
+        {
+            "id": "980aacd9-ed92-4296-aa9e-f520849e2244",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-10943",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Modify User Program",
+            "releaseDate": "2019-08-13",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                }
+            ]
+        },
+        {
+            "id": "7af56b4e-255d-4a67-ba53-9119dcb30a11",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-13945",
+            "cveScore": 6.8,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Access To Sensitive Data",
+            "releaseDate": "2019-12-12",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                }
+            ]
+        },
+        {
+            "id": "c3d53b01-9647-4458-8eff-be67c60f5bf0",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-15782",
+            "cveScore": 9.8,
+            "comment": null,
+            "type": "Buffer Overflow",
+            "operationalRisk": null,
+            "impact": "Access To Sensitive Data",
+            "releaseDate": "2021-05-28",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "b20f9c83-6195-46ae-9046-8649a22a1c5d"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "edea01f1-027e-4444-a17a-a666294a38b2"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                }
+            ]
+        },
+        {
+            "id": "6b0933dd-baf5-4114-a010-25c2e9e90142",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-28400",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Uncontrolled Resource Consumption",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2021-07-13",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "c9ae2ccc-5e1b-4f5a-8f2c-dba3ffaaa431",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2021-3449",
+            "cveScore": 5.9,
+            "comment": null,
+            "type": "NULL Pointer",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2021-03-25",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                }
+            ]
+        },
+        {
+            "id": "8ecdd058-e2fa-48ae-9e90-814f9e484744",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2021-3712",
+            "cveScore": 7.4,
+            "comment": null,
+            "type": "Memory Corruption",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2021-08-24",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "db3a029a-a4aa-4a11-8155-021a6d5df1ab",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2022-0778",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Logic Bug",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2022-03-15",
+            "affectedAssets": [
+                {
+                    "assetId": "c0932403-e25d-44c9-a080-f14e58a5e505"
+                },
+                {
+                    "assetId": "b20f9c83-6195-46ae-9046-8649a22a1c5d"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "edea01f1-027e-4444-a17a-a666294a38b2"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                },
+                {
+                    "assetId": "dbd72bb6-b41a-4d0a-a476-d179bccc41f6"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "3d0820b1-da2d-423c-bc43-cf26dea12b42",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-28397",
+            "cveScore": 5.3,
+            "comment": null,
+            "type": "Excessive Privileges",
+            "operationalRisk": null,
+            "impact": "Access To Sensitive Data",
+            "releaseDate": "2021-08-10",
+            "affectedAssets": [
+                {
+                    "assetId": "b20f9c83-6195-46ae-9046-8649a22a1c5d"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "edea01f1-027e-4444-a17a-a666294a38b2"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                }
+            ]
+        },
+        {
+            "id": "635b3386-64c7-4a33-abdf-96df0c7f8b79",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2021-40365",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2022-12-13",
+            "affectedAssets": [
+                {
+                    "assetId": "b20f9c83-6195-46ae-9046-8649a22a1c5d"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "edea01f1-027e-4444-a17a-a666294a38b2"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                }
+            ]
+        },
+        {
+            "id": "68e50d26-e4c1-49a3-a5dd-a192e73b5e0a",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2021-44693",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2022-12-13",
+            "affectedAssets": [
+                {
+                    "assetId": "b20f9c83-6195-46ae-9046-8649a22a1c5d"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "edea01f1-027e-4444-a17a-a666294a38b2"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                }
+            ]
+        },
+        {
+            "id": "777d851b-b4cd-43a3-bc27-3d73abe09ec9",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2021-44694",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2022-12-13",
+            "affectedAssets": [
+                {
+                    "assetId": "b20f9c83-6195-46ae-9046-8649a22a1c5d"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "edea01f1-027e-4444-a17a-a666294a38b2"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                }
+            ]
+        },
+        {
+            "id": "e725d22f-498b-40cf-ae32-a08b6fe1e6a1",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2021-44695",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Improper Input Validation",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2022-12-13",
+            "affectedAssets": [
+                {
+                    "assetId": "b20f9c83-6195-46ae-9046-8649a22a1c5d"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "edea01f1-027e-4444-a17a-a666294a38b2"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                }
+            ]
+        },
+        {
+            "id": "54e9931d-db44-4481-afa3-f736c885d12a",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2022-30694",
+            "cveScore": 3.5,
+            "comment": null,
+            "type": "Improper Input Validation",
+            "operationalRisk": null,
+            "impact": "Cross Site Request Forgery",
+            "releaseDate": "2022-11-08",
+            "affectedAssets": [
+                {
+                    "assetId": "b20f9c83-6195-46ae-9046-8649a22a1c5d"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "edea01f1-027e-4444-a17a-a666294a38b2"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                }
+            ]
+        },
+        {
+            "id": "8f257d49-67eb-4a2e-963b-746578a39b9c",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2022-38465",
+            "cveScore": 7.8,
+            "comment": null,
+            "type": "Authentication Bypass",
+            "operationalRisk": null,
+            "impact": "Access To Sensitive Data",
+            "releaseDate": "2022-10-11",
+            "affectedAssets": [
+                {
+                    "assetId": "b20f9c83-6195-46ae-9046-8649a22a1c5d"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "edea01f1-027e-4444-a17a-a666294a38b2"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                }
+            ]
+        },
+        {
+            "id": "8e1204e9-a0cb-41a9-bd22-25e0f3895923",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2022-38773",
+            "cveScore": 6.8,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2023-01-10",
+            "affectedAssets": [
+                {
+                    "assetId": "b20f9c83-6195-46ae-9046-8649a22a1c5d"
+                },
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "edea01f1-027e-4444-a17a-a666294a38b2"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                }
+            ]
+        },
+        {
+            "id": "afcce0a9-f755-4c56-85b6-af5df29489ac",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-19281",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2020-03-10",
+            "affectedAssets": [
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "a85d760f-079b-4f80-99ca-9e9504ad826e"
+                },
+                {
+                    "assetId": "4933beec-eb9f-4f47-9423-8673e5209e31"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                },
+                {
+                    "assetId": "e424d324-c2b5-4d10-bb9e-882664b85c83"
+                },
+                {
+                    "assetId": "f6602b3c-20b0-40c9-b75e-41c5e36391c8"
+                }
+            ]
+        },
+        {
+            "id": "80b593f9-ede4-4bb6-9153-253ebf957412",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-6568",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2019-04-17",
+            "affectedAssets": [
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                }
+            ]
+        },
+        {
+            "id": "ab698a35-0cb1-4ab7-9d24-85912f3a4812",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-6575",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2019-04-17",
+            "affectedAssets": [
+                {
+                    "assetId": "5b4c872d-e69a-4a7e-b81f-52478e435b2f"
+                },
+                {
+                    "assetId": "b6b37e1e-1de4-44fe-9f58-68437d6ebcd8"
+                }
+            ]
+        },
+        {
+            "id": "f1cfd6d5-caa4-4e16-9e9c-fcfda52771cc",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-4833",
+            "cveScore": 8.8,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2018-06-14",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "22a30dd8-a5f2-4cdd-b45a-17de4be6b76a",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-4848",
+            "cveScore": 6.1,
+            "comment": null,
+            "type": "Cross Site Scripting",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2018-06-14",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "5f261878-9e82-4914-a935-1c81bc93784b",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-10942",
+            "cveScore": 8.6,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2019-08-13",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "e6aa7dc8-0d4b-4158-91f7-6f9d5b5428cf",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-13924",
+            "cveScore": 5.4,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Account Takeover",
+            "releaseDate": "2020-02-11",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "6ad4b522-07d0-46b9-86e9-8a33ffaefc78",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-19301",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2020-04-14",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "bdba8d59-da91-4d94-a4f2-81b98e95709f",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-6567",
+            "cveScore": 5.5,
+            "comment": null,
+            "type": "Cryptographic Issue",
+            "operationalRisk": null,
+            "impact": "Information Disclosure",
+            "releaseDate": "2019-06-12",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "3b0ffa00-9e6f-4cfa-a5d5-66a671787ed1",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2019-6569",
+            "cveScore": 9.1,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Segmentation Bypass",
+            "releaseDate": "2019-03-26",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "0bc701c0-6f2f-414f-9115-adbf0ed4280b",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-15799",
+            "cveScore": 6.5,
+            "comment": null,
+            "type": "Cross Site Scripting",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2021-01-12",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "e64b9081-8514-430f-83f3-4a25cb98c567",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-15800",
+            "cveScore": 9.8,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2021-01-12",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "d282026c-aadb-4089-a8db-911c75f21e2b",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-25226",
+            "cveScore": 9.8,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2021-01-12",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "b1f3f28f-5513-4acb-af1b-2c895680db89",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-28391",
+            "cveScore": 5.9,
+            "comment": null,
+            "type": "Cryptographic Issue",
+            "operationalRisk": null,
+            "impact": "Information Disclosure",
+            "releaseDate": "2021-01-12",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "c4b425df-43bc-4e2e-a408-843caafe732c",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-28395",
+            "cveScore": 5.9,
+            "comment": null,
+            "type": "Cryptographic Issue",
+            "operationalRisk": null,
+            "impact": "Information Disclosure",
+            "releaseDate": "2021-01-12",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "d56eda6c-500d-43ea-bca1-50882c6935c5",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-28895",
+            "cveScore": 7.3,
+            "comment": null,
+            "type": "Memory Corruption",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2021-02-03",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "23226343-fc56-4661-9227-76cb492fce44",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2020-35198",
+            "cveScore": 9.8,
+            "comment": null,
+            "type": "Integer Overflow",
+            "operationalRisk": null,
+            "impact": "Buffer Overflow",
+            "releaseDate": "2021-05-12",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "5e6933ec-f3b4-4dc8-ae9a-8ee37ca2a4df",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2021-29998",
+            "cveScore": 9.8,
+            "comment": null,
+            "type": "Memory Corruption",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2021-04-13",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "a2fdf8ff-ece5-4de7-8f2d-58fdae1fd6d7",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2022-26647",
+            "cveScore": 9.8,
+            "comment": null,
+            "type": "Brute Force",
+            "operationalRisk": null,
+            "impact": "Buffer Overflow",
+            "releaseDate": "2022-07-12",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "73780d23-e0e5-43ca-87cc-8b78dc3d0ee7",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2022-26648",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Buffer Overflow",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2022-07-12",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "d619ce10-8f13-444c-a188-9c9f07c9a168",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2022-26649",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Buffer Overflow",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2022-07-12",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "56699432-e631-4684-a055-1150b064b6ba",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2022-40631",
+            "cveScore": 6.1,
+            "comment": null,
+            "type": "Cross Site Scripting",
+            "operationalRisk": null,
+            "impact": "Session Hijacking",
+            "releaseDate": "2022-10-11",
+            "affectedAssets": [
+                {
+                    "assetId": "68ebfc9f-f87b-48a4-8dc3-f0fb111c49af"
+                },
+                {
+                    "assetId": "0a7a6972-45a6-4433-880a-41471ed15f7c"
+                }
+            ]
+        },
+        {
+            "id": "e42af9a9-635a-415a-97d0-520bbf82fd45",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2011-4859",
+            "cveScore": 10.0,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Authentication Bypass",
+            "releaseDate": "2011-12-17",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "a7186f0f-18cd-4d64-89c9-855418c3fabf",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2013-0663",
+            "cveScore": 6.8,
+            "comment": null,
+            "type": "Cross Site Request Forgery",
+            "operationalRisk": null,
+            "impact": "Cross Site Request Forgery",
+            "releaseDate": "2013-04-04",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "82e52859-83a2-4561-865a-033d1a6d4cb8",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2013-0664",
+            "cveScore": 8.5,
+            "comment": null,
+            "type": "Crafted Packet",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2013-04-04",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "323b6cab-c3c5-496b-a667-8652022de611",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2013-2763",
+            "cveScore": 5.0,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Denial Of Service",
+            "releaseDate": "2013-04-04",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "a0f42a61-8dbb-418a-af96-fff1d946311c",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2015-6461",
+            "cveScore": 5.4,
+            "comment": null,
+            "type": "Cross Site Scripting",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2019-03-21",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "3dbf7609-6be8-420f-a56d-7df4e0348552",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2015-6462",
+            "cveScore": 5.4,
+            "comment": null,
+            "type": "Cross Site Scripting",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2019-03-21",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "c6948414-2cfa-42bf-adab-5a92dfa91927",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-7240",
+            "cveScore": 8.8,
+            "comment": null,
+            "type": "Buffer Overflow",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2018-04-18",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "eae3a5f8-45a1-487c-b5b1-4fc5ea444eb2",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-7241",
+            "cveScore": 9.8,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Authentication Bypass",
+            "releaseDate": "2018-04-18",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "ef27af44-1c7e-4570-8167-7ad4bb9d3877",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-7242",
+            "cveScore": 9.8,
+            "comment": null,
+            "type": "Cryptographic Issue",
+            "operationalRisk": null,
+            "impact": "Buffer Overflow",
+            "releaseDate": "2018-04-18",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "8cc17b7b-3d38-415f-bef7-8132262bcbe9",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-7759",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Buffer Overflow",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2018-04-18",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "ad02b825-1d28-4580-8608-3e68b92257e8",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-7760",
+            "cveScore": 9.8,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Authentication Bypass",
+            "releaseDate": "2018-04-18",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "3546a99f-98f8-4b69-9d11-497c2e2b79cf",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-7761",
+            "cveScore": 9.8,
+            "comment": null,
+            "type": "Design Error",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2018-04-18",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        },
+        {
+            "id": "c86e6293-080f-4950-8445-a9d2cb86b993",
+            "name": null,
+            "createdAt": "2023-11-08T16:04:50.345216",
+            "updatedAt": "2023-11-08T16:04:50.345216",
+            "cveName": "CVE-2018-7762",
+            "cveScore": 7.5,
+            "comment": null,
+            "type": "Buffer Overflow",
+            "operationalRisk": null,
+            "impact": "Remote Code Execution",
+            "releaseDate": "2018-04-18",
+            "affectedAssets": [
+                {
+                    "assetId": "0307165d-4352-42cf-ab23-be2250167a25"
+                }
+            ]
+        }
+    ]
+}

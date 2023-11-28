@@ -1,12 +1,34 @@
 import { FunnelIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Fragment } from "react";
+import _ from "lodash";
+import { Fragment, useEffect, useState } from "react";
 
+import api from "../../api";
 import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
 import { ButtonVariant } from "../../utils";
+import { parseAssets } from "../../utils/parse";
 import AssetsTable from "./AssetsTable";
 
 const Assets = () => {
+  const [assets, setAssets] = useState([]);
+  const [currPage, setCurrPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetch = async () => {
+      setLoading(true);
+      const {
+        data: { data },
+      } = await api.getAssets();
+      setCurrPage(_.get(data, "currentPage"));
+      setTotalPages(_.get(data, "totalPages"));
+      setAssets(parseAssets(_.get(data, "assets")));
+      setLoading(false);
+    };
+    fetch();
+  }, []);
+
   return (
     <Fragment>
       {/* Header */}
@@ -28,7 +50,12 @@ const Assets = () => {
       </div>
       {/* Content */}
       <div className="gap-4 px-7 py-4">
-        <AssetsTable />
+        <AssetsTable
+          currPage={currPage}
+          totalPages={totalPages}
+          data={assets}
+          loading={loading}
+        />
       </div>
     </Fragment>
   );

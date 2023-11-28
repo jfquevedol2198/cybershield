@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 
-import { RiskLevel, getRiskLevel } from "../../../utils/risk";
+import { RiskLevel } from "../../../utils/risk";
 import { DonutChartDataType } from "../../../utils/types";
 
 const DonutChart = ({ width, height, data, innerRadius, outerRadius }) => {
@@ -13,7 +13,8 @@ const DonutChart = ({ width, height, data, innerRadius, outerRadius }) => {
       .select(svgRef.current)
       .attr("width", width)
       .attr("height", height);
-    svg.selectAll("path").remove().selectAll("text").remove();
+    svg.selectAll("path").remove();
+    svg.selectAll("text").remove();
 
     let startAngle = 0;
     const totalValue = data.reduce((sum, d) => sum + d.value, 0);
@@ -21,7 +22,7 @@ const DonutChart = ({ width, height, data, innerRadius, outerRadius }) => {
     const parsedData = [];
     data
       .sort(
-        (a, b) => RiskLevel[a.riskLevel].order - RiskLevel[b.riskLevel].order
+        (a, b) => RiskLevel[b.riskLevel].order - RiskLevel[a.riskLevel].order
       )
       .forEach((d) => {
         parsedData.push({
@@ -34,6 +35,7 @@ const DonutChart = ({ width, height, data, innerRadius, outerRadius }) => {
         });
         startAngle += (2 * Math.PI * d.value) / totalValue;
       });
+    console.log(parsedData);
 
     svg
       .selectAll("arcOuter")
