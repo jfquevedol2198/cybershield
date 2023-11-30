@@ -43,7 +43,7 @@ const Button = ({
             aria-label="loading"
           />
         )}
-        <span>{children}</span>
+        <span className="truncate">{children}</span>
       </button>
     </div>
   );

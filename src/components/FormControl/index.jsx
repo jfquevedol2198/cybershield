@@ -59,7 +59,7 @@ const FormControl = React.forwardRef(
             >
               <Listbox.Button
                 className={clsx(
-                  "relative flex w-full cursor-pointer flex-row items-center rounded border",
+                  "relative flex w-full cursor-pointer flex-row items-center rounded border bg-white shadow-input",
                   "hover:border-hover",
                   "focus:border-focus focus:shadow-none focus:outline-none",
                   "cursor-pointer caret-transparent disabled:border-disabled",

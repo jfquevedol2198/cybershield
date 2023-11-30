@@ -80,15 +80,15 @@ const RiskManagement = () => {
               <TabRisk key="risk" />,
               <TabAlerts key="alerts" value={253} />,
               <TabShops key="shops" value={4} />,
-              <TabInsights key="insights" value={3} />,
-              <TabIncidents key="incidents" value={2} />,
+              // <TabInsights key="insights" value={3} />,
+              // <TabIncidents key="incidents" value={2} />,
             ]}
             tabPanels={[
               <PanelRisk key="risk" />,
               <PanelAlerts key="alerts" />,
               <PanelShops key="shops" />,
-              <PanelInsights key="insights" />,
-              <PanelIncidents key="incidents" />,
+              // <PanelInsights key="insights" />,
+              // <PanelIncidents key="incidents" />,
             ]}
             tabListClassName="overflow-x-hidden overflow-y-hidden"
             tabPanelClassName="px-7 py-8 bg-white h-[35rem]"

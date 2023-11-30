@@ -80,11 +80,11 @@ export const SIDEBAR_ITEMS = [
         title: "Alerts",
         Component: Alerts,
       },
-      {
-        path: "insights",
-        title: "Insights",
-        Component: Insights,
-      },
+      // {
+      //   path: "insights",
+      //   title: "Insights",
+      //   Component: Insights,
+      // },
       {
         path: "vulnerabilities",
         title: "Vulnerabilities",
@@ -98,18 +98,18 @@ export const SIDEBAR_ITEMS = [
     Component: Assets,
     Icon: AssetsIcon,
   },
-  {
-    path: "incidents",
-    title: "Incidents",
-    Icon: IncidentsIcon,
-    Component: Template,
-  },
-  {
-    path: "secure-remote-management",
-    title: "Secure Remote Management",
-    Icon: SecureRemoteManagementIcon,
-    Component: Template,
-  },
+  // {
+  //   path: "incidents",
+  //   title: "Incidents",
+  //   Icon: IncidentsIcon,
+  //   Component: Template,
+  // },
+  // {
+  //   path: "secure-remote-management",
+  //   title: "Secure Remote Management",
+  //   Icon: SecureRemoteManagementIcon,
+  //   Component: Template,
+  // },
 ];
 
 export const SETTINGS_SIDEBAR_ITEMS = [

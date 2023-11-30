@@ -16,6 +16,7 @@ import StackedAreaChart from "../../../components/d3/StackedAreaChart";
 import { ButtonVariant } from "../../../utils";
 import { groupByKey, parseAlerts } from "../../../utils/parse";
 import AlertsTable from "./AlertsTable";
+import Filter from "./Filter";
 
 const dataArea = [
   {
@@ -85,6 +86,8 @@ const Alerts = () => {
   const [riskData, setRiskData] = useState([]);
   const [groupByType, setGroupByType] = useState([]);
 
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
   }, 500);
@@ -130,7 +133,15 @@ const Alerts = () => {
     setWidth(stackAreaChartRef.current.clientWidth);
     window.addEventListener("resize", debounced);
     return window.removeEventListener("resize", () => {});
-  }, []);
+  }, [debounced]);
+
+  /**
+   * Filter
+   * @param {*} data
+   */
+  const onFilter = (data) => {
+    console.log(data);
+  };
 
   return (
     <Fragment>
@@ -144,7 +155,11 @@ const Alerts = () => {
           <NormalButton variant={ButtonVariant.icon} className="h-full">
             <MagnifyingGlassIcon className="h-6 w-6" />
           </NormalButton>
-          <NormalButton variant={ButtonVariant.icon} className="h-full">
+          <NormalButton
+            variant={ButtonVariant.icon}
+            className="h-full"
+            onClick={() => setIsFilterOpen(true)}
+          >
             <FunnelIcon className="h-6 w-6" />
           </NormalButton>
         </div>
@@ -220,10 +235,18 @@ const Alerts = () => {
           </div>
         </div>
       </div>
+
       {/* Content */}
       <div className="gap-4 px-7 py-4">
         <AlertsTable data={alerts} loading={loading} />
       </div>
+
+      {/* Filter */}
+      <Filter
+        isOpen={isFilterOpen}
+        onSubmit={onFilter}
+        onClose={() => setIsFilterOpen(false)}
+      />
     </Fragment>
   );
 };
