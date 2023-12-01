@@ -17,6 +17,7 @@ import StackedAreaChart from "../../../components/d3/StackedAreaChart";
 import { ButtonVariant } from "../../../utils";
 import { groupByKey } from "../../../utils/parse";
 import { RiskLevel } from "../../../utils/risk";
+import Filter from "./Filter";
 import VulnerabilityTable from "./VulnerabilityTable";
 
 const dataArea = [
@@ -82,6 +83,8 @@ const Vulnerabilities = () => {
   const stackAreaChartRef = useRef(null);
   const [width, setWidth] = useState(0);
 
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [vulnerabilities, setVulnerabilities] = useState([]);
   const [riskData, setRiskData] = useState([]);
@@ -134,6 +137,14 @@ const Vulnerabilities = () => {
     return window.removeEventListener("resize", () => {});
   }, []);
 
+  /**
+   * Filter
+   * @param {*} data
+   */
+  const onFilter = (data) => {
+    console.log(data);
+  };
+
   return (
     <Fragment>
       {/* Header */}
@@ -150,7 +161,11 @@ const Vulnerabilities = () => {
           <NormalButton variant={ButtonVariant.icon} className="h-full">
             <MagnifyingGlassIcon className="h-6 w-6" />
           </NormalButton>
-          <NormalButton variant={ButtonVariant.icon} className="h-full">
+          <NormalButton
+            variant={ButtonVariant.icon}
+            className="h-full"
+            onClick={() => setIsFilterOpen(true)}
+          >
             <FunnelIcon className="h-6 w-6" />
           </NormalButton>
         </div>
@@ -209,9 +224,9 @@ const Vulnerabilities = () => {
                 Vulnerability prioritization by
               </span>
               <div className="flex flex-row items-center gap-2 text-sm font-light">
-                <Tag variant={TagVariant.active} label="CVSS Score" />
+                <Tag variant={TagVariant.content} label="CVSS Score" />
                 <Tag riskLevel={RiskLevel.none} label="CVE ID" />
-                <Tag variant={TagVariant.active} label="Group" />
+                <Tag variant={TagVariant.content} label="Group" />
               </div>
             </div>
             {loading && (
@@ -239,6 +254,12 @@ const Vulnerabilities = () => {
       <div className="gap-4 px-7 py-4">
         <VulnerabilityTable data={vulnerabilities} loading={loading} />
       </div>
+      {/* Filter */}
+      <Filter
+        isOpen={isFilterOpen}
+        onSubmit={onFilter}
+        onClose={() => setIsFilterOpen(false)}
+      />
     </Fragment>
   );
 };

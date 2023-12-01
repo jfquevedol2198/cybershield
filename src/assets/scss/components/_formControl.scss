@@ -36,6 +36,26 @@
       }
     }
   }
+  &.multiselect {
+    input {
+      &:not(:placeholder-shown) {
+        & + label {
+          &.small {
+            transform: translateY(-22px);
+            font-size: 12px;
+          }
+          &.medium {
+            transform: translateY(-24px);
+            font-size: 12px;
+          }
+          &.large {
+            transform: translateY(-24px);
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
   .input-icon {
     @apply absolute right-2 top-1/2;
     transform: translateY(-50%);

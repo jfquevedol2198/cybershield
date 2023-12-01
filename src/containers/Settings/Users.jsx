@@ -39,7 +39,7 @@ const columns = [
     key: "risk",
     render: (value) => (
       <Tag
-        variant={value ? TagVariant.filled : TagVariant.inactive}
+        variant={value ? TagVariant.positive : TagVariant.inactive}
         label={value ? "Active" : "Inactive"}
       />
     ),
@@ -77,7 +77,7 @@ const columns = [
     key: "isMfaEnabled",
     render: (value) => (
       <Tag
-        variant={value ? TagVariant.filled : TagVariant.inactive}
+        variant={value ? TagVariant.positive : TagVariant.inactive}
         label={value ? "Enabled" : "Disabled"}
       />
     ),

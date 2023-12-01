@@ -5,6 +5,7 @@ import { z } from "zod";
 
 import Button from "../../../components/Button";
 import FormControl from "../../../components/FormControl";
+import MultiSelect from "../../../components/MultiSelect";
 import SlideOver from "../../../components/SlideOver";
 import { ButtonVariant, SizeVariant } from "../../../utils";
 
@@ -126,10 +127,9 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             data={Categories}
             {...form.register("assignee")}
           />
-          <FormControl
+          <MultiSelect
             id="status"
             label="Status"
-            inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.status?.message}

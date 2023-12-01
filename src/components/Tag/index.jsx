@@ -5,10 +5,10 @@ import PropTypes from "prop-types";
 import { riskLevelStyles, variantStyles } from "../../utils/tag-styles";
 
 export const TagVariant = {
-  active: "active",
-  filled: "filled",
+  positive: "positive",
   closeable: "closeable",
   inactive: "inactive",
+  content: "content",
 };
 
 const Tag = ({ riskLevel, variant, label, onRemove }) => {
@@ -30,10 +30,11 @@ const Tag = ({ riskLevel, variant, label, onRemove }) => {
         "flex flex-row items-center justify-center gap-2 rounded-full",
         variantStyles[variant]
       )}
+      onClick={() => onRemove && onRemove()}
     >
       {label}
-      {variant === variant.closeable && (
-        <XMarkIcon className="h-6 w-6 text-white" onClick={onRemove} />
+      {variant === TagVariant.closeable && (
+        <XMarkIcon className="h-6 w-6 text-white" />
       )}
     </div>
   );

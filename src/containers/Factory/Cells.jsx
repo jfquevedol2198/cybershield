@@ -9,12 +9,14 @@ import NormalButton from "../../components/NormalButton";
 import { ButtonVariant } from "../../utils";
 import { parseAssets } from "../../utils/parse";
 import AssetsTable from "../Assets/AssetsTable";
+import FilterCells from "./FilterCells";
 
 const Cells = () => {
   const [steps, setSteps] = useState([{ name: "All Cells", id: "all_cells" }]);
   const [cells, setCells] = useState([]);
   const [assets, setAssets] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
@@ -71,7 +73,11 @@ const Cells = () => {
           <NormalButton variant={ButtonVariant.icon} className="h-full">
             <MagnifyingGlassIcon className="h-6 w-6" />
           </NormalButton>
-          <NormalButton variant={ButtonVariant.icon} className="h-full">
+          <NormalButton
+            variant={ButtonVariant.icon}
+            className="h-full"
+            onClick={() => setIsFilterOpen(true)}
+          >
             <FunnelIcon className="h-6 w-6" />
           </NormalButton>
         </div>
@@ -100,6 +106,10 @@ const Cells = () => {
       <div className="mt-2 w-full overflow-x-auto px-5">
         {steps.length === 2 && <AssetsTable data={assets} />}
       </div>
+      <FilterCells
+        isOpen={isFilterOpen}
+        onClose={() => setIsFilterOpen(false)}
+      />
     </Fragment>
   );
 };

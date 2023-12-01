@@ -91,7 +91,6 @@ const Alerts = () => {
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
   }, 500);
-  console.log("groupByType = ", groupByType);
 
   useEffect(() => {
     const fetch = async () => {

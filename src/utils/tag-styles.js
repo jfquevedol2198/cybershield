@@ -7,11 +7,11 @@ export const riskLevelStyles = {
 };
 
 export const variantStyles = {
-  active:
-    "text-gray-4 cursor-pointer h-6 px-3 bg-background border-[1px] border-gray-2",
-  filled: "text-white cursor-pointer h-6 px-3 bg-green",
+  positive: "text-white cursor-pointer h-6 px-3 bg-green",
   closeable:
     "text-white cursor-pointer h-8 px-3 bg-background border-[1px] border-gray-2",
   inactive:
     "text-gray-3 cursor-not-allowed h-6 px-3 bg-gray-1 border-[1px] border-gray-2",
+  content:
+    "text-gray-4 cursor-pointer h-6 px-3 bg-background border-[1px] border-gray-2",
 };
