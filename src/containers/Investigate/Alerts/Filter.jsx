@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import Button from "../../../components/Button";
+import Checkbox from "../../../components/Checkbox";
 import FormControl from "../../../components/FormControl";
 import MultiSelect from "../../../components/MultiSelect";
 import SlideOver from "../../../components/SlideOver";
@@ -188,11 +189,22 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             id="pluginName"
             label="Plug-in Name"
             inputType="dropdown"
+            className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.pluginName?.message}
             data={Categories}
             {...form.register("pluginName")}
           />
+          <div className="mb-2 text-base font-bold text-gray-4">
+            Unassigned assets&apos;s alerts
+          </div>
+          <div className="mb-2 text-base font-bold text-gray-4">
+            <Checkbox
+              id="isUnassigned"
+              label="Unassigned assets's alerts"
+              {...form.register("shop")}
+            />
+          </div>
         </div>
         <div className="flex flex-row items-center justify-end gap-2 pt-5">
           <Button variant={ButtonVariant.outline}>CANCEL</Button>
