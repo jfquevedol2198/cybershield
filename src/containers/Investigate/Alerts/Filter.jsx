@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import PropTypes from "prop-types";
-import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 
 import Button from "../../../components/Button";
@@ -21,11 +22,11 @@ const schema = z
     severity: z.string(),
     assignee: z.string(),
     status: z.string(),
-    alertTime: z.object({ min: z.date(), max: z.date() }).optional(),
+    alertTime: z.string(),
     ip: z.string(),
     shop: z.string(),
     cell: z.string(),
-    lastUpdated: z.object({ min: z.date(), max: z.date() }).optional(),
+    lastUpdated: z.string(),
     pluginName: z.string(),
   })
   .superRefine(({ password, confirmPassword }, ctx) => {
@@ -39,7 +40,7 @@ const schema = z
   });
 
 const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
-  const getDefaultValues = () => {
+  const defaultValues = () => {
     return {
       fullname: undefined,
       username: undefined,
@@ -53,10 +54,18 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
       lastUpdated: undefined,
     };
   };
+
   const form = useForm({
     resolver: zodResolver(schema),
-    defaultValues: getDefaultValues(),
+    defaultValues: defaultValues(),
   });
+
+  useEffect(() => {
+    if (isOpen) {
+      form.reset();
+    }
+  }, [isOpen]);
+
   const onHandleSubmit = form.handleSubmit(onSubmit);
 
   return (

@@ -144,12 +144,15 @@ const Alerts = () => {
    * @param {*} data
    */
   const onFilter = (data) => {
+    const filtered = Object.keys(data).filter((key) => !!data[key]);
+    if (filtered.length === 0) return;
     setFilteredAlerts(
       applyFilter(
         alerts,
-        Object.keys(data)
-          .filter((key) => !!data[key])
-          .reduce((filter, key) => ([...filter, { key, value: data[key] }], []))
+        filtered.reduce(
+          (filter, key) => [...filter, { key, value: data[key] }],
+          []
+        )
       )
     );
     setIsFilterOpen(false);

@@ -20,35 +20,53 @@ export const getFilterOptions = (data) => {
 export const DateFilterOptions = [
   {
     label: "None",
-    value: { max: new Date() },
-    key: "none",
+    value: "date_range_none",
   },
   {
     label: "Last Hour",
-    value: { min: dayjs().subtract(1, "hour").toDate(), max: new Date() },
-    key: "last_hour",
+    value: "date_range_last_hour",
   },
   {
     label: "Last Day",
-    value: { min: dayjs().subtract(1, "day").toDate(), max: new Date() },
-    key: "last_day",
+    value: "date_range_last_day",
   },
   {
     label: "Last Week",
-    value: { min: dayjs().subtract(1, "week").toDate(), max: new Date() },
-    key: "last_week",
+    value: "date_range_last_week",
   },
   {
     label: "Last 30 days",
-    value: { min: dayjs().subtract(1, "30").toDate(), max: new Date() },
-    key: "last_30_days",
+    value: "date_range_last_30_days",
   },
   {
     label: "Older than 30 days",
-    value: { min: null, max: dayjs().subtract(30, "day").toDate() },
-    key: "last_older_30_days",
+    value: "date_range_last_older_30_days",
   },
 ];
+
+export const DateFilterRangeData = {
+  date_range_none: { max: new Date() },
+  date_range_last_hour: {
+    min: dayjs().subtract(1, "hour").toDate(),
+    max: new Date(),
+  },
+  date_range_last_day: {
+    min: dayjs().subtract(1, "day").toDate(),
+    max: new Date(),
+  },
+  date_range_last_week: {
+    min: dayjs().subtract(1, "week").toDate(),
+    max: new Date(),
+  },
+  date_range_last_30_days: {
+    min: dayjs().subtract(1, "30").toDate(),
+    max: new Date(),
+  },
+  date_range_last_older_30_days: {
+    min: null,
+    max: dayjs().subtract(30, "day").toDate(),
+  },
+};
 
 export const applyFilter = (data, filterOptions) => {
   let filteredData = data;
@@ -58,31 +76,34 @@ export const applyFilter = (data, filterOptions) => {
       filteredData = filteredData.filter((d) => {
         if (!d[option.key]) return false;
         if (type === "string") {
+          if (option.value.indexOf("date_range_") === 0) {
+            const { min, max } = DateFilterRangeData[option.value];
+            if (!d[option.key]) return false;
+
+            const t = new Date(d[option.key]);
+            if (!min && !max) {
+              const minDate = new Date(min);
+              const maxDate = new Date(max);
+              return t >= minDate && t <= maxDate;
+            }
+            if (!min && max) {
+              const maxDate = new Date(max);
+              return t <= maxDate;
+            }
+            if (min && !max) {
+              const minDate = new Date(min);
+              return t >= minDate;
+            }
+            return false;
+          }
           return (
             d[option.key] === "*" || d[option.key].indexOf(option.value) > -1
           );
-        } else if (type === "object" && !option.value[0]) {
-          return option.value.indexOf(d[option.key]) > -1;
-        } else {
-          const { min, max } = option.value;
-          if (!d[option.key]) return false;
-
-          const t = new Date(d[option.key]);
-          if (!min && !max) {
-            const minDate = new Date(min);
-            const maxDate = new Date(max);
-            return t >= minDate && t <= maxDate;
-          }
-          if (!min && max) {
-            const maxDate = new Date(max);
-            return t <= maxDate;
-          }
-          if (min && !max) {
-            const minDate = new Date(min);
-            return t >= minDate;
-          }
-          return false;
         }
+        if (type === "object" && !option.value[0]) {
+          return option.value.indexOf(d[option.key]) > -1;
+        }
+        return false;
       });
     }
   });
