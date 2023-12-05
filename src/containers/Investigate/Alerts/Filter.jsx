@@ -9,6 +9,8 @@ import FormControl from "../../../components/FormControl";
 import MultiSelect from "../../../components/MultiSelect";
 import SlideOver from "../../../components/SlideOver";
 import { ButtonVariant, SizeVariant } from "../../../utils";
+import { DateFilterOptions } from "../../../utils/filter";
+import { RiskLevel } from "../../../utils/risk";
 
 const schema = z
   .object({
@@ -16,14 +18,14 @@ const schema = z
     type: z.string(),
     subType: z.string(),
     alertId: z.string(),
-    serverity: z.string(),
+    severity: z.string(),
     assignee: z.string(),
-    status: z.array(z.string()),
-    alertTime: z.string(),
+    status: z.string(),
+    alertTime: z.object({ min: z.date(), max: z.date() }).optional(),
     ip: z.string(),
     shop: z.string(),
     cell: z.string(),
-    lastUpdated: z.string(),
+    lastUpdated: z.object({ min: z.date(), max: z.date() }).optional(),
     pluginName: z.string(),
   })
   .superRefine(({ password, confirmPassword }, ctx) => {
@@ -36,18 +38,7 @@ const schema = z
     }
   });
 
-const Categories = [
-  {
-    label: "test1",
-    value: "Text 1",
-  },
-  {
-    label: "test2",
-    value: "Text 2",
-  },
-];
-
-const Filter = ({ isOpen, onSubmit, onClose }) => {
+const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
   const getDefaultValues = () => {
     return {
       fullname: undefined,
@@ -58,6 +49,8 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
       factory: undefined,
       password: undefined,
       confirmPassword: undefined,
+      alertTime: undefined,
+      lastUpdated: undefined,
     };
   };
   const form = useForm({
@@ -69,7 +62,7 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
   return (
     <SlideOver title="Filter" isOpen={isOpen} onClose={onClose}>
       <form className="flex h-full flex-col" onSubmit={onHandleSubmit}>
-        <div className="flex-auto overflow-y-auto">
+        <div className="flex-auto overflow-hidden hover:overflow-y-auto">
           <div className="mb-5 flex flex-col gap-5 bg-gray-1 px-4 py-5">
             <div className="text-base text-gray-4">Alert types</div>
             <FormControl
@@ -78,7 +71,8 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
               inputType="dropdown"
               size={SizeVariant.small}
               error={form.formState.errors.category?.message}
-              data={Categories}
+              data={filterOptions["category"]}
+              setValue={form.setValue}
               {...form.register("category")}
             />
             <FormControl
@@ -87,7 +81,8 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
               inputType="dropdown"
               size={SizeVariant.small}
               error={form.formState.errors.type?.message}
-              data={Categories}
+              data={filterOptions["type"]}
+              setValue={form.setValue}
               {...form.register("type")}
             />
             <FormControl
@@ -96,7 +91,8 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
               inputType="dropdown"
               size={SizeVariant.small}
               error={form.formState.errors.subType?.message}
-              data={Categories}
+              data={filterOptions["subtype"]}
+              setValue={form.setValue}
               {...form.register("subType")}
             />
           </div>
@@ -111,11 +107,15 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
           <FormControl
             id="severity"
             label="Severity"
-            inputType="severity"
+            inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.severity?.message}
-            data={Categories}
+            data={Object.keys(RiskLevel).map((key) => ({
+              value: key,
+              label: RiskLevel[key].label,
+            }))}
+            setValue={form.setValue}
             {...form.register("severity")}
           />
           <FormControl
@@ -125,7 +125,8 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.assignee?.message}
-            data={Categories}
+            data={filterOptions["assignee"]}
+            setValue={form.setValue}
             {...form.register("assignee")}
           />
           <MultiSelect
@@ -134,7 +135,7 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.status?.message}
-            data={Categories}
+            data={filterOptions["status"]}
             {...form.register("status")}
           />
           <FormControl
@@ -144,7 +145,8 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.alertTime?.message}
-            data={Categories}
+            data={DateFilterOptions}
+            setValue={form.setValue}
             {...form.register("alertTime")}
           />
           <FormControl
@@ -162,7 +164,8 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.shop?.message}
-            data={Categories}
+            data={filterOptions["shop"]}
+            setValue={form.setValue}
             {...form.register("shop")}
           />
           <FormControl
@@ -172,7 +175,8 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.cell?.message}
-            data={Categories}
+            data={filterOptions["cell"]}
+            setValue={form.setValue}
             {...form.register("cell")}
           />
           <FormControl
@@ -182,7 +186,8 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.lastUpdated?.message}
-            data={Categories}
+            data={DateFilterOptions}
+            setValue={form.setValue}
             {...form.register("lastUpdated")}
           />
           <FormControl
@@ -192,7 +197,8 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.pluginName?.message}
-            data={Categories}
+            data={filterOptions["pluginName"]}
+            setValue={form.setValue}
             {...form.register("pluginName")}
           />
           <div className="mb-2 text-base font-bold text-gray-4">
@@ -208,7 +214,9 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
         </div>
         <div className="flex flex-row items-center justify-end gap-2 pt-5">
           <Button variant={ButtonVariant.outline}>CANCEL</Button>
-          <Button variant={ButtonVariant.filled}>FILTER</Button>
+          <Button variant={ButtonVariant.filled} isSubmit>
+            FILTER
+          </Button>
         </div>
       </form>
     </SlideOver>
@@ -219,6 +227,7 @@ Filter.propTypes = {
   isOpen: PropTypes.bool,
   onSubmit: PropTypes.func,
   onClose: PropTypes.func,
+  filterOptions: PropTypes.shape(PropTypes.any),
 };
 
 export default Filter;

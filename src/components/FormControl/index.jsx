@@ -25,13 +25,14 @@ const FormControl = React.forwardRef(
       label,
       size,
       inputType,
+      setValue: setValueForm,
       ...rest
     },
     ref
   ) => {
     const [selected, setSelected] = useState(null);
     const [filter, setFilter] = useState(null);
-    const containerRef = useRef(null);
+    const inputRef = useRef(null);
     const hasIcon = inputType === "phone" || inputType === "dropdown";
     const [value, setValue] = useState(null);
     useEffect(() => {
@@ -47,15 +48,17 @@ const FormControl = React.forwardRef(
             "form-control relative",
             value !== null ? "filled" : ""
           )}
-          ref={containerRef}
+          ref={ref}
         >
           {inputType === "dropdown" ? (
             <Listbox
               value={selected}
               onChange={(v) => {
                 setSelected(v);
-                setValue(v.value);
+                setValue(typeof v === "string" ? v : v.value);
+                setValueForm(rest.name, typeof v === "string" ? v : v.value);
               }}
+              disabled={!data}
             >
               <Listbox.Button
                 className={clsx(
@@ -69,12 +72,10 @@ const FormControl = React.forwardRef(
                 )}
               >
                 <input
-                  ref={ref}
                   {...rest}
                   className={clsx(
                     "absolute -left-full flex w-0 items-center rounded border bg-white shadow-input"
                   )}
-                  value={selected?.value}
                   placeholder="dropdown"
                 />
                 <label
@@ -83,45 +84,61 @@ const FormControl = React.forwardRef(
                 >
                   {label}
                 </label>
-                <div>{selected?.label}</div>
+                <div>
+                  {typeof selected === "string"
+                    ? selected === "*"
+                      ? "All"
+                      : selected
+                    : selected?.label === "*"
+                    ? "All"
+                    : selected?.label}
+                </div>
                 <span className="input-icon">
                   <ChevronDownIcon className="w-5" />
                 </span>
               </Listbox.Button>
-              <Transition
-                as={Fragment}
-                leave="transition ease-in duration-100"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Listbox.Options className="absolute top-full z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white px-2 py-2 text-base shadow-input sm:text-sm">
-                  {data.map((d) => (
-                    <Listbox.Option
-                      key={d.value}
-                      className={({ active }) =>
-                        `relative cursor-default select-none ${
-                          active
-                            ? "bg-background text-amber-900"
-                            : "text-gray-900"
-                        }`
-                      }
-                      value={d}
-                    >
-                      {({ selected }) => (
-                        <div
-                          className={`flex cursor-pointer flex-row items-center gap-2 truncate px-2 py-3 ${
-                            selected
-                              ? "bg-background font-medium"
-                              : "font-normal"
-                          }`}
-                        >
-                          {d.label}
-                        </div>
-                      )}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </Transition>
+              {data && (
+                <Transition
+                  as={Fragment}
+                  leave="transition ease-in duration-100"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Listbox.Options className="absolute top-full z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white px-2 py-2 text-base shadow-input sm:text-sm">
+                    {data.map((d) => (
+                      <Listbox.Option
+                        key={typeof d === "string" ? d : d.key || d.value}
+                        className={({ active }) =>
+                          `relative cursor-default select-none ${
+                            active
+                              ? "bg-background text-amber-900"
+                              : "text-gray-900"
+                          }`
+                        }
+                        value={d}
+                      >
+                        {({ selected }) => (
+                          <div
+                            className={`flex cursor-pointer flex-row items-center gap-2 truncate px-2 py-3 ${
+                              selected
+                                ? "bg-background font-medium"
+                                : "font-normal"
+                            }`}
+                          >
+                            {typeof d === "string"
+                              ? d === "*"
+                                ? "All"
+                                : d
+                              : d.label === "*"
+                              ? "All"
+                              : d.label}
+                          </div>
+                        )}
+                      </Listbox.Option>
+                    ))}
+                  </Listbox.Options>
+                </Transition>
+              )}
             </Listbox>
           ) : (
             <div className="relative flex w-full flex-row items-center">
@@ -155,6 +172,7 @@ const FormControl = React.forwardRef(
                     <Listbox.Options className="absolute top-full z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white px-2 py-2 text-base shadow-input sm:text-sm">
                       <div className="relative w-full border-b-[1px] border-gray-1">
                         <input
+                          ref={inputRef}
                           className="w-full border-none pl-10 outline-none focus:border-none focus:shadow-none focus:ring-0"
                           onChange={(e) => setFilter(e.target.value)}
                         />
@@ -199,7 +217,7 @@ const FormControl = React.forwardRef(
                 </Listbox>
               )}
               <input
-                ref={ref}
+                ref={inputRef}
                 type={inputType === "phone" ? "text" : inputType}
                 className={clsx(
                   "relative flex w-full items-center rounded border bg-white shadow-input",
@@ -264,6 +282,7 @@ FormControl.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+  setValue: PropTypes.func,
 };
 
 export default FormControl;

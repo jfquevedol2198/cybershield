@@ -99,6 +99,7 @@ export function mockGetAlerts(mock) {
               ...alert,
               assetName: _.get(asset, "name") || "-",
               cell: _.get(asset, "level2[0].name"),
+              shop: _.get(asset, "level2[0].level1.name"),
             };
           }),
         },

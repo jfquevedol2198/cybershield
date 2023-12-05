@@ -28,7 +28,15 @@ const MultiSelect = React.forwardRef(
             value={selected}
             onChange={(v) => {
               setSelected(v);
-              setValue(v.value);
+              setValue(
+                typeof v === "string"
+                  ? v === "*"
+                    ? "All"
+                    : v
+                  : v.value === "*"
+                  ? "All"
+                  : v.value
+              );
             }}
             multiple
           >
@@ -49,7 +57,9 @@ const MultiSelect = React.forwardRef(
                 className={clsx(
                   "absolute -left-full flex w-0 items-center rounded border bg-white shadow-input"
                 )}
-                value={selected.map((d) => d.value).join(",")}
+                value={selected
+                  .map((d) => (typeof d === "string" ? d : d.value))
+                  .join(",")}
                 placeholder="dropdown"
               />
               <label
@@ -65,11 +75,17 @@ const MultiSelect = React.forwardRef(
               <div className="mb-1.5 flex flex-row items-center gap-1">
                 {selected.map((d) => (
                   <Tag
-                    label={d.label}
-                    key={d.value}
+                    label={typeof d === "string" ? d : d.label}
+                    key={typeof d === "string" ? d : d.value}
                     variant={TagVariant.content}
                     onRemove={() =>
-                      setSelected(selected.filter((s) => s.value !== d.value))
+                      setSelected(
+                        selected.filter((s) => {
+                          const ss = typeof s === "string" ? s : s.value;
+                          const dd = typeof d === "string" ? d : d.value;
+                          return ss !== dd;
+                        })
+                      )
                     }
                   />
                 ))}
@@ -107,7 +123,13 @@ const MultiSelect = React.forwardRef(
                           "justify-between"
                         )}
                       >
-                        {d.label}
+                        {typeof d === "string"
+                          ? d === "*"
+                            ? "All"
+                            : d
+                          : d.label === "*"
+                          ? "All"
+                          : d.label}
                         {selected && <CheckIcon className="w-5" />}
                       </div>
                     )}

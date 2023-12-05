@@ -9,8 +9,8 @@ import { RiskLevel, getRiskLevel } from "../../../utils/risk";
 const columns = [
   {
     title: "Alert ID",
-    dataIndex: "id",
-    key: "id",
+    dataIndex: "alertId",
+    key: "alertId",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 1,

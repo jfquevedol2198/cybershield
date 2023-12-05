@@ -14,6 +14,7 @@ import PrioritizationItem from "../../../components/PrioritizationItem";
 import DonutChart from "../../../components/d3/DonutChart";
 import StackedAreaChart from "../../../components/d3/StackedAreaChart";
 import { ButtonVariant } from "../../../utils";
+import { applyFilter, getFilterOptions } from "../../../utils/filter";
 import { groupByKey, parseAlerts } from "../../../utils/parse";
 import AlertsTable from "./AlertsTable";
 import Filter from "./Filter";
@@ -83,10 +84,12 @@ const Alerts = () => {
 
   const [loading, setLoading] = useState(false);
   const [alerts, setAlerts] = useState([]);
+  const [filteredAlerts, setFilteredAlerts] = useState([]);
   const [riskData, setRiskData] = useState([]);
   const [groupByType, setGroupByType] = useState([]);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filterOptions, setFilterOptions] = useState([]);
 
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
@@ -101,6 +104,8 @@ const Alerts = () => {
       const alerts = parseAlerts(_.get(data, "alerts") || []);
       setAlerts(alerts);
       setGroupByType(groupByKey(alerts, "type"));
+      setFilterOptions(getFilterOptions(alerts));
+      setFilteredAlerts(alerts);
 
       const riskData = alerts.reduce(
         (_data, vul) => {
@@ -139,7 +144,15 @@ const Alerts = () => {
    * @param {*} data
    */
   const onFilter = (data) => {
-    console.log(data);
+    setFilteredAlerts(
+      applyFilter(
+        alerts,
+        Object.keys(data)
+          .filter((key) => !!data[key])
+          .reduce((filter, key) => ([...filter, { key, value: data[key] }], []))
+      )
+    );
+    setIsFilterOpen(false);
   };
 
   return (
@@ -234,17 +247,16 @@ const Alerts = () => {
           </div>
         </div>
       </div>
-
       {/* Content */}
       <div className="gap-4 px-7 py-4">
-        <AlertsTable data={alerts} loading={loading} />
+        <AlertsTable data={filteredAlerts} loading={loading} />
       </div>
-
       {/* Filter */}
       <Filter
         isOpen={isFilterOpen}
         onSubmit={onFilter}
         onClose={() => setIsFilterOpen(false)}
+        filterOptions={filterOptions}
       />
     </Fragment>
   );

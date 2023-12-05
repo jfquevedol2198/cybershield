@@ -17,15 +17,19 @@ export const parseAssets = (data) =>
 
 export const parseAlerts = (data) =>
   data.map((alert) => ({
-    id: alert.id,
+    alertId: alert.id,
+    category: _.get(alert, "subCategory.category.name") || "-",
     type: _.get(alert, "subCategory.type.name") || "-",
+    subtype: _.get(alert, "subCategory.subtype.name") || "-",
     severity: _.get(alert, "severity") * 10 || 0,
     status: _.get(alert, "status") || "-",
     alertTime: _.get(alert, "createdAt"),
     assetName: _.get(alert, "assetName") || "-",
     ip: _.get(alert, "destinationAssetIp") || "-",
     cell: _.get(alert, "cell"),
+    shop: _.get(alert, "shop"),
     updatedAt: _.get(alert, "updatedAt"),
+    assignee: _.get(alert, "assigneeUserId") || "-",
   }));
 
 export const groupByKey = (data, key) => {
