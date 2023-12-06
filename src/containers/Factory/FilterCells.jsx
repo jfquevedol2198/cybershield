@@ -24,7 +24,7 @@ const Categories = [
   },
 ];
 
-const FilterCells = ({ isOpen, onSubmit, onClose }) => {
+const FilterCells = ({ isOpen, filterOptions, onSubmit, onClose }) => {
   const getDefaultValues = () => {
     return {
       name: undefined,
@@ -56,7 +56,7 @@ const FilterCells = ({ isOpen, onSubmit, onClose }) => {
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.location?.message}
-            data={Categories}
+            data={filterOptions["location"]}
             {...form.register("location")}
           />
         </div>
@@ -73,6 +73,7 @@ FilterCells.propTypes = {
   isOpen: PropTypes.bool,
   onSubmit: PropTypes.func,
   onClose: PropTypes.func,
+  filterOptions: PropTypes.shape(PropTypes.any),
 };
 
 export default FilterCells;

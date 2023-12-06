@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import Button from "../../../components/Button";

@@ -13,18 +13,7 @@ const schema = z.object({
   location: z.string(),
 });
 
-const Categories = [
-  {
-    label: "test1",
-    value: "Text 1",
-  },
-  {
-    label: "test2",
-    value: "Text 2",
-  },
-];
-
-const FilterShops = ({ isOpen, onSubmit, onClose }) => {
+const FilterShops = ({ isOpen, filterOptions, onSubmit, onClose }) => {
   const getDefaultValues = () => {
     return {
       name: undefined,
@@ -56,7 +45,7 @@ const FilterShops = ({ isOpen, onSubmit, onClose }) => {
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.location?.message}
-            data={Categories}
+            data={filterOptions["location"]}
             {...form.register("location")}
           />
         </div>
@@ -73,6 +62,7 @@ FilterShops.propTypes = {
   isOpen: PropTypes.bool,
   onSubmit: PropTypes.func,
   onClose: PropTypes.func,
+  filterOptions: PropTypes.shape(PropTypes.any),
 };
 
 export default FilterShops;

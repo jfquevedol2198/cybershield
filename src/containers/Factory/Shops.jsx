@@ -9,15 +9,26 @@ import FactoryShopCard from "../../components/FactoryShopCard";
 import FactoryShopCell from "../../components/FactoryShopCell";
 import NormalButton from "../../components/NormalButton";
 import { ButtonVariant } from "../../utils";
+import { applyFilter, getFilterOptions } from "../../utils/filter";
 import { parseAssets } from "../../utils/parse";
 import AssetsTable from "../Assets/AssetsTable";
+import FilterCells from "./FilterCells";
 import FilterShops from "./FilterShops";
 
 const Shops = () => {
   const [steps, setSteps] = useState([{ name: "All Shops", id: "all_shops" }]);
   const [cells, setCells] = useState([]);
+  const [filteredCells, setFilteredCells] = useState([]);
+  const [filterCellOptions, setFilterCellOptions] = useState([]);
+
   const [shops, setShops] = useState([]);
+  const [filteredShops, setFilteredShops] = useState([]);
+  const [filterShopOptions, setFilterShopOptions] = useState([]);
+
   const [assets, setAssets] = useState([]);
+  const [filteredAssets, setFilteredAssets] = useState([]);
+  const [filterAssetOptions, setFilterAssetOptions] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -28,6 +39,8 @@ const Shops = () => {
         data: { data },
       } = await api.getShops();
       setShops(data);
+      setFilteredShops(data);
+      setFilterShopOptions(getFilterOptions(data));
       setLoading(false);
     };
     fetch();
@@ -38,9 +51,10 @@ const Shops = () => {
     const {
       data: { data },
     } = await api.getCells({ shopId: shop.id });
-    console.log(data);
     setSteps([...steps, shop]);
     setCells(data);
+    setFilteredCells(data);
+    setFilterCellOptions(getFilterOptions(data));
     setLoading(false);
   };
 
@@ -50,8 +64,58 @@ const Shops = () => {
       data: { data },
     } = await api.getAssets({ cellId: cell.id });
     setSteps([...steps, cell]);
-    setAssets(parseAssets(data));
+    const assets = parseAssets(data);
+    setAssets(assets);
+    setFilteredAssets(assets);
+    setFilterAssetOptions(getFilterOptions(assets));
     setLoading(false);
+  };
+
+  /**
+   * Filter
+   * @param {*} data
+   */
+  const onFilterShops = (data) => {
+    const filtered = Object.keys(data).filter((key) => !!data[key]);
+    if (filtered.length === 0) return;
+    setFilteredShops(
+      applyFilter(
+        shops,
+        filtered.reduce(
+          (filter, key) => [...filter, { key, value: data[key] }],
+          []
+        )
+      )
+    );
+    setIsFilterOpen(false);
+  };
+  const onFilterCells = (data) => {
+    const filtered = Object.keys(data).filter((key) => !!data[key]);
+    if (filtered.length === 0) return;
+    setFilteredShops(
+      applyFilter(
+        cells,
+        filtered.reduce(
+          (filter, key) => [...filter, { key, value: data[key] }],
+          []
+        )
+      )
+    );
+    setIsFilterOpen(false);
+  };
+  const onFilterAssets = (data) => {
+    const filtered = Object.keys(data).filter((key) => !!data[key]);
+    if (filtered.length === 0) return;
+    setFilteredShops(
+      applyFilter(
+        assets,
+        filtered.reduce(
+          (filter, key) => [...filter, { key, value: data[key] }],
+          []
+        )
+      )
+    );
+    setIsFilterOpen(false);
   };
 
   return (
@@ -103,7 +167,7 @@ const Shops = () => {
       )}
       <div className="mt-2 grid w-full grid-cols-1 gap-4 overflow-x-auto px-5 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {steps.length === 1 &&
-          shops.map((shop) => {
+          filteredShops.map((shop) => {
             return (
               <div key={shop.id} onClick={() => fetchCells(shop)}>
                 <FactoryShopCard
@@ -118,7 +182,7 @@ const Shops = () => {
             );
           })}
         {steps.length === 2 &&
-          _.map(cells, (cell) => {
+          _.map(filteredCells, (cell) => {
             return (
               <div key={cell.id} onClick={() => fetchAssets(cell)}>
                 <FactoryShopCell
@@ -133,12 +197,32 @@ const Shops = () => {
           })}
       </div>
       <div className="mt-2 w-full overflow-x-auto px-5">
-        {steps.length === 3 && <AssetsTable data={assets} />}
+        {steps.length === 3 && <AssetsTable data={filteredAssets} />}
       </div>
-      <FilterShops
-        isOpen={isFilterOpen}
-        onClose={() => setIsFilterOpen(false)}
-      />
+      {steps.length === 1 && (
+        <FilterShops
+          isOpen={isFilterOpen}
+          filterOptions={filterShopOptions}
+          onSubmit={onFilterShops}
+          onClose={() => setIsFilterOpen(false)}
+        />
+      )}
+      {steps.length === 2 && (
+        <FilterCells
+          isOpen={isFilterOpen}
+          filterOptions={filterCellOptions}
+          onSubmit={onFilterCells}
+          onClose={() => setIsFilterOpen(false)}
+        />
+      )}
+      {steps.length === 3 && (
+        <FilterShops
+          isOpen={isFilterOpen}
+          filterOptions={filterAssetOptions}
+          onSubmit={onFilterAssets}
+          onClose={() => setIsFilterOpen(false)}
+        />
+      )}
     </Fragment>
   );
 };
