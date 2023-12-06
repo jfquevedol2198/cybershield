@@ -1,4 +1,4 @@
-import { FunnelIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { FunnelIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import _ from "lodash";
 import { Fragment, useEffect, useState } from "react";
@@ -8,6 +8,7 @@ import Button from "../../components/Button";
 import FactoryShopCard from "../../components/FactoryShopCard";
 import FactoryShopCell from "../../components/FactoryShopCell";
 import NormalButton from "../../components/NormalButton";
+import SearchInput from "../../components/SearchInput";
 import { ButtonVariant } from "../../utils";
 import { applyFilter, getFilterOptions } from "../../utils/filter";
 import { parseAssets } from "../../utils/parse";
@@ -148,9 +149,7 @@ const Shops = () => {
         </div>
         <div className="flex flex-row items-center gap-4">
           <Button variant={ButtonVariant.outline}>EXPORT SHOPS LIST</Button>
-          <NormalButton variant={ButtonVariant.icon} className="h-full">
-            <MagnifyingGlassIcon className="h-6 w-6" />
-          </NormalButton>
+          <SearchInput onSearch={() => {}} />
           <NormalButton
             variant={ButtonVariant.icon}
             className="h-full"

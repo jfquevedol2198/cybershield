@@ -1,8 +1,4 @@
-import {
-  ArrowDownIcon,
-  FunnelIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowDownIcon, FunnelIcon } from "@heroicons/react/24/outline";
 import _ from "lodash";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
@@ -11,6 +7,7 @@ import api from "../../../api";
 import Button from "../../../components/Button";
 import NormalButton from "../../../components/NormalButton";
 import PrioritizationItem from "../../../components/PrioritizationItem";
+import SearchInput from "../../../components/SearchInput";
 import DonutChart from "../../../components/d3/DonutChart";
 import StackedAreaChart from "../../../components/d3/StackedAreaChart";
 import { ButtonVariant } from "../../../utils";
@@ -167,9 +164,7 @@ const Alerts = () => {
         </div>
         <div className="flex flex-row items-center gap-4">
           <Button variant={ButtonVariant.outline}>EXPORT ALERTS LIST</Button>
-          <NormalButton variant={ButtonVariant.icon} className="h-full">
-            <MagnifyingGlassIcon className="h-6 w-6" />
-          </NormalButton>
+          <SearchInput onSearch={() => {}} />
           <NormalButton
             variant={ButtonVariant.icon}
             className="h-full"

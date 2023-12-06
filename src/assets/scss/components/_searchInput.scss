@@ -1,0 +1,18 @@
+.searchInput {
+  input {
+    @apply border-[1px] border-white;
+    &:hover {
+      @apply border-primary-4;
+    }
+    &:focus-visible {
+      @apply outline-none;
+    }
+    &:active {
+      @apply outline-none;
+    }
+    &:focus {
+      @apply shadow-none outline-none;
+      --tw-ring-shadow: transparent;
+    }
+  }
+}

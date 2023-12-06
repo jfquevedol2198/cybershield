@@ -9,15 +9,17 @@ import SlideOver from "../../components/SlideOver";
 import { ButtonVariant, SizeVariant } from "../../utils";
 
 const schema = z.object({
-  name: z.string(),
-  location: z.string(),
+  username: z.string(),
+  fullname: z.string(),
+  role: z.string(),
 });
 
-const FilterShops = ({ isOpen, filterOptions = {}, onSubmit, onClose }) => {
+const FilterUsers = ({ isOpen, filterOptions = {}, onSubmit, onClose }) => {
   const getDefaultValues = () => {
     return {
-      name: undefined,
-      location: undefined,
+      username: undefined,
+      fullname: undefined,
+      role: undefined,
     };
   };
   const form = useForm({
@@ -31,23 +33,31 @@ const FilterShops = ({ isOpen, filterOptions = {}, onSubmit, onClose }) => {
       <form className="flex h-full flex-col" onSubmit={onHandleSubmit}>
         <div className="flex-auto overflow-y-auto">
           <FormControl
-            id="name"
-            label="Name"
+            id="username"
+            label="Username"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.name?.message}
-            {...form.register("name")}
+            error={form.formState.errors.username?.message}
+            {...form.register("username")}
           />
           <FormControl
-            id="location"
-            label="Location"
+            id="fullname"
+            label="Full name"
+            className="mb-5"
+            size={SizeVariant.small}
+            error={form.formState.errors.fullname?.message}
+            {...form.register("fullname")}
+          />
+          <FormControl
+            id="role"
+            label="Role"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.location?.message}
-            data={filterOptions["location"]}
+            error={form.formState.errors.role?.message}
+            data={filterOptions["role"]}
             setValue={form.setValue}
-            {...form.register("location")}
+            {...form.register("role")}
           />
         </div>
         <div className="flex flex-row items-center justify-end gap-2 pt-5">
@@ -61,11 +71,11 @@ const FilterShops = ({ isOpen, filterOptions = {}, onSubmit, onClose }) => {
   );
 };
 
-FilterShops.propTypes = {
+FilterUsers.propTypes = {
   isOpen: PropTypes.bool,
   onSubmit: PropTypes.func,
   onClose: PropTypes.func,
   filterOptions: PropTypes.shape(PropTypes.any),
 };
 
-export default FilterShops;
+export default FilterUsers;

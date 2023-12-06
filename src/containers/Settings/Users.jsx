@@ -1,12 +1,15 @@
-import { FunnelIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { FunnelIcon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
 
 import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
+import SearchInput from "../../components/SearchInput";
 import Table from "../../components/Table";
 import Tag, { TagVariant } from "../../components/Tag";
 import { ButtonVariant } from "../../utils";
+import { applyFilter, getFilterOptions } from "../../utils/filter";
 import CreateUserModal from "./CreateUserModal";
+import FilterUsers from "./FilterUsers";
 
 const columns = [
   {
@@ -101,6 +104,30 @@ const data = [
 
 const Users = () => {
   const [isCreateUser, setCreateUser] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filterOptions, setFilterOptions] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+
+  useEffect(() => {
+    setFilteredUsers(data);
+    setFilterOptions(getFilterOptions(data));
+  }, []);
+
+  const onFilter = (data) => {
+    const filtered = Object.keys(data).filter((key) => !!data[key]);
+    if (filtered.length === 0) return;
+    setFilteredUsers(
+      applyFilter(
+        data,
+        filtered.reduce(
+          (filter, key) => [...filter, { key, value: data[key] }],
+          []
+        )
+      )
+    );
+    setIsFilterOpen(false);
+  };
+
   return (
     <div>
       <div className="mb-2 text-[1.625rem] font-bold">Users</div>
@@ -110,10 +137,12 @@ const Users = () => {
       </div>
       <div className="mb-5">
         <div className="flex flex-row items-center justify-end gap-8">
-          <NormalButton variant={ButtonVariant.icon} className="h-full">
-            <MagnifyingGlassIcon className="h-6 w-6" />
-          </NormalButton>
-          <NormalButton variant={ButtonVariant.icon} className="h-full">
+          <SearchInput onSearch={() => {}} />
+          <NormalButton
+            variant={ButtonVariant.icon}
+            className="h-full"
+            onClick={() => setIsFilterOpen(true)}
+          >
             <FunnelIcon className="h-6 w-6" />
           </NormalButton>
           <Button
@@ -125,11 +154,17 @@ const Users = () => {
         </div>
       </div>
       <div>
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={filteredUsers} />
       </div>
       <CreateUserModal
         isOpen={isCreateUser}
         onClose={() => setCreateUser(false)}
+      />{" "}
+      <FilterUsers
+        isOpen={isFilterOpen}
+        filterOptions={filterOptions}
+        onSubmit={onFilter}
+        onClose={() => setIsFilterOpen(false)}
       />
     </div>
   );

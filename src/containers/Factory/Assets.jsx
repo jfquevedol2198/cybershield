@@ -1,10 +1,11 @@
-import { FunnelIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { FunnelIcon } from "@heroicons/react/24/outline";
 import _ from "lodash";
 import { Fragment, useEffect, useState } from "react";
 
 import api from "../../api";
 import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
+import SearchInput from "../../components/SearchInput";
 import { ButtonVariant } from "../../utils";
 import { parseAssets } from "../../utils/parse";
 import AssetsTable from "../Assets/AssetsTable";
@@ -40,9 +41,7 @@ const Assets = () => {
         </div>
         <div className="flex flex-row items-center gap-4">
           <Button variant={ButtonVariant.outline}>EXPORT SHOPS LIST</Button>
-          <NormalButton variant={ButtonVariant.icon} className="h-full">
-            <MagnifyingGlassIcon className="h-6 w-6" />
-          </NormalButton>
+          <SearchInput onSearch={() => {}} />
           <NormalButton variant={ButtonVariant.icon} className="h-full">
             <FunnelIcon className="h-6 w-6" />
           </NormalButton>

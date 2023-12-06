@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import Button from "../../components/Button";
+import Checkbox from "../../components/Checkbox";
 import FormControl from "../../components/FormControl";
 import SlideOver from "../../components/SlideOver";
 import { ButtonVariant, SizeVariant } from "../../utils";
@@ -12,17 +13,6 @@ const schema = z.object({
   name: z.string(),
   location: z.string(),
 });
-
-const Categories = [
-  {
-    label: "test1",
-    value: "Text 1",
-  },
-  {
-    label: "test2",
-    value: "Text 2",
-  },
-];
 
 const FilterCells = ({ isOpen, filterOptions, onSubmit, onClose }) => {
   const getDefaultValues = () => {
@@ -57,12 +47,25 @@ const FilterCells = ({ isOpen, filterOptions, onSubmit, onClose }) => {
             size={SizeVariant.small}
             error={form.formState.errors.location?.message}
             data={filterOptions["location"]}
+            setValue={form.setValue}
             {...form.register("location")}
           />
+          <div className="mb-2 text-base font-bold text-gray-4">
+            Advanced filters
+          </div>
+          <div className="mb-2 text-base font-bold text-gray-4">
+            <Checkbox
+              id="isUnassigned"
+              label="Inspected for compliance"
+              {...form.register("shop")}
+            />
+          </div>
         </div>
         <div className="flex flex-row items-center justify-end gap-2 pt-5">
           <Button variant={ButtonVariant.outline}>CANCEL</Button>
-          <Button variant={ButtonVariant.filled}>FILTER</Button>
+          <Button variant={ButtonVariant.filled} isSubmit>
+            FILTER
+          </Button>
         </div>
       </form>
     </SlideOver>
