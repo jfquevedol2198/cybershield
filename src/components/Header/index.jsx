@@ -110,6 +110,7 @@ const Header = () => {
                   <Menu.Item
                     className="px-2 py-3 text-gray-4"
                     as={NormalButton}
+                    href="/dashboard/my-account"
                   >
                     <MyAccountSvg className="h-7 w-6" />
                     My Account

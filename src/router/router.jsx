@@ -4,6 +4,7 @@ import { ReactComponent as AssetsIcon } from "../assets/images/assets.svg";
 import { ReactComponent as ComplianceIcon } from "../assets/images/compliance.svg";
 import { ReactComponent as Factory1Icon } from "../assets/images/factory1.svg";
 import { ReactComponent as InvestigateIcon } from "../assets/images/investigate.svg";
+import { ReactComponent as LogoutSvg } from "../assets/images/logout.svg";
 import { ReactComponent as RiskManagementIcon } from "../assets/images/risk-management.svg";
 import Error404 from "../containers/404";
 import { App } from "../containers/App";
@@ -17,6 +18,9 @@ import Vulnerabilities from "../containers/Investigate/Vulnerabilities";
 import Login from "../containers/Login";
 import AuthCodeVerify from "../containers/MFA/AuthCodeVerify";
 import Scan from "../containers/MFA/Scan";
+import MyAccount from "../containers/MyAccount";
+import AccountInformation from "../containers/MyAccount/AccountInformation";
+import ChangePassword from "../containers/MyAccount/ChangePassword";
 import { Register } from "../containers/Register";
 import RiskManagement from "../containers/RiskManagement";
 import Settings from "../containers/Settings";
@@ -25,6 +29,7 @@ import UploadLogo from "../containers/Settings/UploadLogo";
 import Users from "../containers/Settings/Users";
 import Template from "../containers/Template";
 import UpdatePassword from "../containers/UpdatePassword";
+import { redirectToAuth } from "../utils";
 import { authorizationLoader } from "./authorizationLoader";
 
 export const SIDEBAR_ITEMS = [
@@ -127,6 +132,25 @@ export const SETTINGS_SIDEBAR_ITEMS = [
   },
 ];
 
+export const MY_ACCOUNT_SIDEBAR_ITEMS = [
+  {
+    path: "account-information",
+    title: "Account Information",
+    Component: AccountInformation,
+  },
+  {
+    path: "change-password",
+    title: "New Password",
+    Component: ChangePassword,
+  },
+  {
+    title: "Sign out",
+    Component: TimeRefresh,
+    Icon: LogoutSvg,
+    onClick: redirectToAuth,
+  },
+];
+
 export const createRoutes = () => [
   {
     path: "/",
@@ -180,6 +204,14 @@ export const createRoutes = () => [
         Component: Settings,
         children: SETTINGS_SIDEBAR_ITEMS.map((item) => ({
           path: `/dashboard/settings/${item.path}`,
+          Component: item.Component,
+        })),
+      },
+      {
+        path: "/dashboard/my-account",
+        Component: MyAccount,
+        children: MY_ACCOUNT_SIDEBAR_ITEMS.map((item) => ({
+          path: `/dashboard/my-account/${item.path}`,
           Component: item.Component,
         })),
       },
