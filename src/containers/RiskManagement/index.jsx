@@ -3,6 +3,7 @@ import { useDebouncedCallback } from "use-debounce";
 
 import Button from "../../components/Button";
 import ColorBar from "../../components/ColorBar";
+import CreateIncidentModal from "../../components/CreateIncidentModal";
 import CustomTap from "../../components/CustomTap";
 import DropdownSelect from "../../components/DropdownSelect";
 import Tag from "../../components/Tag";
@@ -132,6 +133,7 @@ const RiskManagement = () => {
           </Button>
         </div>
       </div>
+      {/* <CreateIncidentModal /> */}
     </Fragment>
   );
 };

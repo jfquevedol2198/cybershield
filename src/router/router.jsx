@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { ReactComponent as AssetsIcon } from "../assets/images/assets.svg";
 import { ReactComponent as ComplianceIcon } from "../assets/images/compliance.svg";
 import { ReactComponent as Factory1Icon } from "../assets/images/factory1.svg";
+import { ReactComponent as IncidentsIcon } from "../assets/images/incidents.svg";
 import { ReactComponent as InvestigateIcon } from "../assets/images/investigate.svg";
 import { ReactComponent as LogoutSvg } from "../assets/images/logout.svg";
 import { ReactComponent as RiskManagementIcon } from "../assets/images/risk-management.svg";
@@ -99,12 +100,12 @@ export const SIDEBAR_ITEMS = [
     Component: Assets,
     Icon: AssetsIcon,
   },
-  // {
-  //   path: "incidents",
-  //   title: "Incidents",
-  //   Icon: IncidentsIcon,
-  //   Component: Template,
-  // },
+  {
+    path: "incidents",
+    title: "Incidents",
+    Icon: IncidentsIcon,
+    Component: Template,
+  },
   // {
   //   path: "secure-remote-management",
   //   title: "Secure Remote Management",

@@ -9,6 +9,9 @@ export default defineConfig({
       external: ["user-debounce"],
     },
   },
+  define: {
+    global: "window",
+  },
   plugins: [
     react(),
     svgr({
