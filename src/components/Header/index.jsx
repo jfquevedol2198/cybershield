@@ -12,7 +12,8 @@ import { ReactComponent as ChatSupportSvg } from "../../assets/images/chatsuppor
 import { ReactComponent as KnowledgeSvg } from "../../assets/images/knowledge.svg";
 import { ReactComponent as LogoutSvg } from "../../assets/images/logout.svg";
 import { ReactComponent as MyAccountSvg } from "../../assets/images/myaccount.svg";
-import { ButtonVariant, redirectToAuth } from "../../utils";
+import useCommon from "../../hooks/useCommon";
+import { ButtonVariant } from "../../utils";
 import Avatar from "../Avatar";
 import DropdownButton from "../DropdownButton";
 import NormalButton from "../NormalButton";
@@ -20,6 +21,7 @@ import NormalButton from "../NormalButton";
 const Header = () => {
   const location = useLocation();
   const isSetting = location.pathname.indexOf("/settings") > -1;
+  const { setShowSignoutModal } = useCommon();
   return (
     <div className="header">
       <div className="left">
@@ -118,7 +120,7 @@ const Header = () => {
                   <Menu.Item
                     className="px-2 py-3 text-gray-4"
                     as={NormalButton}
-                    onClick={redirectToAuth}
+                    onClick={() => setShowSignoutModal(true)}
                   >
                     <LogoutSvg className="h-7 w-6" />
                     Log out

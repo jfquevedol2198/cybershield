@@ -1,10 +1,12 @@
 import { useLocation } from "react-router-dom";
 
+import useCommon from "../../hooks/useCommon";
 import { MY_ACCOUNT_SIDEBAR_ITEMS } from "../../router";
 import NormalButton from "../NormalButton";
 
 const MyAccountSidebar = () => {
   const location = useLocation();
+  const { setShowSignoutModal } = useCommon();
   return (
     <div className="w-[13.75rem] bg-white p-8">
       <div className="mb-4 text-[1.375rem] font-bold">My Account</div>
@@ -31,7 +33,14 @@ const MyAccountSidebar = () => {
               </NormalButton>
             )}
             {item.onClick && (
-              <NormalButton key={item.path} onClick={item.onClick}>
+              <NormalButton
+                key={item.onClick}
+                onClick={() => {
+                  if (item.onClick === "signout") {
+                    setShowSignoutModal(true);
+                  }
+                }}
+              >
                 <div className="flex w-full justify-between py-3 text-left text-base font-light text-gray-4">
                   <div className="flex flex-row items-center gap-2">
                     {Icon && <Icon />}

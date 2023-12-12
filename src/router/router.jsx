@@ -29,7 +29,6 @@ import UploadLogo from "../containers/Settings/UploadLogo";
 import Users from "../containers/Settings/Users";
 import Template from "../containers/Template";
 import UpdatePassword from "../containers/UpdatePassword";
-import { redirectToAuth } from "../utils";
 import { authorizationLoader } from "./authorizationLoader";
 
 export const SIDEBAR_ITEMS = [
@@ -147,7 +146,7 @@ export const MY_ACCOUNT_SIDEBAR_ITEMS = [
     title: "Sign out",
     Component: TimeRefresh,
     Icon: LogoutSvg,
-    onClick: redirectToAuth,
+    onClick: "signout",
   },
 ];
 

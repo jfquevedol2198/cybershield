@@ -1,9 +1,9 @@
 export const riskLevelStyles = {
-  low: "bg-risk-4 text-black",
-  medium: "bg-risk-3 text-white",
-  high: "bg-risk-2 text-white",
-  critical: "bg-risk-1 text-white",
-  none: "bg-gray-3 text-white",
+  Low: "bg-risk-4 text-black",
+  Medium: "bg-risk-3 text-white",
+  High: "bg-risk-2 text-white",
+  Critical: "bg-risk-1 text-white",
+  None: "bg-gray-3 text-white",
 };
 
 export const variantStyles = {
