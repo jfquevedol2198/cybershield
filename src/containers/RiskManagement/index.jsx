@@ -3,7 +3,7 @@ import { useDebouncedCallback } from "use-debounce";
 
 import Button from "../../components/Button";
 import ColorBar from "../../components/ColorBar";
-import CreateIncidentModal from "../../components/CreateIncidentModal";
+// import CreateIncidentModal from "../../components/CreateIncidentModal";
 import CustomTap from "../../components/CustomTap";
 import DropdownSelect from "../../components/DropdownSelect";
 import Tag from "../../components/Tag";
@@ -12,14 +12,12 @@ import { ButtonVariant, SizeVariant } from "../../utils";
 import { RiskLevel } from "../../utils/risk";
 import AffectAssetsTable from "./AffectedAssetsTable";
 import {
-  PanelAlerts,
-  PanelIncidents,
-  PanelInsights,
+  PanelAlerts, // PanelIncidents,
+  // PanelInsights,
   PanelRisk,
   PanelShops,
-  TabAlerts,
-  TabIncidents,
-  TabInsights,
+  TabAlerts, // TabIncidents,
+  // TabInsights,
   TabRisk,
   TabShops,
 } from "./TabItems";
