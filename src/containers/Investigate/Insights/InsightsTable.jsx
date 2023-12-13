@@ -12,7 +12,7 @@ const columns = [
     key: "insightId",
     sort: true,
     sortDataType: SortDataType.String,
-    colSpan: 1,
+    colSpan: 0.8,
     className: "",
     align: "left",
   },

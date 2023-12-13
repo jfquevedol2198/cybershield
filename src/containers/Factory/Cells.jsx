@@ -16,13 +16,13 @@ import FilterCells from "./FilterCells";
 const Cells = () => {
   const [steps, setSteps] = useState([{ name: "All Cells", id: "all_cells" }]);
   const [loading, setLoading] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const [cells, setCells] = useState([]);
   const [filteredCells, setFilteredCells] = useState([]);
   const [filterCellOptions, setFilterCellOptions] = useState([]);
-
   const [assets, setAssets] = useState([]);
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filteredAssets, setFilteredAssets] = useState([]);
   const [filterAssetOptions, setFilterAssetOptions] = useState([]);
 

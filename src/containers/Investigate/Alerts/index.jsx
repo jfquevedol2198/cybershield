@@ -81,12 +81,12 @@ const Alerts = () => {
 
   const [loading, setLoading] = useState(false);
   const [alerts, setAlerts] = useState([]);
-  const [filteredAlerts, setFilteredAlerts] = useState([]);
   const [riskData, setRiskData] = useState([]);
   const [groupByType, setGroupByType] = useState([]);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
+  const [filteredAlerts, setFilteredAlerts] = useState([]);
 
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);

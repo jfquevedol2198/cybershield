@@ -27,11 +27,12 @@ const Shops = () => {
   const [filterShopOptions, setFilterShopOptions] = useState([]);
 
   const [assets, setAssets] = useState([]);
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filteredAssets, setFilteredAssets] = useState([]);
   const [filterAssetOptions, setFilterAssetOptions] = useState([]);
 
   const [loading, setLoading] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {

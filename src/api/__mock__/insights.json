@@ -5,7 +5,8 @@
     "score": 1,
     "status": "New",
     "updatedTime": "2023-01-03 12:25",
-    "cell": "-",
+    "cell": "Cell 1",
+    "shop": "Shop 1",
     "relatedAlerts": "5"
   },
   {
@@ -14,7 +15,8 @@
     "score": 0.6,
     "status": "New",
     "updatedTime": "2023-02-05 14:45",
-    "cell": "-",
+    "cell": "Cell 2",
+    "shop": "Shop 2",
     "relatedAlerts": "5"
   },
   {
@@ -23,7 +25,8 @@
     "score": 0.4,
     "status": "New",
     "updatedTime": "2023-03-09 19:25",
-    "cell": "-",
+    "cell": "Cell 3",
+    "shop": "Shop 3",
     "relatedAlerts": "3"
   },
   {
@@ -32,7 +35,8 @@
     "score": 0.2,
     "status": "New",
     "updatedTime": "2023-05-14 01:15",
-    "cell": "-",
+    "cell": "Cell 4",
+    "shop": "Shop 4",
     "relatedAlerts": "2"
   }
 ]

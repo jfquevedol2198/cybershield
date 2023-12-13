@@ -56,7 +56,7 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
           <FormControl
             id="severity"
             label="Severity"
-            inputType="severity"
+            inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.severity?.message}

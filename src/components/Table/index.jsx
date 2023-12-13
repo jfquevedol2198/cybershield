@@ -12,7 +12,7 @@ import { sortFunc } from "../../utils/sort";
 import NormalButton from "../NormalButton";
 import { TablePropType } from "./types";
 
-const Table = ({ columns, dataSource, totalPages, loading }) => {
+const Table = ({ columns, dataSource, totalPages, loading, onClickRow }) => {
   const [sorts, setSorts] = useState([]);
 
   const { totalColSpan } = useMemo(() => {
@@ -107,6 +107,7 @@ const Table = ({ columns, dataSource, totalPages, loading }) => {
           <div
             key={`row-${index}`}
             className="table-header flex flex-row flex-nowrap items-center border-b-[1px] border-gray-1 bg-white px-2 hover:bg-gray-1"
+            onClick={() => onClickRow && onClickRow(data)}
           >
             {columns.map((column) => (
               <div

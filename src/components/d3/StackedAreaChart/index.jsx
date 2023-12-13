@@ -102,7 +102,6 @@ const StackedAreaChart = ({ width, height, data, colors }) => {
       d3.selectAll(".myArea").style("opacity", 0.5);
       // expect the one that is hovered
       d3.select("." + d.key.split(" ").join("_")).style("opacity", 1);
-      console.log("hover");
     };
 
     // And when it is not hovered anymore

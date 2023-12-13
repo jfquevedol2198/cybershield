@@ -35,7 +35,6 @@ const DonutChart = ({ width, height, data, innerRadius, outerRadius }) => {
         });
         startAngle += (2 * Math.PI * d.value) / totalValue;
       });
-    console.log(parsedData);
 
     svg
       .selectAll("arcOuter")

@@ -10,7 +10,9 @@ import SearchInput from "../../../components/SearchInput";
 import DonutChart from "../../../components/d3/DonutChart";
 import StackedAreaChart from "../../../components/d3/StackedAreaChart";
 import { ButtonVariant } from "../../../utils";
+import { applyFilter, getFilterOptions } from "../../../utils/filter";
 import { groupByKey } from "../../../utils/parse";
+import Filter from "./Filter";
 import InsightsTable from "./InsightsTable";
 
 const dataArea = [
@@ -81,6 +83,10 @@ const Insights = () => {
   const [riskData, setRiskData] = useState([]);
   const [groupByType, setGroupByType] = useState([]);
 
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filteredInsights, setFilteredInsights] = useState([]);
+  const [filterOptions, setFilterOptions] = useState({});
+
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
     console.log(stackAreaChartRef.current.clientWidth);
@@ -94,7 +100,9 @@ const Insights = () => {
       } = await api.getInsights();
       const insights = data;
       setInsights(insights);
+      setFilteredInsights(insights);
       setGroupByType(groupByKey(insights, "type"));
+      setFilterOptions(getFilterOptions(insights));
 
       const riskData = insights.reduce(
         (_data, vul) => {
@@ -128,6 +136,25 @@ const Insights = () => {
     return window.removeEventListener("resize", () => {});
   }, []);
 
+  /**
+   * Filter
+   * @param {*} data
+   */
+  const onFilter = (data) => {
+    const filtered = Object.keys(data).filter((key) => !!data[key]);
+    if (filtered.length === 0) return;
+    setFilteredInsights(
+      applyFilter(
+        insights,
+        filtered.reduce(
+          (filter, key) => [...filter, { key, value: data[key] }],
+          []
+        )
+      )
+    );
+    setIsFilterOpen(false);
+  };
+
   return (
     <Fragment>
       {/* Header */}
@@ -140,7 +167,11 @@ const Insights = () => {
         <div className="flex flex-row items-center gap-4">
           <Button variant={ButtonVariant.outline}>EXPORT INSIGHTS LIST</Button>
           <SearchInput onSearch={() => {}} />
-          <NormalButton variant={ButtonVariant.icon} className="h-full">
+          <NormalButton
+            variant={ButtonVariant.icon}
+            className="h-full"
+            onClick={() => setIsFilterOpen(true)}
+          >
             <FunnelIcon className="h-6 w-6" />
           </NormalButton>
         </div>
@@ -216,10 +247,19 @@ const Insights = () => {
           </div>
         </div>
       </div>
+
       {/* Content */}
       <div className="gap-4 px-7 py-4">
-        <InsightsTable data={insights} loading={loading} />
+        <InsightsTable data={filteredInsights} loading={loading} />
       </div>
+
+      {/* Filter */}
+      <Filter
+        isOpen={isFilterOpen}
+        onSubmit={onFilter}
+        onClose={() => setIsFilterOpen(false)}
+        filterOptions={filterOptions}
+      />
     </Fragment>
   );
 };

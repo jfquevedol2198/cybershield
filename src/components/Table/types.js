@@ -24,4 +24,5 @@ export const TablePropType = {
   title: PropTypes.string,
   currentPage: PropTypes.number,
   totalPages: PropTypes.number,
+  onClickRow: PropTypes.func,
 };
