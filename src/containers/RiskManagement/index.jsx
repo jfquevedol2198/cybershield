@@ -133,7 +133,6 @@ const RiskManagement = () => {
           </Button>
         </div>
       </div>
-      {/* <CreateIncidentModal /> */}
     </Fragment>
   );
 };
