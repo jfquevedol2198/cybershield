@@ -11,15 +11,15 @@ import SlideOver from "../../../components/SlideOver";
 import { ButtonVariant, SizeVariant } from "../../../utils";
 
 const schema = z.object({
-  type: z.string(),
-  category: z.string(),
-  severity: z.string(),
-  updatedAt: z.string(),
-  cell: z.string(),
-  isUnassigned: z.boolean(),
-  relatedAlerts: z.string(),
-  status: z.array(z.string()),
-  shop: z.string(),
+  type: z.string().optional(),
+  category: z.string().optional(),
+  severity: z.string().optional(),
+  updatedAt: z.string().optional(),
+  cell: z.string().optional(),
+  isUnassigned: z.boolean().optional(),
+  relatedAlerts: z.string().optional(),
+  status: z.string().optional(),
+  shop: z.string().optional(),
 });
 
 const Categories = [
@@ -151,7 +151,6 @@ const Filter = ({ isOpen, onSubmit, onClose, filterOptions }) => {
               size={SizeVariant.small}
               error={form.formState.errors.status?.message}
               data={StatusOptions}
-              setValue={form.setValue}
               {...form.register("status")}
             />
           </div>
