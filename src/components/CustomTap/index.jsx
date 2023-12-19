@@ -6,6 +6,8 @@ import { ChildrenType } from "../../utils/types";
 
 const CustomTap = ({
   className,
+  tabActiveClassName,
+  tabNormalClassName,
   tabListClassName,
   tabPanelClassName,
   tabs,
@@ -21,7 +23,7 @@ const CustomTap = ({
               className={({ selected }) =>
                 clsx(
                   "px-4 py-2 text-base focus-visible:outline-none",
-                  selected ? "bg-white text-gray-4" : "bg-gray-1 text-gray-2"
+                  selected ? tabActiveClassName : tabNormalClassName
                 )
               }
             >
@@ -41,12 +43,19 @@ const CustomTap = ({
   );
 };
 
+CustomTap.defaultProps = {
+  tabActiveClassName: "bg-white text-gray-4",
+  tabNormalClassName: "bg-gray-1 text-gray-2",
+};
+
 CustomTap.propTypes = {
   className: PropTypes.string,
   tabListClassName: PropTypes.string,
   tabPanelClassName: PropTypes.string,
   tabs: PropTypes.arrayOf(ChildrenType),
   tabPanels: PropTypes.arrayOf(ChildrenType),
+  tabActiveClassName: PropTypes.string,
+  tabNormalClassName: PropTypes.string,
 };
 
 export default CustomTap;
