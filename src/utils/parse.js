@@ -10,9 +10,16 @@ export const parseAssets = (data) =>
     mac: _.get(asset, "interfaces[0].mac") || "-",
     ip: _.get(asset, "interfaces[0].ip") || "-",
     cell: _.get(asset, "level2[0].name") || "-",
+    shop: _.get(asset, "level2[0].name.level1.name") || "-",
     vendor: asset.vendorName,
     lastSeenAt: dayjs(asset.firstSeen).format("DD MMM YYYY | HH:mm:ss"),
     location: asset.location || "-",
+    state: asset.state,
+    firmware: asset.firmwareVersion,
+    model: asset.modelName,
+    pluginName: "",
+    edr: "",
+    isCertain: asset.isCertain || false,
   }));
 
 export const parseAlerts = (data) =>
