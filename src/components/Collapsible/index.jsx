@@ -15,8 +15,8 @@ const Collapsible = ({ children, showCount }) => {
       >
         {isShowFull && <MinusIcon className="w-6" />}
         {!isShowFull && <PlusIcon className="w-6" />}
-        {isShowFull && <>Show more</>}
-        {!isShowFull && <>Show less</>}
+        {isShowFull && <>Show less</>}
+        {!isShowFull && <>Show more</>}
       </span>
     </>
   );
