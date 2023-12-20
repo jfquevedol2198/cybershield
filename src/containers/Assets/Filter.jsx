@@ -73,7 +73,6 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
   }, [isOpen]);
 
   const onHandleSubmit = form.handleSubmit(onSubmit);
-  console.log(form.formState.errors);
 
   return (
     <SlideOver title="Filter" isOpen={isOpen} onClose={onClose}>

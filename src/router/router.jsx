@@ -14,6 +14,7 @@ import FactoryAssets from "../containers/Factory/Assets";
 import FactoryCells from "../containers/Factory/Cells";
 import FactoryShops from "../containers/Factory/Shops";
 import ForgotPassword from "../containers/ForgotPassword";
+import Incidents from "../containers/Incidents";
 import Alerts from "../containers/Investigate/Alerts";
 import Insights from "../containers/Investigate/Insights";
 import Vulnerabilities from "../containers/Investigate/Vulnerabilities";
@@ -105,7 +106,7 @@ export const SIDEBAR_ITEMS = [
     path: "incidents",
     title: "Incidents",
     Icon: IncidentsIcon,
-    Component: Template,
+    Component: Incidents,
   },
   // {
   //   path: "secure-remote-management",

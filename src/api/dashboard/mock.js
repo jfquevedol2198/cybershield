@@ -4,6 +4,7 @@ import alertsPage0Json from "../__mock__/alerts_page0.json";
 import alertsPage1Json from "../__mock__/alerts_page1.json";
 import alertsPage2Json from "../__mock__/alerts_page2.json";
 import assetsJson from "../__mock__/assets.json";
+import incidentsJson from "../__mock__/incidents.json";
 import insightsJson from "../__mock__/insights.json";
 import sitesJson from "../__mock__/sites.json";
 import vulnerabilitiesJson from "../__mock__/vulnerabilities.json";
@@ -110,4 +111,8 @@ export function mockGetAlerts(mock) {
 
 export function mockGetInsights(mock) {
   mock.onGet("/insights").reply(200, { data: insightsJson });
+}
+
+export function mockGetIncidents(mock) {
+  mock.onGet("/incidents").reply(200, { data: incidentsJson });
 }

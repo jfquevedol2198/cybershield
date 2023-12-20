@@ -97,7 +97,8 @@ export const applyFilter = (data, filterOptions) => {
             return false;
           }
           return (
-            option.value === "*" || d[option.key].indexOf(option.value) > -1
+            option.value === "*" ||
+            `${d[option.key]}`.indexOf(option.value) > -1
           );
         }
         if (type === "object" && !option.value[0]) {

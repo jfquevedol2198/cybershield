@@ -10,6 +10,7 @@ import {
   mockGetAlerts,
   mockGetAssets,
   mockGetCells,
+  mockGetIncidents,
   mockGetInsights,
   mockGetShops,
   mockGetVulnerabilities,
@@ -31,4 +32,5 @@ export const createMocks = (apiClient, delayResponse = 2000) => {
   mockGetVulnerabilities(mock);
   mockGetAlerts(mock);
   mockGetInsights(mock);
+  mockGetIncidents(mock);
 };

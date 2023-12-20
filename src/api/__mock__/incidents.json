@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "name": "Unauthorized Administrator",
+    "risk": 9,
+    "status": "In progress",
+    "type": "Other",
+    "creationTime": "Session Hijacking",
+    "cell": "Refinery DMZ",
+    "owner": "admin",
+    "updatedAt": "2023/11/23 20:00:58"
+  },
+  {
+    "id": "6",
+    "name": "Unlimited Protocol Administrator",
+    "risk": 7,
+    "status": "In progress",
+    "type": "Unlimited Protocol Administrator",
+    "creationTime": "Session Hijacking",
+    "cell": "Refinery DMZ",
+    "owner": "admin",
+    "updatedAt": "2023/11/23 20:00:58"
+  },
+  {
+    "id": "1",
+    "name": "Unauthorized Administrator",
+    "risk": 7,
+    "status": "In progress",
+    "type": "Other",
+    "creationTime": "Session Hijacking",
+    "cell": "Refinery DMZ",
+    "owner": "admin",
+    "updatedAt": "2023/11/23 20:00:58"
+  },
+  {
+    "id": "6",
+    "name": "Unlimited Protocol Administrator",
+    "risk": 4,
+    "status": "In progress",
+    "type": "Unlimited Protocol Administrator",
+    "creationTime": "Session Hijacking",
+    "cell": "Refinery DMZ",
+    "owner": "admin",
+    "updatedAt": "2023/11/23 20:00:58"
+  },
+  {
+    "id": "6",
+    "name": "Unlimited Protocol Administrator",
+    "risk": 4,
+    "status": "In progress",
+    "type": "Unlimited Protocol Administrator",
+    "creationTime": "Session Hijacking",
+    "cell": "Refinery DMZ",
+    "owner": "admin",
+    "updatedAt": "2023/11/23 20:00:58"
+  },
+  {
+    "id": "1",
+    "name": "Unauthorized Administrator",
+    "risk": 1,
+    "status": "In progress",
+    "type": "Other",
+    "creationTime": "Session Hijacking",
+    "cell": "Refinery DMZ",
+    "owner": "admin",
+    "updatedAt": "2023/11/23 20:00:58"
+  }
+]

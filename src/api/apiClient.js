@@ -8,6 +8,7 @@ import {
   alerts,
   assets,
   cells,
+  incidents,
   insights,
   shops,
   vulnerabilities,
@@ -25,6 +26,7 @@ export const createApiClient = (httpClient) => {
     ...vulnerabilities(httpClient),
     ...alerts(httpClient),
     ...insights(httpClient),
+    ...incidents(httpClient),
   };
   return apiClient;
 };

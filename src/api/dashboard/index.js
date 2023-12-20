@@ -33,3 +33,9 @@ export const insights = (httpClient) => ({
     return httpClient.get("/insights");
   },
 });
+
+export const incidents = (httpClient) => ({
+  getIncidents() {
+    return httpClient.get("/incidents");
+  },
+});
