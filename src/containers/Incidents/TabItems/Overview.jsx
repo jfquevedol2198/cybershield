@@ -9,7 +9,7 @@ const OverviewTabPanel = () => {
     <div key="overview" className="">
       <div className="mb-1 bg-white px-4 py-2">
         <div className="mb-2 text-base font-bold">Description</div>
-        <div className="text-base font-normal">
+        <div className="text-base font-normal text-gray-4">
           IMATIC S7-1500F-1 PN, CENTRAL PROCESSING UNIT
         </div>
       </div>
