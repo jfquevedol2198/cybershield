@@ -16,7 +16,7 @@ import {
   PhysicalAdjacentDevicesTabPanel,
 } from "./TabItems/PhysicalAdjacentDevices";
 
-const AssetDetailModal = ({ ...rest }) => {
+const DetailModal = ({ ...rest }) => {
   return (
     <RiskModal riskLevel="critical" title="Oil Wells/South Well" {...rest}>
       <div className="w-[56.25rem]">
@@ -103,4 +103,4 @@ const AssetDetailModal = ({ ...rest }) => {
   );
 };
 
-export default AssetDetailModal;
+export default DetailModal;

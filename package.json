@@ -13,6 +13,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@hookform/resolvers": "^3.3.2",
+    "aws-amplify": "^6.0.9",
     "axios": "^1.6.0",
     "axios-mock-adapter": "^1.22.0",
     "clsx": "^2.0.0",

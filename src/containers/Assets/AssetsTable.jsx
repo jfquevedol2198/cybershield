@@ -5,7 +5,7 @@ import Table from "../../components/Table";
 import Tag from "../../components/Tag";
 import { SortDataType } from "../../utils";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
-import AssetDetailModal from "./AssetDetailModal";
+import DetailModal from "./DetailModal";
 
 const columns = [
   {
@@ -123,7 +123,7 @@ const AssetsTable = ({ currPage, totalPages, data, loading }) => {
         loading={loading}
         onClickRow={onClickRow}
       />
-      <AssetDetailModal
+      <DetailModal
         riskLevel="critical"
         isOpen={isOpen}
         closeModal={() => setIsOpen(false)}
