@@ -1,10 +1,12 @@
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 import Table from "../../../components/Table";
 import Tag from "../../../components/Tag";
 import { SortDataType } from "../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
+import DetailModal from "./DetailModal";
 
 const columns = [
   {
@@ -95,13 +97,24 @@ const columns = [
 ];
 
 const AlertsTable = ({ data, loading }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const onClickRow = () => setIsOpen(true);
+
   return (
-    <Table
-      columns={columns}
-      dataSource={data}
-      rowsPerPage={10}
-      loading={loading}
-    />
+    <>
+      <Table
+        columns={columns}
+        dataSource={data}
+        rowsPerPage={10}
+        loading={loading}
+        onClickRow={onClickRow}
+      />
+      <DetailModal
+        riskLevel="low"
+        isOpen={isOpen}
+        closeModal={() => setIsOpen(false)}
+      />
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ const DataRow = ({ property, value, isLast = false }) => {
     <div
       className={clsx("flex flex-row items-center gap-2", !isLast && "mb-3")}
     >
-      <div className="w-1/2 text-sm font-bold text-gray-4">{property}</div>
+      <div className="w-1/2 text-sm font-bold text-black">{property}</div>
       <div className="w-1/2 justify-start text-sm font-normal text-gray-4">
         {value}
       </div>
