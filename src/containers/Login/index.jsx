@@ -1,15 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "aws-amplify/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
-import api from "../../api";
 import Alarm, { AlarmType } from "../../components/Alarm";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
-import { delay, setCookieValue } from "../../utils";
+import { delay } from "../../utils";
 import { AUTH_TOKEN, ButtonVariant, SizeVariant } from "../../utils/constants";
 import snack from "../../utils/snack";
 
@@ -39,16 +39,22 @@ const Login = () => {
       setError(null);
       setIsLoading(true);
 
-      const {
-        data: { token },
-      } = await api.login({
-        email: e.email,
+      const { isSignedIn, nextStep } = await signIn({
+        username: e.email,
         password: e.password,
       });
+      if (
+        !isSignedIn &&
+        nextStep.signInStep === "CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED"
+      ) {
+        forgotPassword;
+        navigate("/reset-password");
+        return;
+      }
 
-      snack.success("Successfully logged in!");
-      console.log("token = " + token);
-      setCookieValue(AUTH_TOKEN, token, 2, "hour");
+      // snack.success("Successfully logged in!");
+      // console.log("token = " + token);
+      // setCookieValue(AUTH_TOKEN, token, 2, "hour");
 
       await delay(1000);
       navigate("/dashboard");
