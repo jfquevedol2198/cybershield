@@ -9,7 +9,7 @@ import Alarm, { AlarmType } from "../../components/Alarm";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
-import { delay } from "../../utils";
+import { delay, setCookieValue } from "../../utils";
 import { AUTH_TOKEN, ButtonVariant, SizeVariant } from "../../utils/constants";
 import snack from "../../utils/snack";
 
@@ -43,18 +43,19 @@ const Login = () => {
         username: e.email,
         password: e.password,
       });
-      if (
-        !isSignedIn &&
-        nextStep.signInStep === "CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED"
-      ) {
-        forgotPassword;
-        navigate("/reset-password");
-        return;
-      }
-
-      // snack.success("Successfully logged in!");
-      // console.log("token = " + token);
-      // setCookieValue(AUTH_TOKEN, token, 2, "hour");
+      // console.log(nextStep);
+      // if (
+      //   !isSignedIn &&
+      //   nextStep.signInStep === "CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED"
+      // ) {
+      //   forgotPassword;
+      //   navigate("/reset-password");
+      //   return;
+      // }
+      const token = nextStep;
+      snack.success("Successfully logged in!");
+      console.log("token = " + token);
+      setCookieValue(AUTH_TOKEN, token, 2, "hour");
 
       await delay(1000);
       navigate("/dashboard");
