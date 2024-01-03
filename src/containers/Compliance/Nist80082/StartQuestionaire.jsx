@@ -1,8 +1,13 @@
+import { useState } from "react";
+
 import ClockSvg from "../../../assets/images/clock.svg";
 import Button from "../../../components/Button";
 import { ButtonVariant } from "../../../utils";
+import ResetModal from "./ResetModal";
 
 const StartQuestionaire = () => {
+  const [showResetModal, setShowResetModal] = useState(false);
+
   return (
     <div className="flex h-full max-w-[56.25rem] flex-col justify-center">
       <div className="mb-8 text-[2rem] font-bold text-black">
@@ -30,10 +35,17 @@ const StartQuestionaire = () => {
         <Button variant={ButtonVariant.filled} isSubmit>
           Open Questionnaire
         </Button>
-        <Button variant={ButtonVariant.outline}>
+        <Button
+          variant={ButtonVariant.outline}
+          onClick={() => setShowResetModal(true)}
+        >
           Reset Compliance Questionnaire
         </Button>
       </div>
+      <ResetModal
+        showModal={showResetModal}
+        onClose={() => setShowResetModal(false)}
+      />
     </div>
   );
 };
