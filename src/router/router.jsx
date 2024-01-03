@@ -10,6 +10,7 @@ import { ReactComponent as RiskManagementIcon } from "../assets/images/risk-mana
 import Error404 from "../containers/404";
 import { App } from "../containers/App";
 import Assets from "../containers/Assets";
+import Nist80082 from "../containers/Compliance/Nist80082";
 import FactoryAssets from "../containers/Factory/Assets";
 import FactoryCells from "../containers/Factory/Cells";
 import FactoryShops from "../containers/Factory/Shops";
@@ -45,7 +46,13 @@ export const SIDEBAR_ITEMS = [
     path: "compliance",
     title: "Compliance",
     Icon: ComplianceIcon,
-    Component: Template,
+    children: [
+      {
+        path: "nist-800-82",
+        title: "NIST 800-82",
+        Component: Nist80082,
+      },
+    ],
   },
   {
     path: "factory-1",
