@@ -1,7 +1,12 @@
+import chroma from "chroma-js";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+
+const colorScale = chroma
+  .scale(["#F26060", "#F77044", "#FD8224", "FF871C", "#27AE60"])
+  .domain([0, 100], 100, "log");
 
 const Item = ({
   score,
@@ -19,9 +24,12 @@ const Item = ({
       )}
       onClick={onSelect}
     >
-      <div className="mb-1 flex flex-row items-baseline justify-center leading-none">
-        <span className="text-[2.75rem] font-light text-gray-2">{score}</span>
-        <span className="text-[1.5rem] font-light text-gray-2">%</span>
+      <div
+        className="mb-1 flex flex-row items-baseline justify-center leading-none"
+        style={{ color: colorScale(score).hex() }}
+      >
+        <span className="text-[2.75rem] font-light">{score}</span>
+        <span className="text-[1.5rem] font-light">%</span>
       </div>
       <div className="mb-1 flex flex-col items-baseline justify-center leading-none">
         <span className="text-base font-bold text-gray-4">{title}</span>
@@ -89,9 +97,12 @@ const Sidebar = () => {
       <div className="text-[1.625rem] font-bold text-gray-3 ">Compliance</div>
       <div className="mb-4 text-[2rem] font-bold text-gray-4">NIST 800-82</div>
       <div className="mb-5 bg-white px-5 py-3">
-        <div className="mb-1 flex flex-row items-baseline justify-center leading-none">
-          <span className="text-[5rem] font-light text-gray-2">0</span>
-          <span className="text-[2rem] font-light text-gray-2">%</span>
+        <div
+          className="mb-1 flex flex-row items-baseline justify-center leading-none"
+          style={{ color: colorScale(1).hex() }}
+        >
+          <span className="text-[5rem] font-light">1</span>
+          <span className="text-[2rem] font-light">%</span>
         </div>
         <div className="text-center text-[1.375rem] font-normal leading-none text-gray-4">
           Compliance Score
