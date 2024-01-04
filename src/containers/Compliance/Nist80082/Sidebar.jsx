@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const Item = ({
   score,
@@ -41,7 +42,7 @@ Item.propTypes = {
   onSelect: PropTypes.func,
 };
 
-const ITEMS = [
+export const COMPLIANCE_ITEMS = [
   {
     score: 1,
     title: "Detect",
@@ -76,11 +77,15 @@ const ITEMS = [
 
 const Sidebar = () => {
   const [selIndex, setSelIndex] = useState();
-  const onSelect = (index) => {
+  const [, setSearchParams] = useSearchParams();
+
+  const onSelect = (item, index) => {
     setSelIndex(index);
+    setSearchParams({ status: "start", option: item.title });
   };
+
   return (
-    <div className="w-[23.75rem] bg-background py-8 pl-[2.5rem] pr-[1.25rem]">
+    <div className="flex-[0_0_23.75rem] bg-background py-8 pl-[2.5rem] pr-[1.25rem]">
       <div className="text-[1.625rem] font-bold text-gray-3 ">Compliance</div>
       <div className="mb-4 text-[2rem] font-bold text-gray-4">NIST 800-82</div>
       <div className="mb-5 bg-white px-5 py-3">
@@ -96,12 +101,12 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="flex flex-col gap-1">
-        {ITEMS.map((item, index) => (
+        {COMPLIANCE_ITEMS.map((item, index) => (
           <Item
             key={item.title}
             {...item}
             selected={selIndex === index}
-            onSelect={() => onSelect(index)}
+            onSelect={() => onSelect(item, index)}
           />
         ))}
       </div>

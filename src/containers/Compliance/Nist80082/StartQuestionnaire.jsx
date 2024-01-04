@@ -1,12 +1,20 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import ClockSvg from "../../../assets/images/clock.svg";
 import Button from "../../../components/Button";
 import { ButtonVariant } from "../../../utils";
 import ResetModal from "./ResetModal";
+import { COMPLIANCE_ITEMS } from "./Sidebar";
 
-const StartQuestionaire = () => {
+const StartQuestionnaire = () => {
   const [showResetModal, setShowResetModal] = useState(false);
+  const [searchParams, setSearchparams] = useSearchParams();
+
+  const title = searchParams.get("option") || "Detect";
+  const answers = COMPLIANCE_ITEMS.find(
+    (item) => item.title === title
+  )?.answers;
 
   return (
     <div className="flex h-full max-w-[56.25rem] flex-col justify-center">
@@ -32,15 +40,36 @@ const StartQuestionaire = () => {
         reputation, and ensure operational continuity.
       </div>
       <div className="flex flex-row items-center gap-2">
-        <Button variant={ButtonVariant.filled} isSubmit>
-          Open Questionnaire
-        </Button>
-        <Button
-          variant={ButtonVariant.outline}
-          onClick={() => setShowResetModal(true)}
-        >
-          Reset Compliance Questionnaire
-        </Button>
+        {answers === 0 && (
+          <Button
+            variant={ButtonVariant.filled}
+            onClick={() => {
+              searchParams.append("status", "questionnaire");
+              setSearchparams(searchParams);
+            }}
+          >
+            Start Questionnaire
+          </Button>
+        )}
+        {answers > 0 && (
+          <>
+            <Button
+              variant={ButtonVariant.filled}
+              onClick={() => {
+                searchParams.set("status", "questionnaire");
+                setSearchparams(searchParams);
+              }}
+            >
+              Open Questionnaire
+            </Button>
+            <Button
+              variant={ButtonVariant.outline}
+              onClick={() => setShowResetModal(true)}
+            >
+              Reset Compliance Questionnaire
+            </Button>
+          </>
+        )}
       </div>
       <ResetModal
         showModal={showResetModal}
@@ -50,4 +79,4 @@ const StartQuestionaire = () => {
   );
 };
 
-export default StartQuestionaire;
+export default StartQuestionnaire;

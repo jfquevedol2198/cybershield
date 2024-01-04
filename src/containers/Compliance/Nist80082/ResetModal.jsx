@@ -20,7 +20,9 @@ const ResetModal = ({ showModal, onClose }) => {
           <Button variant={ButtonVariant.outline} onClick={onClose}>
             CANCEL
           </Button>
-          <Button variant={ButtonVariant.filled}>RESET</Button>
+          <Button variant={ButtonVariant.filled} onClick={onClose}>
+            RESET
+          </Button>
         </div>
       </div>
     </Modal>
