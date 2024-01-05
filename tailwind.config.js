@@ -16,6 +16,7 @@ export default {
           4: "var(--primary-color-4)",
         },
         "primary-text": "var(--primary-text-color)",
+        "secondary-text": "var(--secondary-text-color)",
         secondary: {
           1: "var(--secondary-color-1)",
           2: "var(--secondary-color-2)",

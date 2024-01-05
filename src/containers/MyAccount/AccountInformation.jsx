@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -33,14 +34,33 @@ const FilterOptions = [
 ];
 
 const schema = z.object({
-  fullname: z.string().min(1, "Full name is required"),
-  username: z.string().min(1, "User name is required"),
+  firstName: z.string().min(1, "First name is required"),
+  middleName: z.string(),
+  lastName: z.string().min(1, "Last name is required"),
+  country: z.string().min(1, "Country is required"),
+  state: z.string().min(1, "State is required"),
+  city: z.string().min(1, "City is required"),
+  zipCode: z.string().min(1, "Zip code is required"),
+  manager: z.string().min(1, "Job manager is required"),
+  jobTitle: z.string().min(1, "Job title is required"),
+  phone: z.string().min(1, "Phone number is required"),
   email: z.string().min(1, "Email is required"),
-  factories: z.array(z.string()),
 });
 
 const AccountInformation = () => {
   const [editMode, setEditMode] = useState(false);
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const data = await axios.get(
+        "https://api.countrystatecity.in/v1/countries"
+      );
+      console.log(data);
+    };
+    fetch();
+  }, []);
 
   const getDefaultValues = () => {
     return {
@@ -62,27 +82,115 @@ const AccountInformation = () => {
       </div>
       <div className="flex flex-row gap-2">
         <div className="w-[28rem]">
+          <div className="mb-4 flex flex-row gap-4">
+            <span className="sr-only">Name</span>
+            <FormControl
+              id="firstName"
+              label="First name"
+              size={SizeVariant.small}
+              error={form.formState.errors.firstName?.message}
+              {...form.register("firstName")}
+            />
+            <FormControl
+              id="middleName"
+              label="Middle name"
+              size={SizeVariant.small}
+              error={form.formState.errors.middleName?.message}
+              {...form.register("middleName")}
+            />
+            <FormControl
+              id="lastName"
+              label="Last name"
+              size={SizeVariant.small}
+              error={form.formState.errors.lastName?.message}
+              {...form.register("lastName")}
+            />
+          </div>
+          <div className="mb-4 flex flex-row gap-4">
+            <span className="sr-only">Country, State</span>
+            <div className="w-full">
+              <FormControl
+                id="country"
+                label="Country"
+                inputType="dropdown"
+                size={SizeVariant.small}
+                error={form.formState.errors.country?.message}
+                data={countries}
+                {...form.register("country")}
+              />
+            </div>
+            <div className="w-full">
+              <FormControl
+                id="state"
+                label="State"
+                inputType="dropdown"
+                size={SizeVariant.small}
+                error={form.formState.errors.state?.message}
+                data={states}
+                {...form.register("state")}
+              />
+            </div>
+          </div>
+          <div className="mb-4 flex flex-row gap-4">
+            <span className="sr-only">City, Zipcode</span>
+            <div className="w-full">
+              <FormControl
+                id="city"
+                label="City"
+                inputType="dropdown"
+                size={SizeVariant.small}
+                error={form.formState.errors.city?.message}
+                data={countries}
+                {...form.register("city")}
+              />
+            </div>
+            <div className="w-full">
+              <FormControl
+                id="zipCode"
+                label="Zip code"
+                size={SizeVariant.small}
+                error={form.formState.errors.zipCode?.message}
+                {...form.register("zipCode")}
+              />
+            </div>
+          </div>
+          <span className="sr-only">Job Title</span>
           <div className="mb-4">
             <FormControl
-              className="mb-4"
-              id="fullname"
-              label="Full name"
+              id="jobTitle"
+              label="Job Title"
               size={SizeVariant.small}
-              error={form.formState.errors.fullname?.message}
-              {...form.register("fullname")}
+              error={form.formState.errors.jobTitle?.message}
+              {...form.register("jobTitle")}
+            />
+          </div>
+          <div className="mb-4">
+            <span className="sr-only">Job Manager</span>
+            <FormControl
+              id="manager"
+              label="Job Manager"
+              size={SizeVariant.small}
+              error={form.formState.errors.manager?.message}
+              {...form.register("manager")}
             />
           </div>
           <div className="mb-4">
             <FormControl
               className="mb-4"
-              id="username"
-              label="User name"
-              size={SizeVariant.small}
-              error={form.formState.errors.username?.message}
-              {...form.register("username")}
+              id="phone"
+              inputType="phone"
+              label="Phone number"
+              size={SizeVariant.medium}
+              error={form.formState.errors.phone?.message}
+              {...form.register("phone")}
             />
           </div>
+          <div className="text-secondary-text mb-4 text-sm font-light">
+            If you want to update your phone number this will trigger the
+            Multiple Factor authentication flow.
+          </div>
           <div className="mb-4">
+            <span className="sr-only">Job Manager</span>
             <FormControl
               className="mb-4"
               id="email"
@@ -90,18 +198,6 @@ const AccountInformation = () => {
               size={SizeVariant.small}
               error={form.formState.errors.email?.message}
               {...form.register("email")}
-              isDisabled
-            />
-          </div>
-          <div className="mb-4">
-            <MultiSelect
-              id="factories"
-              label="Factories"
-              className="mb-5"
-              size={SizeVariant.small}
-              error={form.formState.errors.factories?.message}
-              data={FilterOptions}
-              {...form.register("factories")}
               isDisabled
             />
           </div>

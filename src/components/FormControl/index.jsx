@@ -74,7 +74,7 @@ const FormControl = React.forwardRef(
                 <input
                   {...rest}
                   className={clsx(
-                    "absolute -left-full flex w-0 items-center rounded border bg-white shadow-input"
+                    "invisible absolute -left-full flex w-0 items-center rounded border bg-white shadow-input"
                   )}
                   placeholder="dropdown"
                 />
