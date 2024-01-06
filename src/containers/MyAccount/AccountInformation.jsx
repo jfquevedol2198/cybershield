@@ -76,8 +76,10 @@ const AccountInformation = () => {
 
   return (
     <div>
-      <div className="mb-2 text-[1.625rem] font-bold">Account information</div>
-      <div className="mb-5 text-base font-normal">
+      <div className="mb-2 text-[1.625rem] font-bold text-gray-4">
+        Account information
+      </div>
+      <div className="mb-5 text-base font-normal text-gray-4">
         Update the account information.
       </div>
       <div className="flex flex-row gap-2">

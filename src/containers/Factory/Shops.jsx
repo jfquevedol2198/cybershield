@@ -11,7 +11,7 @@ import NormalButton from "../../components/NormalButton";
 import SearchInput from "../../components/SearchInput";
 import { ButtonVariant } from "../../utils";
 import { applyFilter, getFilterOptions } from "../../utils/filter";
-import { parseAssets } from "../../utils/parse";
+import { parseAssets, parseCellsOfShop, parseShops } from "../../utils/parse";
 import AssetsTable from "../Assets/AssetsTable";
 import FilterCells from "./FilterCells";
 import FilterShops from "./FilterShops";
@@ -37,12 +37,11 @@ const Shops = () => {
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const {
-        data: { data },
-      } = await api.getShops();
-      setShops(data);
-      setFilteredShops(data);
-      setFilterShopOptions(getFilterOptions(data));
+      const { data } = await api.getShops();
+      const shops = parseShops(data);
+      setShops(shops);
+      setFilteredShops(shops);
+      setFilterShopOptions(getFilterOptions(shops));
       setLoading(false);
     };
     fetch();
@@ -50,13 +49,12 @@ const Shops = () => {
 
   const fetchCells = async (shop) => {
     setLoading(true);
-    const {
-      data: { data },
-    } = await api.getCells({ shopId: shop.id });
+    const { data } = await api.getCellsOfShop({ shopId: shop.id });
     setSteps([...steps, shop]);
-    setCells(data);
-    setFilteredCells(data);
-    setFilterCellOptions(getFilterOptions(data));
+    const cells = parseCellsOfShop(data);
+    setCells(cells);
+    setFilteredCells(cells);
+    setFilterCellOptions(getFilterOptions(cells));
     setLoading(false);
   };
 
@@ -171,7 +169,7 @@ const Shops = () => {
             return (
               <div key={shop.id} onClick={() => fetchCells(shop)}>
                 <FactoryShopCard
-                  cells={(_.get(shop, "level2") || []).length}
+                  cells={shop.cells}
                   name={shop.name}
                   description={shop.description}
                   score={shop.riskScore * 100}

@@ -1,6 +1,35 @@
 import dayjs from "dayjs";
 import _ from "lodash";
 
+export const parseShops = (data) =>
+  data
+    .filter((shop) => shop.risk_score !== null)
+    .map((shop) => ({
+      id: shop.id,
+      cells: (shop.cells || []).length,
+      name: shop.name_ || "",
+      description: shop.description || "",
+      riskScore: parseFloat(shop.risk_score || "0"),
+      location: shop.location || "",
+      assets: (shop.cells || []).reduce(
+        (sum, cell) => sum + (cell.assets || 0),
+        0
+      ),
+    }));
+
+export const parseCellsOfShop = (data) =>
+  data
+    .filter((cell) => cell.name !== null)
+    .map((cell) => ({
+      shopId: cell.shop_id,
+      id: cell.cell_id,
+      name: cell.cell_name,
+      description: cell.description,
+      location: cell.location,
+      riskScore: parseFloat(cell.risk_score || "0"),
+      assets: cell.asset_count,
+    }));
+
 export const parseAssets = (data) =>
   data.map((asset) => ({
     assetId: asset.id,

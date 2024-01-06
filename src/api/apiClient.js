@@ -7,7 +7,7 @@ import {
 import {
   alerts,
   assets,
-  cells,
+  cellsOfShop,
   incidents,
   insights,
   shops,
@@ -22,7 +22,7 @@ export const createApiClient = (httpClient) => {
     ...verifyCodeApi(httpClient),
     ...assets(httpClient),
     ...shops(httpClient),
-    ...cells(httpClient),
+    ...cellsOfShop(httpClient),
     ...vulnerabilities(httpClient),
     ...alerts(httpClient),
     ...insights(httpClient),

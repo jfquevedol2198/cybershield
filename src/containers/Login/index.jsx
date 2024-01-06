@@ -1,5 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "aws-amplify/auth";
+import {
+  confirmSignIn,
+  resetPassword,
+  signIn,
+  updatePassword,
+} from "aws-amplify/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -43,14 +48,21 @@ const Login = () => {
         username: e.email,
         password: e.password,
       });
-      // console.log(nextStep);
+      console.log(nextStep);
       // if (
       //   !isSignedIn &&
       //   nextStep.signInStep === "CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED"
       // ) {
-      //   forgotPassword;
-      //   navigate("/reset-password");
+      //   const output = await confirmSignIn({
+      //     oldPassword: "fernando",
+      //     newPassword: "12345678",
+      //     // username: "fernando",
+      //   });
+      //   console.log(output);
       //   return;
+      //   // forgotPassword;
+      //   // navigate("/reset-password");
+      //   // return;
       // }
       const token = nextStep;
       snack.success("Successfully logged in!");

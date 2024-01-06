@@ -4,15 +4,17 @@ export const assets = (httpClient) => ({
   },
 });
 
-export const cells = (httpClient) => ({
-  getCells(data) {
-    return httpClient.post("/cells", data);
+export const cellsOfShop = (httpClient) => ({
+  getCellsOfShop({ shopId }) {
+    return httpClient.get(
+      `/view_cells_shopsf${shopId ? "?shop_id=" + shopId : ""}`
+    );
   },
 });
 
 export const shops = (httpClient) => ({
-  getShops(data) {
-    return httpClient.post("/shops", data);
+  getShops() {
+    return httpClient.get("/shops");
   },
 });
 
