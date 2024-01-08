@@ -1,6 +1,6 @@
 import { FunnelIcon } from "@heroicons/react/24/outline";
-import _ from "lodash";
 import { Fragment, useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 import api from "../../api";
 import Button from "../../components/Button";
@@ -11,20 +11,18 @@ import { parseAssets } from "../../utils/parse";
 import AssetsTable from "../Assets/AssetsTable";
 
 const Assets = () => {
+  const [searchParams] = useSearchParams();
+  const cellId = searchParams.get("cellId");
+  const cellName = searchParams.get("cellName");
+
   const [assets, setAssets] = useState([]);
-  const [currPage, setCurrPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const {
-        data: { data },
-      } = await api.getAssets();
-      setCurrPage(_.get(data, "currentPage"));
-      setTotalPages(_.get(data, "totalPages"));
-      setAssets(parseAssets(_.get(data, "assets")));
+      const { data } = await api.getAssets({});
+      setAssets(parseAssets(data));
       setLoading(false);
     };
     fetch();
@@ -36,7 +34,18 @@ const Assets = () => {
       <div className="mb-3 flex flex-row items-center justify-between bg-background px-8">
         <div className="flex flex-row items-center gap-2">
           <span className="text-[1.625rem] font-bold text-gray-4">
-            Factory 1 &gt; Assets ({assets.length})
+            {cellId && cellName ? (
+              <>
+                <Link to={`/dashboard/factory-1/cells`} className="text-link">
+                  All Cells
+                </Link>
+                {" > "}
+                <span>{cellName}</span>{" "}
+              </>
+            ) : (
+              <>Factory 1</>
+            )}
+            &gt; Assets ({assets.length})
           </span>
         </div>
         <div className="flex flex-row items-center gap-4">
@@ -48,12 +57,7 @@ const Assets = () => {
         </div>
       </div>
       <div className="mt-2 w-full overflow-x-auto px-5">
-        <AssetsTable
-          currPage={currPage}
-          totalPages={totalPages}
-          data={assets}
-          loading={loading}
-        />
+        <AssetsTable data={assets} loading={loading} />
       </div>
     </Fragment>
   );

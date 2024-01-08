@@ -17,7 +17,7 @@ export const parseShops = (data) =>
       ),
     }));
 
-export const parseCellsOfShop = (data) =>
+export const parseCells = (data) =>
   data
     .filter((cell) => cell.name !== null)
     .map((cell) => ({
@@ -32,23 +32,24 @@ export const parseCellsOfShop = (data) =>
 
 export const parseAssets = (data) =>
   data.map((asset) => ({
-    assetId: asset.id,
-    name: asset.name,
+    assetId: asset.asset_id,
+    name: asset.asset_name,
+    cellId: asset.cell_id,
+    cell: asset.cell_name,
+    ip: asset.interfaces_ip,
+    mac: asset.interfaces_mac,
     type: asset.type,
-    risk: parseFloat(asset.riskScore) * 100,
-    mac: _.get(asset, "interfaces[0].mac") || "-",
-    ip: _.get(asset, "interfaces[0].ip") || "-",
-    cell: _.get(asset, "level2[0].name") || "-",
-    shop: _.get(asset, "level2[0].name.level1.name") || "-",
-    vendor: asset.vendorName,
-    lastSeenAt: dayjs(asset.firstSeen).format("DD MMM YYYY | HH:mm:ss"),
+    risk: parseFloat(asset.risk_score) * 100,
+    shop: "-",
+    vendor: asset.vendor_name,
+    lastSeenAt: dayjs(asset.lastseen).format("DD MMM YYYY | HH:mm:ss"),
     location: asset.location || "-",
-    state: asset.state,
-    firmware: asset.firmwareVersion,
-    model: asset.modelName,
+    state: "-",
+    firmware: "-",
+    model: "-",
     pluginName: "",
     edr: "",
-    isCertain: asset.isCertain || false,
+    isCertain: false,
   }));
 
 export const parseAlerts = (data) =>

@@ -14,8 +14,6 @@ import Filter from "./Filter";
 
 const Assets = () => {
   const [assets, setAssets] = useState([]);
-  const [currPage, setCurrPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -25,12 +23,8 @@ const Assets = () => {
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const {
-        data: { data },
-      } = await api.getAssets();
-      setCurrPage(_.get(data, "currentPage"));
-      setTotalPages(_.get(data, "totalPages"));
-      const assets = parseAssets(_.get(data, "assets"));
+      const { data } = await api.getAssets({});
+      const assets = parseAssets(data);
       setAssets(assets);
       setFilteredAssets(assets);
       setFilterOptions(getFilterOptions(assets));
@@ -81,12 +75,7 @@ const Assets = () => {
       </div>
       {/* Content */}
       <div className="gap-4 px-7 py-4">
-        <AssetsTable
-          currPage={currPage}
-          totalPages={totalPages}
-          data={filteredAssets}
-          loading={loading}
-        />
+        <AssetsTable data={filteredAssets} loading={loading} />
       </div>
       {/* Filter */}
       <Filter

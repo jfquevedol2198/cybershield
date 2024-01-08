@@ -1,14 +1,17 @@
 export const assets = (httpClient) => ({
-  getAssets(data) {
-    return httpClient.post(`/assets`, data);
+  getAssets({ cellId }) {
+    return httpClient.get(`/assets_view${cellId ? "/cell/" + cellId : ""}`);
   },
 });
 
-export const cellsOfShop = (httpClient) => ({
+export const cells = (httpClient) => ({
   getCellsOfShop({ shopId }) {
     return httpClient.get(
       `/view_cells_shopsf${shopId ? "?shop_id=" + shopId : ""}`
     );
+  },
+  getSiteCells() {
+    return httpClient.get("/cells_view");
   },
 });
 
