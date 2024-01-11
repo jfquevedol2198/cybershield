@@ -1,6 +1,7 @@
 import { FunnelIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
+import EditSvg from "../../assets/images/edit.svg";
 import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
 import SearchInput from "../../components/SearchInput";
@@ -88,6 +89,27 @@ const columns = [
     className: "",
     align: "left",
   },
+  {
+    title: "ServiceNow",
+    dataIndex: "isServiceNowEnabled",
+    key: "isServiceNowEnabled",
+    render: (value) => (
+      <Tag
+        variant={value ? TagVariant.positive : TagVariant.inactive}
+        label={value ? "Enabled" : "Disabled"}
+      />
+    ),
+    colSpan: 1,
+    className: "",
+    align: "left",
+  },
+  {
+    title: "",
+    dataIndex: "",
+    key: "actions",
+    colSpan: 2.5,
+    render: () => <img src={EditSvg} alt="Edit" />,
+  },
 ];
 const data = [
   {
@@ -104,6 +126,7 @@ const data = [
 
 const Users = () => {
   const [isCreateUser, setCreateUser] = useState(false);
+  const [isEditUser, setEditUser] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -159,7 +182,7 @@ const Users = () => {
       <CreateUserModal
         isOpen={isCreateUser}
         onClose={() => setCreateUser(false)}
-      />{" "}
+      />
       <FilterUsers
         isOpen={isFilterOpen}
         filterOptions={filterOptions}
