@@ -30,7 +30,7 @@ const schema = z
 
 const UpdatePassword = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { user } = useAuth();
+  const { tempUser, setTempUser } = useAuth();
   const navigate = useNavigate();
 
   const getDefaultValues = () => {
@@ -47,8 +47,9 @@ const UpdatePassword = () => {
   const onSubmit = async (e) => {
     try {
       setIsLoading(true);
-      await Auth.completeNewPassword(user, e.password);
+      await Auth.completeNewPassword(tempUser, e.password);
       snack.success("Password updated successfully");
+      setTempUser(null);
       navigate("/login");
     } catch (error) {
       const { response } = error;

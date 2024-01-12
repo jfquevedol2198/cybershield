@@ -1,16 +1,52 @@
+import { Auth } from "aws-amplify";
 import PropTypes from "prop-types";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+
+import {
+  AUTH_TOKEN,
+  getCookieValue,
+  redirectToAuth,
+  setCookieValue,
+} from "../utils";
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState({});
+  const [tempUser, setTempUser] = useState(null);
+  const [authToken, setAuthToken] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      const token = user.signInUserSession?.accessToken?.jwtToken;
+      setCookieValue(AUTH_TOKEN, token, 2, "hour");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const user = await Auth.currentUserInfo();
+      if (user) {
+        setUser(user);
+      }
+    };
+    const token = getCookieValue(AUTH_TOKEN);
+    setAuthToken(token);
+    if (token) {
+      fetch();
+    } else {
+      redirectToAuth();
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         user,
         setUser,
+        tempUser,
+        setTempUser,
+        authToken,
       }}
     >
       {children}

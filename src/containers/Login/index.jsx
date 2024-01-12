@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Auth } from "aws-amplify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -10,8 +10,8 @@ import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
 import useAuth from "../../hooks/useAuth";
-import { delay, setCookieValue } from "../../utils";
-import { AUTH_TOKEN, ButtonVariant, SizeVariant } from "../../utils/constants";
+import { delay } from "../../utils";
+import { ButtonVariant, SizeVariant } from "../../utils/constants";
 import snack from "../../utils/snack";
 
 const schema = z.object({
@@ -23,7 +23,13 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { setUser } = useAuth();
+  const { authToken, user, setUser, setTempUser } = useAuth();
+
+  useEffect(() => {
+    if (authToken && user && user.username) {
+      navigate("/dashboard");
+    }
+  }, [user, authToken]);
 
   const getDefaultValues = () => {
     return {
@@ -43,7 +49,7 @@ const Login = () => {
 
       const data = await Auth.signIn(e.email, e.password);
       if (data.challengeName === "NEW_PASSWORD_REQUIRED") {
-        setUser(data);
+        setTempUser(data);
         navigate("/reset-password");
         return;
       }
@@ -54,7 +60,6 @@ const Login = () => {
       }
       setUser(data);
       snack.success("Successfully logged in!");
-      setCookieValue(AUTH_TOKEN, token, 2, "hour");
 
       await delay(1000);
       navigate("/dashboard");

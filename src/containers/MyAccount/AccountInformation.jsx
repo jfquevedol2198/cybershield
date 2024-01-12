@@ -6,32 +6,8 @@ import { z } from "zod";
 
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
-import MultiSelect from "../../components/MultiSelect";
 import NormalButton from "../../components/NormalButton";
 import { ButtonVariant, SizeVariant } from "../../utils";
-
-const FilterOptions = [
-  {
-    label: "Factory1",
-    value: "factory1",
-  },
-  {
-    label: "Factory2",
-    value: "factory2",
-  },
-  {
-    label: "Factory3",
-    value: "factory3",
-  },
-  {
-    label: "Factory4",
-    value: "factory4",
-  },
-  {
-    label: "Factory5",
-    value: "factory5",
-  },
-];
 
 const schema = z.object({
   firstName: z.string().min(1, "First name is required"),
