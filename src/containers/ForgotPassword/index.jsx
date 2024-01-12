@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Auth } from "aws-amplify";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -37,10 +38,9 @@ const ForgotPassword = () => {
   const onSubmit = async (e) => {
     try {
       setIsLoading(true);
-      const { data } = await api.resetPassword({
-        email: e.email,
-      });
-      snack.success(data.message);
+      const data = await Auth.forgotPassword(e.email);
+      console.log(data);
+      snack.success("Please check your email");
       setIsSuccess(true);
     } catch (error) {
       const { response } = error;

@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Auth } from "aws-amplify";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -8,6 +9,7 @@ import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
 import Modal from "../../components/Modal";
 import { ButtonVariant, SizeVariant } from "../../utils";
+import snack from "../../utils/snack";
 
 const schema = z.object({
   email: z.string().min(1, "Email is required"),
@@ -16,14 +18,7 @@ const schema = z.object({
 const CreateUserModal = ({ isOpen, onClose }) => {
   const getDefaultValues = () => {
     return {
-      fullname: undefined,
-      username: undefined,
       email: undefined,
-      phone: undefined,
-      role: undefined,
-      factory: undefined,
-      password: undefined,
-      confirmPassword: undefined,
     };
   };
   const form = useForm({
@@ -33,8 +28,19 @@ const CreateUserModal = ({ isOpen, onClose }) => {
 
   useEffect(() => form.reset(), [isOpen]);
 
-  const onSubmit = (e) => {
-    console.log(e);
+  const onSubmit = async (e) => {
+    try {
+      await Auth.signUp({
+        username: e.email,
+        password: "12345678",
+        attributes: {
+          email: e.email,
+        },
+      });
+      snack.success("User created, temporary password is 12345678");
+    } catch (error) {
+      snack.error(error.message);
+    }
   };
 
   const onHandleSubmit = form.handleSubmit(onSubmit);
