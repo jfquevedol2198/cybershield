@@ -1,10 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  confirmSignIn,
-  resetPassword,
-  signIn,
-  updatePassword,
-} from "aws-amplify/auth";
+import { Auth } from "aws-amplify";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,6 +9,7 @@ import Alarm, { AlarmType } from "../../components/Alarm";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
+import useAuth from "../../hooks/useAuth";
 import { delay, setCookieValue } from "../../utils";
 import { AUTH_TOKEN, ButtonVariant, SizeVariant } from "../../utils/constants";
 import snack from "../../utils/snack";
@@ -27,6 +23,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const getDefaultValues = () => {
     return {
@@ -44,29 +41,19 @@ const Login = () => {
       setError(null);
       setIsLoading(true);
 
-      const { isSignedIn, nextStep } = await signIn({
-        username: e.email,
-        password: e.password,
-      });
-      console.log(nextStep);
-      // if (
-      //   !isSignedIn &&
-      //   nextStep.signInStep === "CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED"
-      // ) {
-      //   const output = await confirmSignIn({
-      //     oldPassword: "fernando",
-      //     newPassword: "12345678",
-      //     // username: "fernando",
-      //   });
-      //   console.log(output);
-      //   return;
-      //   // forgotPassword;
-      //   // navigate("/reset-password");
-      //   // return;
-      // }
-      const token = nextStep;
+      const data = await Auth.signIn(e.email, e.password);
+      if (data.challengeName === "NEW_PASSWORD_REQUIRED") {
+        setUser(data);
+        navigate("/reset-password");
+        return;
+      }
+      const token = data.signInUserSession?.accessToken?.jwtToken;
+      if (!token) {
+        setError("Something went wrong, please try again");
+        return;
+      }
+      setUser(data);
       snack.success("Successfully logged in!");
-      console.log("token = " + token);
       setCookieValue(AUTH_TOKEN, token, 2, "hour");
 
       await delay(1000);

@@ -3,6 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import api from "../../api";
+import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
 import SearchInput from "../../components/SearchInput";
@@ -48,6 +49,9 @@ const Assets = () => {
             &gt; Assets ({assets.length})
           </span>
         </div>
+
+        {loading && <ActivityIndicator />}
+
         <div className="flex flex-row items-center gap-4">
           <Button variant={ButtonVariant.outline}>EXPORT SHOPS LIST</Button>
           <SearchInput onSearch={() => {}} />

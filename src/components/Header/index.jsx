@@ -6,20 +6,26 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { ReactComponent as ChatSupportSvg } from "../../assets/images/chatsupport.svg";
 import { ReactComponent as KnowledgeSvg } from "../../assets/images/knowledge.svg";
 import { ReactComponent as LogoutSvg } from "../../assets/images/logout.svg";
 import { ReactComponent as MyAccountSvg } from "../../assets/images/myaccount.svg";
+import useAuth from "../../hooks/useAuth";
 import useCommon from "../../hooks/useCommon";
-import { ButtonVariant } from "../../utils";
+import { ButtonVariant, redirectToAuth } from "../../utils";
 import Avatar from "../Avatar";
 import DropdownButton from "../DropdownButton";
 import NormalButton from "../NormalButton";
 
 const Header = () => {
   const location = useLocation();
+  const { user } = useAuth();
+  useEffect(() => {
+    if (!user) redirectToAuth();
+  }, [user]);
   const isSetting = location.pathname.indexOf("/settings") > -1;
   const { setShowSignoutModal } = useCommon();
   return (
@@ -101,7 +107,7 @@ const Header = () => {
               buttonContent={
                 <NormalButton variant={ButtonVariant.icon} className="h-full">
                   <div className="flex flex-col items-end">
-                    <span className="text-sm font-light">Eric Boyd</span>
+                    <span className="text-sm font-light">{user.username}</span>
                     <span className="text-xs">W INDUSTRIES</span>
                   </div>
                   <Avatar />

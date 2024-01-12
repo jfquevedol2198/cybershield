@@ -3,6 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import api from "../../api";
+import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import FactoryShopCell from "../../components/FactoryShopCell";
 import NormalButton from "../../components/NormalButton";
@@ -86,11 +87,9 @@ const Cells = () => {
           </NormalButton>
         </div>
       </div>
-      {loading && (
-        <div className="flex h-full w-full items-center justify-center">
-          Loading
-        </div>
-      )}
+
+      {loading && <ActivityIndicator />}
+
       <div className="mt-2 grid w-full grid-cols-1 gap-4 overflow-x-auto px-5 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {filteredCells.map((cell) => {
           return (

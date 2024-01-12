@@ -1,9 +1,9 @@
 import { ArrowDownIcon, FunnelIcon } from "@heroicons/react/24/outline";
-import _ from "lodash";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 import api from "../../../api";
+import ActivityIndicator from "../../../components/ActivityIndicator";
 import Button from "../../../components/Button";
 import NormalButton from "../../../components/NormalButton";
 import PrioritizationItem from "../../../components/PrioritizationItem";
@@ -95,10 +95,8 @@ const Alerts = () => {
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const {
-        data: { data },
-      } = await api.getAlerts();
-      const alerts = parseAlerts(_.get(data, "alerts") || []);
+      const { data } = await api.getAlerts();
+      const alerts = parseAlerts(data || []);
       setAlerts(alerts);
       setGroupByType(groupByKey(alerts, "type"));
       setFilterOptions(getFilterOptions(alerts));
@@ -107,11 +105,11 @@ const Alerts = () => {
       const riskData = alerts.reduce(
         (_data, vul) => {
           const severity = vul.severity;
-          if (severity > 0 && severity <= 3.5) {
+          if (severity > 0 && severity <= 35) {
             _data.low++;
-          } else if (severity > 3.5 && severity <= 5.5) {
+          } else if (severity > 35 && severity <= 55) {
             _data.medium++;
-          } else if (severity > 5.5 && severity <= 7.5) {
+          } else if (severity > 55 && severity <= 75) {
             _data.high++;
           } else {
             _data.critical++;
@@ -126,7 +124,6 @@ const Alerts = () => {
         { riskLevel: "high", value: riskData["high"] },
         { riskLevel: "critical", value: riskData["critical"] },
       ]);
-
       setLoading(false);
     };
     fetch();
@@ -157,6 +154,7 @@ const Alerts = () => {
 
   return (
     <Fragment>
+      {loading && <ActivityIndicator />}
       {/* Header */}
       <div className="mb-3 flex flex-row items-center justify-between bg-background px-8">
         <div className="flex flex-row items-center gap-2">

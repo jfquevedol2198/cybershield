@@ -29,7 +29,7 @@ export const vulnerabilities = (httpClient) => ({
 
 export const alerts = (httpClient) => ({
   getAlerts() {
-    return httpClient.post("/alerts");
+    return httpClient.get("/alerts");
   },
 });
 

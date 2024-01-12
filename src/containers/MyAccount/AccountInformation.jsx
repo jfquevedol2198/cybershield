@@ -54,10 +54,18 @@ const AccountInformation = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const data = await axios.get(
-        "https://api.countrystatecity.in/v1/countries"
+      const { data } = await axios.get(
+        "https://api.countrystatecity.in/v1/countries",
+        {
+          headers: {
+            "X-CSCAPI-KEY":
+              "dXR1UVBPYzdmTDY1QW9zRkhnb1FsVkl2Mnd1NWFXQUxra2kxN2ppYQ==",
+          },
+        }
       );
-      console.log(data);
+      setCountries(
+        data.map((country) => ({ label: country.name, value: country.iso2 }))
+      );
     };
     fetch();
   }, []);
@@ -187,7 +195,7 @@ const AccountInformation = () => {
               {...form.register("phone")}
             />
           </div>
-          <div className="text-secondary-text mb-4 text-sm font-light">
+          <div className="mb-4 text-sm font-light text-secondary-text">
             If you want to update your phone number this will trigger the
             Multiple Factor authentication flow.
           </div>

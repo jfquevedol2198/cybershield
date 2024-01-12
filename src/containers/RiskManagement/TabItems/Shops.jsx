@@ -15,7 +15,7 @@ TabShops.propTypes = {
   value: PropTypes.number,
 };
 
-export const PanelShops = () => {
+export const PanelShops = ({ shops }) => {
   return (
     <div className="flex h-full flex-col">
       <div className="mb-5 border-b-[1px] border-background pb-5 text-base font-normal text-gray-5">
@@ -23,11 +23,14 @@ export const PanelShops = () => {
         your mitigation efforts.
       </div>{" "}
       <div className="h-full flex-auto overflow-y-auto">
-        <ShopCard category="Texas Refinery" score={92} />
-        <ShopCard category="Supervisory" score={92} />
-        <ShopCard category="Corporate IT" score={92} />
-        <ShopCard category="Oil Wells" score={92} />
+        {shops.map((shop) => (
+          <ShopCard key={shop.id} category={shop.name} score={shop.riskScore} />
+        ))}
       </div>
     </div>
   );
+};
+
+PanelShops.propTypes = {
+  shops: PropTypes.arrayOf(PropTypes.any),
 };

@@ -1,12 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Auth } from "aws-amplify";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
-import api from "../../api";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
+import useAuth from "../../hooks/useAuth";
 import { ButtonVariant, SizeVariant } from "../../utils/constants";
 import snack from "../../utils/snack";
 
@@ -28,6 +30,8 @@ const schema = z
 
 const UpdatePassword = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const getDefaultValues = () => {
     return {
@@ -43,12 +47,9 @@ const UpdatePassword = () => {
   const onSubmit = async (e) => {
     try {
       setIsLoading(true);
-      console.log(schema.parse(e));
-      const { data } = await api.updatePassword({
-        password: e.password,
-        confirmPassword: e.confirmPassword,
-      });
-      snack.success(data.message);
+      await Auth.completeNewPassword(user, e.password);
+      snack.success("Password updated successfully");
+      navigate("/login");
     } catch (error) {
       const { response } = error;
       if (response) {
@@ -72,15 +73,6 @@ const UpdatePassword = () => {
         security, choose a password you haven&apos;t used before.
       </p>
       <form onSubmit={onHandleSubmit} className="mb-4">
-        <FormControl
-          inputType="password"
-          className="mb-4"
-          id="password"
-          label="New password"
-          size={SizeVariant.medium}
-          error={form.formState.errors.password?.message}
-          {...form.register("password")}
-        />
         <p className="mb-4 text-base font-normal not-italic text-gray-4">
           8 - 256 characters
         </p>

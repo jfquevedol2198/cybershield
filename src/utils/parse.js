@@ -55,26 +55,28 @@ export const parseAssets = (data) =>
 export const parseAlerts = (data) =>
   data.map((alert) => ({
     alertId: alert.id,
-    category: _.get(alert, "subCategory.category.name") || "-",
-    type: _.get(alert, "subCategory.type.name") || "-",
-    subtype: _.get(alert, "subCategory.subtype.name") || "-",
+    category: _.get(alert, "category_name") || "-",
+    type: _.get(alert, "type_name") || "-",
+    subtype: _.get(alert, "subtype_name") || "-",
     severity: _.get(alert, "severity") * 10 || 0,
     status: _.get(alert, "status") || "-",
-    alertTime: _.get(alert, "createdAt"),
-    assetName: _.get(alert, "assetName") || "-",
-    ip: _.get(alert, "destinationAssetIp") || "-",
-    cell: _.get(alert, "cell"),
-    shop: _.get(alert, "shop"),
-    updatedAt: _.get(alert, "updatedAt"),
-    assignee: _.get(alert, "assigneeUserId") || "-",
+    alertTime: _.get(alert, "created_at"),
+    assetName: _.get(alert, "asset_name") || "",
+    ip: _.get(alert, "destination_asset_ip") || "-",
+    cell: _.get(alert, "cell") || "",
+    shop: _.get(alert, "shop") || "",
+    updatedAt: _.get(alert, "updated_at"),
+    assignee: _.get(alert, "assignee_user_id") || "",
   }));
 
 export const groupByKey = (data, key) => {
   const group = data.reduce((_group, value) => {
-    if (Object.keys(_group).indexOf(value[key]) !== -1) {
-      _group[value[key]]++;
-    } else {
-      _group[value[key]] = 1;
+    if (value[key] !== "" && value[key] !== "-") {
+      if (Object.keys(_group).indexOf(value[key]) !== -1) {
+        _group[value[key]]++;
+      } else {
+        _group[value[key]] = 1;
+      }
     }
     return _group;
   }, {});

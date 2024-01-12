@@ -106,14 +106,14 @@ const Table = ({ columns, dataSource, totalPages, loading, onClickRow }) => {
         {sortedData.map((data, index) => (
           <div
             key={`row-${index}`}
-            className="table-header flex flex-row flex-nowrap items-center border-b-[1px] border-gray-1 bg-white px-2 hover:bg-gray-1"
+            className="table-header flex flex-row flex-nowrap items-center border-b-[1px] border-gray-1 bg-white hover:bg-gray-1"
             onClick={() => onClickRow && onClickRow(data)}
           >
             {columns.map((column) => (
               <div
                 key={column.key}
                 className={clsx(
-                  "cell flex flex-row px-1 py-3 text-base font-bold text-gray-4",
+                  "cell flex flex-row px-2 py-3 text-base font-bold text-gray-4",
                   column.align === "left"
                     ? "justify-start"
                     : column.align === "right"

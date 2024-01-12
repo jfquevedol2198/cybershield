@@ -126,7 +126,7 @@ const data = [
 
 const Users = () => {
   const [isCreateUser, setCreateUser] = useState(false);
-  const [isEditUser, setEditUser] = useState(false);
+  // const [isEditUser, setEditUser] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);

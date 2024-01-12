@@ -31,7 +31,6 @@ import Settings from "../containers/Settings";
 import TimeRefresh from "../containers/Settings/TimeRefresh";
 import UploadLogo from "../containers/Settings/UploadLogo";
 import Users from "../containers/Settings/Users";
-import Template from "../containers/Template";
 import UpdatePassword from "../containers/UpdatePassword";
 import { authorizationLoader } from "./authorizationLoader";
 

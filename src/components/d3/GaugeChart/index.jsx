@@ -63,7 +63,8 @@ const GaugeChart = ({ percent }) => {
       .select(svgRef.current)
       .attr("width", 200)
       .attr("height", 100);
-    svg.selectAll("path").remove().selectAll("text").remove();
+    svg.selectAll("path").remove();
+    svg.selectAll("text").remove();
     svg
       .selectAll("arcOuter")
       .data(dataOuter)
@@ -111,7 +112,7 @@ const GaugeChart = ({ percent }) => {
       .attr("transform", "translate(100, 75)")
       .attr("d", (d) => arc(d))
       .attr("fill", (d) => `var(${d.color})`);
-  }, []);
+  }, [percent]);
 
   return <svg ref={svgRef}></svg>;
 };

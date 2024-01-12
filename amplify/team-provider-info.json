@@ -1,19 +1,20 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-cybershield-dev-170813-authRole",
-      "UnauthRoleArn": "arn:aws:iam::353190019001:role/amplify-cybershield-dev-170813-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::353190019001:role/amplify-cybershield-dev-170813-authRole",
+      "AuthRoleName": "amplify-cybershield-dev-225230-authRole",
+      "UnauthRoleArn": "arn:aws:iam::353190019001:role/amplify-cybershield-dev-225230-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::353190019001:role/amplify-cybershield-dev-225230-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-cybershield-dev-170813-deployment",
-      "UnauthRoleName": "amplify-cybershield-dev-170813-unauthRole",
-      "StackName": "amplify-cybershield-dev-170813",
-      "StackId": "arn:aws:cloudformation:us-east-2:353190019001:stack/amplify-cybershield-dev-170813/9dafca40-a116-11ee-9071-0a691b348643",
-      "AmplifyAppId": "d39k4ej2hcwks3"
+      "DeploymentBucketName": "amplify-cybershield-dev-225230-deployment",
+      "UnauthRoleName": "amplify-cybershield-dev-225230-unauthRole",
+      "StackName": "amplify-cybershield-dev-225230",
+      "StackId": "arn:aws:cloudformation:us-east-2:353190019001:stack/amplify-cybershield-dev-225230/0627fdd0-b0fe-11ee-9b45-0a67e775f483",
+      "AmplifyAppId": "d2aizjnlukx26a"
     },
     "categories": {
       "auth": {
-        "cybershieldcbe60dbd": {}
+        "cybershield5b51d114": {},
+        "cybershield248fb882": {}
       }
     }
   }

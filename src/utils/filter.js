@@ -1,12 +1,15 @@
 import dayjs from "dayjs";
 
 export const getFilterOptions = (data) => {
+  if (!data) return {};
   const filterOptions = {};
   Object.keys(data[0]).map((key) => {
     const values = data.map((d) => d[key]);
     const _values = values.reduce(
       (options, value) =>
-        !value || options.indexOf(value) > -1 ? options : [...options, value],
+        !value || options.indexOf(value) > -1 || value === "-" || value === ""
+          ? options
+          : [...options, value],
       []
     );
     filterOptions[key] =

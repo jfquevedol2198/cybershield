@@ -1,31 +1,15 @@
+import PropTypes from "prop-types";
+
 import Table from "../../components/Table";
 import Tag from "../../components/Tag";
 import { SortDataType } from "../../utils";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
 
-const data = [
-  { id: 122, name: "C9300-24-T-A", type: "Network Device", risk: 76 },
-  { id: 101, name: "Euchner M...", type: "SIS", risk: 77 },
-  { id: 100, name: "Hirschman", type: "Switch", risk: 78 },
-  { id: 99, name: "Iynx", type: "Network Device", risk: 79 },
-  { id: 98, name: "REDLION...", type: "Switch", risk: 80 },
-  { id: 97, name: "C-2110-11P", type: "Camera", risk: 81 },
-  { id: 96, name: "NP5110_lab", type: "OT Device", risk: 82 },
-  { id: 91, name: "WIN-7HSN...", type: "Windows Match", risk: 83 },
-  { id: 95, name: "WAGO OT...", type: "OT Device", risk: 84 },
-  { id: 94, name: "EDS-G508...", type: "Network Device", risk: 85 },
-  { id: 226, name: "MG", type: "Firewall", risk: 74 },
-  { id: 92, name: "PNOZ m1p...", type: "Network Device", risk: 73 },
-  { id: 93, name: "PNOZ m1p...", type: "Network Device", risk: 72 },
-  { id: 103, name: "NP5112_lab", type: "OT Device", risk: 71 },
-  { id: 90, name: "WAGO OT", type: "OT Devive", risk: 35 },
-];
-
 const columns = [
   {
     title: "Asset ID",
-    dataIndex: "id",
-    key: "id",
+    dataIndex: "assetId",
+    key: "assetId",
     sortDataType: SortDataType.Number,
     colSpan: 1,
     className: "",
@@ -36,7 +20,7 @@ const columns = [
     dataIndex: "name",
     key: "name",
     sortDataType: SortDataType.String,
-    colSpan: 2,
+    colSpan: 1,
     className: "",
     align: "left",
   },
@@ -45,7 +29,7 @@ const columns = [
     dataIndex: "type",
     key: "type",
     sortDataType: SortDataType.Number,
-    colSpan: 2.5,
+    colSpan: 1,
     className: "",
     align: "left",
   },
@@ -55,14 +39,18 @@ const columns = [
     key: "risk",
     render: (value) => <Tag riskLevel={RiskLevel[getRiskLevel(value)]} />,
     sortDataType: SortDataType.Number,
-    colSpan: 1,
+    colSpan: 0.5,
     className: "",
     align: "left",
   },
 ];
 
-const AffectAssetsTable = () => {
+const AffectAssetsTable = ({ data }) => {
   return <Table columns={columns} dataSource={data} />;
+};
+
+AffectAssetsTable.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.any),
 };
 
 export default AffectAssetsTable;
