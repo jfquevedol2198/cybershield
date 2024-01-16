@@ -11,6 +11,8 @@ import Error404 from "../containers/404";
 import { App } from "../containers/App";
 import Assets from "../containers/Assets";
 import Nist80082 from "../containers/Compliance/Nist80082";
+import ConfirmAccount from "../containers/ConfirmAccount";
+import ConfirmPassword from "../containers/ConfirmPassword";
 import FactoryAssets from "../containers/Factory/Assets";
 import FactoryCells from "../containers/Factory/Cells";
 import FactoryShops from "../containers/Factory/Shops";
@@ -179,6 +181,14 @@ export const createRoutes = () => [
   {
     path: "/reset-password",
     Component: UpdatePassword,
+  },
+  {
+    path: "/confirm-password",
+    Component: ConfirmPassword,
+  },
+  {
+    path: "/confirm-account",
+    Component: ConfirmAccount,
   },
   {
     path: "/mfa/scan",

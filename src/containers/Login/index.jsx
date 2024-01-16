@@ -48,9 +48,10 @@ const Login = () => {
       setIsLoading(true);
 
       const data = await Auth.signIn(e.email, e.password);
+      console.log(data);
       if (data.challengeName === "NEW_PASSWORD_REQUIRED") {
         setTempUser(data);
-        navigate("/reset-password");
+        navigate("/confirm-password");
         return;
       }
       const token = data.signInUserSession?.accessToken?.jwtToken;
@@ -64,12 +65,12 @@ const Login = () => {
       await delay(1000);
       navigate("/dashboard");
     } catch (error) {
-      const { response } = error;
-      if (response) {
-        setError(response.data.message);
-      } else {
-        setError(error.message);
+      let { name, message } = error;
+      if (name === "UserNotConfirmedException") {
+        navigate(`/confirm-account?username=${e.email}`);
+        return;
       }
+      setError(message);
     } finally {
       setIsLoading(false);
     }

@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
-import api from "../../api";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
@@ -18,7 +17,7 @@ const schema = z.object({
 
 const ForgotPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  // const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
 
   const getDefaultValues = () => {
@@ -31,9 +30,9 @@ const ForgotPassword = () => {
     defaultValues: getDefaultValues(),
   });
 
-  const onSignin = () => {
-    navigate("/login");
-  };
+  // const onSignin = () => {
+  //   navigate("/login");
+  // };
 
   const onSubmit = async (e) => {
     try {
@@ -41,7 +40,8 @@ const ForgotPassword = () => {
       const data = await Auth.forgotPassword(e.email);
       console.log(data);
       snack.success("Please check your email");
-      setIsSuccess(true);
+      // setIsSuccess(true);
+      navigate(`/reset-password?username=${e.email}`);
     } catch (error) {
       const { response } = error;
       if (response) {
@@ -63,7 +63,7 @@ const ForgotPassword = () => {
       <p className="mb-4 text-base font-normal not-italic text-gray-4">
         Enter the email address associated with your account.
       </p>
-      {form.formState.isSubmitSuccessful && isSuccess ? (
+      {/* {form.formState.isSubmitSuccessful && isSuccess ? (
         <>
           <p className="mb-4 text-[1.75rem] font-bold not-italic text-gray-4">
             Check your inbox
@@ -106,32 +106,32 @@ const ForgotPassword = () => {
             SIGN IN
           </Button>
         </>
-      ) : (
-        <form onSubmit={onHandleSubmit} className="mb-4">
-          <FormControl
-            className="mb-4"
-            id="email"
-            label="E-mail"
-            size={SizeVariant.medium}
-            error={form.formState.errors.email?.message}
-            {...form.register("email")}
-          />
-          <Button
-            isSubmit
-            isLoading={isLoading}
-            className="mb-4 mt-4"
-            variant={ButtonVariant.primary}
-          >
-            RESET PASSWORD
-          </Button>
-          <Link
-            to="/login"
-            className="mx-auto mb-4 block text-center text-base text-primary-4 underline"
-          >
-            CANCEL
-          </Link>
-        </form>
-      )}
+      ) : ( */}
+      <form onSubmit={onHandleSubmit} className="mb-4">
+        <FormControl
+          className="mb-4"
+          id="email"
+          label="E-mail"
+          size={SizeVariant.medium}
+          error={form.formState.errors.email?.message}
+          {...form.register("email")}
+        />
+        <Button
+          isSubmit
+          isLoading={isLoading}
+          className="mb-4 mt-4"
+          variant={ButtonVariant.primary}
+        >
+          RESET PASSWORD
+        </Button>
+        <Link
+          to="/login"
+          className="mx-auto mb-4 block text-center text-base text-primary-4 underline"
+        >
+          CANCEL
+        </Link>
+      </form>
+      {/* )} */}
     </AuthLayout>
   );
 };
