@@ -89,3 +89,13 @@ export const groupByKey = (data, key) => {
     .sort((b, a) => a.count - b.count)
     .slice(0, 6);
 };
+
+export const parseCognitoUsers = (data) =>
+  data.map((user) => ({
+    username: user.Username || "-",
+    status: user.UserStatus === "CONFIRMED",
+    email:
+      (_.get(user, "Attributes") || []).filter((d) => d.Name === "email")?.[0]
+        .Value || "-",
+    isMfaEnabled: false,
+  }));

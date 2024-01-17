@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import PropTypes from "prop-types";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -54,7 +54,7 @@ const Factories = [
 ];
 
 const EditUserModal = ({ isOpen, data, onClose }) => {
-  const getDefaultValues = useMemo(() => {
+  const getDefaultValues = useCallback(() => {
     return {
       fullname: data["fullname"] || undefined,
       username: data["username"] || undefined,
@@ -161,6 +161,10 @@ const EditUserModal = ({ isOpen, data, onClose }) => {
       </form>
     </Modal>
   );
+};
+
+EditUserModal.defaultProps = {
+  data: {},
 };
 
 EditUserModal.propTypes = {
