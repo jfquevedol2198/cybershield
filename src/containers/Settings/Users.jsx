@@ -1,5 +1,5 @@
 import { FunnelIcon } from "@heroicons/react/24/outline";
-import { config as AWSconfig, CognitoIdentityServiceProvider } from "aws-sdk";
+// import { config as AWSconfig, CognitoIdentityServiceProvider } from "aws-sdk";
 import { useEffect, useState } from "react";
 
 import EditSvg from "../../assets/images/edit.svg";
@@ -136,28 +136,27 @@ const Users = () => {
   ];
 
   useEffect(() => {
-    AWSconfig.update({
-      region: awsconfig.aws_cognito_region, // replace with your AWS region
-      credentials: {
-        accessKeyId: config.awsAccessKeyId,
-        secretAccessKey: config.awsSecretAccessKey,
-      },
-    });
-    const cognito = new CognitoIdentityServiceProvider();
-    const params = {
-      UserPoolId: "us-east-2_siYKlWDc5", // replace with your User Pool ID
-    };
-
-    cognito.listUsers(params, (err, data) => {
-      if (err) {
-        setUsers([]);
-      } else {
-        const users = parseCognitoUsers(data.Users);
-        setUsers(users);
-        setFilteredUsers(users);
-        setFilterOptions(getFilterOptions(users));
-      }
-    });
+    // AWSconfig.update({
+    //   region: awsconfig.aws_cognito_region, // replace with your AWS region
+    //   credentials: {
+    //     accessKeyId: config.awsAccessKeyId,
+    //     secretAccessKey: config.awsSecretAccessKey,
+    //   },
+    // });
+    // const cognito = new CognitoIdentityServiceProvider();
+    // const params = {
+    //   UserPoolId: "us-east-2_siYKlWDc5", // replace with your User Pool ID
+    // };
+    // cognito.listUsers(params, (err, data) => {
+    //   if (err) {
+    //     setUsers([]);
+    //   } else {
+    //     const users = parseCognitoUsers(data.Users);
+    //     setUsers(users);
+    //     setFilteredUsers(users);
+    //     setFilterOptions(getFilterOptions(users));
+    //   }
+    // });
   }, []);
 
   const onFilter = (data) => {
