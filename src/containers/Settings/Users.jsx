@@ -1,5 +1,5 @@
 import { FunnelIcon } from "@heroicons/react/24/outline";
-import AWS from "aws-sdk";
+import { config as AWSconfig, CognitoIdentityServiceProvider } from "aws-sdk";
 import { useEffect, useState } from "react";
 
 import EditSvg from "../../assets/images/edit.svg";
@@ -136,14 +136,14 @@ const Users = () => {
   ];
 
   useEffect(() => {
-    AWS.config.update({
+    AWSconfig.update({
       region: awsconfig.aws_cognito_region, // replace with your AWS region
       credentials: {
         accessKeyId: config.awsAccessKeyId,
         secretAccessKey: config.awsSecretAccessKey,
       },
     });
-    const cognito = new AWS.CognitoIdentityServiceProvider();
+    const cognito = new CognitoIdentityServiceProvider();
     const params = {
       UserPoolId: "us-east-2_siYKlWDc5", // replace with your User Pool ID
     };
