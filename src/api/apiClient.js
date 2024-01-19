@@ -10,7 +10,9 @@ import {
   cells,
   incidents,
   insights,
+  questions,
   shops,
+  users,
   vulnerabilities,
 } from "./dashboard";
 
@@ -27,6 +29,8 @@ export const createApiClient = (httpClient) => {
     ...alerts(httpClient),
     ...insights(httpClient),
     ...incidents(httpClient),
+    ...users(httpClient),
+    ...questions(httpClient),
   };
   return apiClient;
 };

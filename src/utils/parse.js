@@ -92,10 +92,20 @@ export const groupByKey = (data, key) => {
 
 export const parseCognitoUsers = (data) =>
   data.map((user) => ({
-    username: user.Username || "-",
-    status: user.UserStatus === "CONFIRMED",
-    email:
-      (_.get(user, "Attributes") || []).filter((d) => d.Name === "email")?.[0]
-        .Value || "-",
-    isMfaEnabled: false,
+    id: user.id,
+    username: user.user_name,
+    status: true,
+    email: user.email,
+    isMfaEnabled: user.enable_multifactor_authn,
+    isServiceNowEnabled: true,
+    phone: user.phone,
+    title: user.title,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    middleName: user.middle_name,
+    manager: user.manager,
+    country: user.country,
+    state: user.state,
+    city: user.city,
+    zip: user.zip,
   }));

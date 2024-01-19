@@ -13,7 +13,6 @@ const httpClient = axios.create({
 });
 
 const apiClient = createApiClient(httpClient);
-
 if (config.isMockEnabled) {
   createMocks(httpClient);
 }

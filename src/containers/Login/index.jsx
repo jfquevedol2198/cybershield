@@ -24,7 +24,9 @@ const Login = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { authToken, user, setUser, setTempUser } = useAuth();
-
+  useEffect(() => {
+    console.log("____ login");
+  }, []);
   useEffect(() => {
     if (authToken && user && user.username) {
       navigate("/dashboard");

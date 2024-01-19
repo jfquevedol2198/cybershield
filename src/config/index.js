@@ -6,4 +6,7 @@ export default {
   userPoolID: import.meta.env.VITE_COGNITO_USER_POOL_ID,
   awsAccessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
   awsSecretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
+  countryStateCityApiKey: import.meta.env.VITE_COUNTRY_STATE_CITY_API_KEY,
+  serviceNowAuthUsername: import.meta.env.VITE_SERVICE_NOW_AUTH_USERNAME,
+  serviceNowAuthPassword: import.meta.env.VITE_SERVICE_NOW_AUTH_PASSWORD,
 };

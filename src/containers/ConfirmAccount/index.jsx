@@ -93,7 +93,7 @@ const ConfirmSignup = () => {
       const code = `${e.value1}${e.value2}${e.value3}${e.value4}${e.value5}${e.value6}`;
       await Auth.confirmSignUp(username, code);
       snack.success("Account is confirmed successfully");
-      navigate("/login");
+      navigate(`/complete-profile?email=${username}`);
     } catch (error) {
       const { response } = error;
       if (response) {

@@ -30,7 +30,7 @@ const FormControl = React.forwardRef(
     },
     ref
   ) => {
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState(rest.defaultSelValue);
     const [filter, setFilter] = useState(null);
     const inputRef = useRef(null);
     const hasIcon = inputType === "phone" || inputType === "dropdown";
@@ -105,37 +105,61 @@ const FormControl = React.forwardRef(
                   leaveTo="opacity-0"
                 >
                   <Listbox.Options className="absolute top-full z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white px-2 py-2 text-base shadow-input sm:text-sm">
-                    {data.map((d) => (
-                      <Listbox.Option
-                        key={typeof d === "string" ? d : d.key || d.value}
-                        className={({ active }) =>
-                          `relative cursor-default select-none ${
-                            active
-                              ? "bg-background text-amber-900"
-                              : "text-gray-900"
-                          }`
-                        }
-                        value={d}
-                      >
-                        {({ selected }) => (
-                          <div
-                            className={`flex cursor-pointer flex-row items-center gap-2 truncate px-2 py-3 ${
-                              selected
-                                ? "bg-background font-medium"
-                                : "font-normal"
-                            }`}
+                    <div className="relative w-full border-b-[1px] border-gray-1">
+                      <input
+                        ref={inputRef}
+                        className="w-full border-none pl-10 outline-none focus:border-none focus:shadow-none focus:ring-0"
+                        onChange={(e) => setFilter(e.target.value)}
+                      />
+                      <MagnifyingGlassIcon className="absolute left-2 top-2 w-6" />
+                    </div>
+                    {data.length > 0 &&
+                      data
+                        .filter((v) =>
+                          filter
+                            ? v.label
+                                .toLowerCase()
+                                .indexOf(filter.toLowerCase()) > -1
+                            : true
+                        )
+                        .map((d) => (
+                          <Listbox.Option
+                            key={typeof d === "string" ? d : d.key || d.value}
+                            className={({ active }) =>
+                              `relative cursor-default select-none ${
+                                active
+                                  ? "bg-background text-amber-900"
+                                  : "text-gray-900"
+                              }`
+                            }
+                            value={d}
                           >
-                            {typeof d === "string"
-                              ? d === "*"
-                                ? "All"
-                                : d
-                              : d.label === "*"
-                              ? "All"
-                              : d.label}
-                          </div>
-                        )}
-                      </Listbox.Option>
-                    ))}
+                            {({ selected }) => (
+                              <div
+                                className={`flex cursor-pointer flex-row items-center gap-2 truncate px-2 py-3 ${
+                                  selected
+                                    ? "bg-background font-medium"
+                                    : "font-normal"
+                                }`}
+                              >
+                                {typeof d === "string"
+                                  ? d === "*"
+                                    ? "All"
+                                    : d
+                                  : d.label === "*"
+                                  ? "All"
+                                  : d.label}
+                              </div>
+                            )}
+                          </Listbox.Option>
+                        ))}
+                    {data.length === 0 && (
+                      <div
+                        className={`flex cursor-pointer flex-row items-center gap-2 truncate px-2 py-3 font-normal`}
+                      >
+                        NO DATA
+                      </div>
+                    )}
                   </Listbox.Options>
                 </Transition>
               )}

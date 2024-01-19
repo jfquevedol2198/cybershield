@@ -1,15 +1,14 @@
 import { FunnelIcon } from "@heroicons/react/24/outline";
-// import { config as AWSconfig, CognitoIdentityServiceProvider } from "aws-sdk";
 import { useEffect, useState } from "react";
 
+import apiClient from "../../api";
 import EditSvg from "../../assets/images/edit.svg";
-import awsconfig from "../../aws-exports";
+import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
 import SearchInput from "../../components/SearchInput";
 import Table from "../../components/Table";
 import Tag, { TagVariant } from "../../components/Tag";
-import config from "../../config";
 import { ButtonVariant } from "../../utils";
 import { applyFilter, getFilterOptions } from "../../utils/filter";
 import { parseCognitoUsers } from "../../utils/parse";
@@ -18,10 +17,14 @@ import EditUserModal from "./EditUserModal";
 import FilterUsers from "./FilterUsers";
 
 const Users = () => {
+  const [loading, setLoading] = useState(false);
+
   const [isCreateUser, setCreateUser] = useState(false);
   const [isEditUser, setIsEditUser] = useState(false);
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
+
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [selUser, setSelUser] = useState(null);
@@ -42,8 +45,8 @@ const Users = () => {
     },
     {
       title: "Full Name",
-      dataIndex: "fullname",
-      key: "fullname",
+      dataIndex: "fullName",
+      key: "fullName",
       colSpan: 1,
       className: "",
       align: "left",
@@ -88,8 +91,8 @@ const Users = () => {
     },
     {
       title: "Sites",
-      dataIndex: "assigned",
-      key: "assigned",
+      dataIndex: "sites",
+      key: "sites",
       colSpan: 1,
       className: "",
       align: "left",
@@ -136,27 +139,16 @@ const Users = () => {
   ];
 
   useEffect(() => {
-    // AWSconfig.update({
-    //   region: awsconfig.aws_cognito_region, // replace with your AWS region
-    //   credentials: {
-    //     accessKeyId: config.awsAccessKeyId,
-    //     secretAccessKey: config.awsSecretAccessKey,
-    //   },
-    // });
-    // const cognito = new CognitoIdentityServiceProvider();
-    // const params = {
-    //   UserPoolId: "us-east-2_siYKlWDc5", // replace with your User Pool ID
-    // };
-    // cognito.listUsers(params, (err, data) => {
-    //   if (err) {
-    //     setUsers([]);
-    //   } else {
-    //     const users = parseCognitoUsers(data.Users);
-    //     setUsers(users);
-    //     setFilteredUsers(users);
-    //     setFilterOptions(getFilterOptions(users));
-    //   }
-    // });
+    const fetch = async () => {
+      setLoading(true);
+      const { data } = await apiClient.getSysUsers();
+      const users = parseCognitoUsers(data);
+      setUsers(users);
+      setFilteredUsers(users);
+      setFilterOptions(getFilterOptions(users));
+      setLoading(false);
+    };
+    fetch();
   }, []);
 
   const onFilter = (data) => {
@@ -176,6 +168,7 @@ const Users = () => {
 
   return (
     <div>
+      {loading && <ActivityIndicator />}
       <div className="mb-2 text-[1.625rem] font-bold">Users</div>
       <div className="mb-5 text-base font-normal">
         Create new or edit existing customers users for the central management
@@ -208,7 +201,7 @@ const Users = () => {
       />
       {selUser && (
         <EditUserModal
-          data={selUser}
+          user={selUser}
           isOpen={isEditUser}
           onClose={() => {
             setIsEditUser(false);

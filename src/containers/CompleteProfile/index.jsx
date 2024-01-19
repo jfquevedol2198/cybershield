@@ -1,44 +1,53 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import _ from "lodash";
-import PropTypes from "prop-types";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 
-import apiClient from "../../api";
-import ActivityIndicator from "../../components/ActivityIndicator";
+import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
-import ButtonToggle from "../../components/ButtonToggle";
-import Checkbox from "../../components/Checkbox";
 import FormControl from "../../components/FormControl";
-import Modal from "../../components/Modal";
 import config from "../../config";
-import { ButtonVariant, SizeVariant } from "../../utils";
+import { ButtonVariant, SizeVariant } from "../../utils/constants";
+import { createServiceNowUser } from "../../utils/serviceNow";
 import snack from "../../utils/snack";
 
-const schema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  middleName: z.string(),
-  lastName: z.string().min(1, "Last name is required"),
-  country: z.string().min(1, "Country is required"),
-  state: z.string().min(1, "State is required"),
-  city: z.string().min(1, "City is required"),
-  zip: z.string().min(1, "Zip code is required"),
-  manager: z.string().min(1, "Job manager is required"),
-  title: z.string().min(1, "Job title is required"),
-  email: z.string().email("Email is required"),
-  sites: z.string(),
-  isCreateIncidents: z.boolean(),
-});
+const schema = z
+  .object({
+    firstName: z.string().min(1, "First name is required"),
+    middleName: z.string(),
+    lastName: z.string().min(1, "Last name is required"),
+    country: z.string().min(1, "Country is required"),
+    state: z.string().min(1, "State is required"),
+    city: z.string().min(1, "City is required"),
+    zip: z.string().min(1, "Zip code is required"),
+    manager: z.string().min(1, "Job manager is required"),
+    jobTitle: z.string().min(1, "Job title is required"),
+    password: z.string().min(1, "Password is required"),
+    confirmPassword: z.string().min(1, "Confirm Password is required"),
+  })
+  .superRefine(({ password, confirmPassword }, ctx) => {
+    if (confirmPassword !== password) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["confirmPassword"],
+        message: "Passwords do not match",
+      });
+    }
+  });
 
-const EditUserModal = ({ isOpen, user, onClose }) => {
+const CompleteProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // country, state, city
   const [isCountryLoading, setIsCountryLoading] = useState(false);
   const [isStateLoading, setIsStateLoading] = useState(false);
   const [isCityLoading, setIsCityLoading] = useState(false);
+
+  const [searchParam] = useSearchParams();
+  const email = searchParam.get("email") || "";
+  const navigate = useNavigate();
 
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
@@ -47,24 +56,19 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      firstName: _.get(user, "firstName"),
-      middleName: _.get(user, "middleName"),
-      lastName: _.get(user, "lastName"),
-      country: _.get(user, "country"),
-      state: _.get(user, "state"),
-      city: _.get(user, "city"),
-      zip: _.get(user, "zip"),
-      manager: _.get(user, "manager"),
-      title: _.get(user, "title"),
-      email: _.get(user, "email"),
-      sites: _.get(user, "sites"),
-      isCreateIncidents: _.get(user, "isCreateIncidents") || false,
+      fullname: undefined,
+      username: undefined,
+      email: undefined,
+      phone: undefined,
+      role: undefined,
+      factory: undefined,
+      password: undefined,
+      confirmPassword: undefined,
     },
   });
 
   const country = useWatch({ control: form.control, name: "country" });
   const state = useWatch({ control: form.control, name: "state" });
-  const city = useWatch({ control: form.control, name: "city" });
 
   useEffect(() => {
     const fetch = async () => {
@@ -125,52 +129,43 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
   }, [state]);
 
   const onSubmit = async (e) => {
-    try {
-      setIsLoading(true);
-      const {
-        firstName,
-        middleName,
-        lastName,
-        country,
-        state,
-        city,
-        zip,
-        manager,
-        title,
-        email,
-        phone,
-      } = e;
-      const data = {
-        country,
-        zip,
-        active: true,
-        state,
-        city,
-        title: title,
-        first_name: firstName,
-        email,
-        manager,
-        phone,
-        last_name: lastName,
-        middle_name: middleName,
-      };
-      const res = await apiClient.updateSysUser(user.id, data);
-      console.log(res);
-      snack.success("Updated successfully");
-    } catch (error) {
-      console.log(error);
-      snack.error("Updated failed");
-    } finally {
-      setIsLoading(false);
-    }
+    setIsLoading(true);
+    const {
+      firstName,
+      middleName,
+      lastName,
+      country,
+      state,
+      city,
+      zip,
+      manager,
+      jobTitle,
+    } = e;
+    const data = {
+      country,
+      zip,
+      active: true,
+      state,
+      city,
+      title: jobTitle,
+      sys_class_name: "sys_user",
+      first_name: firstName,
+      email,
+      manager,
+      last_name: lastName,
+      middle_name: middleName,
+    };
+    await createServiceNowUser(data);
   };
 
   const onHandleSubmit = form.handleSubmit(onSubmit);
 
   return (
-    <Modal title="Create user" isOpen={isOpen} closeModal={onClose}>
-      {isLoading && <ActivityIndicator />}
-      <form className="min-w-[30rem]" onSubmit={onHandleSubmit}>
+    <AuthLayout>
+      <form onSubmit={onHandleSubmit}>
+        <p className="mb-4 text-[1.625rem] font-bold not-italic text-gray-4">
+          Complete your profile
+        </p>
         <div className="mb-4 flex w-full flex-row gap-4">
           <span className="sr-only">Name</span>
           <FormControl
@@ -209,7 +204,6 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
               label="Country"
               inputType="dropdown"
               size={SizeVariant.small}
-              defaultSelValue={country}
               error={form.formState.errors.country?.message}
               data={countries}
               {...form.register("country")}
@@ -223,7 +217,6 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
               label="State"
               inputType="dropdown"
               size={SizeVariant.small}
-              defaultSelValue={state}
               error={form.formState.errors.state?.message}
               data={states}
               {...form.register("state")}
@@ -240,7 +233,6 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
               label="City"
               inputType="dropdown"
               size={SizeVariant.small}
-              defaultSelValue={city}
               error={form.formState.errors.city?.message}
               data={cities}
               {...form.register("city")}
@@ -262,11 +254,11 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
         <span className="sr-only">Job Title</span>
         <div className="mb-4">
           <FormControl
-            id="title"
+            id="jobTitle"
             label="Job Title"
             size={SizeVariant.small}
-            error={form.formState.errors.title?.message}
-            {...form.register("title")}
+            error={form.formState.errors.jobTitle?.message}
+            {...form.register("jobTitle")}
             setValue={form.setValue}
           />
         </div>
@@ -280,67 +272,45 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
             {...form.register("manager")}
           />
         </div>
-        <FormControl
-          className="mb-4"
-          id="email"
-          label="Email address"
-          size={SizeVariant.medium}
-          error={form.formState.errors.email?.message}
-          {...form.register("email")}
-          setValue={form.setValue}
-        />
-        <FormControl
-          className="mb-4"
-          id="phone"
-          inputType="phone"
-          label="Phone number"
-          size={SizeVariant.medium}
-          error={form.formState.errors.phone?.message}
-          {...form.register("phone")}
-          setValue={form.setValue}
-        />
-        <p className="mb-2 text-sm text-secondary-text">
-          Please use a valid phone number
+        <p className="mb-4 mt-2 text-[1.625rem] font-bold not-italic text-gray-4">
+          Update your password
         </p>
         <FormControl
-          type="sites"
+          type="password"
           className="mb-4"
-          label="Sites"
+          id="password"
+          label="Password"
           size={SizeVariant.medium}
-          error={form.formState.errors.sites?.message}
-          {...form.register("sites")}
+          error={form.formState.errors.password?.message}
+          {...form.register("password")}
           setValue={form.setValue}
         />
-
-        <p className="text-md mb-2 font-bold text-secondary-text">
-          Service Now
+        <p className="mb-4 text-base font-normal not-italic text-gray-4">
+          8 - 256 characters
         </p>
-        <div className="mb-2 text-base font-bold text-gray-4">
-          <Checkbox
-            id="isCreateIncidents"
-            label="The user will be able to create incidents."
-            {...form.register("isCreateIncidents")}
-          />
-        </div>
-        <div className="flex flex-row items-center justify-end gap-2">
-          <Button variant={ButtonVariant.outline}>CANCEL</Button>
-          <Button variant={ButtonVariant.filled} isSubmit>
-            SAVE
+        <FormControl
+          type="password"
+          className="mb-8"
+          id="confirmPassword"
+          label="Confirm password"
+          size={SizeVariant.medium}
+          error={form.formState.errors.confirmPassword?.message}
+          {...form.register("confirmPassword")}
+          setValue={form.setValue}
+        />
+        <div className="flex w-full flex-row items-center justify-end gap-2">
+          <Button
+            isBlock
+            variant={ButtonVariant.filled}
+            isSubmit
+            isDisabled={isLoading}
+          >
+            SIGN IN
           </Button>
         </div>
       </form>
-    </Modal>
+    </AuthLayout>
   );
 };
 
-EditUserModal.defaultProps = {
-  user: {},
-};
-
-EditUserModal.propTypes = {
-  isOpen: PropTypes.bool,
-  onClose: PropTypes.func,
-  user: PropTypes.shape(PropTypes.any),
-};
-
-export default EditUserModal;
+export default CompleteProfile;

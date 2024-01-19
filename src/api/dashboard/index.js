@@ -44,3 +44,18 @@ export const incidents = (httpClient) => ({
     return httpClient.get("/incidents");
   },
 });
+
+export const users = (httpClient) => ({
+  getSysUsers() {
+    return httpClient.get("/sys_user");
+  },
+  updateSysUser(id, data) {
+    return httpClient.put(`/sys_user/${id}`, data);
+  },
+});
+
+export const questions = (httpClient) => ({
+  getQuestions() {
+    return httpClient.get("/questions_view");
+  },
+});

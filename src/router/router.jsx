@@ -10,6 +10,7 @@ import { ReactComponent as RiskManagementIcon } from "../assets/images/risk-mana
 import Error404 from "../containers/404";
 import { App } from "../containers/App";
 import Assets from "../containers/Assets";
+import CompleteProfile from "../containers/CompleteProfile";
 import Nist80082 from "../containers/Compliance/Nist80082";
 import ConfirmAccount from "../containers/ConfirmAccount";
 import ConfirmPassword from "../containers/ConfirmPassword";
@@ -189,6 +190,10 @@ export const createRoutes = () => [
   {
     path: "/confirm-account",
     Component: ConfirmAccount,
+  },
+  {
+    path: "/complete-profile",
+    Component: CompleteProfile,
   },
   {
     path: "/mfa/scan",
