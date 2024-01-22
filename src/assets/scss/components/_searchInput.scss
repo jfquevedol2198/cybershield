@@ -1,6 +1,6 @@
 .searchInput {
   input {
-    @apply border-[1px] border-white;
+    @apply border border-white;
     &:hover {
       @apply border-primary-4;
     }

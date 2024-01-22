@@ -17,7 +17,7 @@ const UploadLogo = () => {
         page.
       </div>
       {!uploadMode && (
-        <div className="flex h-[66px] w-[212px] flex-row items-center justify-center gap-2 border-[1px] border-dashed border-link">
+        <div className="flex h-[66px] w-[212px] flex-row items-center justify-center gap-2 border border-dashed border-link">
           <NormalButton
             variant={ButtonVariant.text}
             onClick={() => {

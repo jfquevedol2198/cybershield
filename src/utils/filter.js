@@ -71,6 +71,23 @@ export const DateFilterRangeData = {
   },
 };
 
+export const applySearch = (data, search) => {
+  if (!data) return [];
+  if (!search) return data;
+
+  const lowSearch = search.toLowerCase();
+  return data.reduce(
+    (_data, row) =>
+      Object.keys(row).filter((key) => {
+        const value = `${row[key]}`;
+        return value.toLowerCase().indexOf(lowSearch) > -1;
+      }).length > 0
+        ? [..._data, row]
+        : _data,
+    []
+  );
+};
+
 export const applyFilter = (data, filterOptions) => {
   let filteredData = data;
   filterOptions.forEach((option) => {

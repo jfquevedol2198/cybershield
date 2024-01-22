@@ -175,7 +175,12 @@ export const PanelAlerts = () => {
             <span className="text-base text-gray-5">/70</span>
           </div>
         </div>
-        <Button variant={ButtonVariant.filled}>VIEW OPEN ALERTS</Button>
+        <Button
+          variant={ButtonVariant.filled}
+          href="/dashboard/investigate/alerts?status=OPEN"
+        >
+          VIEW OPEN ALERTS
+        </Button>
       </div>
       <div className="h-full flex-auto overflow-y-auto">
         <Table dataSource={data} columns={columns} />

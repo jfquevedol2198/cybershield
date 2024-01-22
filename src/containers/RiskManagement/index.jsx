@@ -56,7 +56,6 @@ const RiskManagement = () => {
 
   const debounced = useDebouncedCallback(() => {
     setWidth(riskLineChartRef.current.clientWidth);
-    console.log(riskLineChartRef.current.clientWidth);
   }, 500);
 
   useEffect(() => {

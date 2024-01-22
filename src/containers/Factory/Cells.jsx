@@ -7,9 +7,11 @@ import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import FactoryShopCell from "../../components/FactoryShopCell";
 import NormalButton from "../../components/NormalButton";
+import SearchAndFilter from "../../components/SearchAndFilter";
 import SearchInput from "../../components/SearchInput";
+import useSearchAndFilter from "../../hooks/useSearchAndFilter";
 import { ButtonVariant } from "../../utils";
-import { applyFilter, getFilterOptions } from "../../utils/filter";
+import { getFilterOptions } from "../../utils/filter";
 import { parseCells } from "../../utils/parse";
 import FilterCells from "./FilterCells";
 
@@ -20,11 +22,10 @@ const Cells = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [cells, setCells] = useState([]);
-  const [filteredCells, setFilteredCells] = useState([]);
   const [filterCellOptions, setFilterCellOptions] = useState([]);
-
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const { setPageData, filterData } = useSearchAndFilter();
 
   useEffect(() => {
     const fetch = async () => {
@@ -33,8 +34,7 @@ const Cells = () => {
         ? api.getCellsOfShop({ shopId })
         : api.getSiteCells());
       const cells = parseCells(data);
-      setCells(cells);
-      setFilteredCells(cells);
+      setPageData(cells);
       setFilterCellOptions(getFilterOptions(cells));
       setLoading(false);
     };
@@ -42,17 +42,18 @@ const Cells = () => {
   }, [shopId]);
 
   const onFilterCells = (data) => {
-    const filtered = Object.keys(data).filter((key) => !!data[key]);
-    if (filtered.length === 0) return;
-    setFilteredCells(
-      applyFilter(
-        cells,
-        filtered.reduce(
-          (filter, key) => [...filter, { key, value: data[key] }],
-          []
-        )
-      )
-    );
+    console.log(data);
+    // const filtered = Object.keys(data).filter((key) => !!data[key]);
+    // if (filtered.length === 0) return;
+    // setFilteredCells(
+    //   applyFilter(
+    //     cells,
+    //     filtered.reduce(
+    //       (filter, key) => [...filter, { key, value: data[key] }],
+    //       []
+    //     )
+    //   )
+    // );
     setIsFilterOpen(false);
   };
 
@@ -77,7 +78,7 @@ const Cells = () => {
         </div>
         <div className="flex flex-row items-center gap-4">
           <Button variant={ButtonVariant.outline}>EXPORT CELLS LIST</Button>
-          <SearchInput onSearch={() => {}} />
+          <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}
             className="h-full"
@@ -88,10 +89,14 @@ const Cells = () => {
         </div>
       </div>
 
+      <div className="px-6">
+        <SearchAndFilter />
+      </div>
+
       {loading && <ActivityIndicator />}
 
-      <div className="mt-2 grid w-full grid-cols-1 gap-4 overflow-x-auto px-5 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-        {filteredCells.map((cell) => {
+      <div className="mt-4 grid w-full grid-cols-1 gap-4 overflow-x-auto px-5 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        {filterData.map((cell) => {
           return (
             <Link
               key={cell.description}

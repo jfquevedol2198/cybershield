@@ -4,7 +4,7 @@
       &::placeholder {
         @apply text-transparent;
       }
-      @apply border-[1px] border-gray-1;
+      @apply border border-gray-1;
       &:not(:placeholder-shown) {
         @apply border-primary-3;
         @apply z-10;

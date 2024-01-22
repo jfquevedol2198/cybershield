@@ -54,7 +54,7 @@ const Assets = () => {
 
         <div className="flex flex-row items-center gap-4">
           <Button variant={ButtonVariant.outline}>EXPORT SHOPS LIST</Button>
-          <SearchInput onSearch={() => {}} />
+          <SearchInput />
           <NormalButton variant={ButtonVariant.icon} className="h-full">
             <FunnelIcon className="h-6 w-6" />
           </NormalButton>

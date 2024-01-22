@@ -39,7 +39,7 @@ const TimeRefresh = () => {
       </div>
       {!editMode && timeRefresh && (
         <div className="flex flex-row gap-2">
-          <div className="flex h-[45px] w-[13rem] items-center justify-center rounded-md border-[1px] border-focus bg-gray-1">
+          <div className="flex h-[45px] w-[13rem] items-center justify-center rounded-md border border-focus bg-gray-1">
             {timeRefresh.label}
           </div>
           <Button
@@ -60,7 +60,7 @@ const TimeRefresh = () => {
               <DropdownSelect
                 data={Period}
                 onSelect={(v) => setTempValue(v)}
-                className="w-full rounded-md border-[1px] border-focus bg-white"
+                className="w-full rounded-md border border-focus bg-white"
               />
             </div>
             <Button

@@ -3,14 +3,17 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 import api from "../../api";
+import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
 import PrioritizationItem from "../../components/PrioritizationItem";
+import SearchAndFilter from "../../components/SearchAndFilter";
 import SearchInput from "../../components/SearchInput";
 import DonutChart from "../../components/d3/DonutChart";
 import StackedAreaChart from "../../components/d3/StackedAreaChart";
+import useSearchAndFilter from "../../hooks/useSearchAndFilter";
 import { ButtonVariant } from "../../utils";
-import { applyFilter, getFilterOptions } from "../../utils/filter";
+import { getFilterOptions } from "../../utils/filter";
 import { groupByKey } from "../../utils/parse";
 import Filter from "./Filter";
 import IncidentsTable from "./IncidentsTable";
@@ -78,15 +81,15 @@ const Incidents = () => {
   const stackAreaChartRef = useRef(null);
   const [width, setWidth] = useState(0);
 
-  const [incidents, setIncidents] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
-  const [filteredIncidents, setFilteredIncidents] = useState([]);
 
   const [riskData, setRiskData] = useState([]);
   const [groupByCveID, setGroupByCveID] = useState([]);
+
+  const { setPageData, filterData } = useSearchAndFilter();
 
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
@@ -95,40 +98,44 @@ const Incidents = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      setLoading(true);
-      const {
-        data: { data },
-      } = await api.getIncidents();
-      const incidents = data;
-      setIncidents(incidents);
-      setFilteredIncidents(incidents);
-      setFilterOptions(getFilterOptions(incidents));
-      setLoading(false);
+      try {
+        setLoading(true);
+        const {
+          data: { data },
+        } = await api.getIncidents();
+        const incidents = data;
+        setPageData(incidents);
+        setFilterOptions(getFilterOptions(incidents));
 
-      setGroupByCveID(groupByKey(incidents, "type"));
+        setGroupByCveID(groupByKey(incidents, "type"));
 
-      const riskData = incidents.reduce(
-        (_data, vul) => {
-          const severity = vul.cveScore;
-          if (severity > 0 && severity <= 3.5) {
-            _data.low++;
-          } else if (severity > 3.5 && severity <= 5.5) {
-            _data.medium++;
-          } else if (severity > 5.5 && severity <= 7.5) {
-            _data.high++;
-          } else {
-            _data.critical++;
-          }
-          return _data;
-        },
-        { medium: 0, critical: 0, high: 0, low: 0 }
-      );
-      setRiskData([
-        { riskLevel: "low", value: riskData["low"] },
-        { riskLevel: "medium", value: riskData["medium"] },
-        { riskLevel: "high", value: riskData["high"] },
-        { riskLevel: "critical", value: riskData["critical"] },
-      ]);
+        const riskData = incidents.reduce(
+          (_data, vul) => {
+            const severity = vul.cveScore;
+            if (severity > 0 && severity <= 3.5) {
+              _data.low++;
+            } else if (severity > 3.5 && severity <= 5.5) {
+              _data.medium++;
+            } else if (severity > 5.5 && severity <= 7.5) {
+              _data.high++;
+            } else {
+              _data.critical++;
+            }
+            return _data;
+          },
+          { medium: 0, critical: 0, high: 0, low: 0 }
+        );
+        setRiskData([
+          { riskLevel: "low", value: riskData["low"] },
+          { riskLevel: "medium", value: riskData["medium"] },
+          { riskLevel: "high", value: riskData["high"] },
+          { riskLevel: "critical", value: riskData["critical"] },
+        ]);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetch();
 
@@ -142,32 +149,34 @@ const Incidents = () => {
    * @param {*} data
    */
   const onFilter = (data) => {
-    const filtered = Object.keys(data).filter((key) => !!data[key]);
-    if (filtered.length === 0) return;
-    setFilteredIncidents(
-      applyFilter(
-        incidents,
-        filtered.reduce(
-          (filter, key) => [...filter, { key, value: data[key] }],
-          []
-        )
-      )
-    );
+    console.log(data);
+    // const filtered = Object.keys(data).filter((key) => !!data[key]);
+    // if (filtered.length === 0) return;
+    // setFilteredIncidents(
+    //   applyFilter(
+    //     incidents,
+    //     filtered.reduce(
+    //       (filter, key) => [...filter, { key, value: data[key] }],
+    //       []
+    //     )
+    //   )
+    // );
     setIsFilterOpen(false);
   };
 
   return (
     <Fragment>
+      {loading && <ActivityIndicator />}
       {/* Header */}
       <div className="mb-3 flex flex-row items-center justify-between bg-background px-8">
         <div className="flex flex-row items-center gap-2">
           <span className="text-[1.625rem] font-bold text-gray-4">
-            Incidents ({filteredIncidents.length})
+            Incidents ({filterData.length})
           </span>
         </div>
         <div className="flex flex-row items-center gap-4">
           <Button variant={ButtonVariant.outline}>EXPORT INCIDENTS LIST</Button>
-          <SearchInput onSearch={() => {}} />
+          <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}
             className="h-full"
@@ -177,6 +186,9 @@ const Incidents = () => {
           </NormalButton>
           <Button variant={ButtonVariant.filled}>CREATE INCIDENT</Button>
         </div>
+      </div>
+      <div className="px-8">
+        <SearchAndFilter />
       </div>
       <div className="w-full overflow-x-auto">
         <div className="flex min-w-[90rem] flex-row items-start justify-start gap-4 px-7 py-4">
@@ -248,7 +260,7 @@ const Incidents = () => {
       </div>
       {/* Content */}
       <div className="gap-4 px-7 py-4">
-        <IncidentsTable data={filteredIncidents} loading={loading} />
+        <IncidentsTable data={filterData} loading={loading} />
       </div>
       {/* Filter */}
       <Filter

@@ -6,11 +6,13 @@ import EditSvg from "../../assets/images/edit.svg";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
+import SearchAndFilter from "../../components/SearchAndFilter";
 import SearchInput from "../../components/SearchInput";
 import Table from "../../components/Table";
 import Tag, { TagVariant } from "../../components/Tag";
+import useSearchAndFilter from "../../hooks/useSearchAndFilter";
 import { ButtonVariant } from "../../utils";
-import { applyFilter, getFilterOptions } from "../../utils/filter";
+import { getFilterOptions } from "../../utils/filter";
 import { parseCognitoUsers } from "../../utils/parse";
 import CreateUserModal from "./CreateUserModal";
 import EditUserModal from "./EditUserModal";
@@ -25,9 +27,9 @@ const Users = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
 
-  const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
   const [selUser, setSelUser] = useState(null);
+
+  const { setPageData, filterData } = useSearchAndFilter();
 
   const onClickEdit = (data) => {
     setSelUser(data);
@@ -143,8 +145,7 @@ const Users = () => {
       setLoading(true);
       const { data } = await apiClient.getSysUsers();
       const users = parseCognitoUsers(data);
-      setUsers(users);
-      setFilteredUsers(users);
+      setPageData(users);
       setFilterOptions(getFilterOptions(users));
       setLoading(false);
     };
@@ -152,17 +153,18 @@ const Users = () => {
   }, []);
 
   const onFilter = (data) => {
-    const filtered = Object.keys(data).filter((key) => !!data[key]);
-    if (filtered.length === 0) return;
-    setFilteredUsers(
-      applyFilter(
-        users,
-        filtered.reduce(
-          (filter, key) => [...filter, { key, value: data[key] }],
-          []
-        )
-      )
-    );
+    console.log(data);
+    // const filtered = Object.keys(data).filter((key) => !!data[key]);
+    // if (filtered.length === 0) return;
+    // setFilteredUsers(
+    //   applyFilter(
+    //     users,
+    //     filtered.reduce(
+    //       (filter, key) => [...filter, { key, value: data[key] }],
+    //       []
+    //     )
+    //   )
+    // );
     setIsFilterOpen(false);
   };
 
@@ -176,7 +178,7 @@ const Users = () => {
       </div>
       <div className="mb-5">
         <div className="flex flex-row items-center justify-end gap-8">
-          <SearchInput onSearch={() => {}} />
+          <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}
             className="h-full"
@@ -192,8 +194,11 @@ const Users = () => {
           </Button>
         </div>
       </div>
+      <div className="px-8">
+        <SearchAndFilter />
+      </div>
       <div>
-        <Table columns={columns} dataSource={filteredUsers} />
+        <Table columns={columns} dataSource={filterData} />
       </div>
       <CreateUserModal
         isOpen={isCreateUser}

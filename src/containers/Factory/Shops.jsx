@@ -7,28 +7,27 @@ import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import FactoryShopCard from "../../components/FactoryShopCard";
 import NormalButton from "../../components/NormalButton";
+import SearchAndFilter from "../../components/SearchAndFilter";
 import SearchInput from "../../components/SearchInput";
+import useSearchAndFilter from "../../hooks/useSearchAndFilter";
 import { ButtonVariant } from "../../utils";
-import { applyFilter, getFilterOptions } from "../../utils/filter";
+import { getFilterOptions } from "../../utils/filter";
 import { parseShops } from "../../utils/parse";
 import FilterShops from "./FilterShops";
 
 const Shops = () => {
-  const [shops, setShops] = useState([]);
-  const [filteredShops, setFilteredShops] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [filterShopOptions, setFilterShopOptions] = useState([]);
-
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const [loading, setLoading] = useState(false);
+  const { setPageData, filterData } = useSearchAndFilter();
 
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
       const { data } = await api.getShops();
       const shops = parseShops(data);
-      setShops(shops);
-      setFilteredShops(shops);
+      setPageData(shops);
       setFilterShopOptions(getFilterOptions(shops));
       setLoading(false);
     };
@@ -40,22 +39,24 @@ const Shops = () => {
    * @param {*} data
    */
   const onFilterShops = (data) => {
-    const filtered = Object.keys(data).filter((key) => !!data[key]);
-    if (filtered.length === 0) return;
-    setFilteredShops(
-      applyFilter(
-        shops,
-        filtered.reduce(
-          (filter, key) => [...filter, { key, value: data[key] }],
-          []
-        )
-      )
-    );
+    console.log(data);
+    // const filtered = Object.keys(data).filter((key) => !!data[key]);
+    // if (filtered.length === 0) return;
+    // setFilteredShops(
+    //   applyFilter(
+    //     shops,
+    //     filtered.reduce(
+    //       (filter, key) => [...filter, { key, value: data[key] }],
+    //       []
+    //     )
+    //   )
+    // );
     setIsFilterOpen(false);
   };
 
   return (
     <Fragment>
+      {loading && <ActivityIndicator />}
       {/* Header */}
       <div className="mb-3 flex flex-row items-center justify-between bg-background px-8">
         <div className="flex flex-row items-center gap-2">
@@ -63,7 +64,7 @@ const Shops = () => {
         </div>
         <div className="flex flex-row items-center gap-4">
           <Button variant={ButtonVariant.outline}>EXPORT SHOPS LIST</Button>
-          <SearchInput onSearch={() => {}} />
+          <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}
             className="h-full"
@@ -74,10 +75,12 @@ const Shops = () => {
         </div>
       </div>
 
-      {loading && <ActivityIndicator />}
+      <div className="px-8">
+        <SearchAndFilter />
+      </div>
 
       <div className="mt-2 grid w-full grid-cols-1 gap-4 overflow-x-auto px-5 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-        {filteredShops.map((shop) => {
+        {filterData.map((shop) => {
           return (
             <Link
               key={shop.id}

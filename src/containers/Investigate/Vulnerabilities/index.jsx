@@ -155,7 +155,7 @@ const Vulnerabilities = () => {
           <Button variant={ButtonVariant.outline}>
             EXPORT VULNERABILITIES LIST
           </Button>
-          <SearchInput onSearch={() => {}} />
+          <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}
             className="h-full"

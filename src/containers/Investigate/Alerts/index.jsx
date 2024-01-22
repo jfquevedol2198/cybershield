@@ -7,11 +7,13 @@ import ActivityIndicator from "../../../components/ActivityIndicator";
 import Button from "../../../components/Button";
 import NormalButton from "../../../components/NormalButton";
 import PrioritizationItem from "../../../components/PrioritizationItem";
+import SearchAndFilter from "../../../components/SearchAndFilter";
 import SearchInput from "../../../components/SearchInput";
 import DonutChart from "../../../components/d3/DonutChart";
 import StackedAreaChart from "../../../components/d3/StackedAreaChart";
+import useSearchAndFilter from "../../../hooks/useSearchAndFilter";
 import { ButtonVariant } from "../../../utils";
-import { applyFilter, getFilterOptions } from "../../../utils/filter";
+import { getFilterOptions } from "../../../utils/filter";
 import { groupByKey, parseAlerts } from "../../../utils/parse";
 import AlertsTable from "./AlertsTable";
 import Filter from "./Filter";
@@ -80,13 +82,13 @@ const Alerts = () => {
   const [width, setWidth] = useState(0);
 
   const [loading, setLoading] = useState(false);
-  const [alerts, setAlerts] = useState([]);
   const [riskData, setRiskData] = useState([]);
   const [groupByType, setGroupByType] = useState([]);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
-  const [filteredAlerts, setFilteredAlerts] = useState([]);
+
+  const { setPageData, filterData } = useSearchAndFilter();
 
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
@@ -94,37 +96,41 @@ const Alerts = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      setLoading(true);
-      const { data } = await api.getAlerts();
-      const alerts = parseAlerts(data || []);
-      setAlerts(alerts);
-      setGroupByType(groupByKey(alerts, "type"));
-      setFilterOptions(getFilterOptions(alerts));
-      setFilteredAlerts(alerts);
+      try {
+        setLoading(true);
+        const { data } = await api.getAlerts();
+        const alerts = parseAlerts(data || []);
+        setPageData(alerts);
+        setGroupByType(groupByKey(alerts, "type"));
+        setFilterOptions(getFilterOptions(alerts));
 
-      const riskData = alerts.reduce(
-        (_data, vul) => {
-          const severity = vul.severity;
-          if (severity > 0 && severity <= 35) {
-            _data.low++;
-          } else if (severity > 35 && severity <= 55) {
-            _data.medium++;
-          } else if (severity > 55 && severity <= 75) {
-            _data.high++;
-          } else {
-            _data.critical++;
-          }
-          return _data;
-        },
-        { medium: 0, critical: 0, high: 0, low: 0 }
-      );
-      setRiskData([
-        { riskLevel: "low", value: riskData["low"] },
-        { riskLevel: "medium", value: riskData["medium"] },
-        { riskLevel: "high", value: riskData["high"] },
-        { riskLevel: "critical", value: riskData["critical"] },
-      ]);
-      setLoading(false);
+        const riskData = alerts.reduce(
+          (_data, vul) => {
+            const severity = vul.severity;
+            if (severity > 0 && severity <= 35) {
+              _data.low++;
+            } else if (severity > 35 && severity <= 55) {
+              _data.medium++;
+            } else if (severity > 55 && severity <= 75) {
+              _data.high++;
+            } else {
+              _data.critical++;
+            }
+            return _data;
+          },
+          { medium: 0, critical: 0, high: 0, low: 0 }
+        );
+        setRiskData([
+          { riskLevel: "low", value: riskData["low"] },
+          { riskLevel: "medium", value: riskData["medium"] },
+          { riskLevel: "high", value: riskData["high"] },
+          { riskLevel: "critical", value: riskData["critical"] },
+        ]);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetch();
 
@@ -138,18 +144,20 @@ const Alerts = () => {
    * @param {*} data
    */
   const onFilter = (data) => {
-    const filtered = Object.keys(data).filter((key) => !!data[key]);
-    if (filtered.length === 0) return;
-    setFilteredAlerts(
-      applyFilter(
-        alerts,
-        filtered.reduce(
-          (filter, key) => [...filter, { key, value: data[key] }],
-          []
-        )
-      )
-    );
-    setIsFilterOpen(false);
+    console.log(data);
+    // const filtered = Object.keys(data).filter((key) => !!data[key]);
+    // console.log(data);
+    // if (filtered.length === 0) return;
+    // setFilteredAlerts(
+    //   applyFilter(
+    //     alerts,
+    //     filtered.reduce(
+    //       (filter, key) => [...filter, { key, value: data[key] }],
+    //       []
+    //     )
+    //   )
+    // );
+    // setIsFilterOpen(false);
   };
 
   return (
@@ -162,7 +170,7 @@ const Alerts = () => {
         </div>
         <div className="flex flex-row items-center gap-4">
           <Button variant={ButtonVariant.outline}>EXPORT ALERTS LIST</Button>
-          <SearchInput onSearch={() => {}} />
+          <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}
             className="h-full"
@@ -171,6 +179,9 @@ const Alerts = () => {
             <FunnelIcon className="h-6 w-6" />
           </NormalButton>
         </div>
+      </div>
+      <div className="px-8">
+        <SearchAndFilter />
       </div>
       <div className="w-full overflow-x-auto">
         <div className="flex min-w-[90rem] flex-row items-start justify-start gap-4 px-7 py-4">
@@ -245,7 +256,7 @@ const Alerts = () => {
       </div>
       {/* Content */}
       <div className="gap-4 px-7 py-4">
-        <AlertsTable data={filteredAlerts} loading={loading} />
+        <AlertsTable data={filterData} loading={loading} />
       </div>
       {/* Filter */}
       <Filter

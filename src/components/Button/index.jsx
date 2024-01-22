@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import { sizeStyles, variantStyles } from "../../utils/button-styles";
 import { ButtonVariant, SizeVariant } from "../../utils/constants";
@@ -15,7 +16,9 @@ const Button = ({
   isSubmit,
   isLoading,
   onClick,
+  href,
 }) => {
+  const Comp = href ? Link : "button";
   return (
     <div
       className={clsx(
@@ -23,7 +26,7 @@ const Button = ({
         isBlock ? "flex items-center" : "inline-block"
       )}
     >
-      <button
+      <Comp
         disabled={isDisabled || isLoading}
         className={clsx(
           "relative flex flex-row items-center justify-center gap-2 disabled:cursor-not-allowed",
@@ -33,6 +36,7 @@ const Button = ({
         )}
         type={isSubmit ? "submit" : "button"}
         onClick={onClick}
+        to={href}
       >
         {isLoading && (
           <span
@@ -44,7 +48,7 @@ const Button = ({
           />
         )}
         <span className="truncate">{children}</span>
-      </button>
+      </Comp>
     </div>
   );
 };
@@ -69,6 +73,7 @@ Button.propTypes = {
   isDisabled: PropTypes.bool,
   isLoading: PropTypes.bool,
   onClick: PropTypes.func,
+  href: PropTypes.string,
 };
 
 export default Button;
