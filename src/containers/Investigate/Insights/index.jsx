@@ -4,7 +4,7 @@ import { useDebouncedCallback } from "use-debounce";
 
 import api from "../../../api";
 import ActivityIndicator from "../../../components/ActivityIndicator";
-import Button from "../../../components/Button";
+import ExportButton from "../../../components/ExportButton";
 import NormalButton from "../../../components/NormalButton";
 import PrioritizationItem from "../../../components/PrioritizationItem";
 import SearchAndFilter from "../../../components/SearchAndFilter";
@@ -169,7 +169,7 @@ const Insights = () => {
           </span>
         </div>
         <div className="flex flex-row items-center gap-4">
-          <Button variant={ButtonVariant.outline}>EXPORT INSIGHTS LIST</Button>
+          <ExportButton name="insights" label="EXPORT INSIGHTS LIST" />
           <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}

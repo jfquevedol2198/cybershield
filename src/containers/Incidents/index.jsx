@@ -5,6 +5,7 @@ import { useDebouncedCallback } from "use-debounce";
 import api from "../../api";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
+import ExportButton from "../../components/ExportButton";
 import NormalButton from "../../components/NormalButton";
 import PrioritizationItem from "../../components/PrioritizationItem";
 import SearchAndFilter from "../../components/SearchAndFilter";
@@ -175,7 +176,7 @@ const Incidents = () => {
           </span>
         </div>
         <div className="flex flex-row items-center gap-4">
-          <Button variant={ButtonVariant.outline}>EXPORT INCIDENTS LIST</Button>
+          <ExportButton name="incidents" label="EXPORT INCIDENTS LIST" />
           <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}

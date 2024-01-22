@@ -1,9 +1,8 @@
 import { FunnelIcon } from "@heroicons/react/24/outline";
-import _ from "lodash";
 import { Fragment, useEffect, useState } from "react";
 
 import api from "../../api";
-import Button from "../../components/Button";
+import ExportButton from "../../components/ExportButton";
 import NormalButton from "../../components/NormalButton";
 import SearchAndFilter from "../../components/SearchAndFilter";
 import SearchInput from "../../components/SearchInput";
@@ -63,7 +62,7 @@ const Assets = () => {
           </span>
         </div>
         <div className="flex flex-row items-center gap-4">
-          <Button variant={ButtonVariant.outline}>EXPORT ASSETS LIST</Button>
+          <ExportButton name="assets" label="EXPORT ASSETS LIST" />
           <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}

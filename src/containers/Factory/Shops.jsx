@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import api from "../../api";
 import ActivityIndicator from "../../components/ActivityIndicator";
-import Button from "../../components/Button";
+import ExportButton from "../../components/ExportButton";
 import FactoryShopCard from "../../components/FactoryShopCard";
 import NormalButton from "../../components/NormalButton";
 import SearchAndFilter from "../../components/SearchAndFilter";
@@ -63,7 +63,7 @@ const Shops = () => {
           <span className="text-[1.625rem] font-bold text-gray-4">Shops</span>
         </div>
         <div className="flex flex-row items-center gap-4">
-          <Button variant={ButtonVariant.outline}>EXPORT SHOPS LIST</Button>
+          <ExportButton name="shops" label="EXPORT SHOPS LIST" />
           <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}

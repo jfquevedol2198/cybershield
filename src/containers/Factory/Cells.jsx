@@ -4,7 +4,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import api from "../../api";
 import ActivityIndicator from "../../components/ActivityIndicator";
-import Button from "../../components/Button";
+import ExportButton from "../../components/ExportButton";
 import FactoryShopCell from "../../components/FactoryShopCell";
 import NormalButton from "../../components/NormalButton";
 import SearchAndFilter from "../../components/SearchAndFilter";
@@ -77,7 +77,7 @@ const Cells = () => {
           </span>
         </div>
         <div className="flex flex-row items-center gap-4">
-          <Button variant={ButtonVariant.outline}>EXPORT CELLS LIST</Button>
+          <ExportButton name="cells" label="EXPORT CELLS LIST" />
           <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}

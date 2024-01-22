@@ -1,5 +1,6 @@
 import Button from "../../components/Button";
 import CustomTap from "../../components/CustomTap";
+import ExportButton from "../../components/ExportButton";
 import RiskModal from "../../components/RiskModal";
 import Stats from "../../components/Stats";
 import Tag from "../../components/Tag";
@@ -94,7 +95,7 @@ const DetailModal = ({ ...rest }) => {
         />
       </div>
       <div className="flex flex-row items-center justify-end gap-2">
-        <Button variant={ButtonVariant.outline}>EXPORT REPORT</Button>
+        <ExportButton name="incident" label="EXPORT REPORT" />
         <Button variant={ButtonVariant.filled} isSubmit>
           OPEN INCIDENT
         </Button>

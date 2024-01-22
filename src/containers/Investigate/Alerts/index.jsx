@@ -4,7 +4,7 @@ import { useDebouncedCallback } from "use-debounce";
 
 import api from "../../../api";
 import ActivityIndicator from "../../../components/ActivityIndicator";
-import Button from "../../../components/Button";
+import ExportButton from "../../../components/ExportButton";
 import NormalButton from "../../../components/NormalButton";
 import PrioritizationItem from "../../../components/PrioritizationItem";
 import SearchAndFilter from "../../../components/SearchAndFilter";
@@ -169,7 +169,7 @@ const Alerts = () => {
           <span className="text-[1.625rem] font-bold text-gray-4">Alerts</span>
         </div>
         <div className="flex flex-row items-center gap-4">
-          <Button variant={ButtonVariant.outline}>EXPORT ALERTS LIST</Button>
+          <ExportButton name="alerts" label="EXPORT ALERTS LIST" />
           <SearchInput />
           <NormalButton
             variant={ButtonVariant.icon}
