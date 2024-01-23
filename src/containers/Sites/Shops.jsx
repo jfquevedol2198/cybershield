@@ -21,7 +21,7 @@ const Shops = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const { siteId } = useParams();
 
-  const { setPageData, filterData } = useSearchAndFilter();
+  const { setPageData, filterData, addFilter } = useSearchAndFilter();
   // const { siteId } = useParams();
 
   useEffect(() => {
@@ -41,18 +41,7 @@ const Shops = () => {
    * @param {*} data
    */
   const onFilterShops = (data) => {
-    console.log(data);
-    // const filtered = Object.keys(data).filter((key) => !!data[key]);
-    // if (filtered.length === 0) return;
-    // setFilteredShops(
-    //   applyFilter(
-    //     shops,
-    //     filtered.reduce(
-    //       (filter, key) => [...filter, { key, value: data[key] }],
-    //       []
-    //     )
-    //   )
-    // );
+    addFilter(data);
     setIsFilterOpen(false);
   };
 

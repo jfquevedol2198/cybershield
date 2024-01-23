@@ -11,6 +11,7 @@ import SearchInput from "../../../components/SearchInput";
 import Tag, { TagVariant } from "../../../components/Tag";
 import DonutChart from "../../../components/d3/DonutChart";
 import StackedAreaChart from "../../../components/d3/StackedAreaChart";
+import useSearchAndFilter from "../../../hooks/useSearchAndFilter";
 import { ButtonVariant } from "../../../utils";
 import { groupByKey } from "../../../utils/parse";
 import { RiskLevel } from "../../../utils/risk";
@@ -87,9 +88,10 @@ const Vulnerabilities = () => {
   const [riskData, setRiskData] = useState([]);
   const [groupByCveID, setGroupByCveID] = useState([]);
 
+  const { addFilter } = useSearchAndFilter();
+
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
-    console.log(stackAreaChartRef.current.clientWidth);
   }, 500);
 
   useEffect(() => {
@@ -139,7 +141,8 @@ const Vulnerabilities = () => {
    * @param {*} data
    */
   const onFilter = (data) => {
-    console.log(data);
+    addFilter(data);
+    setIsFilterOpen(false);
   };
 
   return (

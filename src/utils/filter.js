@@ -118,7 +118,9 @@ export const applyFilter = (data, filterOptions) => {
           }
           return (
             option.value === "*" ||
-            `${d[option.key]}`.indexOf(option.value) > -1
+            `${d[option.key]}`
+              .toLowerCase()
+              .indexOf(option.value.toLowerCase()) > -1
           );
         }
         if (type === "object" && !option.value[0]) {

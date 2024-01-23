@@ -90,11 +90,11 @@ const Incidents = () => {
   const [riskData, setRiskData] = useState([]);
   const [groupByCveID, setGroupByCveID] = useState([]);
 
-  const { setPageData, filterData } = useSearchAndFilter();
+  const { setPageData, filterData, addFilter, hasFilterAndSearch } =
+    useSearchAndFilter();
 
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
-    console.log(stackAreaChartRef.current.clientWidth);
   }, 500);
 
   useEffect(() => {
@@ -150,18 +150,7 @@ const Incidents = () => {
    * @param {*} data
    */
   const onFilter = (data) => {
-    console.log(data);
-    // const filtered = Object.keys(data).filter((key) => !!data[key]);
-    // if (filtered.length === 0) return;
-    // setFilteredIncidents(
-    //   applyFilter(
-    //     incidents,
-    //     filtered.reduce(
-    //       (filter, key) => [...filter, { key, value: data[key] }],
-    //       []
-    //     )
-    //   )
-    // );
+    addFilter(data);
     setIsFilterOpen(false);
   };
 
@@ -191,74 +180,79 @@ const Incidents = () => {
       <div className="px-8">
         <SearchAndFilter />
       </div>
-      <div className="w-full overflow-x-auto">
-        <div className="flex min-w-[90rem] flex-row items-start justify-start gap-4 px-7 py-4">
-          <div className="flex min-w-[220px] flex-col items-center bg-white p-4">
-            <div className="mb-2 text-base font-bold">Total incidents</div>
-            <DonutChart
-              width={100}
-              height={100}
-              innerRadius={40}
-              outerRadius={50}
-              data={riskData}
-            />
-            <div className="mt-2 flex flex-row items-center justify-center gap-1 text-base text-green">
-              <ArrowDownIcon className="h-3" />
-              15%
-            </div>
-          </div>
-          <div
-            className="flex flex-auto flex-col items-center bg-white p-4"
-            ref={stackAreaChartRef}
-          >
-            <div className="flex w-full flex-row items-center justify-between">
-              <span className="text-base font-bold">
-                Vulnerabilities status timeline
-              </span>
-              <div className="flex flex-row items-center gap-2 text-sm font-light">
-                {Object.keys(colors).map((key) => {
-                  return (
-                    <div key={key} className="flex flex-row items-center gap-1">
-                      <span
-                        className="h-3 w-3 rounded-full"
-                        style={{ backgroundColor: `var(${colors[key]})` }}
-                      />
-                      <span>{key}</span>
-                    </div>
-                  );
-                })}
+      {!hasFilterAndSearch && (
+        <div className="w-full overflow-x-auto">
+          <div className="flex min-w-[90rem] flex-row items-start justify-start gap-4 px-7 py-4">
+            <div className="flex min-w-[220px] flex-col items-center bg-white p-4">
+              <div className="mb-2 text-base font-bold">Total incidents</div>
+              <DonutChart
+                width={100}
+                height={100}
+                innerRadius={40}
+                outerRadius={50}
+                data={riskData}
+              />
+              <div className="mt-2 flex flex-row items-center justify-center gap-1 text-base text-green">
+                <ArrowDownIcon className="h-3" />
+                15%
               </div>
             </div>
+            <div
+              className="flex flex-auto flex-col items-center bg-white p-4"
+              ref={stackAreaChartRef}
+            >
+              <div className="flex w-full flex-row items-center justify-between">
+                <span className="text-base font-bold">
+                  Vulnerabilities status timeline
+                </span>
+                <div className="flex flex-row items-center gap-2 text-sm font-light">
+                  {Object.keys(colors).map((key) => {
+                    return (
+                      <div
+                        key={key}
+                        className="flex flex-row items-center gap-1"
+                      >
+                        <span
+                          className="h-3 w-3 rounded-full"
+                          style={{ backgroundColor: `var(${colors[key]})` }}
+                        />
+                        <span>{key}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
 
-            <StackedAreaChart
-              width={width - 32}
-              height={140}
-              data={dataArea}
-              colors={colors}
-            />
-          </div>
-          <div className="flex h-[12.25rem] w-[33.25rem] min-w-fit flex-col items-center bg-white p-4 pb-3">
-            {loading && (
-              <div className="flex h-full w-full items-center justify-center">
-                Loading...
-              </div>
-            )}
-            {!loading && (
-              <div className="mt-2 grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-2">
-                {groupByCveID.map((group) => (
-                  <PrioritizationItem
-                    key={group.type}
-                    isReverse
-                    percent={group.percent}
-                    name={group.type}
-                    count={group.count}
-                  />
-                ))}
-              </div>
-            )}
+              <StackedAreaChart
+                width={width - 32}
+                height={140}
+                data={dataArea}
+                colors={colors}
+              />
+            </div>
+            <div className="flex h-[12.25rem] w-[33.25rem] min-w-fit flex-col items-center bg-white p-4 pb-3">
+              {loading && (
+                <div className="flex h-full w-full items-center justify-center">
+                  Loading...
+                </div>
+              )}
+              {!loading && (
+                <div className="mt-2 grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-2">
+                  {groupByCveID.map((group) => (
+                    <PrioritizationItem
+                      key={group.type}
+                      isReverse
+                      percent={group.percent}
+                      name={group.type}
+                      count={group.count}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {/* Content */}
       <div className="gap-4 px-7 py-4">
         <IncidentsTable data={filterData} loading={loading} />

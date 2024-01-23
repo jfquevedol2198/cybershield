@@ -19,7 +19,7 @@ const Assets = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
 
-  const { setPageData, filterData } = useSearchAndFilter();
+  const { setPageData, filterData, addFilter } = useSearchAndFilter();
 
   useEffect(() => {
     const fetch = async () => {
@@ -38,17 +38,7 @@ const Assets = () => {
    * @param {*} data
    */
   const onFilter = (data) => {
-    // const filtered = Object.keys(data).filter((key) => !!data[key]);
-    // if (filtered.length === 0) return;
-    // setFilteredAssets(
-    //   applyFilter(
-    //     assets,
-    //     filtered.reduce(
-    //       (filter, key) => [...filter, { key, value: data[key] }],
-    //       []
-    //     )
-    //   )
-    // );
+    addFilter(data);
     setIsFilterOpen(false);
   };
 

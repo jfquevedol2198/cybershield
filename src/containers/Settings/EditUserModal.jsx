@@ -323,7 +323,9 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
           />
         </div>
         <div className="flex flex-row items-center justify-end gap-2">
-          <Button variant={ButtonVariant.outline}>CANCEL</Button>
+          <Button variant={ButtonVariant.outline} onClick={onClose}>
+            CANCEL
+          </Button>
           <Button variant={ButtonVariant.filled} isSubmit>
             SAVE
           </Button>

@@ -88,11 +88,10 @@ const Insights = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState({});
 
-  const { setPageData, filterData } = useSearchAndFilter();
+  const { setPageData, filterData, addFilter } = useSearchAndFilter();
 
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
-    console.log(stackAreaChartRef.current.clientWidth);
   }, 500);
 
   useEffect(() => {
@@ -143,18 +142,7 @@ const Insights = () => {
    * @param {*} data
    */
   const onFilter = (data) => {
-    console.log(data);
-    // const filtered = Object.keys(data).filter((key) => !!data[key]);
-    // if (filtered.length === 0) return;
-    // setFilteredInsights(
-    //   applyFilter(
-    //     insights,
-    //     filtered.reduce(
-    //       (filter, key) => [...filter, { key, value: data[key] }],
-    //       []
-    //     )
-    //   )
-    // );
+    addFilter(data);
     setIsFilterOpen(false);
   };
 

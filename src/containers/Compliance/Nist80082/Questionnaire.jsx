@@ -22,11 +22,13 @@ const Questionnaire = () => {
     const fetch = async () => {
       setLoading(true);
       const { data } = await apiClient.getQuestions();
-      setQuestions(data);
+      setQuestions(
+        data.filter((question) => question.question_section === title)
+      );
       setLoading(false);
     };
     fetch();
-  }, []);
+  }, [title]);
 
   return (
     <div className="flex h-full w-full flex-col">
@@ -37,7 +39,9 @@ const Questionnaire = () => {
             {title}
           </div>
           <div className="flex flex-row items-baseline text-gray-2">
-            <div className="text-[2.75rem] leading-none">{answers}</div>
+            <div className="text-[2.75rem] leading-none">
+              {questions.length}
+            </div>
             <div className="text-2xl leading-none">/{questions.length}</div>
           </div>
         </div>
@@ -48,13 +52,15 @@ const Questionnaire = () => {
       </div>
       <div className="flex-auto overflow-y-auto py-6 pl-[4.25rem] pr-[0.8125rem]">
         <div className="space-y-10  ">
-          {questions.map((question, index) => (
-            <QuestionnaireItem
-              index={question.question_number}
-              key={`question-${index}`}
-              question={question.question_description}
-            />
-          ))}
+          {questions
+            .filter((question) => question.question_section === title)
+            .map((question, index) => (
+              <QuestionnaireItem
+                index={question.question_number}
+                key={`question-${index}`}
+                question={question.question_description}
+              />
+            ))}
         </div>
       </div>
       <div className="flex flex-row justify-between border-t border-gray-1 p-8">

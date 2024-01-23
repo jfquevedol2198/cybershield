@@ -8,11 +8,12 @@ const SearchAndFilterContext = createContext({});
 
 export const SearchAndFilterProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [params, setParams] = useState([]);
+  const [filterParams, setFilterParams] = useState([]);
   const [search, setSearch] = useState(null);
   const [pageData, setPageData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const location = useLocation();
+  const hasFilterAndSearch = !!search || filterParams.length > 0;
 
   useEffect(() => {
     setPageData([]);
@@ -20,16 +21,17 @@ export const SearchAndFilterProvider = ({ children }) => {
   }, [location.pathname]);
 
   useEffect(() => {
-    const params = [];
+    const filterParams = [];
     let search = null;
     for (let entry of searchParams.entries()) {
       if (entry[0] === "search") {
         search = entry[1];
       } else {
-        params.push(entry);
+        if (entry[0].indexOf("filter_") > -1)
+          filterParams.push({ key: entry[0].slice(7), value: entry[1] });
       }
     }
-    setParams(params);
+    setFilterParams(filterParams);
     setSearch(search);
   }, [searchParams]);
 
@@ -39,12 +41,12 @@ export const SearchAndFilterProvider = ({ children }) => {
       if (search) {
         data = applySearch(data, search);
       }
-      if (params.length > 0) {
-        data = applyFilter(data, params);
+      if (filterParams.length > 0) {
+        data = applyFilter(data, filterParams) || [];
       }
       setFilterData(data);
     }
-  }, [params, search, pageData]);
+  }, [filterParams, search, pageData]);
 
   const onClearAll = () => {
     setSearchParams({});
@@ -59,16 +61,31 @@ export const SearchAndFilterProvider = ({ children }) => {
     setSearchParams(searchParams);
   };
 
+  const addFilter = (data) => {
+    const arrFilter = Object.keys(data)
+      .filter((key) => !!data[key])
+      .map((key) => ({ key, value: data[key] }));
+    filterParams.forEach((filter) => {
+      searchParams.delete(`filter_${filter.key}`);
+    });
+    arrFilter.forEach((filter) => {
+      searchParams.append(`filter_${filter.key}`, filter.value);
+    });
+    setSearchParams(searchParams);
+  };
+
   return (
     <SearchAndFilterContext.Provider
       value={{
+        hasFilterAndSearch,
         search,
-        params,
+        filterParams,
         pageData,
         filterData,
         onClearAll,
         onRemoveItem,
         setPageData,
+        addFilter,
       }}
     >
       {children}

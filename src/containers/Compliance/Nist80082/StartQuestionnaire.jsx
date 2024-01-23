@@ -9,7 +9,7 @@ import { COMPLIANCE_ITEMS } from "./Sidebar";
 
 const StartQuestionnaire = () => {
   const [showResetModal, setShowResetModal] = useState(false);
-  const [searchParams, setSearchparams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const title = searchParams.get("option") || "Detect";
   const answers = COMPLIANCE_ITEMS.find(
@@ -45,7 +45,7 @@ const StartQuestionnaire = () => {
             variant={ButtonVariant.filled}
             onClick={() => {
               searchParams.append("status", "questionnaire");
-              setSearchparams(searchParams);
+              setSearchParams(searchParams);
             }}
           >
             Start Questionnaire
@@ -57,7 +57,7 @@ const StartQuestionnaire = () => {
               variant={ButtonVariant.filled}
               onClick={() => {
                 searchParams.set("status", "questionnaire");
-                setSearchparams(searchParams);
+                setSearchParams(searchParams);
               }}
             >
               Open Questionnaire

@@ -25,7 +25,7 @@ const Cells = () => {
   const [filterCellOptions, setFilterCellOptions] = useState([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const { setPageData, filterData } = useSearchAndFilter();
+  const { setPageData, filterData, addFilter } = useSearchAndFilter();
 
   useEffect(() => {
     const fetch = async () => {
@@ -42,18 +42,7 @@ const Cells = () => {
   }, [shopId]);
 
   const onFilterCells = (data) => {
-    console.log(data);
-    // const filtered = Object.keys(data).filter((key) => !!data[key]);
-    // if (filtered.length === 0) return;
-    // setFilteredCells(
-    //   applyFilter(
-    //     cells,
-    //     filtered.reduce(
-    //       (filter, key) => [...filter, { key, value: data[key] }],
-    //       []
-    //     )
-    //   )
-    // );
+    addFilter(data);
     setIsFilterOpen(false);
   };
 

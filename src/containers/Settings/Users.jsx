@@ -29,7 +29,7 @@ const Users = () => {
 
   const [selUser, setSelUser] = useState(null);
 
-  const { setPageData, filterData } = useSearchAndFilter();
+  const { setPageData, filterData, addFilter } = useSearchAndFilter();
 
   const onClickEdit = (data) => {
     setSelUser(data);
@@ -153,18 +153,7 @@ const Users = () => {
   }, []);
 
   const onFilter = (data) => {
-    console.log(data);
-    // const filtered = Object.keys(data).filter((key) => !!data[key]);
-    // if (filtered.length === 0) return;
-    // setFilteredUsers(
-    //   applyFilter(
-    //     users,
-    //     filtered.reduce(
-    //       (filter, key) => [...filter, { key, value: data[key] }],
-    //       []
-    //     )
-    //   )
-    // );
+    addFilter(data);
     setIsFilterOpen(false);
   };
 
