@@ -194,7 +194,7 @@ const Users = () => {
           </Button>
         </div>
       </div>
-      <div className="px-8">
+      <div className="mb-4">
         <SearchAndFilter />
       </div>
       <div>

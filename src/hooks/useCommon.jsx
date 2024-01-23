@@ -7,6 +7,7 @@ const CommonContext = createContext({});
 
 export const CommonProvider = ({ children }) => {
   const [showSignoutModal, setShowSignoutModal] = useState(false);
+  const [sites, setSites] = useState([]);
   const onSignout = redirectToAuth;
 
   return (
@@ -15,6 +16,8 @@ export const CommonProvider = ({ children }) => {
         showSignoutModal,
         setShowSignoutModal,
         onSignout,
+        sites,
+        setSites,
       }}
     >
       {children}

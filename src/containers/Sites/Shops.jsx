@@ -1,6 +1,6 @@
 import { FunnelIcon } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import api from "../../api";
 import ActivityIndicator from "../../components/ActivityIndicator";
@@ -19,6 +19,7 @@ const Shops = () => {
   const [loading, setLoading] = useState(false);
   const [filterShopOptions, setFilterShopOptions] = useState([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const { siteId } = useParams();
 
   const { setPageData, filterData } = useSearchAndFilter();
   // const { siteId } = useParams();
@@ -85,7 +86,7 @@ const Shops = () => {
           return (
             <Link
               key={shop.id}
-              to={`/dashboard/factory-1/cells?shopId=${shop.id}&shopName=${shop.name}`}
+              to={`/dashboard/site/${siteId}/cells?shopId=${shop.id}&shopName=${shop.name}`}
             >
               <FactoryShopCard
                 cells={shop.cells}

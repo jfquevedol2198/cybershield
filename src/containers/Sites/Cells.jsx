@@ -1,6 +1,6 @@
 import { FunnelIcon } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 
 import api from "../../api";
 import ActivityIndicator from "../../components/ActivityIndicator";
@@ -19,7 +19,7 @@ const Cells = () => {
   const [searchParams] = useSearchParams();
   const shopId = searchParams.get("shopId");
   const shopName = searchParams.get("shopName");
-
+  const { siteId } = useParams();
   const [loading, setLoading] = useState(false);
 
   const [filterCellOptions, setFilterCellOptions] = useState([]);
@@ -65,7 +65,10 @@ const Cells = () => {
           <span className="text-[1.625rem] font-bold text-gray-4">
             {shopId && shopName ? (
               <>
-                <Link to="/dashboard/factory-1/shops" className="text-link">
+                <Link
+                  to={`/dashboard/site/${siteId}/shops`}
+                  className="text-link"
+                >
                   All Shops
                 </Link>
                 {" > "}
@@ -100,7 +103,7 @@ const Cells = () => {
           return (
             <Link
               key={cell.description}
-              to={`/dashboard/factory-1/assets?cellId=${cell.id}&cellName=${cell.name}`}
+              to={`/dashboard/site/${siteId}/assets?cellId=${cell.id}&cellName=${cell.name}`}
             >
               <FactoryShopCell
                 name={cell.name}

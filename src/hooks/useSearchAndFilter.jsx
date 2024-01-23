@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 
-import { applySearch } from "../utils/filter";
+import { applyFilter, applySearch } from "../utils/filter";
 
 const SearchAndFilterContext = createContext({});
 
@@ -39,7 +39,9 @@ export const SearchAndFilterProvider = ({ children }) => {
       if (search) {
         data = applySearch(data, search);
       }
-      console.log("*** filterData = ", data);
+      if (params.length > 0) {
+        data = applyFilter(data, params);
+      }
       setFilterData(data);
     }
   }, [params, search, pageData]);

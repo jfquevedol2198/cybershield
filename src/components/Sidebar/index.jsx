@@ -6,6 +6,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import apiClient from "../../api";
+import useCommon from "../../hooks/useCommon";
 import { SIDEBAR_ITEMS } from "../../router";
 import ActivityIndicator from "../ActivityIndicator";
 import NormalButton from "../NormalButton";
@@ -13,7 +14,7 @@ import NormalButton from "../NormalButton";
 const Sidebar = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-  const [sites, setSites] = useState([]);
+  const { sites, setSites } = useCommon();
 
   useEffect(() => {
     const fetch = async () => {
