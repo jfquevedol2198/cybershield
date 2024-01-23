@@ -2,14 +2,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 
 import apiClient from "../../api";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
-import ButtonToggle from "../../components/ButtonToggle";
 import Checkbox from "../../components/Checkbox";
 import FormControl from "../../components/FormControl";
 import Modal from "../../components/Modal";
