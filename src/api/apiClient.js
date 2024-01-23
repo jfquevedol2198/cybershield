@@ -12,6 +12,7 @@ import {
   insights,
   questions,
   shops,
+  sites,
   users,
   vulnerabilities,
 } from "./dashboard";
@@ -31,6 +32,7 @@ export const createApiClient = (httpClient) => {
     ...incidents(httpClient),
     ...users(httpClient),
     ...questions(httpClient),
+    ...sites(httpClient),
   };
   return apiClient;
 };

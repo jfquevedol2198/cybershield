@@ -14,9 +14,6 @@ import CompleteProfile from "../containers/CompleteProfile";
 import Nist80082 from "../containers/Compliance/Nist80082";
 import ConfirmAccount from "../containers/ConfirmAccount";
 import ConfirmPassword from "../containers/ConfirmPassword";
-import FactoryAssets from "../containers/Factory/Assets";
-import FactoryCells from "../containers/Factory/Cells";
-import FactoryShops from "../containers/Factory/Shops";
 import ForgotPassword from "../containers/ForgotPassword";
 import Incidents from "../containers/Incidents";
 import Alerts from "../containers/Investigate/Alerts";
@@ -34,6 +31,9 @@ import Settings from "../containers/Settings";
 import TimeRefresh from "../containers/Settings/TimeRefresh";
 import UploadLogo from "../containers/Settings/UploadLogo";
 import Users from "../containers/Settings/Users";
+import FactoryAssets from "../containers/Sites/Assets";
+import FactoryCells from "../containers/Sites/Cells";
+import FactoryShops from "../containers/Sites/Shops";
 import UpdatePassword from "../containers/UpdatePassword";
 import { authorizationLoader } from "./authorizationLoader";
 
@@ -57,8 +57,8 @@ export const SIDEBAR_ITEMS = [
     ],
   },
   {
-    path: "factory-1",
-    title: "Factory 1",
+    path: "site/:siteId",
+    isSite: true,
     Icon: Factory1Icon,
     children: [
       {

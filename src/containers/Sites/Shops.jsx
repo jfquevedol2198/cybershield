@@ -1,6 +1,6 @@
 import { FunnelIcon } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 import api from "../../api";
 import ActivityIndicator from "../../components/ActivityIndicator";
@@ -21,6 +21,7 @@ const Shops = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const { setPageData, filterData } = useSearchAndFilter();
+  const { siteId } = useParams();
 
   useEffect(() => {
     const fetch = async () => {

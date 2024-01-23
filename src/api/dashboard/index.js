@@ -59,3 +59,9 @@ export const questions = (httpClient) => ({
     return httpClient.get("/questions_view");
   },
 });
+
+export const sites = (httpClient) => ({
+  getSites() {
+    return httpClient.get("/sites");
+  },
+});
