@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { z } from "zod";
 
 import AuthLayout from "../../components/AuthLayout";
@@ -11,7 +11,6 @@ import FormControl from "../../components/FormControl";
 import config from "../../config";
 import { ButtonVariant, SizeVariant } from "../../utils/constants";
 import { createServiceNowUser } from "../../utils/serviceNow";
-import snack from "../../utils/snack";
 
 const schema = z
   .object({
@@ -47,7 +46,6 @@ const CompleteProfile = () => {
 
   const [searchParam] = useSearchParams();
   const email = searchParam.get("email") || "";
-  const navigate = useNavigate();
 
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);

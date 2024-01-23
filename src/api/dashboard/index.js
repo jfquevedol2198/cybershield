@@ -19,11 +19,14 @@ export const shops = (httpClient) => ({
   getShops() {
     return httpClient.get("/shops");
   },
+  getSiteShops(siteId) {
+    return httpClient.get(`/shops/site/${siteId}`);
+  },
 });
 
 export const vulnerabilities = (httpClient) => ({
   getVulnerabilities() {
-    return httpClient.get("/vulnerabilities");
+    return httpClient.get("/vulnerabilities_view");
   },
 });
 
@@ -41,7 +44,7 @@ export const insights = (httpClient) => ({
 
 export const incidents = (httpClient) => ({
   getIncidents() {
-    return httpClient.get("/incidents");
+    return httpClient.get("/incident");
   },
 });
 

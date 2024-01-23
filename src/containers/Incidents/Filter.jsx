@@ -13,28 +13,18 @@ import SlideOver from "../../components/SlideOver";
 import { ButtonVariant, SizeVariant } from "../../utils";
 import { RiskLevel } from "../../utils/risk";
 
-const schema = z
-  .object({
-    creationTime: z.string().optional(),
-    type: z.string().optional(),
-    status: z.string().optional(),
-    risk: z.string().optional(),
-    cell: z.string().optional(),
-    relatedAlert: z.string().optional(),
-    owner: z.string().optional(),
-    shop: z.string().optional(),
-    assignee: z.string().optional(),
-    isMyIncidentsOnly: z.boolean().optional(),
-  })
-  .superRefine(({ password, confirmPassword }, ctx) => {
-    if (confirmPassword !== password) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["confirmPassword"],
-        message: "Passwords do not match",
-      });
-    }
-  });
+const schema = z.object({
+  creationTime: z.string().optional(),
+  type: z.string().optional(),
+  status: z.string().optional(),
+  risk: z.string().optional(),
+  cell: z.string().optional(),
+  relatedAlert: z.string().optional(),
+  owner: z.string().optional(),
+  shop: z.string().optional(),
+  assignee: z.string().optional(),
+  isMyIncidentsOnly: z.boolean().optional(),
+});
 
 const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
   const defaultValues = () => {

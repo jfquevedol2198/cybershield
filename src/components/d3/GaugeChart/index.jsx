@@ -45,7 +45,7 @@ const GaugeChart = ({ percent }) => {
         outerRadius: 68,
         startAngle: -Math.PI / 2,
         endAngle: -Math.PI / 2 + (percent / 100) * Math.PI,
-        color: "--risk-color-1",
+        color: `--risk-color-${4 - Math.floor(percent / 25)}`,
       },
       {
         innerRadius: 58,

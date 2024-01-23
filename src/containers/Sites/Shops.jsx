@@ -22,19 +22,18 @@ const Shops = () => {
   const { siteId } = useParams();
 
   const { setPageData, filterData, addFilter } = useSearchAndFilter();
-  // const { siteId } = useParams();
 
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const { data } = await api.getShops();
+      const { data } = await api.getSiteShops(siteId);
       const shops = parseShops(data);
       setPageData(shops);
       setFilterShopOptions(getFilterOptions(shops));
       setLoading(false);
     };
     fetch();
-  }, []);
+  }, [siteId]);
 
   /**
    * Filter

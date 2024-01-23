@@ -54,10 +54,12 @@ export const SearchAndFilterProvider = ({ children }) => {
   };
 
   const onRemoveItem = (key) => {
-    searchParams.delete(key);
     if (key === "search") {
+      searchParams.delete(key);
       setSearch(null);
+      return;
     }
+    searchParams.delete(`filter_${key}`);
     setSearchParams(searchParams);
   };
 

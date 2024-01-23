@@ -8,21 +8,11 @@ import FormControl from "../../../components/FormControl";
 import SlideOver from "../../../components/SlideOver";
 import { ButtonVariant, SizeVariant } from "../../../utils";
 
-const schema = z
-  .object({
-    severity: z.string(),
-    impact: z.string(),
-    vendor: z.array(z.string()),
-  })
-  .superRefine(({ password, confirmPassword }, ctx) => {
-    if (confirmPassword !== password) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["confirmPassword"],
-        message: "Passwords do not match",
-      });
-    }
-  });
+const schema = z.object({
+  severity: z.string(),
+  impact: z.string(),
+  vendor: z.array(z.string()),
+});
 
 const Categories = [
   {
@@ -62,6 +52,7 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             error={form.formState.errors.severity?.message}
             data={Categories}
             {...form.register("severity")}
+            setValue={form.setValue}
           />
           <FormControl
             id="impact"
@@ -72,6 +63,7 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             error={form.formState.errors.impact?.message}
             data={Categories}
             {...form.register("impact")}
+            setValue={form.setValue}
           />
           <FormControl
             id="vendor"
@@ -81,6 +73,7 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             error={form.formState.errors.vendor?.message}
             data={Categories}
             {...form.register("vendor")}
+            setValue={form.setValue}
           />
         </div>
         <div className="flex flex-row items-center justify-end gap-2 pt-5">

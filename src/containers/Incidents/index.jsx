@@ -101,9 +101,7 @@ const Incidents = () => {
     const fetch = async () => {
       try {
         setLoading(true);
-        const {
-          data: { data },
-        } = await api.getIncidents();
+        const { data } = await api.getIncidents();
         const incidents = data;
         setPageData(incidents);
         setFilterOptions(getFilterOptions(incidents));

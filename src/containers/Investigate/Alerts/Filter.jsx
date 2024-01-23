@@ -13,31 +13,21 @@ import { ButtonVariant, SizeVariant } from "../../../utils";
 import { DateFilterOptions } from "../../../utils/filter";
 import { RiskLevel } from "../../../utils/risk";
 
-const schema = z
-  .object({
-    category: z.string(),
-    type: z.string(),
-    subType: z.string(),
-    alertId: z.string(),
-    severity: z.string(),
-    assignee: z.string(),
-    status: z.string(),
-    alertTime: z.string(),
-    ip: z.string(),
-    shop: z.string(),
-    cell: z.string(),
-    lastUpdated: z.string(),
-    pluginName: z.string(),
-  })
-  .superRefine(({ password, confirmPassword }, ctx) => {
-    if (confirmPassword !== password) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["confirmPassword"],
-        message: "Passwords do not match",
-      });
-    }
-  });
+const schema = z.object({
+  category: z.string(),
+  type: z.string(),
+  subType: z.string(),
+  alertId: z.string(),
+  severity: z.string(),
+  assignee: z.string(),
+  status: z.string(),
+  alertTime: z.string(),
+  ip: z.string(),
+  shop: z.string(),
+  cell: z.string(),
+  lastUpdated: z.string(),
+  pluginName: z.string(),
+});
 
 const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
   const defaultValues = () => {

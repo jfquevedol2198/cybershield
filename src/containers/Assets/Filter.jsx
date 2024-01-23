@@ -11,39 +11,29 @@ import SlideOver from "../../components/SlideOver";
 import { ButtonVariant, SizeVariant } from "../../utils";
 import { RiskLevel } from "../../utils/risk";
 
-const schema = z
-  .object({
-    type: z.string().optional(),
-    tag: z.string().optional(),
-    risk: z.string().optional(),
-    mac: z.string().optional(),
-    ip: z.string().optional(),
-    cell: z.string().optional(),
-    vendor: z.string().optional(),
-    location: z.string().optional(),
-    shop: z.string().optional(),
-    model: z.string().optional(),
-    firmware: z.string().optional(),
-    state: z.string().optional(),
-    edr: z.string().optional(),
-    complianceTestId: z.string().optional(),
-    pluginName: z.string().optional(),
-    isAlertExist: z.boolean().optional(),
-    isVulnerabilityExist: z.boolean().optional(),
-    isUnassigned: z.boolean().optional(),
-    isHideUncertainAssets: z.boolean().optional(),
-    isAssetsExternalID: z.boolean().optional(),
-    isInspectedCompliance: z.boolean().optional(),
-  })
-  .superRefine(({ password, confirmPassword }, ctx) => {
-    if (confirmPassword !== password) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["confirmPassword"],
-        message: "Passwords do not match",
-      });
-    }
-  });
+const schema = z.object({
+  type: z.string().optional(),
+  tag: z.string().optional(),
+  risk: z.string().optional(),
+  mac: z.string().optional(),
+  ip: z.string().optional(),
+  cell: z.string().optional(),
+  vendor: z.string().optional(),
+  location: z.string().optional(),
+  shop: z.string().optional(),
+  model: z.string().optional(),
+  firmware: z.string().optional(),
+  state: z.string().optional(),
+  edr: z.string().optional(),
+  complianceTestId: z.string().optional(),
+  pluginName: z.string().optional(),
+  isAlertExist: z.boolean().optional(),
+  isVulnerabilityExist: z.boolean().optional(),
+  isUnassigned: z.boolean().optional(),
+  isHideUncertainAssets: z.boolean().optional(),
+  isAssetsExternalID: z.boolean().optional(),
+  isInspectedCompliance: z.boolean().optional(),
+});
 
 const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
   const defaultValues = () => {

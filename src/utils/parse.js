@@ -109,3 +109,19 @@ export const parseCognitoUsers = (data) =>
     city: user.city,
     zip: user.zip,
   }));
+
+export const parseVulnerabilities = (data) =>
+  data.map((vul) => ({
+    id: vul.id,
+    name: vul.name_,
+    createdAt: vul.created_at,
+    updatedAt: vul.updated_at,
+    cveName: vul.cvename,
+    cveScore: vul.cvescore,
+    comment: vul.comment,
+    type: vul.type,
+    operationalRisk: vul.operational_risk,
+    impact: vul.impact,
+    releaseDate: vul.releasedate,
+    affectedAssets: vul.asset_count,
+  }));
