@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
 import config from "../../config";
 import { ButtonVariant, getCookieValue, setCookieValue } from "../../utils";
+import snack from "../../utils/snack";
 
 const UploadLogo = () => {
   const [logo, setLogo] = useState(getCookieValue("LOGO_URL"));
@@ -29,6 +30,7 @@ const UploadLogo = () => {
       setLogoToUpload(imageUrl);
     } catch (error) {
       console.log(error);
+      snack.error("Organization logo upload failed");
     }
     setUploading(false);
   };
@@ -39,6 +41,7 @@ const UploadLogo = () => {
     setLogoToUpload(null);
     setUploadMode(false);
     setTempLogo(null);
+    snack.success("Organization logo updated");
   };
   return (
     <div>

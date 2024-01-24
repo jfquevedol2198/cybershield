@@ -185,7 +185,7 @@ export const PanelAlerts = ({ alerts = [] }) => {
         </div>
         <Button
           variant={ButtonVariant.filled}
-          href="/dashboard/investigate/alerts?status=OPEN"
+          href="/dashboard/investigate/alerts?filter_status=OPEN"
         >
           VIEW OPEN ALERTS
         </Button>
