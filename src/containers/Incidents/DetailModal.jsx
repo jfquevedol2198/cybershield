@@ -96,7 +96,7 @@ const DetailModal = ({ ...rest }) => {
       </div>
       <div className="flex flex-row items-center justify-end gap-2">
         <ExportButton name="incident" label="EXPORT REPORT" />
-        <Button variant={ButtonVariant.filled} isSubmit>
+        <Button variant={ButtonVariant.filled} href="/dashboard/incidents">
           OPEN INCIDENT
         </Button>
       </div>

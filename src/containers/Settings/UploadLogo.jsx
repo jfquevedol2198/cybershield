@@ -1,19 +1,45 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
 import { useState } from "react";
 
 import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
-import { ButtonVariant } from "../../utils";
+import config from "../../config";
+import { ButtonVariant, getCookieValue, setCookieValue } from "../../utils";
 
 const UploadLogo = () => {
-  const [uploadMode, setUploadMode] = useState(false);
-  const [logo, setLogo] = useState(null);
+  const [logo, setLogo] = useState(getCookieValue("LOGO_URL"));
+  const [uploadMode, setUploadMode] = useState(!getCookieValue("LOGO_URL"));
+  const [uploading, setUploading] = useState(false);
   const [tempLogo, setTempLogo] = useState(null);
+  const [logoToUpload, setLogoToUpload] = useState(null);
 
-  const onFileAdd = (e) => {
-    setTempLogo(URL.createObjectURL(e.target.files[0]));
+  const onFileAdd = async (e) => {
+    try {
+      setUploading(true);
+      setTempLogo(URL.createObjectURL(e.target.files[0]));
+      const url = `https://api.imgbb.com/1/upload?expiration=15552000&key=${config.imgbbApiKey}`;
+      const form = new FormData();
+      form.set("image", e.target.files[0]);
+      const {
+        data: {
+          data: { url: imageUrl },
+        },
+      } = await axios.post(url, form);
+      setLogoToUpload(imageUrl);
+    } catch (error) {
+      console.log(error);
+    }
+    setUploading(false);
   };
 
+  const onUpdate = () => {
+    setCookieValue("LOGO_URL", logoToUpload);
+    setLogo(logoToUpload);
+    setLogoToUpload(null);
+    setUploadMode(false);
+    setTempLogo(null);
+  };
   return (
     <div>
       <div className="mb-2 text-[1.625rem] font-bold">Organization Logo</div>
@@ -23,7 +49,9 @@ const UploadLogo = () => {
       </div>
       {!uploadMode && logo && (
         <div className="flex items-start gap-x-4">
-          <div className="flex h-[66px] w-[212px] flex-row items-center justify-center border border-dashed border-link"></div>
+          <div className="flex h-[66px] w-[212px] flex-row items-center justify-center border border-dashed border-link">
+            <img src={logo} alt="" className="h-full" />
+          </div>
           <NormalButton
             variant={ButtonVariant.text}
             onClick={() => {
@@ -35,9 +63,11 @@ const UploadLogo = () => {
           </NormalButton>
         </div>
       )}
-      {(uploadMode || !logo) && (
+      {uploadMode && (
         <div className="flex h-[66px] w-[212px] flex-row items-center justify-center border border-dashed border-link">
-          {!tempLogo ? (
+          {tempLogo ? (
+            <img src={tempLogo} alt="" className="h-full" />
+          ) : (
             <>
               <input
                 type="file"
@@ -53,8 +83,6 @@ const UploadLogo = () => {
                 <PlusIcon className="h-6 w-6" /> Upload Logo
               </label>
             </>
-          ) : (
-            <img src={tempLogo} alt="" className="h-full" />
           )}
         </div>
       )}
@@ -67,9 +95,9 @@ const UploadLogo = () => {
           <div className="flex items-center">
             <Button
               variant={ButtonVariant.filled}
-              onClick={() => setLogo("")}
-              isDisabled={!tempLogo}
+              isDisabled={!tempLogo || uploading || !logoToUpload}
               className="w-[212px]"
+              onClick={onUpdate}
             >
               UPDATE
             </Button>

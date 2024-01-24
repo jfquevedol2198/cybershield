@@ -113,11 +113,11 @@ const IncidentsTable = ({ currPage, totalPages, data, loading }) => {
         loading={loading}
         onClickRow={onClickRow}
       />
-      <DetailModal
+      {/* <DetailModal
         riskLevel="critical"
         isOpen={isOpen}
         closeModal={() => setIsOpen(false)}
-      />
+      /> */}
     </>
   );
 };

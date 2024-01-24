@@ -10,4 +10,5 @@ export default {
   countryStateCityApiKey: import.meta.env.VITE_COUNTRY_STATE_CITY_API_KEY,
   serviceNowAuthUsername: import.meta.env.VITE_SERVICE_NOW_AUTH_USERNAME,
   serviceNowAuthPassword: import.meta.env.VITE_SERVICE_NOW_AUTH_PASSWORD,
+  imgbbApiKey: import.meta.env.VITE_IMGBB_API_KEY,
 };

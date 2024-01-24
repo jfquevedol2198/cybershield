@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import "regenerator-runtime/runtime";
 
 import awsconfig from "./aws-exports";
 import { AuthProvider } from "./hooks/useAuth";

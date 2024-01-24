@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import apiClient from "../../../api";
@@ -12,6 +12,9 @@ const Questionnaire = () => {
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
+
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const questionsWrapper = useRef(null);
 
   const title = searchParams.get("option") || "Detect";
   const answers = COMPLIANCE_ITEMS.find(
@@ -29,6 +32,15 @@ const Questionnaire = () => {
     };
     fetch();
   }, [title]);
+
+  const onBack = () => {
+    if (questionIndex > 0) setQuestionIndex(questionIndex - 1);
+  };
+
+  const onNext = () => {
+    if (questionIndex < questions.length - 1)
+      setQuestionIndex(questionIndex + 1);
+  };
 
   return (
     <div className="flex h-full w-full flex-col">
@@ -51,16 +63,16 @@ const Questionnaire = () => {
         </div>
       </div>
       <div className="flex-auto overflow-y-auto py-6 pl-[4.25rem] pr-[0.8125rem]">
-        <div className="space-y-10  ">
-          {questions
-            .filter((question) => question.question_section === title)
-            .map((question, index) => (
-              <QuestionnaireItem
-                index={question.question_number}
-                key={`question-${index}`}
-                question={question.question_description}
-              />
-            ))}
+        <div className="space-y-10" ref={questionsWrapper}>
+          {questions.map((question, index) => (
+            <QuestionnaireItem
+              index={index + 1}
+              key={`question-${index}`}
+              questionNumber={question.question_number}
+              question={question.question_description}
+              active={index === questionIndex}
+            />
+          ))}
         </div>
       </div>
       <div className="flex flex-row justify-between border-t border-gray-1 p-8">
@@ -68,8 +80,12 @@ const Questionnaire = () => {
           SAVE & CLOSE THE QUESTIONNAIRE
         </Button>
         <div className="flex flex-row gap-2">
-          <Button variant={ButtonVariant.outline}>BACK</Button>
-          <Button variant={ButtonVariant.filled}>NEXT</Button>
+          <Button variant={ButtonVariant.outline} onClick={onBack}>
+            BACK
+          </Button>
+          <Button variant={ButtonVariant.filled} onClick={onNext}>
+            NEXT
+          </Button>
         </div>
       </div>
     </div>

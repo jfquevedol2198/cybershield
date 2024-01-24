@@ -1,16 +1,27 @@
+import clsx from "clsx";
 import PropTypes from "prop-types";
 
 import Button from "../../../components/Button";
 import ButtonToggle from "../../../components/ButtonToggle";
 import { ButtonVariant } from "../../../utils";
 
-const QuestionnaireItem = ({ question, index }) => {
+const QuestionnaireItem = ({ question, index, active }) => {
   return (
-    <div className="flex w-full flex-row gap-[2.4375rem] pr-20">
+    <div
+      className={clsx(
+        "flex w-full flex-row gap-[2.4375rem] pr-20",
+        !active && "pointer-events-none opacity-30"
+      )}
+    >
       <div className="flex h-[4.125rem] flex-[0_0_4.125rem] items-center justify-center rounded-full bg-gray-3 text-[1.75rem] text-white">
         {index}
       </div>
-      <div className="flex flex-auto flex-col border-[3px] border-gray-4 bg-background">
+      <div
+        className={clsx(
+          "flex flex-auto flex-col border-[3px] bg-background",
+          active ? "border-gray-4" : "border-transparent"
+        )}
+      >
         <div className="border-b border-background px-8 py-6 text-[1.625rem] font-normal text-black">
           <div className="mb-4">{question}</div>
           <div className="flex flex-row gap-4">
@@ -31,6 +42,8 @@ const QuestionnaireItem = ({ question, index }) => {
 QuestionnaireItem.propTypes = {
   question: PropTypes.string,
   index: PropTypes.number,
+  questionNumber: PropTypes.number,
+  active: PropTypes.bool,
 };
 
 export default QuestionnaireItem;

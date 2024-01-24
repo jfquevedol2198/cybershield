@@ -19,7 +19,7 @@ const MainLayout = () => {
             <Sidebar />
             <div
               className={clsx(
-                "flex-auto overflow-y-auto bg-background",
+                "relative flex-auto overflow-y-auto bg-background",
                 location.pathname.indexOf("compliance") === -1 && "px-5 py-8"
               )}
               style={{

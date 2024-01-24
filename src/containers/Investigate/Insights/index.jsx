@@ -15,6 +15,7 @@ import useSearchAndFilter from "../../../hooks/useSearchAndFilter";
 import { ButtonVariant } from "../../../utils";
 import { getFilterOptions } from "../../../utils/filter";
 import { groupByKey } from "../../../utils/parse";
+import snack from "../../../utils/snack";
 import Filter from "./Filter";
 import InsightsTable from "./InsightsTable";
 
@@ -96,39 +97,43 @@ const Insights = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      setLoading(true);
-      const {
-        data: { data },
-      } = await api.getInsights();
-      const insights = data;
-      setPageData(insights);
-      setGroupByType(groupByKey(insights, "type"));
-      setFilterOptions(getFilterOptions(insights));
+      try {
+        setLoading(true);
+        const {
+          data: { data },
+        } = await api.getInsights();
+        const insights = data;
+        setPageData(insights);
+        setGroupByType(groupByKey(insights, "type"));
+        setFilterOptions(getFilterOptions(insights));
 
-      const riskData = insights.reduce(
-        (_data, vul) => {
-          const severity = vul.score * 10;
-          if (severity > 0 && severity <= 3.5) {
-            _data.low++;
-          } else if (severity > 3.5 && severity <= 5.5) {
-            _data.medium++;
-          } else if (severity > 5.5 && severity <= 7.5) {
-            _data.high++;
-          } else {
-            _data.critical++;
-          }
-          return _data;
-        },
-        { medium: 0, critical: 0, high: 0, low: 0 }
-      );
-      setRiskData([
-        { riskLevel: "low", value: riskData["low"] },
-        { riskLevel: "medium", value: riskData["medium"] },
-        { riskLevel: "high", value: riskData["high"] },
-        { riskLevel: "critical", value: riskData["critical"] },
-      ]);
-
-      setLoading(false);
+        const riskData = insights.reduce(
+          (_data, vul) => {
+            const severity = vul.score * 10;
+            if (severity > 0 && severity <= 3.5) {
+              _data.low++;
+            } else if (severity > 3.5 && severity <= 5.5) {
+              _data.medium++;
+            } else if (severity > 5.5 && severity <= 7.5) {
+              _data.high++;
+            } else {
+              _data.critical++;
+            }
+            return _data;
+          },
+          { medium: 0, critical: 0, high: 0, low: 0 }
+        );
+        setRiskData([
+          { riskLevel: "low", value: riskData["low"] },
+          { riskLevel: "medium", value: riskData["medium"] },
+          { riskLevel: "high", value: riskData["high"] },
+          { riskLevel: "critical", value: riskData["critical"] },
+        ]);
+      } catch (error) {
+        snack.error(error.message);
+      } finally {
+        setLoading(false);
+      }
     };
     fetch();
 

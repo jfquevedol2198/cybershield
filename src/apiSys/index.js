@@ -1,7 +1,7 @@
 import axios from "axios";
 
+import { createUserApiClient } from "../api/apiClient";
 import config from "../config";
-import { createUserApiClient } from "./apiClient";
 
 const httpClient = axios.create({
   baseURL: config.BASE_USER_API_URL,
