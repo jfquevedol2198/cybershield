@@ -2,6 +2,9 @@ export const assets = (httpClient) => ({
   getAssets({ cellId }) {
     return httpClient.get(`/assets_view${cellId ? "/cell/" + cellId : ""}`);
   },
+  getSiteAssets(siteId) {
+    return httpClient.get(`/assets/site/${siteId}`);
+  },
 });
 
 export const cells = (httpClient) => ({

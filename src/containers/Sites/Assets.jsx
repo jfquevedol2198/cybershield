@@ -25,12 +25,12 @@ const Assets = () => {
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const { data } = await api.getAssets({});
+      const { data } = await api.getSiteAssets(siteId);
       setPageData(parseAssets(data));
       setLoading(false);
     };
     fetch();
-  }, []);
+  }, [siteId]);
 
   return (
     <Fragment>

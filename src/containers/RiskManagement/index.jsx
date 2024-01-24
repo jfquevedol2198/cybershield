@@ -11,7 +11,7 @@ import DropdownSelect from "../../components/DropdownSelect";
 import Tag from "../../components/Tag";
 import RiskLineChart from "../../components/d3/RiskLineChart";
 import { ButtonVariant, SizeVariant } from "../../utils";
-import { parseAssets, parseShops } from "../../utils/parse";
+import { parseAlerts, parseAssets, parseShops } from "../../utils/parse";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
 import AffectAssetsTable from "./AffectedAssetsTable";
 import {
@@ -51,6 +51,7 @@ const RiskManagement = () => {
   const [averageRisk, setAverageRisk] = useState(0);
   const [risksByLevel, setRiskByLevel] = useState({});
   const [shops, setShops] = useState([]);
+  const [alerts, setAlerts] = useState([]);
 
   const [width, setWidth] = useState(0);
 
@@ -92,6 +93,11 @@ const RiskManagement = () => {
       const shops = parseShops(shopsData);
       setShops(shops);
 
+      // alerts
+      const { data: alertsData } = await api.getAlerts();
+      const alerts = parseAlerts(alertsData || []);
+      setAlerts(alerts);
+
       setLoading(false);
     };
     fetch();
@@ -120,14 +126,14 @@ const RiskManagement = () => {
           <CustomTap
             tabs={[
               <TabRisk key="risk" value={averageRisk} />,
-              <TabAlerts key="alerts" value={253} />,
+              <TabAlerts key="alerts" value={alerts.length} />,
               <TabShops key="shops" value={shops.length} />,
               // <TabInsights key="insights" value={3} />,
               // <TabIncidents key="incidents" value={2} />,
             ]}
             tabPanels={[
               <PanelRisk key="risk" />,
-              <PanelAlerts key="alerts" />,
+              <PanelAlerts key="alerts" alerts={alerts} />,
               <PanelShops key="shops" shops={shops} />,
               // <PanelInsights key="insights" />,
               // <PanelIncidents key="incidents" />,

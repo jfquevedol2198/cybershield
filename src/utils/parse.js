@@ -32,8 +32,8 @@ export const parseCells = (data) =>
 
 export const parseAssets = (data) =>
   data.map((asset) => ({
-    assetId: asset.asset_id,
-    name: asset.asset_name,
+    assetId: asset.asset_id || asset.id,
+    name: asset.asset_name || asset.name_,
     cellId: asset.cell_id,
     cell: asset.cell_name,
     ip: asset.interfaces_ip,

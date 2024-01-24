@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
 import { ArrowUpIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import PropTypes from "prop-types";
+import { useMemo } from "react";
 
 import Button from "../../../components/Button";
 import Table from "../../../components/Table";
@@ -162,7 +164,11 @@ const columns = [
   },
 ];
 
-export const PanelAlerts = () => {
+export const PanelAlerts = ({ alerts = [] }) => {
+  const assignedAlerts = useMemo(
+    () => alerts.filter((alert) => !!alert.assignee_user_id),
+    [alerts]
+  );
   return (
     <div className="flex h-full flex-col">
       <div className="mb-5 flex flex-row items-center justify-between border-b-[1px] border-background pb-5 text-base font-normal text-gray-5">
@@ -171,8 +177,10 @@ export const PanelAlerts = () => {
             Assigned to users
           </div>
           <div>
-            <span className="text-[1.75rem] text-gray-5">4</span>{" "}
-            <span className="text-base text-gray-5">/70</span>
+            <span className="text-[1.75rem] text-gray-5">
+              {assignedAlerts.length}
+            </span>
+            <span className="text-base text-gray-5">/{alerts.length}</span>
           </div>
         </div>
         <Button
