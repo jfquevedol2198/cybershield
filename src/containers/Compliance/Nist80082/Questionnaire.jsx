@@ -33,13 +33,26 @@ const Questionnaire = () => {
     fetch();
   }, [title]);
 
+  const scrollToQuestionaire = (questionaire) => {
+    questionaire.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
   const onBack = () => {
-    if (questionIndex > 0) setQuestionIndex(questionIndex - 1);
+    let index = questionIndex;
+    if (index > 0) index--;
+    setQuestionIndex(index);
+    scrollToQuestionaire(
+      questionsWrapper.current.querySelectorAll("& > div")[index]
+    );
   };
 
   const onNext = () => {
-    if (questionIndex < questions.length - 1)
-      setQuestionIndex(questionIndex + 1);
+    let index = questionIndex;
+    if (index < questions.length - 1) index++;
+    setQuestionIndex(index);
+    scrollToQuestionaire(
+      questionsWrapper.current.querySelectorAll("& > div")[index]
+    );
   };
 
   return (
