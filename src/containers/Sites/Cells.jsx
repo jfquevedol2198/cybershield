@@ -32,14 +32,14 @@ const Cells = () => {
       setLoading(true);
       const { data } = await (shopId
         ? api.getCellsOfShop({ shopId })
-        : api.getSiteCells());
+        : api.getSiteCells(siteId));
       const cells = parseCells(data);
       setPageData(cells);
       setFilterCellOptions(getFilterOptions(cells));
       setLoading(false);
     };
     fetch();
-  }, [shopId]);
+  }, [shopId, siteId]);
 
   const onFilterCells = (data) => {
     addFilter(data);

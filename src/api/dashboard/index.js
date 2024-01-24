@@ -13,8 +13,8 @@ export const cells = (httpClient) => ({
       `/view_cells_shopsf${shopId ? "?shop_id=" + shopId : ""}`
     );
   },
-  getSiteCells() {
-    return httpClient.get("/cells_view");
+  getSiteCells(siteId) {
+    return httpClient.get(`/cells_sites_view/${siteId}`);
   },
 });
 
