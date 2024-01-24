@@ -35,7 +35,7 @@ export const parseAssets = (data) =>
     assetId: asset.asset_id || asset.id,
     name: asset.asset_name || asset.name_,
     cellId: asset.cell_id,
-    cell: asset.cell_name,
+    cell: asset.cell_name || asset.cellsname,
     ip: asset.interfaces_ip,
     mac: asset.interfaces_mac,
     type: asset.type,
