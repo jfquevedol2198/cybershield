@@ -1,16 +1,19 @@
+import dayjs from "dayjs";
+import PropTypes from "prop-types";
+
 import Tag, { TagVariant } from "../../../../components/Tag";
 
 const AlertStatusTab = () => {
   return <div>Alert status</div>;
 };
 
-const AlertStatusTabPanel = () => {
+const AlertStatusTabPanel = ({ data }) => {
   return (
     <div className="w-full">
       <div className="bg-white p-5">
         <div className="mb-3 flex flex-row gap-2">
           <span className="text-base font-bold text-black">Alert status</span>
-          <Tag variant={TagVariant.content} label="Open" />
+          <Tag variant={TagVariant.content} label={data.status} />
         </div>
         <div className="mb-3">
           <span className="text-base font-bold text-black">Alert History</span>
@@ -20,7 +23,7 @@ const AlertStatusTabPanel = () => {
             New Alert was modified.
           </div>
           <div className="text-base font-normal text-gray-4">
-            10 Oct 2023 | 10:30
+            {dayjs(data.updated_at).format("DD MMM YYYY | HH:mm:ss")}
           </div>
         </div>
         <div>
@@ -28,12 +31,20 @@ const AlertStatusTabPanel = () => {
             New Alert was created.
           </div>
           <div className="text-base font-normal text-gray-4">
-            04 Oct 2023 | 02:10
+            {dayjs(data.created_at).format("DD MMM YYYY | HH:mm:ss")}
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+AlertStatusTabPanel.defaultProps = {
+  data: {},
+};
+
+AlertStatusTabPanel.propTypes = {
+  data: PropTypes.shape(PropTypes.any),
 };
 
 export { AlertStatusTab, AlertStatusTabPanel };

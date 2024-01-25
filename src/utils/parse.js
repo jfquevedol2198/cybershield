@@ -1,3 +1,5 @@
+import { normalizeString } from "./common";
+
 export const parseShops = (data) =>
   data
     .filter((shop) => shop.risk_score !== null)
@@ -64,4 +66,19 @@ export const parseCognitoUsers = (data) =>
 export const parseVulnerabilities = (data) =>
   data.map((vul) => ({
     ...vul,
+  }));
+
+export const parseAlerts = (data) =>
+  data.map((d) => ({
+    ...d,
+    category_name: normalizeString(d.category_name),
+    type_name: normalizeString(d.type_name),
+    subtype_name: normalizeString(d.subtype_name),
+    severity: parseFloat(d.severity || "0"),
+  }));
+
+export const parseIncident = (data) =>
+  data.map((d) => ({
+    ...d,
+    severity: parseFloat(d.severity) / 10,
   }));

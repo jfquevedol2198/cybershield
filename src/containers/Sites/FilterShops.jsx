@@ -9,14 +9,14 @@ import SlideOver from "../../components/SlideOver";
 import { ButtonVariant, SizeVariant } from "../../utils";
 
 const schema = z.object({
-  name: z.string(),
+  name_: z.string(),
   location: z.string(),
 });
 
 const FilterShops = ({ isOpen, filterOptions = {}, onSubmit, onClose }) => {
   const getDefaultValues = () => {
     return {
-      name: undefined,
+      name_: undefined,
       location: undefined,
     };
   };
@@ -31,12 +31,12 @@ const FilterShops = ({ isOpen, filterOptions = {}, onSubmit, onClose }) => {
       <form className="flex h-full flex-col" onSubmit={onHandleSubmit}>
         <div className="flex-auto overflow-y-auto">
           <FormControl
-            id="name"
+            id="name_"
             label="Name"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.name?.message}
-            {...form.register("name")}
+            error={form.formState.errors.name_?.message}
+            {...form.register("name_")}
           />
           <FormControl
             id="location"

@@ -1,11 +1,13 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 
 import { ChildrenType } from "../../utils/types";
 
-const RiskModal = ({ title, isOpen, children, closeModal }) => {
+const RiskModal = ({ riskLevel, title, isOpen, children, closeModal }) => {
+  console.log(riskLevel);
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -32,7 +34,7 @@ const RiskModal = ({ title, isOpen, children, closeModal }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="h-2 w-full bg-risk-1" />
+              <div className={clsx("h-2 w-full", `bg-${riskLevel.color}`)} />
               <Dialog.Panel className="w-fit transform overflow-hidden bg-background text-left align-middle shadow-xl transition-all">
                 <div className="relative p-6">
                   <div
@@ -67,7 +69,7 @@ RiskModal.propTypes = {
   isOpen: PropTypes.bool,
   title: PropTypes.string,
   closeModal: PropTypes.func.isRequired,
-  riskLevel: PropTypes.string,
+  riskLevel: PropTypes.shape(PropTypes.any),
 };
 
 export default RiskModal;

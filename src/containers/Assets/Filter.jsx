@@ -15,10 +15,10 @@ const schema = z.object({
   type: z.string().optional(),
   tag: z.string().optional(),
   risk: z.string().optional(),
-  mac: z.string().optional(),
-  ip: z.string().optional(),
-  cell: z.string().optional(),
-  vendor: z.string().optional(),
+  interfaces_mac: z.string().optional(),
+  interfaces_ip: z.string().optional(),
+  cell_name: z.string().optional(),
+  vendor_name: z.string().optional(),
   location: z.string().optional(),
   shop: z.string().optional(),
   model: z.string().optional(),
@@ -105,44 +105,44 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
             {...form.register("risk")}
           />
           <FormControl
-            id="mac"
+            id="interfaces_mac"
             label="MAC"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.mac?.message}
-            {...form.register("mac")}
+            error={form.formState.errors.interfaces_mac?.message}
+            {...form.register("interfaces_mac")}
             setValue={form.setValue}
           />
           <FormControl
-            id="ip"
+            id="interfaces_ip"
             label="IP"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.ip?.message}
-            {...form.register("ip")}
+            error={form.formState.errors.interfaces_ip?.message}
+            {...form.register("interfaces_ip")}
             setValue={form.setValue}
           />
           <FormControl
-            id="cell"
+            id="cell_name"
             label="Cell"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.cell?.message}
-            data={filterOptions["cell"]}
+            error={form.formState.errors.cell_name?.message}
+            data={filterOptions["cell_name"]}
             setValue={form.setValue}
-            {...form.register("cell")}
+            {...form.register("cell_name")}
           />
           <FormControl
-            id="vendor"
+            id="vendor_name"
             label="Vendor"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.vendor?.message}
-            data={filterOptions["vendor"]}
+            error={form.formState.errors.vendor_name?.message}
+            data={filterOptions["vendor_name"]}
             setValue={form.setValue}
-            {...form.register("vendor")}
+            {...form.register("vendor_name")}
           />
           <FormControl
             id="location"

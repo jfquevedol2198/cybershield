@@ -12,9 +12,9 @@ import SearchInput from "../../../components/SearchInput";
 import DonutChart from "../../../components/d3/DonutChart";
 import StackedAreaChartComponent from "../../../components/d3/StackedAreaChartComponent";
 import useSearchAndFilter from "../../../hooks/useSearchAndFilter";
-import { ButtonVariant, normalizeString } from "../../../utils";
+import { ButtonVariant } from "../../../utils";
 import { getFilterOptions } from "../../../utils/filter";
-import { groupByKey } from "../../../utils/parse";
+import { groupByKey, parseAlerts } from "../../../utils/parse";
 import { getRiskDataByCategory } from "../../../utils/risk";
 import AlertsTable from "./AlertsTable";
 import Filter from "./Filter";
@@ -49,12 +49,8 @@ const Alerts = () => {
       setLoading(true);
 
       const { data } = await apiClient.getDwAlerts();
-      const alerts = data.map((d) => ({
-        ...d,
-        type_name: normalizeString(d.type_name),
-        subtype_name: normalizeString(d.subtype_name),
-        severity: parseFloat(d.severity || "0"),
-      }));
+      const alerts = parseAlerts(data);
+
       setPageData(alerts);
       setGroupByType(groupByKey(alerts, "type_name"));
       setFilterOptions(getFilterOptions(alerts));

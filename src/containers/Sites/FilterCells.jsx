@@ -10,15 +10,15 @@ import SlideOver from "../../components/SlideOver";
 import { ButtonVariant, SizeVariant } from "../../utils";
 
 const schema = z.object({
-  name: z.string(),
-  location: z.string(),
+  cell_name: z.string(),
+  celllocation: z.string(),
 });
 
 const FilterCells = ({ isOpen, filterOptions, onSubmit, onClose }) => {
   const getDefaultValues = () => {
     return {
-      name: undefined,
-      location: undefined,
+      cell_name: undefined,
+      celllocation: undefined,
     };
   };
   const form = useForm({
@@ -32,23 +32,23 @@ const FilterCells = ({ isOpen, filterOptions, onSubmit, onClose }) => {
       <form className="flex h-full flex-col" onSubmit={onHandleSubmit}>
         <div className="flex-auto overflow-y-auto">
           <FormControl
-            id="name"
+            id="cell_name"
             label="Name"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.name?.message}
-            {...form.register("name")}
+            error={form.formState.errors.cell_name?.message}
+            {...form.register("cell_name")}
           />
           <FormControl
-            id="location"
+            id="celllocation"
             label="Location"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.location?.message}
-            data={filterOptions["location"]}
+            error={form.formState.errors.celllocation?.message}
+            data={filterOptions["celllocation"]}
             setValue={form.setValue}
-            {...form.register("location")}
+            {...form.register("celllocation")}
           />
           <div className="mb-2 text-base font-bold text-gray-4">
             Advanced filters

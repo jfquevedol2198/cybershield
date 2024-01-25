@@ -98,7 +98,11 @@ const columns = [
 
 const AlertsTable = ({ data = [], loading }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const onClickRow = () => setIsOpen(true);
+  const [selData, setSelData] = useState(null);
+  const onClickRow = (rowData) => {
+    setSelData(rowData);
+    setIsOpen(true);
+  };
 
   return (
     <>
@@ -112,6 +116,7 @@ const AlertsTable = ({ data = [], loading }) => {
       <DetailModal
         riskLevel="low"
         isOpen={isOpen}
+        data={selData}
         closeModal={() => setIsOpen(false)}
       />
     </>

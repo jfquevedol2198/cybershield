@@ -14,34 +14,37 @@ import { DateFilterOptions } from "../../../utils/filter";
 import { RiskLevel } from "../../../utils/risk";
 
 const schema = z.object({
-  category: z.string(),
-  type: z.string(),
-  subType: z.string(),
-  alertId: z.string(),
+  category_name: z.string(),
+  type_name: z.string(),
+  subtype_name: z.string(),
+  numeric_id: z.string(),
   severity: z.string(),
-  assignee: z.string(),
+  assignee_user_id: z.string(),
   status: z.string(),
   alertTime: z.string(),
   ip: z.string(),
-  shop: z.string(),
-  cell: z.string(),
-  lastUpdated: z.string(),
+  shopsname: z.string(),
+  cellname: z.string(),
+  updated_at: z.string(),
   pluginName: z.string(),
 });
 
 const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
   const defaultValues = () => {
     return {
-      fullname: undefined,
-      username: undefined,
-      email: undefined,
-      phone: undefined,
-      role: undefined,
-      factory: undefined,
-      password: undefined,
-      confirmPassword: undefined,
+      category_name: undefined,
+      type_name: undefined,
+      subtype_name: undefined,
+      numeric_id: undefined,
+      severity: undefined,
+      assignee_user_id: undefined,
+      status: undefined,
       alertTime: undefined,
-      lastUpdated: undefined,
+      ip: undefined,
+      shopsname: undefined,
+      cellname: undefined,
+      updated_at: undefined,
+      pluginName: undefined,
     };
   };
 
@@ -65,43 +68,43 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
           <div className="mb-5 flex flex-col gap-5 bg-gray-1 px-4 py-5">
             <div className="text-base text-gray-4">Alert types</div>
             <FormControl
-              id="category"
+              id="category_name"
               label="Category"
               inputType="dropdown"
               size={SizeVariant.small}
-              error={form.formState.errors.category?.message}
-              data={filterOptions["category"]}
+              error={form.formState.errors.category_name?.message}
+              data={filterOptions["category_name"]}
               setValue={form.setValue}
-              {...form.register("category")}
+              {...form.register("category_name")}
             />
             <FormControl
-              id="type"
+              id="type_name"
               label="Type"
               inputType="dropdown"
               size={SizeVariant.small}
-              error={form.formState.errors.type?.message}
-              data={filterOptions["type"]}
+              error={form.formState.errors.type_name?.message}
+              data={filterOptions["type_name"]}
               setValue={form.setValue}
-              {...form.register("type")}
+              {...form.register("type_name")}
             />
             <FormControl
-              id="subType"
+              id="subtype_name"
               label="Sub Type"
               inputType="dropdown"
               size={SizeVariant.small}
-              error={form.formState.errors.subType?.message}
-              data={filterOptions["subtype"]}
+              error={form.formState.errors.subtype_name?.message}
+              data={filterOptions["subtype_name"]}
               setValue={form.setValue}
-              {...form.register("subType")}
+              {...form.register("subtype_name")}
             />
           </div>
           <FormControl
-            id="alertId"
+            id="numeric_id"
             label="Alert ID"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.alertId?.message}
-            {...form.register("alertId")}
+            error={form.formState.errors.numeric_id?.message}
+            {...form.register("numeric_id")}
           />
           <FormControl
             id="severity"
@@ -118,15 +121,15 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
             {...form.register("severity")}
           />
           <FormControl
-            id="assignee"
+            id="assignee_user_id"
             label="Assignee"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.assignee?.message}
-            data={filterOptions["assignee"]}
+            error={form.formState.errors.assignee_user_id?.message}
+            data={filterOptions["assignee_user_id"]}
             setValue={form.setValue}
-            {...form.register("assignee")}
+            {...form.register("assignee_user_id")}
           />
           <MultiSelect
             id="status"
@@ -157,37 +160,37 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
             {...form.register("ip")}
           />
           <FormControl
-            id="shop"
+            id="shopsname"
             label="Shop"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.shop?.message}
-            data={filterOptions["shop"]}
+            error={form.formState.errors.shopsname?.message}
+            data={filterOptions["shopsname"]}
             setValue={form.setValue}
-            {...form.register("shop")}
+            {...form.register("shopsname")}
           />
           <FormControl
-            id="cell"
+            id="cellname"
             label="Cell"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.cell?.message}
-            data={filterOptions["cell"]}
+            error={form.formState.errors.cellname?.message}
+            data={filterOptions["cellname"]}
             setValue={form.setValue}
-            {...form.register("cell")}
+            {...form.register("cellname")}
           />
           <FormControl
-            id="lastUpdated"
+            id="updated_at"
             label="Last Updated"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.lastUpdated?.message}
+            error={form.formState.errors.updated_at?.message}
             data={DateFilterOptions}
             setValue={form.setValue}
-            {...form.register("lastUpdated")}
+            {...form.register("updated_at")}
           />
           <FormControl
             id="pluginName"
