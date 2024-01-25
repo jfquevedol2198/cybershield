@@ -5,7 +5,7 @@ import Table from "../../components/Table";
 import Tag from "../../components/Tag";
 import { SortDataType } from "../../utils";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
-import DetailModal from "./DetailModal";
+import DetailModal from "../Assets/DetailModal";
 
 const columns = [
   {
@@ -20,8 +20,8 @@ const columns = [
   },
   {
     title: "Name",
-    dataIndex: "asset_name",
-    key: "asset_name",
+    dataIndex: "name_",
+    key: "name_",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 1,
@@ -119,7 +119,6 @@ const AssetsTable = ({ data, loading }) => {
         dataSource={data}
         loading={loading}
         onClickRow={onClickRow}
-        rowsPerPage={20}
       />
       <DetailModal
         riskLevel="critical"

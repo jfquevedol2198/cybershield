@@ -11,7 +11,15 @@ export const TagVariant = {
   content: "content",
 };
 
-const Tag = ({ riskLevel, variant, label, onRemove }) => {
+const Tag = ({
+  riskLevel,
+  variant,
+  label,
+  onRemove,
+  onSelect,
+  isSelected,
+  showValue,
+}) => {
   if (riskLevel) {
     return (
       <div
@@ -20,7 +28,7 @@ const Tag = ({ riskLevel, variant, label, onRemove }) => {
           riskLevelStyles[riskLevel.label]
         )}
       >
-        {label || riskLevel.label}
+        {label && showValue ? label : riskLevel.label}
       </div>
     );
   }
@@ -28,9 +36,13 @@ const Tag = ({ riskLevel, variant, label, onRemove }) => {
     <div
       className={clsx(
         "flex flex-row items-center justify-center gap-2 rounded-full",
-        variantStyles[variant]
+        variantStyles[variant],
+        isSelected && "border border-blue-500"
       )}
-      onClick={() => onRemove && onRemove()}
+      onClick={() => {
+        onSelect && onSelect(label);
+        onRemove && onRemove();
+      }}
     >
       {label}
       {variant === TagVariant.closeable && (
@@ -44,7 +56,10 @@ Tag.defaultProps = {
   riskLevel: undefined,
   variant: PropTypes.active,
   label: "",
-  onRemove: () => {},
+  onRemove: undefined,
+  onSelect: undefined,
+  isSelected: false,
+  showValue: false,
 };
 
 Tag.propTypes = {
@@ -55,6 +70,9 @@ Tag.propTypes = {
   variant: PropTypes.string,
   label: PropTypes.string,
   onRemove: PropTypes.func,
+  onSelect: PropTypes.func,
+  isSelected: PropTypes.bool,
+  showValue: PropTypes.bool,
 };
 
 export default Tag;

@@ -8,8 +8,8 @@ import { RiskLevel, getRiskLevel } from "../../utils/risk";
 const columns = [
   {
     title: "Asset ID",
-    dataIndex: "assetId",
-    key: "assetId",
+    dataIndex: "numeric_id",
+    key: "numeric_id",
     sortDataType: SortDataType.Number,
     colSpan: 1,
     className: "",
@@ -17,8 +17,8 @@ const columns = [
   },
   {
     title: "Name",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "asset_name",
+    key: "asset_name",
     sortDataType: SortDataType.String,
     colSpan: 1,
     className: "",
@@ -35,9 +35,9 @@ const columns = [
   },
   {
     title: "Risk",
-    dataIndex: "risk",
-    key: "risk",
-    render: (value) => <Tag riskLevel={RiskLevel[getRiskLevel(value)]} />,
+    dataIndex: "risk_score",
+    key: "risk_score",
+    render: (value) => <Tag riskLevel={RiskLevel[getRiskLevel(value * 10)]} />,
     sortDataType: SortDataType.Number,
     colSpan: 0.5,
     className: "",
@@ -46,7 +46,7 @@ const columns = [
 ];
 
 const AffectAssetsTable = ({ data }) => {
-  return <Table columns={columns} dataSource={data} />;
+  return <Table columns={columns} dataSource={data} pagination={false} />;
 };
 
 AffectAssetsTable.propTypes = {

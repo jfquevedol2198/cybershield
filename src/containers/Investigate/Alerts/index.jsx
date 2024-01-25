@@ -1,8 +1,8 @@
-import { ArrowDownIcon, FunnelIcon } from "@heroicons/react/24/outline";
+import { FunnelIcon } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-import api from "../../../api";
+import apiClient from "../../../api";
 import ActivityIndicator from "../../../components/ActivityIndicator";
 import ExportButton from "../../../components/ExportButton";
 import NormalButton from "../../../components/NormalButton";
@@ -10,76 +10,25 @@ import PrioritizationItem from "../../../components/PrioritizationItem";
 import SearchAndFilter from "../../../components/SearchAndFilter";
 import SearchInput from "../../../components/SearchInput";
 import DonutChart from "../../../components/d3/DonutChart";
-import StackedAreaChart from "../../../components/d3/StackedAreaChart";
+import StackedAreaChartComponent from "../../../components/d3/StackedAreaChartComponent";
 import useSearchAndFilter from "../../../hooks/useSearchAndFilter";
-import { ButtonVariant } from "../../../utils";
+import { ButtonVariant, normalizeString } from "../../../utils";
 import { getFilterOptions } from "../../../utils/filter";
-import { groupByKey, parseAlerts } from "../../../utils/parse";
+import { groupByKey } from "../../../utils/parse";
+import { getRiskDataByCategory } from "../../../utils/risk";
 import AlertsTable from "./AlertsTable";
 import Filter from "./Filter";
 
-const dataArea = [
-  {
-    date: "04/09",
-    Rejected: 10,
-    New: 20,
-    Mitigated: 30,
-    "In Progress": 60,
-  },
-  {
-    date: "05/09",
-    Rejected: 20,
-    New: 30,
-    Mitigated: 40,
-    "In Progress": 50,
-  },
-  {
-    date: "06/09",
-    Rejected: 30,
-    New: 40,
-    Mitigated: 50,
-    "In Progress": 60,
-  },
-  {
-    date: "07/09",
-    Rejected: 40,
-    New: 50,
-    Mitigated: 65,
-    "In Progress": 70,
-  },
-  {
-    date: "08/09",
-    Rejected: 20,
-    New: 35,
-    Mitigated: 40,
-    "In Progress": 60,
-  },
-  {
-    date: "09/09",
-    Rejected: 10,
-    New: 40,
-    Mitigated: 60,
-    "In Progress": 80,
-  },
-  {
-    date: "10/09",
-    Rejected: 15,
-    New: 25,
-    Mitigated: 35,
-    "In Progress": 40,
-  },
-];
-
-const colors = {
-  "In Progress": "--secondary-color-1",
-  Mitigated: "--primary-color-3",
-  New: "--link-color",
-  Rejected: "--gray-color-2",
-};
+// const colors = {
+//   "In Progress": "--secondary-color-1",
+//   Mitigated: "--primary-color-3",
+//   New: "--link-color",
+//   Rejected: "--gray-color-2",
+// };
 
 const Alerts = () => {
   const stackAreaChartRef = useRef(null);
-  const [width, setWidth] = useState(0);
+  const [, setWidth] = useState(0);
 
   const [loading, setLoading] = useState(false);
   const [riskData, setRiskData] = useState([]);
@@ -97,48 +46,36 @@ const Alerts = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      try {
-        setLoading(true);
-        const { data } = await api.getAlerts();
-        const alerts = parseAlerts(data || []);
-        setPageData(alerts);
-        setGroupByType(groupByKey(alerts, "type"));
-        setFilterOptions(getFilterOptions(alerts));
+      setLoading(true);
 
-        const riskData = alerts.reduce(
-          (_data, vul) => {
-            const severity = vul.severity;
-            if (severity > 0 && severity <= 35) {
-              _data.low++;
-            } else if (severity > 35 && severity <= 55) {
-              _data.medium++;
-            } else if (severity > 55 && severity <= 75) {
-              _data.high++;
-            } else {
-              _data.critical++;
-            }
-            return _data;
-          },
-          { medium: 0, critical: 0, high: 0, low: 0 }
-        );
-        setRiskData([
-          { riskLevel: "low", value: riskData["low"] },
-          { riskLevel: "medium", value: riskData["medium"] },
-          { riskLevel: "high", value: riskData["high"] },
-          { riskLevel: "critical", value: riskData["critical"] },
-        ]);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
+      const { data } = await apiClient.getDwAlerts();
+      const alerts = data.map((d) => ({
+        ...d,
+        type_name: normalizeString(d.type_name),
+        subtype_name: normalizeString(d.subtype_name),
+        severity: parseFloat(d.severity || "0"),
+      }));
+      setPageData(alerts);
+      setGroupByType(groupByKey(alerts, "type_name"));
+      setFilterOptions(getFilterOptions(alerts));
+
+      const riskData = getRiskDataByCategory(alerts, "severity");
+      setRiskData([
+        { riskLevel: "low", value: riskData["low"] },
+        { riskLevel: "medium", value: riskData["medium"] },
+        { riskLevel: "high", value: riskData["high"] },
+        { riskLevel: "critical", value: riskData["critical"] },
+      ]);
+
+      setLoading(false);
     };
+
     fetch();
 
     setWidth(stackAreaChartRef.current.clientWidth);
     window.addEventListener("resize", debounced);
     return window.removeEventListener("resize", () => {});
-  }, [debounced]);
+  }, []);
 
   /**
    * Filter
@@ -176,17 +113,41 @@ const Alerts = () => {
         <div className="w-full overflow-x-auto">
           <div className="flex min-w-[90rem] flex-row items-start justify-start gap-4 px-7 py-4">
             <div className="flex min-w-[220px] flex-col items-center bg-white p-4">
-              <div className="mb-2 text-base font-bold">Total Alerts</div>
-              <DonutChart
-                width={100}
-                height={100}
-                innerRadius={40}
-                outerRadius={50}
-                data={riskData}
-              />
-              <div className="mt-2 flex flex-row items-center justify-center gap-1 text-base text-green">
-                <ArrowDownIcon className="h-3" />
-                15%
+              <div
+                className="mb-2 text-base font-bold"
+                style={{ marginBottom: "65px" }}
+              >
+                Total Alerts
+              </div>
+              <p
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "65px",
+                  zIndex: "0",
+                  position: "relative",
+                  color: "grey",
+                  backgroundColor: "white",
+                  fontSize: "11px",
+                  alignSelf: "center",
+                  marginBottom: "-75px",
+                  borderRadius: "20px",
+                }}
+              >
+                Alerts
+              </p>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <DonutChart
+                  width={100}
+                  height={100}
+                  innerRadius={40}
+                  outerRadius={50}
+                  data={riskData}
+                />
+              </div>
+              <div className="mt-8 flex flex-row items-center justify-center gap-1 text-base text-green">
+                {/* <ArrowDownIcon className="h-3" />
+                15% */}
               </div>
             </div>
             <div
@@ -197,30 +158,9 @@ const Alerts = () => {
                 <span className="text-base font-bold">
                   Alerts status timeline
                 </span>
-                <div className="flex flex-row items-center gap-2 text-sm font-light">
-                  {Object.keys(colors).map((key) => {
-                    return (
-                      <div
-                        key={key}
-                        className="flex flex-row items-center gap-1"
-                      >
-                        <span
-                          className="h-3 w-3 rounded-full"
-                          style={{ backgroundColor: `var(${colors[key]})` }}
-                        />
-                        <span>{key}</span>
-                      </div>
-                    );
-                  })}
-                </div>
               </div>
-
-              <StackedAreaChart
-                width={width - 32}
-                height={140}
-                data={dataArea}
-                colors={colors}
-              />
+              {/* Nuevo grafico */}
+              <StackedAreaChartComponent />
             </div>
             <div className="flex h-[12.25rem] w-[33.25rem] min-w-fit flex-col items-center bg-white p-4 pb-3">
               <div className="flex w-full flex-row items-center justify-between">
@@ -235,10 +175,12 @@ const Alerts = () => {
                 <div className="mt-2 grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-2">
                   {groupByType.map((group) => (
                     <PrioritizationItem
-                      key={group.type}
+                      key={group.type_name}
                       isReverse
                       percent={group.percent}
-                      name={group.type}
+                      name={(group.type || "N/D")
+                        .replace(/_/g, " ")
+                        .replace(/\b\w/g, (c) => c.toUpperCase())}
                       count={group.count}
                     />
                   ))}
@@ -250,7 +192,7 @@ const Alerts = () => {
       )}
       {/* Content */}
       <div className="gap-4 px-7 py-4">
-        <AlertsTable data={filterData} loading={loading} />
+        <AlertsTable data={filterData} />
       </div>
       {/* Filter */}
       <Filter

@@ -1,8 +1,8 @@
-import { ArrowDownIcon, FunnelIcon } from "@heroicons/react/24/outline";
+import { FunnelIcon } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-import api from "../../../api";
+import apiClient from "../../../api";
 import ActivityIndicator from "../../../components/ActivityIndicator";
 import ExportButton from "../../../components/ExportButton";
 import NormalButton from "../../../components/NormalButton";
@@ -11,83 +11,31 @@ import SearchAndFilter from "../../../components/SearchAndFilter";
 import SearchInput from "../../../components/SearchInput";
 import Tag, { TagVariant } from "../../../components/Tag";
 import DonutChart from "../../../components/d3/DonutChart";
-import StackedAreaChart from "../../../components/d3/StackedAreaChart";
+import StackedAreaChartComponentVul from "../../../components/d3/StackedAreaChartComponentVul";
 import useSearchAndFilter from "../../../hooks/useSearchAndFilter";
-import { ButtonVariant } from "../../../utils";
+import { ButtonVariant, normalizeString } from "../../../utils";
 import { groupByKey, parseVulnerabilities } from "../../../utils/parse";
-import { RiskLevel } from "../../../utils/risk";
+import { getRiskDataByCategory, getRiskLevel } from "../../../utils/risk";
 import Filter from "./Filter";
 import VulnerabilityTable from "./VulnerabilityTable";
 
-const dataArea = [
-  {
-    date: "04/09",
-    Rejected: 10,
-    New: 20,
-    Mitigated: 30,
-    "In Progress": 60,
-  },
-  {
-    date: "05/09",
-    Rejected: 20,
-    New: 30,
-    Mitigated: 40,
-    "In Progress": 50,
-  },
-  {
-    date: "06/09",
-    Rejected: 30,
-    New: 40,
-    Mitigated: 50,
-    "In Progress": 60,
-  },
-  {
-    date: "07/09",
-    Rejected: 40,
-    New: 50,
-    Mitigated: 65,
-    "In Progress": 70,
-  },
-  {
-    date: "08/09",
-    Rejected: 20,
-    New: 35,
-    Mitigated: 40,
-    "In Progress": 60,
-  },
-  {
-    date: "09/09",
-    Rejected: 10,
-    New: 40,
-    Mitigated: 60,
-    "In Progress": 80,
-  },
-  {
-    date: "10/09",
-    Rejected: 15,
-    New: 25,
-    Mitigated: 35,
-    "In Progress": 40,
-  },
-];
+// const colors = {
+//   "In Progress": "--secondary-color-1",
+//   Mitigated: "--primary-color-3",
+//   New: "--link-color",
+//   Rejected: "--gray-color-2",
+// };
 
-const colors = {
-  "In Progress": "--secondary-color-1",
-  Mitigated: "--primary-color-3",
-  New: "--link-color",
-  Rejected: "--gray-color-2",
-};
+const PRIORITIZED_TAGS = ["CVSS Score", "CVE ID", "Group"];
 
 const Vulnerabilities = () => {
   const stackAreaChartRef = useRef(null);
-  const [width, setWidth] = useState(0);
-
+  const [, setWidth] = useState(0);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-
   const [loading, setLoading] = useState(false);
   const [riskData, setRiskData] = useState([]);
-  const [groupByCveID, setGroupByCveID] = useState([]);
-
+  const [selectedTag, setSelectedTag] = useState(PRIORITIZED_TAGS[0]);
+  const [prioritizedData, setPrioritizedData] = useState([]);
   const { setPageData, filterData, addFilter, hasFilterAndSearch } =
     useSearchAndFilter();
 
@@ -98,27 +46,13 @@ const Vulnerabilities = () => {
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const { data } = await api.getVulnerabilities();
-      const vulnerabilities = parseVulnerabilities(data);
-      setPageData(vulnerabilities);
-      setGroupByCveID(groupByKey(vulnerabilities, "cveName"));
 
-      const riskData = vulnerabilities.reduce(
-        (_data, vul) => {
-          const severity = vul.cveScore;
-          if (severity > 0 && severity <= 3.5) {
-            _data.low++;
-          } else if (severity > 3.5 && severity <= 5.5) {
-            _data.medium++;
-          } else if (severity > 5.5 && severity <= 7.5) {
-            _data.high++;
-          } else {
-            _data.critical++;
-          }
-          return _data;
-        },
-        { medium: 0, critical: 0, high: 0, low: 0 }
-      );
+      const { data } = await apiClient.getVulnerabilities();
+      const vulnerabilities = parseVulnerabilities(data);
+
+      setPageData(vulnerabilities);
+
+      const riskData = getRiskDataByCategory(vulnerabilities, "cvescore");
       setRiskData([
         { riskLevel: "low", value: riskData["low"] },
         { riskLevel: "medium", value: riskData["medium"] },
@@ -134,6 +68,28 @@ const Vulnerabilities = () => {
     window.addEventListener("resize", debounced);
     return window.removeEventListener("resize", () => {});
   }, []);
+
+  useEffect(() => {
+    if (selectedTag === PRIORITIZED_TAGS[0]) {
+      setPrioritizedData(
+        groupByKey(
+          filterData,
+          "cvescore",
+          (key) => normalizeString(getRiskLevel(key)).toString() // Convertir a cadena para evitar problemas de comparación
+        )
+      );
+    } else if (selectedTag === PRIORITIZED_TAGS[1]) {
+      setPrioritizedData(
+        groupByKey(
+          filterData,
+          "cvename",
+          (key) => key.match(/CVE-\d{4}/)?.[0] || "N/D"
+        )
+      );
+    } else {
+      setPrioritizedData(groupByKey(filterData, "type", (key) => key || "N/D"));
+    }
+  }, [selectedTag, filterData]);
 
   /**
    * Filter
@@ -186,10 +142,10 @@ const Vulnerabilities = () => {
                 outerRadius={50}
                 data={riskData}
               />
-              <div className="mt-2 flex flex-row items-center justify-center gap-1 text-base text-green">
+              {/* <div className="mt-8 flex flex-row items-center justify-center gap-1 text-base text-green">
                 <ArrowDownIcon className="h-3" />
                 15%
-              </div>
+              </div> */}
             </div>
             <div
               className="flex flex-auto flex-col items-center bg-white p-4"
@@ -199,30 +155,9 @@ const Vulnerabilities = () => {
                 <span className="text-base font-bold">
                   Vulnerabilities status timeline
                 </span>
-                <div className="flex flex-row items-center gap-2 text-sm font-light">
-                  {Object.keys(colors).map((key) => {
-                    return (
-                      <div
-                        key={key}
-                        className="flex flex-row items-center gap-1"
-                      >
-                        <span
-                          className="h-3 w-3 rounded-full"
-                          style={{ backgroundColor: `var(${colors[key]})` }}
-                        />
-                        <span>{key}</span>
-                      </div>
-                    );
-                  })}
-                </div>
               </div>
 
-              <StackedAreaChart
-                width={width - 32}
-                height={140}
-                data={dataArea}
-                colors={colors}
-              />
+              <StackedAreaChartComponentVul />
             </div>
             <div className="flex h-[12.25rem] w-[33.25rem] min-w-fit flex-col items-center bg-white p-4 pb-3">
               <div className="flex w-full flex-row items-center justify-between">
@@ -230,21 +165,29 @@ const Vulnerabilities = () => {
                   Vulnerability prioritization by
                 </span>
                 <div className="flex flex-row items-center gap-2 text-sm font-light">
-                  <Tag variant={TagVariant.content} label="CVSS Score" />
-                  <Tag riskLevel={RiskLevel.none} label="CVE ID" />
-                  <Tag variant={TagVariant.content} label="Group" />
+                  {PRIORITIZED_TAGS.map((key) => (
+                    <Tag
+                      key={key}
+                      variant={TagVariant.content}
+                      label={key}
+                      onSelect={(selectedLabel) =>
+                        setSelectedTag(selectedLabel)
+                      }
+                      isSelected={key === selectedTag}
+                    />
+                  ))}
                 </div>
               </div>
-
               {!loading && (
                 <div className="mt-2 grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-2">
-                  {groupByCveID.map((group) => (
+                  {prioritizedData.map((group) => (
                     <PrioritizationItem
-                      key={group.type}
+                      key={group.cvescore}
                       isReverse
                       percent={group.percent}
                       name={group.type}
                       count={group.count}
+                      isVisible={group.type === selectedTag}
                     />
                   ))}
                 </div>
@@ -253,9 +196,9 @@ const Vulnerabilities = () => {
           </div>
         </div>
       )}
-      {/* Content */}
+
       <div className="gap-4 px-7 py-4">
-        <VulnerabilityTable data={filterData} loading={loading} />
+        <VulnerabilityTable data={filterData} />
       </div>
       {/* Filter */}
       <Filter

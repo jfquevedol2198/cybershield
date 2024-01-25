@@ -7,7 +7,6 @@ import Accordion from "../../../../components/Accordion";
 import Table from "../../../../components/Table";
 import Tag from "../../../../components/Tag";
 import { SortDataType } from "../../../../utils";
-import { parseAlerts } from "../../../../utils/parse";
 import { RiskLevel, getRiskLevel } from "../../../../utils/risk";
 
 const RelatedToTab = () => {
@@ -85,7 +84,7 @@ const RelatedToTabPanel = () => {
       const {
         data: { data },
       } = await api.getAlerts();
-      const alerts = parseAlerts(_.get(data, "alerts") || []);
+      const alerts = _.get(data, "alerts") || [];
       setAlerts(alerts);
       setLoading(false);
     };

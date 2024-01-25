@@ -9,7 +9,7 @@ import SearchInput from "../../components/SearchInput";
 import useCommon from "../../hooks/useCommon";
 import useSearchAndFilter from "../../hooks/useSearchAndFilter";
 import { parseAssets } from "../../utils/parse";
-import AssetsTable from "../Assets/AssetsTable";
+import AssetsTable from "./AssetsTable";
 
 const Assets = () => {
   const [searchParams] = useSearchParams();

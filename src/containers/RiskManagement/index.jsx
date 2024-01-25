@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -11,7 +12,7 @@ import DropdownSelect from "../../components/DropdownSelect";
 import Tag from "../../components/Tag";
 import RiskLineChart from "../../components/d3/RiskLineChart";
 import { ButtonVariant, SizeVariant } from "../../utils";
-import { parseAlerts, parseAssets, parseShops } from "../../utils/parse";
+import { parseAssets, parseShops } from "../../utils/parse";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
 import AffectAssetsTable from "./AffectedAssetsTable";
 import {
@@ -54,6 +55,7 @@ const RiskManagement = () => {
   const [alerts, setAlerts] = useState([]);
 
   const [width, setWidth] = useState(0);
+  const [lastUpdated, setLastUpdated] = useState("");
 
   const debounced = useDebouncedCallback(() => {
     setWidth(riskLineChartRef.current.clientWidth);
@@ -68,15 +70,40 @@ const RiskManagement = () => {
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
+
+      ////
+      const { data: updateDateData } = await api.getUpdateDate();
+      const fechaUTC = updateDateData?.[0].etl_fecha;
+      if (fechaUTC) {
+        const fechaObj = new Date(fechaUTC);
+
+        if (!isNaN(fechaObj.getTime())) {
+          // Formatea la fecha personalizada "30 Nov 2023 | 20:23:19"
+          const formattedDate = dayjs(fechaObj).format(
+            "DD MMM YYYY | HH:mm:ss"
+          );
+          setLastUpdated(formattedDate);
+        } else {
+          console.error(
+            "Fecha inválida después de crear el objeto Date:",
+            fechaUTC
+          );
+        }
+      } else {
+        console.error(
+          "La propiedad etl_fecha no está presente o es undefined en la respuesta de la API"
+        );
+      }
+
       // assets
       const { data } = await api.getAssets({});
       const assets = parseAssets(data);
-      const averageRisk = parseInt(
-        assets.reduce((sum, asset) => sum + asset.risk, 0) / assets.length
+      const averageRisk = parseFloat(
+        assets.reduce((sum, asset) => sum + asset.risk_score, 0) / assets.length
       );
       const risksByLevel = {};
-      assets.forEach(({ risk }) => {
-        const riskLevel = getRiskLevel(risk);
+      assets.forEach(({ risk_score }) => {
+        const riskLevel = getRiskLevel(risk_score);
         if (risksByLevel[riskLevel]) {
           risksByLevel[riskLevel]++;
         } else {
@@ -85,7 +112,7 @@ const RiskManagement = () => {
       });
       setRiskByLevel(risksByLevel);
 
-      setAverageRisk(averageRisk);
+      setAverageRisk(parseInt(averageRisk * 100));
       setAssets(assets);
 
       // shops
@@ -95,7 +122,7 @@ const RiskManagement = () => {
 
       // alerts
       const { data: alertsData } = await api.getAlerts();
-      const alerts = parseAlerts(alertsData || []);
+      const alerts = alertsData || [];
       setAlerts(alerts);
 
       setLoading(false);
@@ -114,9 +141,9 @@ const RiskManagement = () => {
           <Tag riskLevel={RiskLevel[getRiskLevel(averageRisk)]} />
         </div>
         <div className="text-right text-sm font-medium text-gray-5">
-          LAST SCAN 30
+          LAST UPDATED
           <br />
-          Nov 2023 | 20:00:58
+          {lastUpdated}
         </div>
       </div>
       {loading && <ActivityIndicator />}

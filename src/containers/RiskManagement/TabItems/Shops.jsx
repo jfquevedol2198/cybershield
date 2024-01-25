@@ -24,7 +24,11 @@ export const PanelShops = ({ shops }) => {
       </div>{" "}
       <div className="h-full flex-auto overflow-y-auto">
         {shops.map((shop) => (
-          <ShopCard key={shop.id} category={shop.name} score={shop.riskScore} />
+          <ShopCard
+            key={shop.id}
+            category={shop.name_}
+            score={shop.risk_score}
+          />
         ))}
       </div>
     </div>

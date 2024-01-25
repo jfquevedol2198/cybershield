@@ -37,6 +37,9 @@ export const alerts = (httpClient) => ({
   getAlerts() {
     return httpClient.get("/alerts");
   },
+  getDwAlerts() {
+    return httpClient.get("/dw_alerts_view");
+  },
 });
 
 export const insights = (httpClient) => ({
@@ -69,5 +72,11 @@ export const questions = (httpClient) => ({
 export const sites = (httpClient) => ({
   getSites() {
     return httpClient.get("/sites");
+  },
+});
+
+export const updateDate = (httpClient) => ({
+  getUpdateDate() {
+    return httpClient.get("/etl_table_view");
   },
 });

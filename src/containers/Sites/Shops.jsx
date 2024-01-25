@@ -74,13 +74,13 @@ const Shops = () => {
           return (
             <Link
               key={shop.id}
-              to={`/dashboard/site/${siteId}/cells?shopId=${shop.id}&shopName=${shop.name}`}
+              to={`/dashboard/site/${siteId}/cells?shopId=${shop.id}&shopName=${shop.name_}`}
             >
               <FactoryShopCard
-                cells={shop.cells}
-                name={shop.name}
+                cells={shop.cells?.length || 0}
+                name={shop.name_}
                 description={shop.description}
-                score={shop.riskScore * 100}
+                score={shop.risk_score}
                 location={shop.location}
                 assets={shop.assets}
               />

@@ -3,6 +3,7 @@ import {
   ArrowUpIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  EllipsisHorizontalIcon,
 } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { useMemo, useState } from "react";
@@ -12,7 +13,14 @@ import { sortFunc } from "../../utils/sort";
 import NormalButton from "../NormalButton";
 import { TablePropType } from "./types";
 
-const Table = ({ columns, dataSource, totalPages, loading, onClickRow }) => {
+const Table = ({
+  columns,
+  dataSource,
+  pagination,
+  rowsPerPage,
+  loading,
+  onClickRow,
+}) => {
   const [sorts, setSorts] = useState([]);
 
   const { totalColSpan } = useMemo(() => {
@@ -48,6 +56,59 @@ const Table = ({ columns, dataSource, totalPages, loading, onClickRow }) => {
     ];
     setSorts(_sorts);
   };
+
+  ///////// pagination /////////
+  const totalPages = Math.ceil(dataSource.length / rowsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const onNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+  const onPrevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+  const paginations = useMemo(() => {
+    console.log("=======");
+    let _paginations = [];
+    if (totalPages < 8) {
+      for (let i = 1; i < totalPages + 1; i++) {
+        _paginations.push(i);
+      }
+      return _paginations;
+    }
+    if (currentPage < 4) {
+      return [1, 2, 3, "-4", totalPages];
+    } else {
+      _paginations = [1, `-${currentPage - 2}`];
+    }
+    const start = parseInt((currentPage - 1) / 3) * 3 + 1;
+    let end = start + 2;
+    if (end >= totalPages) {
+      for (let i = start; i < totalPages + 1; i++) {
+        _paginations.push(i);
+      }
+      return _paginations;
+    }
+    for (let i = start; i < end + 1; i++) {
+      _paginations.push(i);
+    }
+    if (end === totalPages - 2) {
+      _paginations.push(totalPages - 1);
+    } else {
+      _paginations.push(`-${end + 1}`);
+    }
+    _paginations.push(totalPages);
+    return _paginations;
+  }, [currentPage, totalPages]);
+
+  const paginatedData = useMemo(() => {
+    if (!pagination) return sortedData;
+    return sortedData.slice(
+      (currentPage - 1) * rowsPerPage,
+      currentPage * rowsPerPage
+    );
+  }, [sortedData, currentPage]);
+  //////////////////////////////
 
   return (
     <>
@@ -103,7 +164,7 @@ const Table = ({ columns, dataSource, totalPages, loading, onClickRow }) => {
             Loading...
           </div>
         )}
-        {sortedData.map((data, index) => (
+        {paginatedData.map((data, index) => (
           <div
             key={`row-${index}`}
             className="table-header flex flex-row flex-nowrap items-center border-b-[1px] border-gray-1 bg-white hover:bg-gray-1"
@@ -140,26 +201,43 @@ const Table = ({ columns, dataSource, totalPages, loading, onClickRow }) => {
           </div>
         )}
       </div>
-      {totalPages > 1 && (
+      {pagination && (
         <div className="mt-4 flex w-full flex-row items-center justify-end gap-2">
-          <NormalButton>
+          <NormalButton
+            className="flex h-8 w-8 items-center justify-center rounded  border text-primary-4"
+            onClick={onPrevPage}
+          >
             <ChevronLeftIcon className="h-6" />
           </NormalButton>
-          <NormalButton>1</NormalButton>
-          <NormalButton>...</NormalButton>
-          <NormalButton>3</NormalButton>
-          <NormalButton>4</NormalButton>
-          <NormalButton>5</NormalButton>
-          <NormalButton>...</NormalButton>
-          <NormalButton>10</NormalButton>
-          {totalPages > 8}
-          <NormalButton>
+          {paginations.map((page) => (
+            <NormalButton
+              className={clsx(
+                "flex h-8 w-8 items-center justify-center rounded  border",
+                currentPage === page ? "text-risk-4" : "text-primary-4"
+              )}
+              key={page}
+              onClick={() => {
+                setCurrentPage(page < 0 ? Math.abs(page) + 1 : page);
+              }}
+            >
+              {page < 0 ? <EllipsisHorizontalIcon className="w-4" /> : page}
+            </NormalButton>
+          ))}
+          <NormalButton
+            className="flex h-8 w-8 items-center justify-center rounded  border text-primary-4"
+            onClick={onNextPage}
+          >
             <ChevronRightIcon className="h-6" />
           </NormalButton>
         </div>
       )}
     </>
   );
+};
+
+Table.defaultProps = {
+  pagination: true,
+  rowsPerPage: 10,
 };
 
 Table.propTypes = TablePropType;

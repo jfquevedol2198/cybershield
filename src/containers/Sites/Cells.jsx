@@ -95,11 +95,11 @@ const Cells = () => {
               to={`/dashboard/site/${siteId}/assets?cellId=${cell.id}&cellName=${cell.name}`}
             >
               <FactoryShopCell
-                name={cell.name}
+                name={cell.cell_name}
                 description={cell.description}
-                score={cell.riskScore * 100}
-                location={cell.location}
-                assets={cell.assets}
+                score={cell.risk_score}
+                location={cell.celllocation}
+                assets={cell.asset_count}
               />
             </Link>
           );

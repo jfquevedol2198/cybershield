@@ -16,6 +16,7 @@ import useSearchAndFilter from "../../hooks/useSearchAndFilter";
 import { ButtonVariant } from "../../utils";
 import { getFilterOptions } from "../../utils/filter";
 import { groupByKey } from "../../utils/parse";
+import { getRiskDataByCategory } from "../../utils/risk";
 import Filter from "./Filter";
 import IncidentsTable from "./IncidentsTable";
 
@@ -108,22 +109,7 @@ const Incidents = () => {
 
         setGroupByCveID(groupByKey(incidents, "type"));
 
-        const riskData = incidents.reduce(
-          (_data, vul) => {
-            const severity = vul.cveScore;
-            if (severity > 0 && severity <= 3.5) {
-              _data.low++;
-            } else if (severity > 3.5 && severity <= 5.5) {
-              _data.medium++;
-            } else if (severity > 5.5 && severity <= 7.5) {
-              _data.high++;
-            } else {
-              _data.critical++;
-            }
-            return _data;
-          },
-          { medium: 0, critical: 0, high: 0, low: 0 }
-        );
+        const riskData = getRiskDataByCategory(incidents, "cveScore");
         setRiskData([
           { riskLevel: "low", value: riskData["low"] },
           { riskLevel: "medium", value: riskData["medium"] },

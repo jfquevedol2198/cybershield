@@ -7,7 +7,6 @@ import Accordion from "../../../../components/Accordion";
 import Table from "../../../../components/Table";
 import Tag from "../../../../components/Tag";
 import { SortDataType } from "../../../../utils";
-import { parseAlerts } from "../../../../utils/parse";
 import { RiskLevel, getRiskLevel } from "../../../../utils/risk";
 
 const RelatedToTab = () => {
@@ -17,8 +16,8 @@ const RelatedToTab = () => {
 const columns = [
   {
     title: "ID",
-    dataIndex: "alertId",
-    key: "alertId",
+    dataIndex: "numeric_id",
+    key: "numeric_id",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 0.5,
@@ -27,16 +26,16 @@ const columns = [
   },
   {
     title: "Type",
-    dataIndex: "type",
-    key: "type",
+    dataIndex: "type_name",
+    key: "type_name",
     colSpan: 1,
     className: "",
     align: "left",
   },
   {
     title: "Sub type",
-    dataIndex: "subtype",
-    key: "subtype",
+    dataIndex: "subtype_name",
+    key: "subtype_name",
     colSpan: 1,
     className: "",
     align: "left",
@@ -64,8 +63,8 @@ const columns = [
   },
   {
     title: "Alert Time",
-    dataIndex: "alertTime",
-    key: "alertTime",
+    dataIndex: "created_at",
+    key: "created_at",
     sort: true,
     sortDataType: SortDataType.Date,
     render: (value) => dayjs(value).format("DD MMM YYYY | HH:mm:ss"),
@@ -85,7 +84,7 @@ const RelatedToTabPanel = () => {
       const {
         data: { data },
       } = await api.getAlerts();
-      const alerts = parseAlerts(_.get(data, "alerts") || []);
+      const alerts = _.get(data, "alerts") || [];
       setAlerts(alerts);
       setLoading(false);
     };

@@ -17,7 +17,6 @@ import ConfirmPassword from "../containers/ConfirmPassword";
 import ForgotPassword from "../containers/ForgotPassword";
 import Incidents from "../containers/Incidents";
 import Alerts from "../containers/Investigate/Alerts";
-import Insights from "../containers/Investigate/Insights";
 import Vulnerabilities from "../containers/Investigate/Vulnerabilities";
 import Login from "../containers/Login";
 import AuthCodeVerify from "../containers/MFA/AuthCodeVerify";
@@ -43,18 +42,6 @@ export const SIDEBAR_ITEMS = [
     title: "Risk Management",
     Icon: RiskManagementIcon,
     Component: RiskManagement,
-  },
-  {
-    path: "compliance",
-    title: "Compliance",
-    Icon: ComplianceIcon,
-    children: [
-      {
-        path: "nist-800-82",
-        title: "NIST 800-82",
-        Component: Nist80082,
-      },
-    ],
   },
   {
     path: "site/:siteId",
@@ -93,11 +80,11 @@ export const SIDEBAR_ITEMS = [
         title: "Alerts",
         Component: Alerts,
       },
-      {
-        path: "insights",
-        title: "Insights",
-        Component: Insights,
-      },
+      // {
+      //   path: "insights",
+      //   title: "Insights",
+      //   Component: Insights,
+      // },
       {
         path: "vulnerabilities",
         title: "Vulnerabilities",
@@ -116,6 +103,18 @@ export const SIDEBAR_ITEMS = [
     title: "Incidents",
     Icon: IncidentsIcon,
     Component: Incidents,
+  },
+  {
+    path: "compliance",
+    title: "Compliance",
+    Icon: ComplianceIcon,
+    children: [
+      {
+        path: "nist-800-82",
+        title: "NIST 800-82",
+        Component: Nist80082,
+      },
+    ],
   },
   // {
   //   path: "secure-remote-management",

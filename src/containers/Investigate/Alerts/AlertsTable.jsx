@@ -11,8 +11,8 @@ import DetailModal from "./DetailModal";
 const columns = [
   {
     title: "Alert ID",
-    dataIndex: "alertId",
-    key: "alertId",
+    dataIndex: "numeric_id",
+    key: "numeric_id",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 1,
@@ -21,8 +21,8 @@ const columns = [
   },
   {
     title: "Type",
-    dataIndex: "type",
-    key: "type",
+    dataIndex: "type_name",
+    key: "type_name",
     colSpan: 1,
     className: "",
     align: "left",
@@ -50,8 +50,8 @@ const columns = [
   },
   {
     title: "Alert Time",
-    dataIndex: "alertTime",
-    key: "alertTime",
+    dataIndex: "created_at",
+    key: "created_at",
     sort: true,
     sortDataType: SortDataType.Date,
     render: (value) => dayjs(value).format("DD MMM YYYY | HH:mm:ss"),
@@ -61,32 +61,32 @@ const columns = [
   },
   {
     title: "Asset Name",
-    dataIndex: "assetName",
-    key: "assetName",
+    dataIndex: "nameasset",
+    key: "nameasset",
     colSpan: 1,
     className: "",
     align: "left",
   },
   {
     title: "IP",
-    dataIndex: "ip",
-    key: "ip",
+    dataIndex: "destination_asset_ip",
+    key: "destination_asset_ip",
     colSpan: 1,
     className: "",
     align: "left",
   },
   {
     title: "Cell",
-    dataIndex: "cell",
-    key: "cell",
+    dataIndex: "cellname",
+    key: "cellname",
     colSpan: 1,
     className: "",
     align: "left",
   },
   {
-    title: "last Updated",
-    dataIndex: "updatedAt",
-    key: "updatedAt",
+    title: "Last Updated",
+    dataIndex: "updated_at",
+    key: "updated_at",
     sort: true,
     sortDataType: SortDataType.Date,
     colSpan: 1,
@@ -96,7 +96,7 @@ const columns = [
   },
 ];
 
-const AlertsTable = ({ data, loading }) => {
+const AlertsTable = ({ data = [], loading }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onClickRow = () => setIsOpen(true);
 

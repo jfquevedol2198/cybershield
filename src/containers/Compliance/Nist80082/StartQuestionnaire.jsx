@@ -60,7 +60,7 @@ const StartQuestionnaire = () => {
                 setSearchParams(searchParams);
               }}
             >
-              Open Questionnaire
+              Start Questionnaire
             </Button>
             <Button
               variant={ButtonVariant.outline}
