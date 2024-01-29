@@ -7,7 +7,7 @@ import StartQuestionnaire from "./StartQuestionnaire";
 const Nist80082 = () => {
   const [searchParams] = useSearchParams();
   const status = searchParams.get("status") || "start";
-
+  console.log(status);
   return (
     <div className="flex h-full flex-row">
       <Sidebar />

@@ -1,11 +1,17 @@
 import clsx from "clsx";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 import Button from "../../../components/Button";
 import ButtonToggle from "../../../components/ButtonToggle";
 import { ButtonVariant } from "../../../utils";
+import AddCommentModal from "./AddCommentModal";
 
 const QuestionnaireItem = ({ question, index, active }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const onSend = (comment) => {
+    console.log(comment);
+  };
   return (
     <div
       className={clsx(
@@ -32,9 +38,21 @@ const QuestionnaireItem = ({ question, index, active }) => {
           </div>
         </div>
         <div className="flex flex-row gap-4 px-8 pb-6 pt-4">
-          <Button variant={ButtonVariant.outline}>ADD COMMENT</Button>
+          <Button
+            variant={ButtonVariant.outline}
+            onClick={() => setIsOpen(true)}
+          >
+            ADD COMMENT
+          </Button>
         </div>
       </div>
+      {isOpen && (
+        <AddCommentModal
+          isOpen
+          onClose={() => setIsOpen(false)}
+          onSend={onSend}
+        />
+      )}
     </div>
   );
 };

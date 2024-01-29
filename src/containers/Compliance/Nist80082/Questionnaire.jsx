@@ -6,7 +6,6 @@ import ActivityIndicator from "../../../components/ActivityIndicator";
 import Button from "../../../components/Button";
 import { ButtonVariant } from "../../../utils";
 import QuestionnaireItem from "./QuestionnaireItem";
-import { COMPLIANCE_ITEMS } from "./Sidebar";
 
 const Questionnaire = () => {
   const [searchParams] = useSearchParams();
@@ -15,11 +14,7 @@ const Questionnaire = () => {
 
   const [questionIndex, setQuestionIndex] = useState(0);
   const questionsWrapper = useRef(null);
-
   const title = searchParams.get("option") || "Detect";
-  const answers = COMPLIANCE_ITEMS.find(
-    (item) => item.title === title
-  )?.answers;
 
   useEffect(() => {
     const fetch = async () => {

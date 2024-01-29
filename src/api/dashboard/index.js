@@ -3,7 +3,9 @@ export const assets = (httpClient) => ({
     return httpClient.get(`/assets_view${cellId ? "/cell/" + cellId : ""}`);
   },
   getSiteAssets(siteId) {
-    return httpClient.get(`/assets/site/${siteId}`);
+    return siteId
+      ? httpClient.get(`/assets/site/${siteId}`)
+      : httpClient.get("/assets_view");
   },
 });
 
@@ -40,6 +42,9 @@ export const alerts = (httpClient) => ({
   getDwAlerts() {
     return httpClient.get("/dw_alerts_view");
   },
+  getAlertsView(siteId) {
+    return httpClient.get(`/alerts_sites_view${siteId ? "/" + siteId : ""}`);
+  },
 });
 
 export const insights = (httpClient) => ({
@@ -63,9 +68,12 @@ export const users = (httpClient) => ({
   },
 });
 
-export const questions = (httpClient) => ({
+export const compliance = (httpClient) => ({
   getQuestions() {
     return httpClient.get("/questions_view");
+  },
+  getStatus() {
+    return httpClient.get("/compliance_view");
   },
 });
 
@@ -78,5 +86,11 @@ export const sites = (httpClient) => ({
 export const updateDate = (httpClient) => ({
   getUpdateDate() {
     return httpClient.get("/etl_table_view");
+  },
+});
+
+export const risks = (httpClient) => ({
+  getRisks(siteId) {
+    return httpClient.get(siteId ? `/risk_view/${siteId}` : "/risk_all_view");
   },
 });

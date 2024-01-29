@@ -8,9 +8,10 @@ import {
   alerts,
   assets,
   cells,
+  compliance,
   incidents,
   insights,
-  questions,
+  risks,
   shops,
   sites,
   updateDate,
@@ -32,9 +33,10 @@ export const createApiClient = (httpClient) => {
     ...insights(httpClient),
     ...incidents(httpClient),
     ...users(httpClient),
-    ...questions(httpClient),
+    ...compliance(httpClient),
     ...sites(httpClient),
     ...updateDate(httpClient),
+    ...risks(httpClient),
   };
   return apiClient;
 };

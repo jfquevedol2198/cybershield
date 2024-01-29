@@ -1,4 +1,4 @@
-import { ArrowUpIcon } from "@heroicons/react/24/outline";
+// import { ArrowUpIcon } from "@heroicons/react/24/outline";
 import PropTypes from "prop-types";
 
 import EventCard from "../../../components/EventCard";
@@ -11,10 +11,10 @@ export const TabRisk = ({ value }) => {
       <div className="flex items-center justify-center">
         <GaugeChart percent={value} />
       </div>
-      <div className="absolute right-3 top-3 flex flex-row items-center justify-center gap-1 text-base text-risk-2">
+      {/* <div className="absolute right-3 top-3 flex flex-row items-center justify-center gap-1 text-base text-risk-2">
         <ArrowUpIcon className="h-3" />
         25%
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -23,7 +23,7 @@ TabRisk.propTypes = {
   value: PropTypes.number,
 };
 
-export const PanelRisk = () => {
+export const PanelRisk = ({ risks = [] }) => {
   return (
     <div className="flex h-full flex-col">
       <div className="mb-5 border-b-[1px] border-background pb-5 text-base font-normal text-gray-5">
@@ -31,32 +31,19 @@ export const PanelRisk = () => {
         your mitigation efforts.
       </div>
       <div className="h-full flex-auto overflow-y-auto">
-        <EventCard
-          title="Host Events"
-          description="Events that occurs on one host, including vulnerabilities."
-          score={92}
-        />
-        <EventCard
-          title="Industrial Control Systems"
-          description="Events that describe industrial operations, devices, concepts, or protocols."
-          score={72}
-        />
-        <EventCard
-          title="Network Events"
-          description="Events that describe industrial operations, devices, concepts, or protocols."
-          score={12}
-        />
-        <EventCard
-          title="Network Events"
-          description="Events that describe industrial operations, devices, concepts, or protocols."
-          score={12}
-        />
-        <EventCard
-          title="Network Events"
-          description="Events that describe industrial operations, devices, concepts, or protocols."
-          score={12}
-        />
+        {risks.map((risk, index) => (
+          <EventCard
+            key={`${risk.type}-${index}`}
+            title={risk.type}
+            description="Events that occurs on one host, including vulnerabilities."
+            score={Math.ceil(risk.total_risk_score_by_type_in_site * 10)}
+          />
+        ))}
       </div>
     </div>
   );
+};
+
+PanelRisk.propTypes = {
+  risks: PropTypes.arrayOf(PropTypes.any),
 };

@@ -68,7 +68,6 @@ const Table = ({
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
   const paginations = useMemo(() => {
-    console.log("=======");
     let _paginations = [];
     if (totalPages < 8) {
       for (let i = 1; i < totalPages + 1; i++) {

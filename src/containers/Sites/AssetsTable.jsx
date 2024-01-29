@@ -13,7 +13,7 @@ const columns = [
     dataIndex: "numeric_id",
     key: "numeric_id",
     sort: true,
-    sortDataType: SortDataType.String,
+    sortDataType: SortDataType.Number,
     colSpan: 1,
     className: "",
     align: "left",

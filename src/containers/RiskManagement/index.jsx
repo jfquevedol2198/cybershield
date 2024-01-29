@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { Fragment, useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
 
 import api from "../../api";
@@ -53,6 +54,8 @@ const RiskManagement = () => {
   const [risksByLevel, setRiskByLevel] = useState({});
   const [shops, setShops] = useState([]);
   const [alerts, setAlerts] = useState([]);
+  const [risks, setRisks] = useState([]);
+  const { siteId } = useParams();
 
   const [width, setWidth] = useState(0);
   const [lastUpdated, setLastUpdated] = useState("");
@@ -96,11 +99,9 @@ const RiskManagement = () => {
       }
 
       // assets
-      const { data } = await api.getAssets({});
+      const { data } = await api.getSiteAssets(siteId);
       const assets = parseAssets(data);
-      const averageRisk = parseFloat(
-        assets.reduce((sum, asset) => sum + asset.risk_score, 0) / assets.length
-      );
+
       const risksByLevel = {};
       assets.forEach(({ risk_score }) => {
         const riskLevel = getRiskLevel(risk_score);
@@ -112,23 +113,35 @@ const RiskManagement = () => {
       });
       setRiskByLevel(risksByLevel);
 
-      setAverageRisk(parseInt(averageRisk * 100));
       setAssets(assets);
 
       // shops
-      const { data: shopsData } = await api.getShops();
+      const { data: shopsData } = siteId
+        ? await api.getSiteShops(siteId)
+        : await api.getShops();
       const shops = parseShops(shopsData);
       setShops(shops);
 
       // alerts
-      const { data: alertsData } = await api.getAlerts();
+      const { data: alertsData } = await api.getAlertsView(siteId);
       const alerts = alertsData || [];
       setAlerts(alerts);
 
+      // risks
+      const { data: risks } = await api.getRisks(siteId);
+      setRisks(risks);
+
+      setAverageRisk(
+        Math.ceil(
+          siteId
+            ? risks[0]?.total_risk_score_by_site
+            : risks[0]?.total_risk_score
+        )
+      );
       setLoading(false);
     };
     fetch();
-  }, []);
+  }, [siteId]);
 
   return (
     <Fragment>
@@ -159,7 +172,7 @@ const RiskManagement = () => {
               // <TabIncidents key="incidents" value={2} />,
             ]}
             tabPanels={[
-              <PanelRisk key="risk" />,
+              <PanelRisk key="risk" risks={risks} />,
               <PanelAlerts key="alerts" alerts={alerts} />,
               <PanelShops key="shops" shops={shops} />,
               // <PanelInsights key="insights" />,
@@ -191,7 +204,9 @@ const RiskManagement = () => {
             <div className="mb-3 flex flex-row items-end justify-between">
               <div className="text-[1.375rem] font-bold">Affected Assets</div>
               <div>
-                <span className="mr-1 text-[2.75rem] font-light">52</span>
+                <span className="mr-1 text-[2.75rem] font-light">
+                  {assets.length}
+                </span>
                 <span className="text-[1.5rem] font-light">
                   /{assets.length}
                 </span>

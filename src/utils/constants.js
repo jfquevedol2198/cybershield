@@ -25,3 +25,11 @@ export const SortDirection = {
   ASC: "ASC",
   DESC: "DESC",
 };
+
+export const COMPLIANCE_ITEMS = [
+  "Detect",
+  "Identify",
+  "Protect",
+  "Recover",
+  "Respond",
+];

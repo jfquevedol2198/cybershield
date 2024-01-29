@@ -51,7 +51,7 @@ const Vulnerabilities = () => {
       const vulnerabilities = parseVulnerabilities(data);
 
       setPageData(vulnerabilities);
-
+      console.log(vulnerabilities);
       const riskData = getRiskDataByCategory(vulnerabilities, "cvescore");
       setRiskData([
         { riskLevel: "low", value: riskData["low"] },

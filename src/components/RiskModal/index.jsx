@@ -7,7 +7,6 @@ import { Fragment } from "react";
 import { ChildrenType } from "../../utils/types";
 
 const RiskModal = ({ riskLevel, title, isOpen, children, closeModal }) => {
-  console.log(riskLevel);
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
