@@ -1,16 +1,19 @@
+import PropTypes from "prop-types";
+
 import DataRow from "../../../components/DataRow";
+import { dateFormat, stringFormat } from "../../../utils";
 
 const OverviewTab = () => {
   return <div>Overview</div>;
 };
 
-const OverviewTabPanel = () => {
+const OverviewTabPanel = ({ data }) => {
   return (
     <div key="overview" className="">
       <div className="mb-1 bg-white px-4 py-2">
         <div className="mb-2 text-base font-bold">Description</div>
         <div className="text-base font-normal">
-          IMATIC S7-1500F-1 PN, CENTRAL PROCESSING UNIT
+          {stringFormat(data?.description)}
         </div>
       </div>
       <div className="flex w-full flex-row gap-1">
@@ -21,12 +24,21 @@ const OverviewTabPanel = () => {
           <div>
             <DataRow property="Shop" value="Oil Wells" />
             <DataRow property="Cell" value="South Well" />
-            <DataRow property="Asset owner" value="admin" />
-            <DataRow property="Location" value="-" />
-            <DataRow property="State" value="-" />
-            <DataRow property="First Seen" value="08 Feb 2023 | 10:18:35" />
-            <DataRow property="Last Seen" value="30 Nov 2023 | 20:00:58" />
-            <DataRow property="Vendor" value="Siemens" />
+            <DataRow
+              property="Asset owner"
+              value={stringFormat(data?.owner_user)}
+            />
+            <DataRow property="Location" value={stringFormat(data?.location)} />
+            <DataRow property="State" value={stringFormat(data?.state)} />
+            <DataRow
+              property="First Seen"
+              value={dateFormat(data?.first_seen)}
+            />
+            <DataRow property="Last Seen" value={dateFormat(data?.lastseen)} />
+            <DataRow
+              property="Vendor"
+              value={stringFormat(data?.vendor_name)}
+            />
             <DataRow
               isLast
               property="Asset collected by"
@@ -39,21 +51,34 @@ const OverviewTabPanel = () => {
             Asset Information
           </div>
           <div>
-            <DataRow property="Family" value="SIMATIC S7-1500" />
-            <DataRow property="Model" value="CPU 1511F-1 PN" />
-            <DataRow property="Catalog number" value="6ES7511-1FK01-0AB0" />
-            <DataRow property="Serial" value="-" />
-            <DataRow property="Firmware Version" value="-" />
+            <DataRow property="Family" value={stringFormat(data?.family)} />
+            <DataRow property="Model" value={stringFormat(data?.model_name)} />
+            <DataRow
+              property="Catalog number"
+              value={stringFormat(data?.catalog_number)}
+            />
+            <DataRow
+              property="Serial"
+              value={stringFormat(data?.serial_value)}
+            />
+            <DataRow
+              property="Firmware Version"
+              value={stringFormat(data?.firmware_version)}
+            />
             <DataRow
               isLast
               property="Hardware version"
-              value="08 Feb 2023 | 10:18:35"
+              value={stringFormat(data?.hardware_version)}
             />
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+OverviewTabPanel.propTypes = {
+  data: PropTypes.shape(PropTypes.any),
 };
 
 export { OverviewTab, OverviewTabPanel };

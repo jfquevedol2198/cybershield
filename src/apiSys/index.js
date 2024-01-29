@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { createUserApiClient } from "../api/apiClient";
+import { createUserApiClient } from "../apiSys/apiClient";
 import config from "../config";
 
 const httpClient = axios.create({

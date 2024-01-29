@@ -20,8 +20,8 @@ const columns = [
   },
   {
     title: "Name",
-    dataIndex: "asset_name",
-    key: "asset_name",
+    dataIndex: "name_",
+    key: "name_",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 1,
@@ -97,8 +97,8 @@ const columns = [
   },
   {
     title: "Location",
-    dataIndex: "location",
-    key: "location",
+    dataIndex: "location_sites",
+    key: "location_sites",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 1,
@@ -109,8 +109,10 @@ const columns = [
 
 const AssetsTable = ({ data, loading }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const onClickRow = () => {
+  const [selData, setSelData] = useState(null);
+  const onClickRow = (data) => {
     setIsOpen(true);
+    setSelData(data);
   };
   return (
     <>
@@ -122,7 +124,7 @@ const AssetsTable = ({ data, loading }) => {
         rowsPerPage={20}
       />
       <DetailModal
-        riskLevel="critical"
+        data={selData}
         isOpen={isOpen}
         closeModal={() => setIsOpen(false)}
       />

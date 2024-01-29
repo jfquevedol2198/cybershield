@@ -7,6 +7,16 @@ export const assets = (httpClient) => ({
       ? httpClient.get(`/assets/site/${siteId}`)
       : httpClient.get("/assets_view");
   },
+  getAssetsView(siteId, cellId) {
+    let url = "/assets_sites_view";
+    if (siteId) {
+      url = `${url}/${siteId}`;
+      if (cellId) {
+        url = `${url}/${cellId}`;
+      }
+    }
+    return httpClient.get(url);
+  },
 });
 
 export const cells = (httpClient) => ({

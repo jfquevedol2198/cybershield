@@ -1,38 +1,19 @@
-import {
-  createLoginApi,
-  resetPasswordApi,
-  updatePasswordApi,
-  verifyCodeApi,
-} from "./auth";
-import {
-  alerts,
-  assets,
-  cells,
-  incidents,
-  insights,
-  questions,
-  shops,
-  sites,
-  users,
-  vulnerabilities,
-} from "./dashboard";
+export const users = (httpClient) => ({
+  createUser(data) {
+    return httpClient.post("/create_user", data);
+  },
+});
 
-export const createApiClient = (httpClient) => {
+export const incident = (httpClient) => ({
+  createIncident(data) {
+    return httpClient.post("/create_incident", data);
+  },
+});
+
+export const createUserApiClient = (httpClient) => {
   const apiClient = {
-    ...createLoginApi(httpClient),
-    ...resetPasswordApi(httpClient),
-    ...updatePasswordApi(httpClient),
-    ...verifyCodeApi(httpClient),
-    ...assets(httpClient),
-    ...shops(httpClient),
-    ...cells(httpClient),
-    ...vulnerabilities(httpClient),
-    ...alerts(httpClient),
-    ...insights(httpClient),
-    ...incidents(httpClient),
     ...users(httpClient),
-    ...questions(httpClient),
-    ...sites(httpClient),
+    ...incident(httpClient),
   };
   return apiClient;
 };

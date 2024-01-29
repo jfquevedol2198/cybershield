@@ -9,7 +9,7 @@ import SearchInput from "../../components/SearchInput";
 import useCommon from "../../hooks/useCommon";
 import useSearchAndFilter from "../../hooks/useSearchAndFilter";
 import { parseAssets } from "../../utils/parse";
-import AssetsTable from "./AssetsTable";
+import AssetsTable from "../Assets/AssetsTable";
 
 const Assets = () => {
   const [searchParams] = useSearchParams();
@@ -25,12 +25,12 @@ const Assets = () => {
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const { data } = await api.getSiteAssets(siteId);
+      const { data } = await api.getAssetsView(siteId, cellId);
       setPageData(parseAssets(data));
       setLoading(false);
     };
     fetch();
-  }, [siteId]);
+  }, [siteId, cellId]);
 
   return (
     <Fragment>
@@ -51,7 +51,7 @@ const Assets = () => {
                 <span>{cellName}</span>{" "}
               </>
             ) : (
-              <>{sites.find((site) => site.id === siteId).name_}</>
+              <>{sites.find((site) => site.id === siteId)?.name_}</>
             )}
             &gt; Assets ({filterData.length})
           </span>

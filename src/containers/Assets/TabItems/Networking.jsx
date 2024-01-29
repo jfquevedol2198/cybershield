@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import Accordion from "../../../components/Accordion";
 import Collapsible from "../../../components/Collapsible";
 import DataRow from "../../../components/DataRow";
@@ -35,6 +37,10 @@ const NetworkingTabPanel = () => {
       </div>
     </div>
   );
+};
+
+NetworkingTabPanel.propTypes = {
+  data: PropTypes.shape(PropTypes.any),
 };
 
 export { NetworkingTab, NetworkingTabPanel };

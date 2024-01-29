@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import Accordion from "../../../components/Accordion";
 import DataRow from "../../../components/DataRow";
 
@@ -21,6 +23,10 @@ const AdditionalInfoTabPanel = () => {
       </Accordion>
     </div>
   );
+};
+
+AdditionalInfoTabPanel.propTypes = {
+  data: PropTypes.shape(PropTypes.any),
 };
 
 export { AdditionalInfoTab, AdditionalInfoTabPanel };

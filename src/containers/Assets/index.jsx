@@ -24,7 +24,7 @@ const Assets = () => {
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const { data } = await api.getAssets({});
+      const { data } = await api.getAssetsView();
       const assets = parseAssets(data);
       setPageData(assets);
       setFilterOptions(getFilterOptions(assets));

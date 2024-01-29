@@ -2,15 +2,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 
+import userApiClient from "../../apiSys";
+import ActivityIndicator from "../../components/ActivityIndicator";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
 import config from "../../config";
 import { ButtonVariant, SizeVariant } from "../../utils/constants";
-import { createServiceNowUser } from "../../utils/serviceNow";
+import snack from "../../utils/snack";
 
 const schema = z
   .object({
@@ -38,6 +40,7 @@ const schema = z
 
 const CompleteProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   // country, state, city
   const [isCountryLoading, setIsCountryLoading] = useState(false);
@@ -152,14 +155,32 @@ const CompleteProfile = () => {
       manager,
       last_name: lastName,
       middle_name: middleName,
+
+      home_phone: "-",
+      phone: "-",
+      name: "-",
+      user_name: email.slice(0, email.indexOf("@")),
+      mobile_phone: "-",
+      street: "-",
+      company: "Cybersheild",
+      department: "Department",
+      location: country,
     };
-    await createServiceNowUser(data);
+
+    const res = await userApiClient.createUser(data);
+    if (res.status === 200) {
+      snack.success("User is created successfully, please login");
+      navigate("/login");
+    } else {
+      snack.error("User create failed");
+    }
   };
 
   const onHandleSubmit = form.handleSubmit(onSubmit);
 
   return (
     <AuthLayout>
+      {isLoading && <ActivityIndicator />}
       <form onSubmit={onHandleSubmit}>
         <p className="mb-4 text-[1.625rem] font-bold not-italic text-gray-4">
           Complete your profile

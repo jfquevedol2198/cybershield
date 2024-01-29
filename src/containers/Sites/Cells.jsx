@@ -92,7 +92,7 @@ const Cells = () => {
           return (
             <Link
               key={cell.description}
-              to={`/dashboard/site/${siteId}/assets?cellId=${cell.id}&cellName=${cell.name}`}
+              to={`/dashboard/site/${siteId}/assets?cellId=${cell.cell_id}&cellName=${cell.cell_name}`}
             >
               <FactoryShopCell
                 name={cell.cell_name}

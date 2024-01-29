@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import Accordion from "../../../components/Accordion";
 import Collapsible from "../../../components/Collapsible";
 import DataRow from "../../../components/DataRow";
@@ -40,6 +42,10 @@ const PhysicalAdjacentDevicesTabPanel = () => {
       </div>
     </div>
   );
+};
+
+PhysicalAdjacentDevicesTabPanel.propTypes = {
+  data: PropTypes.shape(PropTypes.any),
 };
 
 export { PhysicalAdjacentDevicesTab, PhysicalAdjacentDevicesTabPanel };
