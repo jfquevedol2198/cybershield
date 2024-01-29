@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
 
+import { getRiskLevel } from "./risk";
+
 export const getFilterOptions = (data) => {
   if (!data) return {};
   const filterOptions = {};
@@ -90,6 +92,7 @@ export const applySearch = (data, search) => {
 
 export const applyFilter = (data, filterOptions) => {
   let filteredData = data;
+  console.log(filterOptions);
   filterOptions.forEach((option) => {
     if (option.value) {
       const type = typeof option.value;
@@ -115,6 +118,14 @@ export const applyFilter = (data, filterOptions) => {
               return t >= minDate;
             }
             return false;
+          }
+          if (
+            option.key === "risk_score" ||
+            option.key === "severity" ||
+            option.key === "cvescore"
+          ) {
+            const level = getRiskLevel(d[option.key]);
+            return level === option.value;
           }
           return (
             option.value === "*" ||

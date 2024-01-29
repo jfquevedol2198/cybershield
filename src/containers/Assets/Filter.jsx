@@ -14,7 +14,7 @@ import { RiskLevel } from "../../utils/risk";
 const schema = z.object({
   type: z.string().optional(),
   tag: z.string().optional(),
-  risk: z.string().optional(),
+  risk_score: z.string().optional(),
   interfaces_mac: z.string().optional(),
   interfaces_ip: z.string().optional(),
   cell_name: z.string().optional(),
@@ -91,18 +91,18 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
             {...form.register("tag")}
           />
           <FormControl
-            id="risk"
+            id="risk_score"
             label="Risk"
             className="mb-5"
             inputType="dropdown"
             size={SizeVariant.small}
-            error={form.formState.errors.risk?.message}
+            error={form.formState.errors.risk_score?.message}
             data={Object.keys(RiskLevel).map((key) => ({
               value: key,
               label: RiskLevel[key].label,
             }))}
             setValue={form.setValue}
-            {...form.register("risk")}
+            {...form.register("risk_score")}
           />
           <FormControl
             id="interfaces_mac"

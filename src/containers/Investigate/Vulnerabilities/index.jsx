@@ -14,6 +14,7 @@ import DonutChart from "../../../components/d3/DonutChart";
 import StackedAreaChartComponentVul from "../../../components/d3/StackedAreaChartComponentVul";
 import useSearchAndFilter from "../../../hooks/useSearchAndFilter";
 import { ButtonVariant, normalizeString } from "../../../utils";
+import { getFilterOptions } from "../../../utils/filter";
 import { groupByKey, parseVulnerabilities } from "../../../utils/parse";
 import { getRiskDataByCategory, getRiskLevel } from "../../../utils/risk";
 import Filter from "./Filter";
@@ -38,6 +39,7 @@ const Vulnerabilities = () => {
   const [prioritizedData, setPrioritizedData] = useState([]);
   const { setPageData, filterData, addFilter, hasFilterAndSearch } =
     useSearchAndFilter();
+  const [filterCellOptions, setFilterCellOptions] = useState([]);
 
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
@@ -51,7 +53,8 @@ const Vulnerabilities = () => {
       const vulnerabilities = parseVulnerabilities(data);
 
       setPageData(vulnerabilities);
-      console.log(vulnerabilities);
+      setFilterCellOptions(getFilterOptions(vulnerabilities));
+
       const riskData = getRiskDataByCategory(vulnerabilities, "cvescore");
       setRiskData([
         { riskLevel: "low", value: riskData["low"] },
@@ -203,6 +206,7 @@ const Vulnerabilities = () => {
       {/* Filter */}
       <Filter
         isOpen={isFilterOpen}
+        filterOptions={filterCellOptions}
         onSubmit={onFilter}
         onClose={() => setIsFilterOpen(false)}
       />

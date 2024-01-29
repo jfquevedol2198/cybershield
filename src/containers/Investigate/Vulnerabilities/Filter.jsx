@@ -7,25 +7,15 @@ import Button from "../../../components/Button";
 import FormControl from "../../../components/FormControl";
 import SlideOver from "../../../components/SlideOver";
 import { ButtonVariant, SizeVariant } from "../../../utils";
+import { RiskLevel } from "../../../utils/risk";
 
 const schema = z.object({
-  severity: z.string(),
+  cvescore: z.string(),
   impact: z.string(),
-  vendor: z.array(z.string()),
+  vendor: z.string(),
 });
 
-const Categories = [
-  {
-    label: "test1",
-    value: "Text 1",
-  },
-  {
-    label: "test2",
-    value: "Text 2",
-  },
-];
-
-const Filter = ({ isOpen, onSubmit, onClose }) => {
+const Filter = ({ isOpen, onSubmit, onClose, filterOptions }) => {
   const getDefaultValues = () => {
     return {
       severity: undefined,
@@ -44,14 +34,17 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
       <form className="flex h-full flex-col" onSubmit={onHandleSubmit}>
         <div className="flex-auto overflow-y-auto">
           <FormControl
-            id="severity"
+            id="cvescore"
             label="Severity"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.severity?.message}
-            data={Categories}
-            {...form.register("severity")}
+            error={form.formState.errors.cvescore?.message}
+            data={Object.keys(RiskLevel).map((key) => ({
+              value: key,
+              label: RiskLevel[key].label,
+            }))}
+            {...form.register("cvescore")}
             setValue={form.setValue}
           />
           <FormControl
@@ -61,7 +54,7 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             className="mb-5"
             size={SizeVariant.small}
             error={form.formState.errors.impact?.message}
-            data={Categories}
+            data={filterOptions["impact"]}
             {...form.register("impact")}
             setValue={form.setValue}
           />
@@ -71,14 +64,16 @@ const Filter = ({ isOpen, onSubmit, onClose }) => {
             inputType="dropdown"
             size={SizeVariant.small}
             error={form.formState.errors.vendor?.message}
-            data={Categories}
+            data={filterOptions["vendor"]}
             {...form.register("vendor")}
             setValue={form.setValue}
           />
         </div>
         <div className="flex flex-row items-center justify-end gap-2 pt-5">
           <Button variant={ButtonVariant.outline}>CANCEL</Button>
-          <Button variant={ButtonVariant.filled}>FILTER</Button>
+          <Button variant={ButtonVariant.filled} isSubmit>
+            FILTER
+          </Button>
         </div>
       </form>
     </SlideOver>
@@ -89,6 +84,7 @@ Filter.propTypes = {
   isOpen: PropTypes.bool,
   onSubmit: PropTypes.func,
   onClose: PropTypes.func,
+  filterOptions: PropTypes.shape(PropTypes.any),
 };
 
 export default Filter;

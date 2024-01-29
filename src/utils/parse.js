@@ -20,7 +20,7 @@ export const parseCells = (data) =>
 export const parseAssets = (data) =>
   data.map((asset) => ({
     ...asset,
-    risk_score: parseFloat(asset.risk_score || "0"),
+    risk_score: parseFloat(asset.risk_score || "0") * 10,
   }));
 
 export const groupByKey = (data, key, formatKeyFn = (key) => key) => {
