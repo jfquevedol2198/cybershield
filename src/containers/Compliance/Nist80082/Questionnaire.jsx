@@ -28,26 +28,23 @@ const Questionnaire = () => {
     fetch();
   }, [title]);
 
-  const scrollToQuestionaire = (questionaire) => {
-    questionaire.scrollIntoView({ behavior: "smooth", block: "center" });
+  const scrollToQuestionnaire = (index) => {
+    const questionnaire =
+      questionsWrapper.current.querySelectorAll("& > div")[index];
+    setQuestionIndex(index);
+    questionnaire.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   const onBack = () => {
     let index = questionIndex;
     if (index > 0) index--;
-    setQuestionIndex(index);
-    scrollToQuestionaire(
-      questionsWrapper.current.querySelectorAll("& > div")[index]
-    );
+    scrollToQuestionnaire(index);
   };
 
   const onNext = () => {
     let index = questionIndex;
     if (index < questions.length - 1) index++;
-    setQuestionIndex(index);
-    scrollToQuestionaire(
-      questionsWrapper.current.querySelectorAll("& > div")[index]
-    );
+    scrollToQuestionnaire(index);
   };
 
   return (
@@ -79,6 +76,7 @@ const Questionnaire = () => {
               questionNumber={question.question_number}
               question={question.question_description}
               active={index === questionIndex}
+              onClick={scrollToQuestionnaire}
             />
           ))}
         </div>
