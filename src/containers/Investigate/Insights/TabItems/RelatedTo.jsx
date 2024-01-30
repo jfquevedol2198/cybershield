@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 
@@ -6,7 +5,7 @@ import api from "../../../../api";
 import Accordion from "../../../../components/Accordion";
 import Table from "../../../../components/Table";
 import Tag from "../../../../components/Tag";
-import { SortDataType } from "../../../../utils";
+import { SortDataType, dateFormat } from "../../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../../utils/risk";
 
 const RelatedToTab = () => {
@@ -67,7 +66,7 @@ const columns = [
     key: "alertTime",
     sort: true,
     sortDataType: SortDataType.Date,
-    render: (value) => dayjs(value).format("DD MMM YYYY | HH:mm:ss"),
+    render: dateFormat,
     colSpan: 1.3,
     className: "",
     align: "left",

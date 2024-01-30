@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
 import Button from "../../../components/Button";
@@ -6,7 +5,7 @@ import CustomTap from "../../../components/CustomTap";
 import ExportButton from "../../../components/ExportButton";
 import RiskModal from "../../../components/RiskModal";
 import Tag from "../../../components/Tag";
-import { ButtonVariant } from "../../../utils";
+import { ButtonVariant, dateFormat } from "../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
 import { AlertInfoTab, AlertInfoTabPanel } from "./TabItems/AlertInfo";
 import { AlertStatusTab, AlertStatusTabPanel } from "./TabItems/AlertStatus";
@@ -58,7 +57,7 @@ const DetailModal = ({ data, ...rest }) => {
             <div className="flex flex-col">
               <span className="text-sm font-bold text-gray-4">Alert time</span>
               <span className="text-sm font-normal text-gray-4">
-                {dayjs(created_at).format("DD MMM YYYY | HH:mm:ss")}
+                {dateFormat(created_at)}
               </span>
             </div>
             <div className="flex flex-col">

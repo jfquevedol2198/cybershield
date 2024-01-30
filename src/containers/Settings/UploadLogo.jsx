@@ -5,12 +5,13 @@ import { useState } from "react";
 import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
 import config from "../../config";
-import { ButtonVariant, getCookieValue, setCookieValue } from "../../utils";
+import useAuth from "../../hooks/useAuth";
+import { ButtonVariant, setCookieValue } from "../../utils";
 import snack from "../../utils/snack";
 
 const UploadLogo = () => {
-  const [logo, setLogo] = useState(getCookieValue("LOGO_URL"));
-  const [uploadMode, setUploadMode] = useState(!getCookieValue("LOGO_URL"));
+  const { configuration, updateConfiguration } = useAuth();
+  const [uploadMode, setUploadMode] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [tempLogo, setTempLogo] = useState(null);
   const [logoToUpload, setLogoToUpload] = useState(null);
@@ -37,10 +38,12 @@ const UploadLogo = () => {
 
   const onUpdate = () => {
     setCookieValue("LOGO_URL", logoToUpload);
-    setLogo(logoToUpload);
     setLogoToUpload(null);
     setUploadMode(false);
     setTempLogo(null);
+    updateConfiguration({
+      linklogo: parseInt(logoToUpload),
+    });
     snack.success("Organization logo updated");
   };
   return (
@@ -50,10 +53,10 @@ const UploadLogo = () => {
         The logo will be updated in the top right of the screen and the login
         page.
       </div>
-      {!uploadMode && logo && (
+      {!uploadMode && configuration.linklogo && (
         <div className="flex items-start gap-x-4">
           <div className="flex h-[66px] w-[212px] flex-row items-center justify-center border border-dashed border-link">
-            <img src={logo} alt="" className="h-full" />
+            <img src={configuration.linklogo} alt="" className="h-full" />
           </div>
           <NormalButton
             variant={ButtonVariant.text}
@@ -93,7 +96,7 @@ const UploadLogo = () => {
         <span className="font-bold">Recommended size:</span>{" "}
         <span className="font-light">150x50 px</span>
       </div>
-      {(uploadMode || !logo) && (
+      {(uploadMode || !configuration.linklogo) && (
         <div>
           <div className="flex items-center">
             <Button

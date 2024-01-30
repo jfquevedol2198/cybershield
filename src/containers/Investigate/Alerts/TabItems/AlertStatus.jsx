@@ -1,7 +1,7 @@
-import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
 import Tag, { TagVariant } from "../../../../components/Tag";
+import { dateFormat } from "../../../../utils";
 
 const AlertStatusTab = () => {
   return <div>Alert status</div>;
@@ -23,7 +23,7 @@ const AlertStatusTabPanel = ({ data }) => {
             New Alert was modified.
           </div>
           <div className="text-base font-normal text-gray-4">
-            {dayjs(data.updated_at).format("DD MMM YYYY | HH:mm:ss")}
+            {dateFormat(data.updated_at)}
           </div>
         </div>
         <div>
@@ -31,7 +31,7 @@ const AlertStatusTabPanel = ({ data }) => {
             New Alert was created.
           </div>
           <div className="text-base font-normal text-gray-4">
-            {dayjs(data.created_at).format("DD MMM YYYY | HH:mm:ss")}
+            {dateFormat(data.created_at)}
           </div>
         </div>
       </div>

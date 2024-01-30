@@ -51,13 +51,16 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const updateConfiguration = async (time) => {
+  const updateConfiguration = async (config) => {
     try {
-      await apiClient.updateConfiguration(time);
-      setConfiguration({
+      const data = {
         ...configuration,
-        time_refresh_interval: time,
-      });
+        ...config,
+      };
+      delete data.account_id;
+      const res = await apiClient.updateConfiguration(data);
+      console.log(res);
+      setConfiguration(data);
       snack.success("Configuration updated successfully");
     } catch (error) {
       snack.error("Configuration updated failed");

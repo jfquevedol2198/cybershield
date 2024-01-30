@@ -37,7 +37,9 @@ const TimeRefresh = () => {
   const onUpdate = () => {
     setTimeRefresh(tempValue);
     setEditMode(false);
-    updateConfiguration(parseInt(tempValue.value));
+    updateConfiguration({
+      time_refresh_interval: parseInt(tempValue.value),
+    });
   };
 
   useEffect(() => {

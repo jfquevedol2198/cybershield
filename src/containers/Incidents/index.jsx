@@ -107,9 +107,9 @@ const Incidents = () => {
         setPageData(incidents);
         setFilterOptions(getFilterOptions(incidents));
 
-        setGroupByCveID(groupByKey(incidents, "type"));
+        setGroupByCveID(groupByKey(incidents, "subcategory"));
 
-        const riskData = getRiskDataByCategory(incidents, "cveScore");
+        const riskData = getRiskDataByCategory(incidents, "severity");
         setRiskData([
           { riskLevel: "low", value: riskData["low"] },
           { riskLevel: "medium", value: riskData["medium"] },

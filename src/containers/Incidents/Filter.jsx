@@ -14,13 +14,13 @@ import { ButtonVariant, SizeVariant } from "../../utils";
 import { RiskLevel } from "../../utils/risk";
 
 const schema = z.object({
-  creationTime: z.string().optional(),
-  type: z.string().optional(),
-  status: z.string().optional(),
-  risk: z.string().optional(),
-  cell: z.string().optional(),
+  opened_at: z.string().optional(),
+  subcategory: z.string().optional(),
+  state: z.string().optional(),
+  severity: z.string().optional(),
+  location: z.string().optional(),
   relatedAlert: z.string().optional(),
-  owner: z.string().optional(),
+  assignment_group: z.string().optional(),
   shop: z.string().optional(),
   assignee: z.string().optional(),
   isMyIncidentsOnly: z.boolean().optional(),
@@ -60,65 +60,65 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
       <form className="flex h-full flex-col" onSubmit={onHandleSubmit}>
         <div className="flex-auto overflow-hidden hover:overflow-y-auto">
           <FormControl
-            id="creationTime"
+            id="opened_at"
             label="Creation Time"
             className="mb-5"
             inputType="dropdown"
             size={SizeVariant.small}
-            error={form.formState.errors.creationTime?.message}
-            data={filterOptions["creationTime"]}
+            error={form.formState.errors.opened_at?.message}
+            data={filterOptions["opened_at"]}
             setValue={form.setValue}
-            {...form.register("creationTime")}
+            {...form.register("opened_at")}
           />
           <FormControl
-            id="type"
+            id="subcategory"
             label="Type"
             className="mb-5"
             inputType="dropdown"
             size={SizeVariant.small}
-            error={form.formState.errors.type?.message}
-            data={filterOptions["type"]}
+            error={form.formState.errors.subcategory?.message}
+            data={filterOptions["subcategory"]}
             setValue={form.setValue}
-            {...form.register("type")}
+            {...form.register("subcategory")}
           />
           <div className="mb-4">
             <MultiSelect
-              id="status"
+              id="state"
               label="Status"
               className="mb-5"
               size={SizeVariant.small}
-              error={form.formState.errors.status?.message}
-              data={_.map(filterOptions?.status, (status) => ({
-                label: status,
-                value: status,
+              error={form.formState.errors.state?.message}
+              data={_.map(filterOptions?.state, (state) => ({
+                label: state,
+                value: state,
               }))}
-              {...form.register("status")}
+              {...form.register("state")}
             />
           </div>
           <FormControl
-            id="risk"
+            id="severity"
             label="Risk"
             className="mb-5"
             inputType="dropdown"
             size={SizeVariant.small}
-            error={form.formState.errors.risk?.message}
+            error={form.formState.errors.severity?.message}
             data={Object.keys(RiskLevel).map((key) => ({
               value: key,
               label: RiskLevel[key].label,
             }))}
             setValue={form.setValue}
-            {...form.register("risk")}
+            {...form.register("severity")}
           />
           <FormControl
-            id="cell"
+            id="location"
             label="Cell"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.cell?.message}
-            data={filterOptions["cell"]}
+            error={form.formState.errors.location?.message}
+            data={filterOptions["location"]}
             setValue={form.setValue}
-            {...form.register("cell")}
+            {...form.register("location")}
           />
           <FormControl
             id="relatedAlert"
@@ -130,15 +130,15 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
             setValue={form.setValue}
           />
           <FormControl
-            id="owner"
+            id="assignment_group"
             label="Owner"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.owner?.message}
-            data={filterOptions["owner"]}
+            error={form.formState.errors.assignment_group?.message}
+            data={filterOptions["assignment_group"]}
             setValue={form.setValue}
-            {...form.register("owner")}
+            {...form.register("assignment_group")}
           />
           <FormControl
             id="shop"

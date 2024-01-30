@@ -3,15 +3,14 @@ import { useState } from "react";
 
 import Table from "../../components/Table";
 import Tag from "../../components/Tag";
-import { SortDataType } from "../../utils";
+import { SortDataType, dateFormat } from "../../utils";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
-import DetailModal from "./DetailModal";
 
 const columns = [
   {
     title: "Incident ID",
-    dataIndex: "id",
-    key: "id",
+    dataIndex: "origin_id",
+    key: "origin_idid",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 1,
@@ -20,8 +19,8 @@ const columns = [
   },
   {
     title: "Name",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "short_description",
+    key: "short_description",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 1,
@@ -41,8 +40,8 @@ const columns = [
   },
   {
     title: "Status",
-    dataIndex: "status",
-    key: "status",
+    dataIndex: "state",
+    key: "state",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 1,
@@ -51,8 +50,8 @@ const columns = [
   },
   {
     title: "Type",
-    dataIndex: "type",
-    key: "type",
+    dataIndex: "subcategory",
+    key: "subcategory",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 1,
@@ -61,24 +60,25 @@ const columns = [
   },
   {
     title: "Creation Time",
-    dataIndex: "creationTime",
-    key: "creationTime",
+    dataIndex: "opened_at",
+    key: "opened_at",
     colSpan: 1,
     className: "",
+    render: dateFormat,
     align: "left",
   },
   {
     title: "Cell",
-    dataIndex: "cell",
-    key: "cell",
+    dataIndex: "location",
+    key: "location",
     colSpan: 1,
     className: "",
     align: "left",
   },
   {
-    title: "Owner",
-    dataIndex: "owner",
-    key: "owner",
+    title: "Assignment Group",
+    dataIndex: "assignment_group",
+    key: "assignment_group",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 1,
@@ -87,10 +87,11 @@ const columns = [
   },
   {
     title: "Last Updated",
-    dataIndex: "updatedAt",
-    key: "updatedAt",
+    dataIndex: "sys_updated_on",
+    key: "sys_updated_on",
     sort: true,
     sortDataType: SortDataType.Date,
+    render: dateFormat,
     colSpan: 1,
     className: "",
     align: "left",
@@ -98,7 +99,7 @@ const columns = [
 ];
 
 const IncidentsTable = ({ currPage, totalPages, data, loading }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [, setIsOpen] = useState(false);
   const onClickRow = () => {
     setIsOpen(true);
   };

@@ -1,10 +1,9 @@
-import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
 import Table from "../../../components/Table";
 import Tag from "../../../components/Tag";
-import { SortDataType } from "../../../utils";
+import { SortDataType, dateFormat } from "../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
 import DetailModal from "./DetailModal";
 
@@ -54,7 +53,7 @@ const columns = [
     key: "created_at",
     sort: true,
     sortDataType: SortDataType.Date,
-    render: (value) => dayjs(value).format("DD MMM YYYY | HH:mm:ss"),
+    render: dateFormat,
     colSpan: 1,
     className: "",
     align: "left",
@@ -90,7 +89,7 @@ const columns = [
     sort: true,
     sortDataType: SortDataType.Date,
     colSpan: 1,
-    render: (value) => dayjs(value).format("DD MMM YYYY | HH:mm:ss"),
+    render: dateFormat,
     className: "",
     align: "left",
   },
