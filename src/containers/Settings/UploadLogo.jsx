@@ -37,14 +37,12 @@ const UploadLogo = () => {
   };
 
   const onUpdate = () => {
-    setCookieValue("LOGO_URL", logoToUpload);
+    updateConfiguration({
+      linklogo: logoToUpload,
+    });
     setLogoToUpload(null);
     setUploadMode(false);
     setTempLogo(null);
-    updateConfiguration({
-      linklogo: parseInt(logoToUpload),
-    });
-    snack.success("Organization logo updated");
   };
   return (
     <div>
@@ -53,7 +51,7 @@ const UploadLogo = () => {
         The logo will be updated in the top right of the screen and the login
         page.
       </div>
-      {!uploadMode && configuration.linklogo && (
+      {!uploadMode && configuration?.linklogo && (
         <div className="flex items-start gap-x-4">
           <div className="flex h-[66px] w-[212px] flex-row items-center justify-center border border-dashed border-link">
             <img src={configuration.linklogo} alt="" className="h-full" />
@@ -69,7 +67,7 @@ const UploadLogo = () => {
           </NormalButton>
         </div>
       )}
-      {uploadMode && (
+      {(uploadMode || !configuration?.linklogo) && (
         <div className="flex h-[66px] w-[212px] flex-row items-center justify-center border border-dashed border-link">
           {tempLogo ? (
             <img src={tempLogo} alt="" className="h-full" />
