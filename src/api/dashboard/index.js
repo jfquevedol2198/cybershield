@@ -113,6 +113,6 @@ export const configuration = (httpClient) => ({
     return httpClient.get("/configuration");
   },
   updateConfiguration(data) {
-    return httpClient.put("/update_configuration/1", data);
+    return httpClient.put("/update_configuration/2", data);
   },
 });
