@@ -2,6 +2,7 @@ import { Auth } from "aws-amplify";
 import PropTypes from "prop-types";
 import { createContext, useContext, useEffect, useState } from "react";
 
+import apiClient from "../api";
 import {
   AUTH_TOKEN,
   getCookieValue,
@@ -13,6 +14,7 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [userInfo, setUserInfo] = useState({});
   const [tempUser, setTempUser] = useState(null);
   const [authToken, setAuthToken] = useState(null);
 
@@ -29,6 +31,10 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         setUser(user);
       }
+      const {
+        data: [userInfo],
+      } = await apiClient.getSysUserView(user.username);
+      setUserInfo(userInfo);
     };
     const token = getCookieValue(AUTH_TOKEN);
     setAuthToken(token);
@@ -43,6 +49,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        userInfo,
         setUser,
         tempUser,
         setTempUser,

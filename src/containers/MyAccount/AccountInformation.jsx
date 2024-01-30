@@ -1,12 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
 import NormalButton from "../../components/NormalButton";
+import config from "../../config";
+import useAuth from "../../hooks/useAuth";
 import { ButtonVariant, SizeVariant } from "../../utils";
 
 const schema = z.object({
@@ -25,8 +27,16 @@ const schema = z.object({
 
 const AccountInformation = () => {
   const [editMode, setEditMode] = useState(false);
+  const { userInfo } = useAuth();
+
+  // country, state, city
+  const [isCountryLoading, setIsCountryLoading] = useState(false);
+  const [isStateLoading, setIsStateLoading] = useState(false);
+  const [isCityLoading, setIsCityLoading] = useState(false);
+
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
@@ -48,8 +58,17 @@ const AccountInformation = () => {
 
   const getDefaultValues = () => {
     return {
-      fullname: "",
-      username: "",
+      firstName: userInfo?.first_name,
+      middleName: userInfo?.middle_name,
+      lastName: userInfo?.last_name,
+      country: userInfo?.country,
+      state: userInfo?.state,
+      city: userInfo?.city,
+      zipCode: userInfo?.zip,
+      manager: userInfo?.manager,
+      jobTitle: userInfo?.title,
+      phone: userInfo?.phone,
+      email: userInfo?.email,
     };
   };
 
@@ -57,6 +76,67 @@ const AccountInformation = () => {
     resolver: zodResolver(schema),
     defaultValues: getDefaultValues(),
   });
+
+  const country = useWatch({ control: form.control, name: "country" });
+  const state = useWatch({ control: form.control, name: "state" });
+
+  useEffect(() => {
+    const fetch = async () => {
+      setIsCountryLoading(true);
+      const { data } = await axios.get(
+        "https://api.countrystatecity.in/v1/countries",
+        {
+          headers: {
+            "X-CSCAPI-KEY": config.countryStateCityApiKey,
+          },
+        }
+      );
+      setCountries(
+        data.map((country) => ({ label: country.name, value: country.iso2 }))
+      );
+      setStates([]);
+      setCities([]);
+      setIsCountryLoading(false);
+    };
+    fetch();
+  }, []);
+
+  useEffect(() => {
+    const fetch = async () => {
+      setIsStateLoading(true);
+      const { data } = await axios.get(
+        `https://api.countrystatecity.in/v1/countries/${country}/states`,
+        {
+          headers: {
+            "X-CSCAPI-KEY": config.countryStateCityApiKey,
+          },
+        }
+      );
+      setStates(
+        data.map((state) => ({ label: state.name, value: state.iso2 }))
+      );
+      setCities([]);
+      setIsStateLoading(false);
+    };
+    if (country) fetch();
+  }, [country]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      setIsCityLoading(true);
+      const { data } = await axios.get(
+        `https://api.countrystatecity.in/v1/countries/${country}/states/${state}/cities`,
+        {
+          headers: {
+            "X-CSCAPI-KEY": config.countryStateCityApiKey,
+          },
+        }
+      );
+      setCities(data.map((city) => ({ label: city.name, value: city.name })));
+      setIsCityLoading(false);
+    };
+    if (country && state) fetch();
+  }, [state]);
 
   return (
     <div>
@@ -103,6 +183,7 @@ const AccountInformation = () => {
                 error={form.formState.errors.country?.message}
                 data={countries}
                 {...form.register("country")}
+                isDisabled={isCountryLoading}
               />
             </div>
             <div className="w-full">
@@ -114,6 +195,7 @@ const AccountInformation = () => {
                 error={form.formState.errors.state?.message}
                 data={states}
                 {...form.register("state")}
+                isDisabled={isStateLoading}
               />
             </div>
           </div>
@@ -126,8 +208,9 @@ const AccountInformation = () => {
                 inputType="dropdown"
                 size={SizeVariant.small}
                 error={form.formState.errors.city?.message}
-                data={countries}
+                data={cities}
                 {...form.register("city")}
+                isDisabled={isCityLoading}
               />
             </div>
             <div className="w-full">
@@ -176,7 +259,7 @@ const AccountInformation = () => {
             Multiple Factor authentication flow.
           </div>
           <div className="mb-4">
-            <span className="sr-only">Job Manager</span>
+            <span className="sr-only">Email</span>
             <FormControl
               className="mb-4"
               id="email"
@@ -193,7 +276,6 @@ const AccountInformation = () => {
                 className="flex-auto"
                 variant={ButtonVariant.filled}
                 onClick={() => {}}
-                isDisabled={!form.formState.isValid}
                 isSubmit
               >
                 UPDATE

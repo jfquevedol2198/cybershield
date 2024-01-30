@@ -21,7 +21,7 @@ import NormalButton from "../NormalButton";
 
 const Header = () => {
   const location = useLocation();
-  const { user } = useAuth();
+  const { userInfo } = useAuth();
 
   const isSetting = location.pathname.indexOf("/settings") > -1;
   const { setShowSignoutModal } = useCommon();
@@ -105,7 +105,7 @@ const Header = () => {
               buttonContent={
                 <NormalButton variant={ButtonVariant.icon} className="h-full">
                   <div className="flex flex-col items-end">
-                    <span className="text-sm font-light">{user.username}</span>
+                    <span className="text-sm font-light">{userInfo.name}</span>
                     <span className="text-xs">W INDUSTRIES</span>
                   </div>
                   <Avatar />

@@ -26,6 +26,7 @@ const FormControl = React.forwardRef(
       size,
       inputType,
       setValue: setValueForm,
+      isDisabled,
       ...rest
     },
     ref
@@ -173,7 +174,7 @@ const FormControl = React.forwardRef(
                     setSelected(v);
                   }}
                 >
-                  <Listbox.Button className="absolute left-3 z-10 flex w-[7rem] cursor-pointer flex-row items-center gap-1 bg-white py-2 text-left sm:text-sm">
+                  <Listbox.Button className="z-9 absolute left-3 flex w-[7rem] cursor-pointer flex-row items-center gap-1 bg-white py-2 text-left sm:text-sm">
                     <span className="bg-transparent text-xl">
                       {selected?.flag}
                     </span>
@@ -253,6 +254,7 @@ const FormControl = React.forwardRef(
                   hasIcon ? "pr-10" : "",
                   inputStyles[size]
                 )}
+                disabled={isDisabled}
                 {...rest}
                 onChange={(e) => {
                   rest.onChange(e);
@@ -291,6 +293,7 @@ FormControl.defaultProps = {
   size: SizeVariant.medium,
   className: "",
   placeholder: "placeholder",
+  isDisabled: false,
 };
 
 FormControl.propTypes = {
@@ -307,6 +310,7 @@ FormControl.propTypes = {
     PropTypes.node,
   ]),
   setValue: PropTypes.func,
+  isDisabled: PropTypes.bool,
 };
 
 export default FormControl;

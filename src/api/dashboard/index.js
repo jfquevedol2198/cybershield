@@ -70,6 +70,9 @@ export const incidents = (httpClient) => ({
 });
 
 export const users = (httpClient) => ({
+  getSysUserView(email) {
+    return httpClient.get(`/sys_user_view/${email}`);
+  },
   getSysUsers() {
     return httpClient.get("/sys_user");
   },
