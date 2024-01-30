@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 
-import apiClient from "../../api";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import Checkbox from "../../components/Checkbox";
@@ -140,12 +139,12 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
         phone,
       } = e;
       const data = {
+        ...user,
         country,
         zip,
-        active: true,
         state,
         city,
-        title: title,
+        title,
         first_name: firstName,
         email,
         manager,
@@ -153,7 +152,10 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
         last_name: lastName,
         middle_name: middleName,
       };
-      const res = await apiClient.updateSysUser(user.id, data);
+      const res = await axios.put(
+        `http://3.128.30.222:8080/sys_user/${user.id}`,
+        data
+      );
       console.log(res);
       snack.success("Updated successfully");
     } catch (error) {

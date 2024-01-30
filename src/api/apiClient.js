@@ -9,6 +9,7 @@ import {
   assets,
   cells,
   compliance,
+  configuration,
   incidents,
   insights,
   risks,
@@ -37,6 +38,7 @@ export const createApiClient = (httpClient) => {
     ...sites(httpClient),
     ...updateDate(httpClient),
     ...risks(httpClient),
+    ...configuration(httpClient),
   };
   return apiClient;
 };

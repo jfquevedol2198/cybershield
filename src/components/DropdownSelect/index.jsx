@@ -1,14 +1,18 @@
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 import { DropdownSelectDataType } from "../../utils/types";
 import NormalButton from "../NormalButton";
 
 const DropdownSelect = React.forwardRef(
-  ({ data, onSelect, className = "bg-background" }, ref) => {
-    const [selected, setSelected] = useState(data[0]);
+  ({ data, onSelect, defaultValue, className = "bg-background" }, ref) => {
+    const [selected, setSelected] = useState(null);
+
+    useEffect(() => {
+      setSelected(defaultValue);
+    }, [defaultValue]);
 
     return (
       <Menu as="div" className="relative z-10 inline-block w-full text-left">

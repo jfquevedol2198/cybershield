@@ -9,6 +9,7 @@ import {
   redirectToAuth,
   setCookieValue,
 } from "../utils";
+import snack from "../utils/snack";
 
 const AuthContext = createContext({});
 
@@ -17,6 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({});
   const [tempUser, setTempUser] = useState(null);
   const [authToken, setAuthToken] = useState(null);
+  const [configuration, setConfiguration] = useState({});
 
   useEffect(() => {
     if (user) {
@@ -35,6 +37,10 @@ export const AuthProvider = ({ children }) => {
         data: [userInfo],
       } = await apiClient.getSysUserView(user.username);
       setUserInfo(userInfo);
+      const {
+        data: [configuration],
+      } = await apiClient.getConfiguration();
+      setConfiguration(configuration);
     };
     const token = getCookieValue(AUTH_TOKEN);
     setAuthToken(token);
@@ -45,15 +51,30 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  const updateConfiguration = async (time) => {
+    try {
+      await apiClient.updateConfiguration(time);
+      setConfiguration({
+        ...configuration,
+        time_refresh_interval: time,
+      });
+      snack.success("Configuration updated successfully");
+    } catch (error) {
+      snack.error("Configuration updated failed");
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
         user,
         userInfo,
+        configuration,
         setUser,
         tempUser,
         setTempUser,
         authToken,
+        updateConfiguration,
       }}
     >
       {children}

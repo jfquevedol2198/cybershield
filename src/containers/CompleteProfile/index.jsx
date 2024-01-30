@@ -155,7 +155,6 @@ const CompleteProfile = () => {
       manager,
       last_name: lastName,
       middle_name: middleName,
-
       home_phone: "-",
       phone: "-",
       name: "-",

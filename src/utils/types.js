@@ -17,6 +17,7 @@ export const DropdownSelectDataType = {
   data: PropTypes.arrayOf(DropdownSelectItemDataType),
   onSelect: PropTypes.func,
   className: PropTypes.string,
+  defaultValue: DropdownSelectItemDataType,
 };
 
 export const DonutChartItemDataType = PropTypes.shape({

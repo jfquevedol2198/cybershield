@@ -107,3 +107,12 @@ export const risks = (httpClient) => ({
     return httpClient.get(siteId ? `/risk_view/${siteId}` : "/risk_all_view");
   },
 });
+
+export const configuration = (httpClient) => ({
+  getConfiguration() {
+    return httpClient.get("/configuration");
+  },
+  updateConfiguration(data) {
+    return httpClient.put("/update_configuration/1", data);
+  },
+});

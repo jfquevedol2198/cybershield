@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "../../components/Button";
 import DropdownSelect from "../../components/DropdownSelect";
+import useAuth from "../../hooks/useAuth";
 import { ButtonVariant } from "../../utils";
 
 const Period = [
@@ -31,6 +32,24 @@ const TimeRefresh = () => {
   const [editMode, setEditMode] = useState(false);
   const [timeRefresh, setTimeRefresh] = useState(null);
   const [tempValue, setTempValue] = useState(null);
+  const { configuration, updateConfiguration } = useAuth();
+
+  const onUpdate = () => {
+    setTimeRefresh(tempValue);
+    setEditMode(false);
+    updateConfiguration(parseInt(tempValue.value));
+  };
+
+  useEffect(() => {
+    if (configuration) {
+      setTimeRefresh(
+        Period.find(
+          (p) => p.value === `${configuration?.time_refresh_interval}`
+        )
+      );
+    }
+  }, [configuration]);
+
   return (
     <div>
       <div className="mb-2 text-[1.625rem] font-bold">Time Refresh</div>
@@ -59,13 +78,16 @@ const TimeRefresh = () => {
             <div className="mb-4">
               <DropdownSelect
                 data={Period}
+                defaultValue={Period.find(
+                  (p) => p.value === `${configuration?.time_refresh_interval}`
+                )}
                 onSelect={(v) => setTempValue(v)}
                 className="w-full rounded-md border border-focus bg-white"
               />
             </div>
             <Button
               variant={ButtonVariant.filled}
-              onClick={() => setTimeRefresh(tempValue)}
+              onClick={onUpdate}
               isDisabled={!tempValue}
             >
               UPDATE
