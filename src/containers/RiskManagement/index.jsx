@@ -17,11 +17,13 @@ import { parseAssets, parseShops } from "../../utils/parse";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
 import AffectAssetsTable from "./AffectedAssetsTable";
 import {
-  PanelAlerts, // PanelIncidents,
+  PanelAlerts,
+  PanelIncidents,
   // PanelInsights,
   PanelRisk,
   PanelShops,
-  TabAlerts, // TabIncidents,
+  TabAlerts,
+  TabIncidents,
   // TabInsights,
   TabRisk,
   TabShops,
@@ -55,6 +57,7 @@ const RiskManagement = () => {
   const [shops, setShops] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [risks, setRisks] = useState([]);
+  const [incidents, setIncidents] = useState([]);
   const { siteId } = useParams();
 
   const [width, setWidth] = useState(0);
@@ -70,78 +73,163 @@ const RiskManagement = () => {
     return window.removeEventListener("resize", () => {});
   }, [debounced]);
 
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     setLoading(true);
+
+  //     ////
+  //     const { data: updateDateData } = await api.getUpdateDate();
+  //     const fechaUTC = updateDateData?.[0].etl_fecha;
+  //     if (fechaUTC) {
+  //       const fechaObj = new Date(fechaUTC);
+
+  //       if (!isNaN(fechaObj.getTime())) {
+  //         // Formatea la fecha personalizada "30 Nov 2023 | 20:23:19"
+  //         const formattedDate = dayjs(fechaObj).format(
+  //           "DD MMM YYYY | HH:mm:ss"
+  //         );
+  //         setLastUpdated(formattedDate);
+  //       } else {
+  //         console.error(
+  //           "Fecha inválida después de crear el objeto Date:",
+  //           fechaUTC
+  //         );
+  //       }
+  //     } else {
+  //       console.error(
+  //         "La propiedad etl_fecha no está presente o es undefined en la respuesta de la API"
+  //       );
+  //     }
+
+  //     // assets
+  //     const { data } = await api.getSiteAssets(siteId);
+  //     const assets = parseAssets(data);
+
+  //     const risksByLevel = {};
+  //     assets.forEach(({ risk_score }) => {
+  //       const riskLevel = getRiskLevel(risk_score);
+  //       if (risksByLevel[riskLevel]) {
+  //         risksByLevel[riskLevel]++;
+  //       } else {
+  //         risksByLevel[riskLevel] = 1;
+  //       }
+  //     });
+  //     setRiskByLevel(risksByLevel);
+
+  //     setAssets(assets);
+
+  //     // shops
+  //     const { data: shopsData } = siteId
+  //       ? await api.getSiteShops(siteId)
+  //       : await api.getShops();
+  //     const shops = parseShops(shopsData);
+  //     setShops(shops);
+
+  //     // alerts
+  //     const { data: alertsData } = await api.getAlertsView(siteId);
+  //     const alerts = alertsData || [];
+  //     setAlerts(alerts);
+
+  //     // risks
+  //     const { data: risks } = await api.getRisks(siteId);
+  //     setRisks(risks);
+
+  //     // incidents
+  //     const { data: incidentsData } = await api.getIncidents();
+  //     setIncidents(incidentsData);
+
+  //     setAverageRisk(
+  //       Math.ceil(
+  //         siteId
+  //           ? risks[0]?.total_risk_score_by_site
+  //           : risks[0]?.total_risk_score
+  //       )
+  //     );
+  //     setLoading(false);
+  //   };
+  //   fetch();
+  // }, [siteId]);
+
+
+
   useEffect(() => {
     const fetch = async () => {
-      setLoading(true);
-
-      ////
-      const { data: updateDateData } = await api.getUpdateDate();
-      const fechaUTC = updateDateData?.[0].etl_fecha;
-      if (fechaUTC) {
-        const fechaObj = new Date(fechaUTC);
-
-        if (!isNaN(fechaObj.getTime())) {
-          // Formatea la fecha personalizada "30 Nov 2023 | 20:23:19"
-          const formattedDate = dayjs(fechaObj).format(
-            "DD MMM YYYY | HH:mm:ss"
-          );
+      try {
+        setLoading(true);
+  
+        // Update date
+        const { data: updateDateData } = await api.getUpdateDate();
+        const fechaUTC = updateDateData?.[0]?.etl_fecha;
+        if (fechaUTC) {
+          const formattedDate = formatDate(fechaUTC);
           setLastUpdated(formattedDate);
         } else {
-          console.error(
-            "Fecha inválida después de crear el objeto Date:",
-            fechaUTC
-          );
+          console.error("Invalid date after creating Date object:", fechaUTC);
         }
-      } else {
-        console.error(
-          "La propiedad etl_fecha no está presente o es undefined en la respuesta de la API"
+  
+        // Assets
+        const { data: assetsData } = await api.getSiteAssets(siteId);
+        const assets = parseAssets(assetsData);
+        const risksByLevel = calculateRisksByLevel(assets);
+        setRiskByLevel(risksByLevel);
+        setAssets(assets);
+  
+        // Shops
+        const { data: shopsData } = siteId
+          ? await api.getSiteShops(siteId)
+          : await api.getShops();
+        const shops = parseShops(shopsData);
+        setShops(shops);
+  
+        // Alerts
+        const { data: alertsData } = await api.getAlertsView(siteId);
+        setAlerts(alertsData);
+  
+        // Risks
+        const { data: risksData } = await api.getRisks(siteId);
+        setRisks(risksData);
+  
+        // Incidents
+        const { data: incidentsData } = await api.getIncidents();
+        setIncidents(incidentsData);
+  
+        // Average Risk
+        setAverageRisk(
+          Math.ceil(
+            siteId
+              ? risksData[0]?.total_risk_score_by_site
+              : risksData[0]?.total_risk_score
+          )
         );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
-
-      // assets
-      const { data } = await api.getSiteAssets(siteId);
-      const assets = parseAssets(data);
-
-      const risksByLevel = {};
-      assets.forEach(({ risk_score }) => {
-        const riskLevel = getRiskLevel(risk_score);
-        if (risksByLevel[riskLevel]) {
-          risksByLevel[riskLevel]++;
-        } else {
-          risksByLevel[riskLevel] = 1;
-        }
-      });
-      setRiskByLevel(risksByLevel);
-
-      setAssets(assets);
-
-      // shops
-      const { data: shopsData } = siteId
-        ? await api.getSiteShops(siteId)
-        : await api.getShops();
-      const shops = parseShops(shopsData);
-      setShops(shops);
-
-      // alerts
-      const { data: alertsData } = await api.getAlertsView(siteId);
-      const alerts = alertsData || [];
-      setAlerts(alerts);
-
-      // risks
-      const { data: risks } = await api.getRisks(siteId);
-      setRisks(risks);
-
-      setAverageRisk(
-        Math.ceil(
-          siteId
-            ? risks[0]?.total_risk_score_by_site
-            : risks[0]?.total_risk_score
-        )
-      );
-      setLoading(false);
     };
+  
     fetch();
   }, [siteId]);
+  
+  const formatDate = (fechaUTC) => {
+    const fechaObj = new Date(fechaUTC);
+    if (!isNaN(fechaObj.getTime())) {
+      return dayjs(fechaObj).format("DD MMM YYYY | HH:mm:ss");
+    } else {
+      console.error("Invalid date after creating Date object:", fechaUTC);
+      return null;
+    }
+  };
+  
+  const calculateRisksByLevel = (assets) => {
+    const risksByLevel = {};
+    assets.forEach(({ risk_score }) => {
+      const riskLevel = getRiskLevel(risk_score);
+      risksByLevel[riskLevel] = (risksByLevel[riskLevel] || 0) + 1;
+    });
+    return risksByLevel;
+  };
+  
 
   return (
     <Fragment>
@@ -169,14 +257,14 @@ const RiskManagement = () => {
               <TabAlerts key="alerts" value={alerts.length} />,
               <TabShops key="shops" value={shops.length} />,
               // <TabInsights key="insights" value={3} />,
-              // <TabIncidents key="incidents" value={2} />,
+              <TabIncidents key="incidents" value={incidents.length} />,
             ]}
             tabPanels={[
               <PanelRisk key="risk" risks={risks} />,
               <PanelAlerts key="alerts" alerts={alerts} />,
               <PanelShops key="shops" shops={shops} />,
               // <PanelInsights key="insights" />,
-              // <PanelIncidents key="incidents" />,
+              <PanelIncidents key="incidents" incidents={incidents}/>,
             ]}
             tabListClassName="overflow-x-hidden overflow-y-hidden"
             tabPanelClassName="px-7 py-8 bg-white h-[35rem]"
