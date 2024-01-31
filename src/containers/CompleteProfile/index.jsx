@@ -11,6 +11,7 @@ import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
 import config from "../../config";
+import useAuth from "../../hooks/useAuth";
 import { ButtonVariant, SizeVariant } from "../../utils/constants";
 import snack from "../../utils/snack";
 
@@ -41,6 +42,7 @@ const schema = z
 const CompleteProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { tempUser } = useAuth();
 
   // country, state, city
   const [isCountryLoading, setIsCountryLoading] = useState(false);
@@ -176,6 +178,10 @@ const CompleteProfile = () => {
   };
 
   const onHandleSubmit = form.handleSubmit(onSubmit);
+
+  if (!tempUser) {
+    navigate("/login");
+  }
 
   return (
     <AuthLayout>
