@@ -6,7 +6,7 @@ import Button from "../../components/Button";
 import NormalButton from "../../components/NormalButton";
 import config from "../../config";
 import useAuth from "../../hooks/useAuth";
-import { ButtonVariant, setCookieValue } from "../../utils";
+import { ButtonVariant } from "../../utils";
 import snack from "../../utils/snack";
 
 const UploadLogo = () => {

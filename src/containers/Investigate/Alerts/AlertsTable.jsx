@@ -5,6 +5,7 @@ import Table from "../../../components/Table";
 import Tag from "../../../components/Tag";
 import { SortDataType, dateFormat } from "../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
+import CreateIncidentModal from "../../Incidents/CreateIncidentModal";
 import DetailModal from "./DetailModal";
 
 const columns = [
@@ -97,6 +98,7 @@ const columns = [
 
 const AlertsTable = ({ data = [], loading }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCreateIncident, setIsCreateIncident] = useState(false);
   const [selData, setSelData] = useState(null);
   const onClickRow = (rowData) => {
     setSelData(rowData);
@@ -117,6 +119,14 @@ const AlertsTable = ({ data = [], loading }) => {
         isOpen={isOpen}
         data={selData}
         closeModal={() => setIsOpen(false)}
+        onCreateIncident={() => {
+          setIsOpen(false);
+          setIsCreateIncident(true);
+        }}
+      />
+      <CreateIncidentModal
+        isOpen={isCreateIncident}
+        onClose={() => setIsCreateIncident(false)}
       />
     </>
   );

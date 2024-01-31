@@ -13,10 +13,10 @@ const ColorBar = ({ data }) => {
           key={`color-${i}`}
           className={clsx(
             "h-full",
-            `bg-${RiskLevel[getRiskLevel((4 - i) * 25)].color}`
+            `bg-${RiskLevel[getRiskLevel((4 - i) * 2.4)].color}`
           )}
           style={{ width: `${(v / total) * 100}%` }}
-        ></div>
+        />
       ))}
     </div>
   );

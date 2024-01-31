@@ -81,4 +81,5 @@ export const parseIncident = (data) =>
   data.map((d) => ({
     ...d,
     severity: parseFloat(d.severity) / 10,
+    state: normalizeString(d.state),
   }));

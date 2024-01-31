@@ -37,7 +37,7 @@ const columns = [
     title: "Risk",
     dataIndex: "risk_score",
     key: "risk_score",
-    render: (value) => <Tag riskLevel={RiskLevel[getRiskLevel(value * 10)]} />,
+    render: (value) => <Tag riskLevel={RiskLevel[getRiskLevel(value)]} />,
     sortDataType: SortDataType.Number,
     colSpan: 0.5,
     className: "",

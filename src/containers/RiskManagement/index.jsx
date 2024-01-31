@@ -202,7 +202,7 @@ const RiskManagement = () => {
         >
           <div className="mb-3">
             <div className="mb-3 flex flex-row items-end justify-between">
-              <div className="text-[1.375rem] font-bold">Affected Assets</div>
+              <div className="text-[1.375rem] font-bold">Assets by Risk</div>
               <div>
                 <span className="mr-1 text-[2.75rem] font-light">
                   {assets.length}

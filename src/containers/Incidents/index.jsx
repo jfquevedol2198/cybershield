@@ -15,8 +15,9 @@ import StackedAreaChart from "../../components/d3/StackedAreaChart";
 import useSearchAndFilter from "../../hooks/useSearchAndFilter";
 import { ButtonVariant } from "../../utils";
 import { getFilterOptions } from "../../utils/filter";
-import { groupByKey } from "../../utils/parse";
+import { groupByKey, parseIncident } from "../../utils/parse";
 import { getRiskDataByCategory } from "../../utils/risk";
+import CreateIncidentModal from "./CreateIncidentModal";
 import Filter from "./Filter";
 import IncidentsTable from "./IncidentsTable";
 
@@ -88,6 +89,8 @@ const Incidents = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
 
+  const [isCreateModal, setIsCreateModal] = useState(false);
+
   const [riskData, setRiskData] = useState([]);
   const [groupByCveID, setGroupByCveID] = useState([]);
 
@@ -104,7 +107,7 @@ const Incidents = () => {
         setLoading(true);
         const { data } = await api.getIncidents();
         const incidents = data;
-        setPageData(incidents);
+        setPageData(parseIncident(incidents));
         setFilterOptions(getFilterOptions(incidents));
 
         setGroupByCveID(groupByKey(incidents, "subcategory"));
@@ -158,7 +161,12 @@ const Incidents = () => {
           >
             <FunnelIcon className="h-6 w-6" />
           </NormalButton>
-          <Button variant={ButtonVariant.filled}>CREATE INCIDENT</Button>
+          <Button
+            variant={ButtonVariant.filled}
+            onClick={() => setIsCreateModal(true)}
+          >
+            CREATE INCIDENT
+          </Button>
         </div>
       </div>
       <div className="px-8">
@@ -247,6 +255,11 @@ const Incidents = () => {
         onSubmit={onFilter}
         onClose={() => setIsFilterOpen(false)}
         filterOptions={filterOptions}
+      />
+      {/* Create Incident Modal */}
+      <CreateIncidentModal
+        isOpen={isCreateModal}
+        onClose={() => setIsCreateModal(false)}
       />
     </Fragment>
   );

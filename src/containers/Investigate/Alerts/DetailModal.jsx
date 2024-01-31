@@ -106,7 +106,10 @@ const DetailModal = ({ data, ...rest }) => {
         </div>
         <div className="flex flex-row items-center justify-end gap-2">
           <ExportButton name="incidents" label="EXPORT REPORT" />
-          <Button variant={ButtonVariant.filled} onClick={rest.closeModal}>
+          <Button
+            variant={ButtonVariant.filled}
+            onClick={rest.onCreateIncident}
+          >
             CREATE INCIDENT
           </Button>
         </div>
