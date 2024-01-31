@@ -94,18 +94,19 @@ const useCompliance = () => {
         user_answer: userAnswer,
         user_short_answers: userShortAnswer,
       };
-      await apiClient8080.insertAnswer(data);
 
       const answer = answers.find(
         (answer) => answer.question_id === questionId
       );
       if (answer) {
+        await apiClient8080.updateAnswer(data);
         setAnswers(
           answers.map((answer) =>
             answer.question_id === questionId ? { ...answer, ...data } : answer
           )
         );
       } else {
+        await apiClient8080.insertAnswer(data);
         setAnswers([...answers, data]);
       }
       fetchCategories();
