@@ -184,6 +184,10 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
   );
 };
 
+Filter.defaultProps = {
+  filterOptions: {},
+};
+
 Filter.propTypes = {
   isOpen: PropTypes.bool,
   onSubmit: PropTypes.func,

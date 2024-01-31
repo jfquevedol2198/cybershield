@@ -26,7 +26,7 @@ const useCompliance = () => {
   const fetchCategories = async () => {
     try {
       setIsCategoryLoading(true);
-      const { data } = await apiClient.getStatus();
+      const { data } = await apiClient.getComplianceStats();
       const categories = data || [];
       setCategories(categories);
 
@@ -87,14 +87,14 @@ const useCompliance = () => {
     try {
       setIsAnswering(true);
       if (!userInfo?.id) return;
+
       let data = {
         user_id: "1", // userInfo?.id.toString(),
         question_id: questionId,
         user_answer: userAnswer,
         user_short_answers: userShortAnswer,
       };
-      const res = await apiClient8080.insertAnswer(data);
-      console.log(res);
+      await apiClient8080.insertAnswer(data);
 
       const answer = answers.find(
         (answer) => answer.question_id === questionId
@@ -108,7 +108,7 @@ const useCompliance = () => {
       } else {
         setAnswers([...answers, data]);
       }
-      console.log(res);
+      fetchCategories();
     } catch (error) {
       console.log(error);
     } finally {

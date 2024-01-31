@@ -85,7 +85,7 @@ export const compliance = (httpClient) => ({
   getQuestions() {
     return httpClient.get("/questions_view");
   },
-  getStatus() {
+  getComplianceStats() {
     return httpClient.get("/compliance_view");
   },
   getAnswersByUserId(userId) {

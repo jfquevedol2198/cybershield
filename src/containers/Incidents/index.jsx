@@ -87,7 +87,7 @@ const Incidents = () => {
   const [loading, setLoading] = useState(false);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [filterOptions, setFilterOptions] = useState([]);
+  const [filterOptions, setFilterOptions] = useState({});
 
   const [isCreateModal, setIsCreateModal] = useState(false);
 
@@ -108,7 +108,7 @@ const Incidents = () => {
         const { data } = await api.getIncidents();
         const incidents = data;
         setPageData(parseIncident(incidents));
-        setFilterOptions(getFilterOptions(incidents));
+        setFilterOptions(getFilterOptions(incidents) || {});
 
         setGroupByCveID(groupByKey(incidents, "subcategory"));
 

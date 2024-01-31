@@ -16,6 +16,13 @@ const Questionnaire = ({ active }) => {
   const [questionIndex, setQuestionIndex] = useState(0);
   const title = searchParams.get("option") || "Detect";
 
+  const status = searchParams.get("status");
+
+  useEffect(() => {
+    setQuestionIndex(0);
+    scrollToQuestionnaire(0);
+  }, [status]);
+
   const { loading, allQuestions = [], answers, onAddComment } = useCompliance();
 
   useEffect(() => {
@@ -39,8 +46,10 @@ const Questionnaire = ({ active }) => {
   );
 
   const scrollToQuestionnaire = (index) => {
+    if (!questionsWrapper.current) return;
     const questionnaire =
       questionsWrapper.current.querySelectorAll("& > div")[index];
+    if (!questionnaire) return;
     setQuestionIndex(index);
     questionnaire.scrollIntoView({ behavior: "smooth", block: "center" });
   };
