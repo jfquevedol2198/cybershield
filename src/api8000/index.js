@@ -5,7 +5,7 @@ import { createApiClient } from "./apiClient";
 import { createMocks } from "./mock";
 
 const httpClient = axios.create({
-  baseURL: config.BASE_API_URL,
+  baseURL: config.BASE_API_URL_8000,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

@@ -2,7 +2,7 @@ import { Auth } from "aws-amplify";
 import PropTypes from "prop-types";
 import { createContext, useContext, useEffect, useState } from "react";
 
-import apiClient from "../api";
+import apiClient from "../api8000";
 import {
   AUTH_TOKEN,
   getCookieValue,

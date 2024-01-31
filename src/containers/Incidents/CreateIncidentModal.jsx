@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import userApiClient from "../../apiSys";
+import apiClient8089 from "../../api8089";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
@@ -60,7 +60,7 @@ const CreateIncidentModal = ({ isOpen, onClose }) => {
         category: "valor",
         contact_type: "self-service",
       };
-      const res = await userApiClient.createIncident(data);
+      const res = await apiClient8089.createIncident(data);
       console.log(res);
       snack.success("Incident created successfully");
       onClose();

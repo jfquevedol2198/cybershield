@@ -7,13 +7,13 @@ import StartQuestionnaire from "./StartQuestionnaire";
 const Nist80082 = () => {
   const [searchParams] = useSearchParams();
   const status = searchParams.get("status") || "start";
-  console.log(status);
+
   return (
     <div className="flex h-full flex-row">
       <Sidebar />
       <div className="flex h-full flex-auto flex-row justify-center bg-white">
-        {status === "start" && <StartQuestionnaire />}
-        {status === "questionnaire" && <Questionnaire />}
+        <StartQuestionnaire active={status === "start"} />
+        <Questionnaire active={status === "questionnaire"} />
       </div>
     </div>
   );

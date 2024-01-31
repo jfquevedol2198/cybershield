@@ -1,32 +1,42 @@
-import { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import apiClient from "../../../api";
 import ActivityIndicator from "../../../components/ActivityIndicator";
 import Button from "../../../components/Button";
+import useCompliance from "../../../hooks/useCompliance";
 import { ButtonVariant } from "../../../utils";
 import QuestionnaireItem from "./QuestionnaireItem";
 
-const Questionnaire = () => {
-  const [searchParams] = useSearchParams();
-  const [loading, setLoading] = useState(false);
+const Questionnaire = ({ active }) => {
+  const questionsWrapper = useRef(null);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [questions, setQuestions] = useState([]);
 
   const [questionIndex, setQuestionIndex] = useState(0);
-  const questionsWrapper = useRef(null);
   const title = searchParams.get("option") || "Detect";
 
+  const { loading, allQuestions = [], answers, onAddComment } = useCompliance();
+
   useEffect(() => {
-    const fetch = async () => {
-      setLoading(true);
-      const { data } = await apiClient.getQuestions();
-      setQuestions(
-        data.filter((question) => question.question_section === title)
-      );
-      setLoading(false);
-    };
-    fetch();
-  }, [title]);
+    setQuestions(
+      allQuestions.filter((question) => question.question_section === title)
+    );
+  }, [allQuestions, title]);
+
+  const answeredCount = useMemo(
+    () =>
+      questions.reduce(
+        (acc, question) =>
+          answers.find(
+            (answer) => question.question_number === answer.question_id
+          )
+            ? acc + 1
+            : acc,
+        0
+      ),
+    [answers, questions]
+  );
 
   const scrollToQuestionnaire = (index) => {
     const questionnaire =
@@ -47,6 +57,8 @@ const Questionnaire = () => {
     scrollToQuestionnaire(index);
   };
 
+  if (!active) return <></>;
+
   return (
     <div className="flex h-full w-full flex-col">
       {loading && <ActivityIndicator />}
@@ -56,9 +68,7 @@ const Questionnaire = () => {
             {title}
           </div>
           <div className="flex flex-row items-baseline text-gray-2">
-            <div className="text-[2.75rem] leading-none">
-              {questions.length}
-            </div>
+            <div className="text-[2.75rem] leading-none">{answeredCount}</div>
             <div className="text-2xl leading-none">/{questions.length}</div>
           </div>
         </div>
@@ -69,20 +79,34 @@ const Questionnaire = () => {
       </div>
       <div className="flex-auto overflow-y-auto py-6 pl-[4.25rem] pr-[0.8125rem]">
         <div className="space-y-10" ref={questionsWrapper}>
-          {questions.map((question, index) => (
-            <QuestionnaireItem
-              index={index + 1}
-              key={`question-${index}`}
-              questionNumber={question.question_number}
-              question={question.question_description}
-              active={index === questionIndex}
-              onClick={scrollToQuestionnaire}
-            />
-          ))}
+          {questions.map((question, index) => {
+            const answer = answers.find(
+              (a) => a.question_id === question.question_number
+            );
+            return (
+              <QuestionnaireItem
+                index={index + 1}
+                key={`question-${index}`}
+                questionNumber={question.question_number}
+                question={question.question_description}
+                active={index === questionIndex}
+                onClick={scrollToQuestionnaire}
+                onAnswer={onAddComment}
+                userAnswer={answer?.user_answer}
+                userShortAnswer={answer?.user_short_answers}
+              />
+            );
+          })}
         </div>
       </div>
       <div className="flex flex-row justify-between border-t border-gray-1 p-8">
-        <Button variant={ButtonVariant.outline}>
+        <Button
+          variant={ButtonVariant.outline}
+          onClick={() => {
+            searchParams.set("status", "start");
+            setSearchParams(searchParams);
+          }}
+        >
           SAVE & CLOSE THE QUESTIONNAIRE
         </Button>
         <div className="flex flex-row gap-2">
@@ -96,6 +120,10 @@ const Questionnaire = () => {
       </div>
     </div>
   );
+};
+
+Questionnaire.propTypes = {
+  active: PropTypes.bool,
 };
 
 export default Questionnaire;

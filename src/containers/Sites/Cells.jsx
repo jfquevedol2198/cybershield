@@ -2,7 +2,7 @@ import { FunnelIcon } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 
-import api from "../../api";
+import api from "../../api8000";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import ExportButton from "../../components/ExportButton";
 import FactoryShopCell from "../../components/FactoryShopCell";

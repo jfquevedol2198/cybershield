@@ -1,7 +1,8 @@
 export default {
   isMockEnabled: import.meta.env.VITE_ENV === "test",
-  BASE_API_URL: import.meta.env.VITE_BASE_API_URL,
-  BASE_USER_API_URL: import.meta.env.VITE_BASE_USER_API_URL,
+  BASE_API_URL_8000: import.meta.env.VITE_BASE_API_URL_8000,
+  BASE_API_URL_8080: import.meta.env.VITE_BASE_API_URL_8080,
+  BASE_API_URL_8089: import.meta.env.VITE_BASE_API_URL_8089,
   TOAST_DURATION: 2000,
   userPoolClientID: import.meta.env.VITE_COGNITO_USER_POOL_CLIENT_ID,
   userPoolID: import.meta.env.VITE_COGNITO_USER_POOL_ID,

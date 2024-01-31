@@ -8,7 +8,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import api from "../../api";
+import api from "../../api8000";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";

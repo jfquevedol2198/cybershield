@@ -5,7 +5,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 
-import userApiClient from "../../apiSys";
+import apiClient8089 from "../../api8089";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
@@ -168,7 +168,7 @@ const CompleteProfile = () => {
       location: country,
     };
 
-    const res = await userApiClient.createUser(data);
+    const res = await apiClient8089.createUser(data);
     if (res.status === 200) {
       snack.success("User is created successfully, please login");
       navigate("/login");

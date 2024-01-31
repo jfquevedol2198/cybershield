@@ -29,7 +29,7 @@ const AddCommentModal = ({ isOpen, onClose, onSend }) => {
 
   const onSubmit = async (e) => {
     try {
-      onSend(e.comment);
+      onSend(e.comment, false);
       onClose();
     } catch (error) {
       snack.error(error.message);

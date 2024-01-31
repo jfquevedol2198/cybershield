@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -7,7 +8,7 @@ import useCompliance from "../../../hooks/useCompliance";
 import { ButtonVariant } from "../../../utils";
 import ResetModal from "./ResetModal";
 
-const StartQuestionnaire = () => {
+const StartQuestionnaire = ({ active }) => {
   const [showResetModal, setShowResetModal] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const { categories } = useCompliance();
@@ -15,6 +16,8 @@ const StartQuestionnaire = () => {
   const category = categories.find(
     (item) => item.section_description === title
   );
+
+  if (!active) return <></>;
 
   return (
     <div className="flex h-full max-w-[56.25rem] flex-col justify-center px-20">
@@ -74,6 +77,10 @@ const StartQuestionnaire = () => {
       )}
     </div>
   );
+};
+
+StartQuestionnaire.propTypes = {
+  active: PropTypes.bool,
 };
 
 export default StartQuestionnaire;

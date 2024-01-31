@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
 
-import api from "../../../../api";
+import api from "../../../../api8000";
 import Accordion from "../../../../components/Accordion";
 import Table from "../../../../components/Table";
 import Tag from "../../../../components/Tag";

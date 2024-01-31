@@ -10,7 +10,7 @@ export const incident = (httpClient) => ({
   },
 });
 
-export const createUserApiClient = (httpClient) => {
+export const createApiClient = (httpClient) => {
   const apiClient = {
     ...users(httpClient),
     ...incident(httpClient),

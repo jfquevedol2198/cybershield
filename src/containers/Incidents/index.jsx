@@ -2,7 +2,7 @@ import { ArrowDownIcon, FunnelIcon } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-import api from "../../api";
+import api from "../../api8000";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import ExportButton from "../../components/ExportButton";

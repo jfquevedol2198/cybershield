@@ -88,6 +88,12 @@ export const compliance = (httpClient) => ({
   getStatus() {
     return httpClient.get("/compliance_view");
   },
+  getAnswersByUserId(userId) {
+    return httpClient.get(`/answers_user/${userId}`);
+  },
+  getAnswersAll() {
+    return httpClient.get("/answers_user");
+  },
 });
 
 export const sites = (httpClient) => ({

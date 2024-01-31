@@ -9,11 +9,24 @@ import AddCommentModal from "./AddCommentModal";
 
 const Answers = ["Yes", "No", "Partial", "Irrelevant"];
 
-const QuestionnaireItem = ({ question, index, active, onClick }) => {
+const QuestionnaireItem = ({
+  question,
+  questionNumber,
+  index,
+  active,
+  onClick,
+  onAnswer,
+  userAnswer,
+  userShortAnswer,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [answer, setAnswer] = useState(null);
-  const onSend = (comment) => {
-    setAnswer(comment);
+
+  const onSend = (comment, shortAnswer = true) => {
+    onAnswer(
+      questionNumber,
+      shortAnswer ? "" : comment,
+      shortAnswer ? comment : ""
+    );
   };
 
   return (
@@ -39,17 +52,21 @@ const QuestionnaireItem = ({ question, index, active, onClick }) => {
             {Answers.map((value) => (
               <ButtonToggle
                 key={value}
-                on={answer === value}
+                on={userShortAnswer === value}
                 label={value}
-                onClick={() => setAnswer(value)}
+                onClick={() => onSend(value)}
               />
             ))}
           </div>
+          {!!userAnswer && userAnswer !== "" && (
+            <div className="mt-4 w-full rounded border p-4">{userAnswer}</div>
+          )}
         </div>
-        <div className="flex flex-row gap-4 px-8 pb-6 pt-4">
+        <div className="flex flex-row items-center gap-4 px-8 pb-6 pt-4">
           <Button
             variant={ButtonVariant.outline}
             onClick={() => setIsOpen(true)}
+            isBlock={false}
           >
             ADD COMMENT
           </Button>
@@ -66,7 +83,15 @@ const QuestionnaireItem = ({ question, index, active, onClick }) => {
   );
 };
 
+QuestionnaireItem.defaultProps = {
+  answer: null,
+};
+
 QuestionnaireItem.propTypes = {
+  isLoading: PropTypes.bool,
+  userAnswer: PropTypes.string,
+  userShortAnswer: PropTypes.string,
+  onAnswer: PropTypes.func,
   question: PropTypes.string,
   index: PropTypes.number,
   questionNumber: PropTypes.number,

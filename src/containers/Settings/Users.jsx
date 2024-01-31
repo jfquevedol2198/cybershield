@@ -1,7 +1,7 @@
 import { FunnelIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
-import apiClient from "../../api";
+import apiClient from "../../api8000";
 import EditSvg from "../../assets/images/edit.svg";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";

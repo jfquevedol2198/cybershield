@@ -5,7 +5,7 @@ import _ from "lodash";
 import { Fragment, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import apiClient from "../../api";
+import apiClient from "../../api8000";
 import useCommon from "../../hooks/useCommon";
 import { SIDEBAR_ITEMS } from "../../router";
 import ActivityIndicator from "../ActivityIndicator";
