@@ -19,7 +19,7 @@ import {
   PhysicalAdjacentDevicesTabPanel,
 } from "./TabItems/PhysicalAdjacentDevices";
 
-const DetailModal = ({ data, closeModal, isOpen }) => {
+const DetailModal = ({ data, closeModal, isOpen, onCreateIncident }) => {
   return (
     <RiskModal
       riskLevel={RiskLevel[getRiskLevel(data?.risk_score * 10)]}
@@ -114,7 +114,7 @@ const DetailModal = ({ data, closeModal, isOpen }) => {
       </div>
       <div className="flex flex-row items-center justify-end gap-2">
         <ExportButton name="incident" label="EXPORT REPORT" />
-        <Button variant={ButtonVariant.filled} onClick={closeModal}>
+        <Button variant={ButtonVariant.filled} onClick={onCreateIncident}>
           CREATE INCIDENT
         </Button>
       </div>
@@ -126,6 +126,7 @@ DetailModal.propTypes = {
   isOpen: PropTypes.bool,
   data: PropTypes.shape(PropTypes.any),
   closeModal: PropTypes.func,
+  onCreateIncident: PropTypes.func,
 };
 
 export default DetailModal;

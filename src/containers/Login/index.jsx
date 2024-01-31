@@ -23,7 +23,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { authToken, user, setUser, setTempUser } = useAuth();
+  const { authToken, user, setUser, setTempUser, fetchUserInfo } = useAuth();
   useEffect(() => {
     console.log("____ login");
   }, []);
@@ -50,10 +50,17 @@ const Login = () => {
       setIsLoading(true);
 
       const data = await Auth.signIn(e.email, e.password);
-      console.log(data);
       if (data.challengeName === "NEW_PASSWORD_REQUIRED") {
         setTempUser(data);
         navigate("/confirm-password");
+        return;
+      }
+
+      const userInfo = await fetchUserInfo(e.email);
+      if (!userInfo) {
+        setTempUser(e.email);
+        snack.info("Please complete profile");
+        navigate(`/complete-profile?email=${e.email}`);
         return;
       }
       const token = data.signInUserSession?.accessToken?.jwtToken;

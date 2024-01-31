@@ -40,7 +40,7 @@ const CreateIncidentModal = ({ isOpen, onClose }) => {
     try {
       setLoading(true);
       const data = {
-        caller_id: userInfo.id,
+        caller_id: userInfo?.id,
         made_sla: true,
         state: "1",
         cmdb_ci: "EJEMPLO12365",
@@ -62,6 +62,7 @@ const CreateIncidentModal = ({ isOpen, onClose }) => {
       };
       const res = await userApiClient.createIncident(data);
       console.log(res);
+      snack.success("Incident created successfully");
       onClose();
     } catch (error) {
       snack.error(error.message);

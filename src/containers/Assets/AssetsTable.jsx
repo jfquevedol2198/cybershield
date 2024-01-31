@@ -5,6 +5,7 @@ import Table from "../../components/Table";
 import Tag from "../../components/Tag";
 import { SortDataType } from "../../utils";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
+import CreateIncidentModal from "../Incidents/CreateIncidentModal";
 import DetailModal from "./DetailModal";
 
 const columns = [
@@ -109,6 +110,8 @@ const columns = [
 
 const AssetsTable = ({ data, loading }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCreateIncident, setIsCreateIncident] = useState(false);
+
   const [selData, setSelData] = useState(null);
   const onClickRow = (data) => {
     setIsOpen(true);
@@ -127,6 +130,14 @@ const AssetsTable = ({ data, loading }) => {
         data={selData}
         isOpen={isOpen}
         closeModal={() => setIsOpen(false)}
+        onCreateIncident={() => {
+          setIsOpen(false);
+          setIsCreateIncident(true);
+        }}
+      />
+      <CreateIncidentModal
+        isOpen={isCreateIncident}
+        onClose={() => setIsCreateIncident(false)}
       />
     </>
   );

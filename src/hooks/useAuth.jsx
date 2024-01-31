@@ -27,16 +27,33 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
+  const fetchUserInfo = async (username) => {
+    try {
+      const {
+        data: [userInfo],
+      } = await apiClient.getSysUserView(username);
+      return userInfo;
+    } catch (error) {
+      console.log(error);
+      if (error?.response?.status === 404) {
+        return null;
+      }
+    }
+    return {};
+  };
+
   useEffect(() => {
     const fetch = async () => {
       const user = await Auth.currentUserInfo();
       if (user) {
         setUser(user);
       }
-      const {
-        data: [userInfo],
-      } = await apiClient.getSysUserView(user.username);
+      const userInfo = await fetchUserInfo(user.username);
+      if (!userInfo) {
+        return redirectToAuth();
+      }
       setUserInfo(userInfo);
+
       const {
         data: [configuration],
       } = await apiClient.getConfiguration();
@@ -78,6 +95,7 @@ export const AuthProvider = ({ children }) => {
         setTempUser,
         authToken,
         updateConfiguration,
+        fetchUserInfo,
       }}
     >
       {children}
