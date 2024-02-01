@@ -106,7 +106,9 @@ const columns = [
     key: "action",
     colSpan: 1.2,
     render: () => (
-      <Button variant={ButtonVariant.outline}>GO TO INCIDENT</Button>
+      <Button variant={ButtonVariant.outline} href="/dashboard/incidents">
+        GO TO INCIDENT
+      </Button>
     ),
     align: "center",
   },
@@ -122,7 +124,9 @@ export const PanelIncidents = () => {
             position.
           </div>
         </div>
-        <Button variant={ButtonVariant.filled}>VIEW INCIDENTS</Button>
+        <Button variant={ButtonVariant.filled} href="/dashboard/incidents">
+          VIEW INCIDENTS
+        </Button>
       </div>
       <div className="h-full flex-auto overflow-y-auto">
         <Table dataSource={data} columns={columns} />

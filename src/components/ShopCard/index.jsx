@@ -17,7 +17,12 @@ const ShopCard = ({ category, score }) => {
       <div className="flex flex-auto flex-col justify-between gap-2 px-2 py-2">
         {category}
       </div>
-      <Button variant={ButtonVariant.filled}>GO TO ALERTS</Button>
+      <Button
+        variant={ButtonVariant.filled}
+        href={"/dashboard/investigate/alerts"}
+      >
+        GO TO ALERTS
+      </Button>
     </div>
   );
 };
