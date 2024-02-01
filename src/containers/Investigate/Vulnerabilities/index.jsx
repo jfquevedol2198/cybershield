@@ -69,7 +69,7 @@ const Vulnerabilities = () => {
 
     setWidth(stackAreaChartRef.current.clientWidth);
     window.addEventListener("resize", debounced);
-    return window.removeEventListener("resize", () => {});
+    return window.removeEventListener("resize", () => { });
   }, []);
 
   useEffect(() => {

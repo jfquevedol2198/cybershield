@@ -48,7 +48,7 @@ const StackedAreaChartComponentVul = () => {
 
     switch (period) {
       case "last_7_days":
-        startDate.setDate(endDate.getDate() - 8);
+        startDate.setDate(endDate.getDate() - 7);
         break;
       case "last_15_days":
         startDate.setDate(endDate.getDate() - 14);

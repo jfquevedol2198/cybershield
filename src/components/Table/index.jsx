@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -20,8 +21,27 @@ const Table = ({
   rowsPerPage,
   loading,
   onClickRow,
+  expandedRowRender,
 }) => {
   const [sorts, setSorts] = useState([]);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [rowStyles, setRowStyles] = useState(null);
+
+  const handleToggleDropdown = (key) => {
+    setActiveDropdown(activeDropdown === key ? null : key);
+  };
+
+  const getRowStyle = (data) => {
+    // Asegúrate de que rowStyles y data.id son válidos antes de acceder a la propiedad
+    if (rowStyles && data && rowStyles[data.id]) {
+      return rowStyles[data.id];
+    }
+    return {}; // Devuelve un objeto vacío si rowStyles o data.id no están definidos
+  };
+
+
+
+
 
   const { totalColSpan } = useMemo(() => {
     const totalColSpan = columns.reduce((sum, col) => sum + col.colSpan, 0);
@@ -42,17 +62,17 @@ const Table = ({
       ...sorts.filter((sort) => sort.key !== key),
       prevSort
         ? {
-            ...prevSort,
-            direction:
-              prevSort.direction === SortDirection.DESC
-                ? SortDirection.ASC
-                : SortDirection.DESC,
-          }
+          ...prevSort,
+          direction:
+            prevSort.direction === SortDirection.DESC
+              ? SortDirection.ASC
+              : SortDirection.DESC,
+        }
         : {
-            key,
-            type: sortType,
-            direction: sortDirection,
-          },
+          key,
+          type: sortType,
+          direction: sortDirection,
+        },
     ];
     setSorts(_sorts);
   };
@@ -68,6 +88,7 @@ const Table = ({
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
   const paginations = useMemo(() => {
+    console.log("=======");
     let _paginations = [];
     if (totalPages < 8) {
       for (let i = 1; i < totalPages + 1; i++) {
@@ -108,6 +129,11 @@ const Table = ({
     );
   }, [sortedData, currentPage]);
   //////////////////////////////
+
+
+
+
+
 
   return (
     <>
@@ -164,35 +190,39 @@ const Table = ({
           </div>
         )}
         {paginatedData.map((data, index) => (
-          <div
-            key={`row-${index}`}
-            className="table-header flex flex-row flex-nowrap items-center border-b-[1px] border-gray-1 bg-white hover:bg-gray-1"
-            onClick={() => onClickRow && onClickRow(data)}
-          >
-            {columns.map((column) => (
-              <div
-                key={column.key}
-                className={clsx(
-                  "cell flex flex-row px-2 py-3 text-base font-bold text-gray-4",
-                  column.align === "left"
-                    ? "justify-start"
-                    : column.align === "right"
-                    ? "justify-end"
-                    : "justify-center"
-                )}
-                style={{
-                  width: `${((column.colSpan / totalColSpan) * 100).toFixed(
-                    2
-                  )}%`,
-                }}
-              >
-                {column.render && column.render(data[column.dataIndex], data)}
-                {!column.render && (
-                  <span className="truncate">{data[column.dataIndex]}</span>
-                )}
-              </div>
-            ))}
-          </div>
+          <React.Fragment key={`row-${index}`}>
+            <div
+              key={`row-${index}`}
+              style={getRowStyle(data)}
+              className="table-header flex flex-row flex-nowrap items-center border-b-[1px] border-gray-1 bg-white hover:bg-gray-1 "
+              onClick={() => onClickRow && onClickRow(data)}
+            >
+              {columns.map((column) => (
+                <div
+                  key={column.key}
+                  className={clsx(
+                    "cell flex flex-row px-2 py-3 text-base font-bold text-gray-4",
+                    column.align === "left"
+                      ? "justify-start"
+                      : column.align === "right"
+                        ? "justify-end"
+                        : "justify-center"
+                  )}
+                  style={{
+                    width: `${((column.colSpan / totalColSpan) * 100).toFixed(
+                      2
+                    )}%`,
+                  }}
+                >
+                  {column.render && column.render(data[column.dataIndex], data)}
+                  {!column.render && (
+                    <span className="truncate">{data[column.dataIndex]}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+            {expandedRowRender && expandedRowRender(data, index)}
+          </React.Fragment>
         ))}
         {!loading && sortedData.length === 0 && (
           <div className="flex w-full flex-row items-center justify-center bg-white py-10 text-black">
