@@ -1,5 +1,7 @@
 import clsx from "clsx";
 import PropTypes from "prop-types";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../../../components/Button";
 import Table from "../../../components/Table";
@@ -7,10 +9,19 @@ import { ButtonVariant, SortDataType } from "../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
 
 export const TabIncidents = ({ value }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/dashboard/investigate/vulnerabilities");
+  };
+
   return (
-    <div className="w-25 h-[6.875rem]">
+    <div className="w-25 h-[6.875rem]" onClick={handleClick}>
       <div className="mb-2 text-base font-normal">Incidents</div>
-      <div className="mb-1 text-[2.75rem] leading-[52px]">{value}</div>
+      <div className="mb-1 flex flex-row items-center justify-center gap-x-1">
+        <span className="text-[2.75rem] leading-[52px]">{value}</span>
+        <ArrowTopRightOnSquareIcon className="h-6 w-6" />
+      </div>
     </div>
   );
 };
