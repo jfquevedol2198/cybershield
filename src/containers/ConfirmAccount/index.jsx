@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Auth } from "aws-amplify";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 import AuthLayout from "../../components/AuthLayout";
@@ -22,10 +22,9 @@ const schema = z.object({
 
 const ConfirmSignup = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [searchParam] = useSearchParams();
-  const username = searchParam.get("username") || "";
+  const { tempUser } = useAuth();
+  const username = tempUser.username || '';
   const navigate = useNavigate();
-  const { setTempUser } = useAuth();
 
   const inputRef1 = useRef(null);
   const inputRef2 = useRef(null);
@@ -95,8 +94,8 @@ const ConfirmSignup = () => {
       const code = `${e.value1}${e.value2}${e.value3}${e.value4}${e.value5}${e.value6}`;
       await Auth.confirmSignUp(username, code);
       snack.success("Account is confirmed successfully");
-      setTempUser(username);
-      navigate(`/complete-profile?email=${username}`);
+      
+      navigate('/complete-profile');
     } catch (error) {
       const { response } = error;
       if (response) {
