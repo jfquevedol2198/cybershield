@@ -56,7 +56,7 @@ const RiskManagement = () => {
   const [alerts, setAlerts] = useState([]);
   const [risks, setRisks] = useState([]);
   const [incidents, setIncidents] = useState([]);
-  const [ vulnerabilities, setVulnerabilities ] = useState([]);
+  const [vulnerabilities, setVulnerabilities] = useState([]);
   const [unassignedAssets, setUnassignedAssets] = useState(0);
 
   const { siteId } = useParams();
@@ -78,7 +78,7 @@ const RiskManagement = () => {
     const fetch = async () => {
       try {
         setLoading(true);
-  
+
         // Update date
         const { data: updateDateData } = await api.getUpdateDate();
         const fechaUTC = updateDateData?.[0]?.etl_fecha;
@@ -91,53 +91,39 @@ const RiskManagement = () => {
             fechaUTC
           );
         }
-      } else {
-        console.error(
-          "La propiedad etl_fecha no está presente o es undefined en la respuesta de la API"
+
+        // assets
+        const { data } = await api.getSiteAssets(siteId);
+        const assets = parseAssets(data);
+
+        setUnassignedAssets(
+          assets.filter(
+            (asset) =>
+              asset.asset_id === "99999" ||
+              asset.id === "99999" ||
+              asset.cell_id === "99999"
+          ).length
         );
-      }
 
-      // assets
-      const { data } = await api.getSiteAssets(siteId);
-      const assets = parseAssets(data);
-
-      setUnassignedAssets(
-        assets.filter(
-          (asset) => asset.asset_id === "99999" || asset.id === "99999"
-        ).length
-      );
-
-      const risksByLevel = {};
-      assets.forEach(({ risk_score }) => {
-        const riskLevel = getRiskLevel(risk_score);
-        if (risksByLevel[riskLevel]) {
-          risksByLevel[riskLevel]++;
-        } else {
-          risksByLevel[riskLevel] = 1;
-        }
-  
-        // Assets
-        const { data: assetsData } = await api.getSiteAssets(siteId);
-        const assets = parseAssets(assetsData);
         const risksByLevel = calculateRisksByLevel(assets);
         setRiskByLevel(risksByLevel);
         setAssets(assets);
-  
+
         // Shops
         const { data: shopsData } = siteId
           ? await api.getSiteShops(siteId)
           : await api.getShops();
         const shops = parseShops(shopsData);
         setShops(shops);
-  
+
         // Alerts
         const { data: alertsData } = await api.getAlertsView(siteId);
         setAlerts(alertsData);
-  
+
         // Risks
         const { data: risksData } = await api.getRisks(siteId);
         setRisks(risksData);
-  
+
         // Incidents
         const { data: incidentsData } = await api.getIncidents();
         setIncidents(incidentsData);
@@ -148,7 +134,6 @@ const RiskManagement = () => {
 
         // TODO: insights. (currently the api is not returning any data so we need to wait for the api to be ready)
 
-  
         // Average Risk
         setAverageRisk(
           Math.ceil(
@@ -163,10 +148,10 @@ const RiskManagement = () => {
         setLoading(false);
       }
     };
-  
+
     fetch();
   }, [siteId]);
-  
+
   const formatDate = (fechaUTC) => {
     const fechaObj = new Date(fechaUTC);
     if (!isNaN(fechaObj.getTime())) {
@@ -176,7 +161,7 @@ const RiskManagement = () => {
       return null;
     }
   };
-  
+
   const calculateRisksByLevel = (assets) => {
     const risksByLevel = {};
     assets.forEach(({ risk_score }) => {
@@ -212,13 +197,16 @@ const RiskManagement = () => {
               <TabAlerts key="alerts" value={alerts.length} />,
               <TabShops key="shops" value={shops.length} />,
               <TabIncidents key="incidents" value={incidents.length} />,
-              <TabVulnerabilities key="vulnerabilities" value={vulnerabilities.length} />,
+              <TabVulnerabilities
+                key="vulnerabilities"
+                value={vulnerabilities.length}
+              />,
             ]}
             tabPanels={[
               <PanelRisk key="risk" risks={risks} />,
               <PanelAlerts key="alerts" alerts={alerts} />,
               <PanelShops key="shops" shops={shops} />,
-              <PanelIncidents key="incidents" incidents={incidents}/>,
+              <PanelIncidents key="incidents" incidents={incidents} />,
             ]}
             tabListClassName="overflow-x-hidden overflow-y-hidden"
             tabPanelClassName="px-7 py-8 bg-white h-[35rem]"
