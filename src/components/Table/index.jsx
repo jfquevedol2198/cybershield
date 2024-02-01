@@ -1,16 +1,11 @@
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  EllipsisHorizontalIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import { SortDirection } from "../../utils";
 import { sortFunc } from "../../utils/sort";
-import NormalButton from "../NormalButton";
+import Pagination from "./Pagination";
+import Row from "./Row";
 import { TablePropType } from "./types";
 
 const Table = ({
@@ -20,6 +15,7 @@ const Table = ({
   rowsPerPage,
   loading,
   onClickRow,
+  expandedRowRender,
 }) => {
   const [sorts, setSorts] = useState([]);
 
@@ -58,55 +54,18 @@ const Table = ({
   };
 
   ///////// pagination /////////
-  const totalPages = Math.ceil(dataSource.length / rowsPerPage);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const onNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  };
-  const onPrevPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
-  const paginations = useMemo(() => {
-    let _paginations = [];
-    if (totalPages < 8) {
-      for (let i = 1; i < totalPages + 1; i++) {
-        _paginations.push(i);
-      }
-      return _paginations;
-    }
-    if (currentPage < 4) {
-      return [1, 2, 3, "-4", totalPages];
-    } else {
-      _paginations = [1, `-${currentPage - 2}`];
-    }
-    const start = parseInt((currentPage - 1) / 3) * 3 + 1;
-    let end = start + 2;
-    if (end >= totalPages) {
-      for (let i = start; i < totalPages + 1; i++) {
-        _paginations.push(i);
-      }
-      return _paginations;
-    }
-    for (let i = start; i < end + 1; i++) {
-      _paginations.push(i);
-    }
-    if (end === totalPages - 2) {
-      _paginations.push(totalPages - 1);
-    } else {
-      _paginations.push(`-${end + 1}`);
-    }
-    _paginations.push(totalPages);
-    return _paginations;
-  }, [currentPage, totalPages]);
-
-  const paginatedData = useMemo(() => {
-    if (!pagination) return sortedData;
-    return sortedData.slice(
-      (currentPage - 1) * rowsPerPage,
-      currentPage * rowsPerPage
-    );
-  }, [sortedData, currentPage]);
+  const [paginatedData, setPaginatedData] = useState([]);
+  const onChangePage = useCallback(
+    (currentPage) => {
+      setPaginatedData(
+        sortedData.slice(
+          (currentPage - 1) * rowsPerPage,
+          currentPage * rowsPerPage
+        )
+      );
+    },
+    [sortedData, rowsPerPage]
+  );
   //////////////////////////////
 
   return (
@@ -163,36 +122,15 @@ const Table = ({
             Loading...
           </div>
         )}
-        {paginatedData.map((data, index) => (
-          <div
+        {(pagination ? paginatedData : sortedData).map((data, index) => (
+          <Row
+            data={data}
             key={`row-${index}`}
-            className="table-header flex flex-row flex-nowrap items-center border-b-[1px] border-gray-1 bg-white hover:bg-gray-1"
-            onClick={() => onClickRow && onClickRow(data)}
-          >
-            {columns.map((column) => (
-              <div
-                key={column.key}
-                className={clsx(
-                  "cell flex flex-row px-2 py-3 text-base font-bold text-gray-4",
-                  column.align === "left"
-                    ? "justify-start"
-                    : column.align === "right"
-                    ? "justify-end"
-                    : "justify-center"
-                )}
-                style={{
-                  width: `${((column.colSpan / totalColSpan) * 100).toFixed(
-                    2
-                  )}%`,
-                }}
-              >
-                {column.render && column.render(data[column.dataIndex], data)}
-                {!column.render && (
-                  <span className="truncate">{data[column.dataIndex]}</span>
-                )}
-              </div>
-            ))}
-          </div>
+            expandedRowRender={expandedRowRender}
+            totalColSpan={totalColSpan}
+            columns={columns}
+            onClickRow={onClickRow}
+          />
         ))}
         {!loading && sortedData.length === 0 && (
           <div className="flex w-full flex-row items-center justify-center bg-white py-10 text-black">
@@ -201,34 +139,11 @@ const Table = ({
         )}
       </div>
       {pagination && (
-        <div className="mt-4 flex w-full flex-row items-center justify-end gap-2">
-          <NormalButton
-            className="flex h-8 w-8 items-center justify-center rounded  border text-primary-4"
-            onClick={onPrevPage}
-          >
-            <ChevronLeftIcon className="h-6" />
-          </NormalButton>
-          {paginations.map((page) => (
-            <NormalButton
-              className={clsx(
-                "flex h-8 w-8 items-center justify-center rounded  border",
-                currentPage === page ? "text-risk-4" : "text-primary-4"
-              )}
-              key={page}
-              onClick={() => {
-                setCurrentPage(page < 0 ? Math.abs(page) + 1 : page);
-              }}
-            >
-              {page < 0 ? <EllipsisHorizontalIcon className="w-4" /> : page}
-            </NormalButton>
-          ))}
-          <NormalButton
-            className="flex h-8 w-8 items-center justify-center rounded  border text-primary-4"
-            onClick={onNextPage}
-          >
-            <ChevronRightIcon className="h-6" />
-          </NormalButton>
-        </div>
+        <Pagination
+          dataSource={dataSource}
+          rowsPerPage={20}
+          onChangePage={onChangePage}
+        />
       )}
     </>
   );

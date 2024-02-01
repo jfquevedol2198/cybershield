@@ -70,7 +70,7 @@ const Alerts = () => {
 
     setWidth(stackAreaChartRef.current.clientWidth);
     window.addEventListener("resize", debounced);
-    return window.removeEventListener("resize", () => {});
+    return window.removeEventListener("resize", () => { });
   }, []);
 
   /**
@@ -108,7 +108,7 @@ const Alerts = () => {
       {!hasFilterAndSearch && (
         <div className="w-full overflow-x-auto">
           <div className="flex min-w-[90rem] flex-row items-start justify-start gap-4 px-7 py-4">
-            <div className="flex min-w-[220px] flex-col items-center bg-white p-4">
+            <div className="flex min-w-[220px] flex-col items-center bg-white p-8">
               <div
                 className="mb-2 text-base font-bold"
                 style={{ marginBottom: "65px" }}
@@ -132,19 +132,17 @@ const Alerts = () => {
               >
                 Alerts
               </p>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <DonutChart
-                  width={100}
-                  height={100}
-                  innerRadius={40}
-                  outerRadius={50}
-                  data={riskData}
-                />
-              </div>
-              <div className="mt-8 flex flex-row items-center justify-center gap-1 text-base text-green">
+              <DonutChart
+                width={100}
+                height={102}
+                innerRadius={40}
+                outerRadius={50}
+                data={riskData}
+              />
+              {/* <div className="mt-8 flex flex-row items-center justify-center gap-1 text-base text-green">
                 {/* <ArrowDownIcon className="h-3" />
-                15% */}
-              </div>
+                15% 
+              </div> */}
             </div>
             <div
               className="flex flex-auto flex-col items-center bg-white p-4"
