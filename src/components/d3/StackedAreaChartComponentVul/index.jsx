@@ -23,6 +23,8 @@ const StackedAreaChartComponentVul = () => {
   const [data, setData] = useState([]);
   const chartRef = useRef();
   const legendRef = useRef();
+  const containerRef = useRef();  // Nuevo ref para el contenedor
+  const [selectedPeriod, setSelectedPeriod] = useState(Period[0].value); // Estado para el periodo seleccionado
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,36 +41,97 @@ const StackedAreaChartComponentVul = () => {
     fetchData();
   }, []);
 
-  const containerWidth = 800;
+  // Mover la función filterDataByPeriod aquí
+  const filterDataByPeriod = (dataset, period) => {
+    const endDate = new Date();
+    let startDate = new Date();
+
+    switch (period) {
+      case "last_7_days":
+        startDate.setDate(endDate.getDate() - 8);
+        break;
+      case "last_15_days":
+        startDate.setDate(endDate.getDate() - 14);
+        break;
+      case "last_month":
+        startDate.setMonth(endDate.getMonth() - 1);
+        break;
+      default:
+        return dataset;
+    }
+
+    return dataset.filter(d => {
+      const date = new Date(d.archive_date);
+      return date >= startDate && date <= endDate;
+    });
+  };
+
+
+  const containerWidth = 780;
   const containerHeight = 140;
-  const legendWidth = 290;
-  const legendHeight = 20;
+
+  const legendStyle = {
+    position: "absolute",
+    top: "12px",
+    left: "-290px",
+    display: "flex",
+    flexDirection: "row-reverse",
+    alignItems: "center",
+  };
 
   const dropdownContainerStyle = {
     position: "absolute",
     top: "-30px",
-    right: "-30px",
+    right: 0,
+    zIndex: 0,
   };
 
   useEffect(() => {
-    if (!chartRef.current || data.length === 0) return;
+    if (!chartRef.current || data.length === 0 || !containerRef.current) return;
 
-    const width = containerWidth;
+    const getTickValuesForLastMonth = (dates) => {
+      const startDate = new Date(dates[0]);  // Utilizar la primera fecha como inicio
+      const endDate = d3.max(dates, (d) => new Date(d));
+      const tickValues = [];
+
+      // Incluir la última fecha
+      tickValues.push(endDate);
+
+      // Restar fechas de 5 en 5 días hasta la primera fecha
+      for (let date = new Date(endDate); date > startDate; date.setDate(date.getDate() - 5)) {
+        tickValues.push(new Date(date));
+      }
+
+      // Incluir la primera fecha si no es igual a la anterior
+      if (tickValues[tickValues.length - 1] > startDate) {
+        tickValues.push(startDate);
+      }
+
+      return tickValues.reverse();  // Invertir el orden para que sea ascendente
+    };
+
+    // Filtrar los datos basándose en el periodo seleccionado
+    const filteredData = filterDataByPeriod(data, selectedPeriod);
+
+    const width = containerRef.current.clientWidth; // Obtener el ancho del contenedor
     const height = containerHeight;
     const margin = { top: 20, right: 20, bottom: 40, left: 30 };
 
+    d3.select(chartRef.current).selectAll("*").remove();
+
     const svg = d3
       .select(chartRef.current)
-      .attr("width", containerWidth)
-      .attr("height", containerHeight);
+      .attr("width", chartRef)
+      .attr("height", height);
+
     const legendSvg = d3
       .select(legendRef.current)
-      .attr("width", legendWidth)
-      .attr("height", legendHeight);
+      .attr("width", width)
+      .attr("height", height);
 
     // Agrupar y acumular por fecha y status
     const groupedData = Array.from(
-      d3.group(data, (d) => new Date(d.archive_date)), // Convertir a objetos Date
+      d3.group(filteredData, (d) => new Date(d.archive_date)), // Convertir a objetos Date
       ([archive_date, values]) => ({
         archive_date,
         ...Object.fromEntries(
@@ -96,13 +159,20 @@ const StackedAreaChartComponentVul = () => {
     const formatTime = d3.timeFormat("%d/%m");
 
     // Obtén las fechas únicas para establecer como valores de las marcas del eje X
-    const uniqueDates = groupedData.map((d) => d.archive_date);
+    const uniqueDates = groupedData.map((d) => new Date(d.archive_date));
     xScale.domain(uniqueDates);
 
     // Configurar las marcas del eje X
-    const xAxis = d3
-      .axisBottom(xScale)
-      .tickValues(groupedData.map((d) => d.archive_date))
+    let tickValues;
+    if (selectedPeriod === 'last_month') {
+      tickValues = getTickValuesForLastMonth(uniqueDates);
+    } else {
+      tickValues = uniqueDates;
+    }
+
+    // Configurar las marcas del eje X
+    const xAxis = d3.axisBottom(xScale)
+      .tickValues(tickValues)
       .tickFormat((d) => formatTime(d)); // Aplicar el formato personalizado
 
     const stack = d3
@@ -191,13 +261,6 @@ const StackedAreaChartComponentVul = () => {
       });
 
     legend
-      .append("circle")
-      .attr("cx", 7.5)
-      .attr("cy", 7.5)
-      .attr("r", 5)
-      .attr("fill", (d) => getColorByStatus(d));
-
-    legend
       .append("text")
       .attr("x", 20)
       .attr("y", 7)
@@ -207,7 +270,21 @@ const StackedAreaChartComponentVul = () => {
       .attr("font-size", "16px")
       .attr("font-family", "Roboto")
       .attr("font-weight", "100");
-  }, [data, containerWidth, containerHeight]);
+
+    legend
+      .append("circle")
+      .attr("cx", 7.5)
+      .attr("cy", 7.5)
+      .attr("r", 5)
+      .attr("fill", (d) => getColorByStatus(d));
+
+
+  }, [data, containerRef, containerWidth, containerHeight, selectedPeriod]);
+
+  // Función para manejar la selección del periodo desde el menú desplegable
+  const handleSelectPeriod = (value) => {
+    setSelectedPeriod(value);
+  };
 
   const getColorByStatus = (status) => {
     const colorMap = {
@@ -220,14 +297,11 @@ const StackedAreaChartComponentVul = () => {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", width: "100%" }} ref={containerRef}>
       <svg ref={chartRef} width={containerWidth} height={containerHeight}></svg>
-      <svg
-        ref={legendRef}
-        style={{ position: "absolute", left: containerWidth - 408, top: -19 }}
-      ></svg>
       <div className="w-50" style={dropdownContainerStyle}>
-        <DropdownSelect data={Period} onSelect={() => {}} />
+        <svg ref={legendRef} style={legendStyle}></svg>
+        <DropdownSelect data={Period} onSelect={e => handleSelectPeriod(e.value)} />
       </div>
     </div>
   );
