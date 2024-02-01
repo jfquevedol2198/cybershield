@@ -246,17 +246,25 @@ const StackedAreaChartComponentVul = () => {
     const legendGap = 25; // Ajusta el valor según tus preferencias
     let accumulatedWidth = 0; // Inicia con un valor mayor
 
-    const legend = legendSvg
-      .selectAll(".legend")
+    // Calcular y almacenar los anchos de los textos de la leyenda
+    const textWidths = uniqueStatusValues.map(status => {
+      const tempText = legendSvg.append("text").text(status).style("font-size", "16px").style("font-family", "Roboto");
+      const textWidth = tempText.node().getComputedTextLength();
+      tempText.remove(); // Eliminar el texto temporal
+      return textWidth;
+    });
+
+    const legend = legendSvg.selectAll(".legend")
       .data(uniqueStatusValues)
       .enter()
       .append("g")
       .attr("class", "legend")
-      .attr("transform", (d) => {
+      .attr("transform", (d, i) => {
+        // Usar el ancho almacenado para calcular la posición x
         const xPos = accumulatedWidth;
-        accumulatedWidth +=
-          legendSvg.append("text").text(d).node().getComputedTextLength() +
-          legendGap;
+        // Añadir el ancho del texto actual y el espacio entre leyendas al ancho acumulado
+        // para el próximo elemento
+        accumulatedWidth += (i < textWidths.length - 1) ? textWidths[i] + legendGap : 0;
         return `translate(${xPos}, 0)`;
       });
 
