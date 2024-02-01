@@ -45,6 +45,11 @@ const Login = () => {
   });
 
   const onSubmit = async (e) => {
+    const temporaryUser = {
+      email: e.email,
+      username: e.email,
+    };
+
     try {
       setError(null);
       setIsLoading(true);
@@ -58,9 +63,9 @@ const Login = () => {
 
       const userInfo = await fetchUserInfo(e.email);
       if (!userInfo) {
-        setTempUser(e.email);
+        setTempUser(temporaryUser);
         snack.info("Please complete profile");
-        navigate(`/complete-profile?email=${e.email}`);
+        navigate('/complete-profile');
         return;
       }
       const token = data.signInUserSession?.accessToken?.jwtToken;
@@ -76,7 +81,8 @@ const Login = () => {
     } catch (error) {
       let { name, message } = error;
       if (name === "UserNotConfirmedException") {
-        navigate(`/confirm-account?username=${e.email}`);
+        setTempUser(temporaryUser);
+        navigate('/confirm-account');
         return;
       }
       setError(message);

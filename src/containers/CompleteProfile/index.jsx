@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 import apiClient8089 from "../../api8089";
@@ -49,8 +49,8 @@ const CompleteProfile = () => {
   const [isStateLoading, setIsStateLoading] = useState(false);
   const [isCityLoading, setIsCityLoading] = useState(false);
 
-  const [searchParam] = useSearchParams();
-  const email = searchParam.get("email") || "";
+  const email = tempUser?.email || '';
+  console.log("tempuser:::", tempUser);
 
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
