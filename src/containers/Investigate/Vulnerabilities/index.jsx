@@ -134,7 +134,7 @@ const Vulnerabilities = () => {
       {!hasFilterAndSearch && (
         <div className="w-full overflow-x-auto">
           <div className="flex min-w-[90rem] flex-row items-start justify-start gap-4 px-7 py-4">
-            <div className="flex min-w-[220px] flex-col items-center bg-white p-4">
+            <div className="flex min-w-[220px] flex-col items-center bg-white p-8">
               <div className="mb-2 text-base font-bold">
                 Total Vulnerabilities
               </div>
@@ -156,7 +156,7 @@ const Vulnerabilities = () => {
             >
               <div className="flex w-full flex-row items-center justify-between">
                 <span className="text-base font-bold">
-                  Vulnerabilities status timeline
+                  Vulnerabilities Affected Assets Status Timeline
                 </span>
               </div>
 

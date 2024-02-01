@@ -224,7 +224,7 @@ const StackedAreaChartComponent = () => {
       <svg ref={chartRef} width={containerWidth} height={containerHeight}></svg>
 
       {/* Leyendas */}
-      <div style={{ position: 'absolute', right: '150px', top: '-19px', display: 'flex' }}>
+      <div style={{ position: 'absolute', right: '70px', top: '-21px', display: 'flex' }}>
         {legendData.map(status => {
           // Cambia el estado para que la primera letra sea mayúscula y el resto minúscula
           const formattedStatus = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
