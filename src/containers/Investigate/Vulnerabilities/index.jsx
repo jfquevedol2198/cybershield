@@ -41,6 +41,8 @@ const Vulnerabilities = () => {
     useSearchAndFilter();
   const [filterCellOptions, setFilterCellOptions] = useState([]);
 
+  const [vulnerabilitiesAssets, setVulnerabilitiesAssets] = useState([]);
+
   const debounced = useDebouncedCallback(() => {
     setWidth(stackAreaChartRef.current.clientWidth);
   }, 500);
@@ -52,8 +54,28 @@ const Vulnerabilities = () => {
       const { data } = await apiClient.getVulnerabilities();
       const vulnerabilities = parseVulnerabilities(data);
 
-      setPageData(vulnerabilities);
-      setFilterCellOptions(getFilterOptions(vulnerabilities));
+      const { data: dataVulnerabilitiesAssets } =
+        await apiClient.getVulnerabilitiesAssetView();
+      setVulnerabilitiesAssets(dataVulnerabilitiesAssets);
+
+      const assetsCountByVulId = dataVulnerabilitiesAssets.reduce(
+        (acc, asset) => {
+          const vulId = asset.idvul;
+          acc[vulId] = (acc[vulId] || 0) + 1;
+          return acc;
+        },
+        {}
+      );
+      const combinedData = vulnerabilities.map((vul) => {
+        return {
+          ...vul,
+          asset_count: assetsCountByVulId[vul.id] || 0,
+          isExpanded: false,
+        };
+      });
+
+      setPageData(combinedData);
+      setFilterCellOptions(getFilterOptions(combinedData));
 
       const riskData = getRiskDataByCategory(vulnerabilities, "cvescore");
       setRiskData([
@@ -69,7 +91,7 @@ const Vulnerabilities = () => {
 
     setWidth(stackAreaChartRef.current.clientWidth);
     window.addEventListener("resize", debounced);
-    return window.removeEventListener("resize", () => { });
+    return window.removeEventListener("resize", () => {});
   }, []);
 
   useEffect(() => {
@@ -156,7 +178,7 @@ const Vulnerabilities = () => {
             >
               <div className="flex w-full flex-row items-center justify-between">
                 <span className="text-base font-bold">
-                  Vulnerabilities Affected Assets Status Timeline
+                  Vulnerabilities Affected Assets Status Timeline
                 </span>
               </div>
 
@@ -201,7 +223,10 @@ const Vulnerabilities = () => {
       )}
 
       <div className="gap-4 px-7 py-4">
-        <VulnerabilityTable data={filterData} />
+        <VulnerabilityTable
+          data={filterData}
+          vulAssetsData={vulnerabilitiesAssets}
+        />
       </div>
       {/* Filter */}
       <Filter

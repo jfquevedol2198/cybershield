@@ -43,6 +43,9 @@ export const vulnerabilities = (httpClient) => ({
   getVulnerabilities() {
     return httpClient.get("/vulnerabilities_view");
   },
+  getVulnerabilitiesAssetView() {
+    return httpClient.get("/vulnerabilities_assets_view");
+  },
 });
 
 export const alerts = (httpClient) => ({
