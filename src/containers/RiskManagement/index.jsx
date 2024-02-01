@@ -7,7 +7,6 @@ import api from "../../api8000";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import ColorBar from "../../components/ColorBar";
-// import CreateIncidentModal from "../../components/CreateIncidentModal";
 import CustomTap from "../../components/CustomTap";
 import DropdownSelect from "../../components/DropdownSelect";
 import Tag from "../../components/Tag";
@@ -17,14 +16,15 @@ import { parseAssets, parseShops } from "../../utils/parse";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
 import AffectAssetsTable from "./AffectedAssetsTable";
 import {
-  PanelAlerts, // PanelIncidents,
-  // PanelInsights,
+  PanelAlerts,
+  PanelIncidents,
   PanelRisk,
   PanelShops,
-  TabAlerts, // TabIncidents,
-  // TabInsights,
+  TabAlerts,
+  TabIncidents,
   TabRisk,
   TabShops,
+  TabVulnerabilities,
 } from "./TabItems";
 
 const Period = [
@@ -55,7 +55,10 @@ const RiskManagement = () => {
   const [shops, setShops] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [risks, setRisks] = useState([]);
+  const [incidents, setIncidents] = useState([]);
+  const [ vulnerabilities, setVulnerabilities ] = useState([]);
   const [unassignedAssets, setUnassignedAssets] = useState(0);
+
   const { siteId } = useParams();
 
   const [width, setWidth] = useState(0);
@@ -73,19 +76,14 @@ const RiskManagement = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      setLoading(true);
-
-      ////
-      const { data: updateDateData } = await api.getUpdateDate();
-      const fechaUTC = updateDateData?.[0].etl_fecha;
-      if (fechaUTC) {
-        const fechaObj = new Date(fechaUTC);
-
-        if (!isNaN(fechaObj.getTime())) {
-          // Formatea la fecha personalizada "30 Nov 2023 | 20:23:19"
-          const formattedDate = dayjs(fechaObj).format(
-            "DD MMM YYYY | HH:mm:ss"
-          );
+      try {
+        setLoading(true);
+  
+        // Update date
+        const { data: updateDateData } = await api.getUpdateDate();
+        const fechaUTC = updateDateData?.[0]?.etl_fecha;
+        if (fechaUTC) {
+          const formattedDate = formatDate(fechaUTC);
           setLastUpdated(formattedDate);
         } else {
           console.error(
@@ -117,38 +115,76 @@ const RiskManagement = () => {
         } else {
           risksByLevel[riskLevel] = 1;
         }
-      });
-      setRiskByLevel(risksByLevel);
+  
+        // Assets
+        const { data: assetsData } = await api.getSiteAssets(siteId);
+        const assets = parseAssets(assetsData);
+        const risksByLevel = calculateRisksByLevel(assets);
+        setRiskByLevel(risksByLevel);
+        setAssets(assets);
+  
+        // Shops
+        const { data: shopsData } = siteId
+          ? await api.getSiteShops(siteId)
+          : await api.getShops();
+        const shops = parseShops(shopsData);
+        setShops(shops);
+  
+        // Alerts
+        const { data: alertsData } = await api.getAlertsView(siteId);
+        setAlerts(alertsData);
+  
+        // Risks
+        const { data: risksData } = await api.getRisks(siteId);
+        setRisks(risksData);
+  
+        // Incidents
+        const { data: incidentsData } = await api.getIncidents();
+        setIncidents(incidentsData);
 
-      setAssets(assets);
+        // vulnerabilities
+        const { data: vulnerabilitiesData } = await api.getVulnerabilities();
+        setVulnerabilities(vulnerabilitiesData);
 
-      // shops
-      const { data: shopsData } = siteId
-        ? await api.getSiteShops(siteId)
-        : await api.getShops();
-      const shops = parseShops(shopsData);
-      setShops(shops);
+        // TODO: insights. (currently the api is not returning any data so we need to wait for the api to be ready)
 
-      // alerts
-      const { data: alertsData } = await api.getAlertsView(siteId);
-      const alerts = alertsData || [];
-      setAlerts(alerts);
-
-      // risks
-      const { data: risks } = await api.getRisks(siteId);
-      setRisks(risks);
-
-      setAverageRisk(
-        Math.ceil(
-          siteId
-            ? risks[0]?.total_risk_score_by_site
-            : risks[0]?.total_risk_score
-        )
-      );
-      setLoading(false);
+  
+        // Average Risk
+        setAverageRisk(
+          Math.ceil(
+            siteId
+              ? risksData[0]?.total_risk_score_by_site
+              : risksData[0]?.total_risk_score
+          )
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
+  
     fetch();
   }, [siteId]);
+  
+  const formatDate = (fechaUTC) => {
+    const fechaObj = new Date(fechaUTC);
+    if (!isNaN(fechaObj.getTime())) {
+      return dayjs(fechaObj).format("DD MMM YYYY | HH:mm:ss");
+    } else {
+      console.error("Invalid date after creating Date object:", fechaUTC);
+      return null;
+    }
+  };
+  
+  const calculateRisksByLevel = (assets) => {
+    const risksByLevel = {};
+    assets.forEach(({ risk_score }) => {
+      const riskLevel = getRiskLevel(risk_score);
+      risksByLevel[riskLevel] = (risksByLevel[riskLevel] || 0) + 1;
+    });
+    return risksByLevel;
+  };
 
   return (
     <Fragment>
@@ -175,15 +211,14 @@ const RiskManagement = () => {
               <TabRisk key="risk" value={averageRisk} />,
               <TabAlerts key="alerts" value={alerts.length} />,
               <TabShops key="shops" value={shops.length} />,
-              // <TabInsights key="insights" value={3} />,
-              // <TabIncidents key="incidents" value={2} />,
+              <TabIncidents key="incidents" value={incidents.length} />,
+              <TabVulnerabilities key="vulnerabilities" value={vulnerabilities.length} />,
             ]}
             tabPanels={[
               <PanelRisk key="risk" risks={risks} />,
               <PanelAlerts key="alerts" alerts={alerts} />,
               <PanelShops key="shops" shops={shops} />,
-              // <PanelInsights key="insights" />,
-              // <PanelIncidents key="incidents" />,
+              <PanelIncidents key="incidents" incidents={incidents}/>,
             ]}
             tabListClassName="overflow-x-hidden overflow-y-hidden"
             tabPanelClassName="px-7 py-8 bg-white h-[35rem]"
