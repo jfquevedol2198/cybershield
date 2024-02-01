@@ -7,7 +7,6 @@ import api from "../../api8000";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import ColorBar from "../../components/ColorBar";
-// import CreateIncidentModal from "../../components/CreateIncidentModal";
 import CustomTap from "../../components/CustomTap";
 import DropdownSelect from "../../components/DropdownSelect";
 import Tag from "../../components/Tag";
@@ -19,14 +18,13 @@ import AffectAssetsTable from "./AffectedAssetsTable";
 import {
   PanelAlerts,
   PanelIncidents,
-  // PanelInsights,
   PanelRisk,
   PanelShops,
   TabAlerts,
   TabIncidents,
-  // TabInsights,
   TabRisk,
   TabShops,
+  TabVulnerabilities,
 } from "./TabItems";
 
 const Period = [
@@ -58,6 +56,7 @@ const RiskManagement = () => {
   const [alerts, setAlerts] = useState([]);
   const [risks, setRisks] = useState([]);
   const [incidents, setIncidents] = useState([]);
+  const [ vulnerabilities, setVulnerabilities ] = useState([]);
   const { siteId } = useParams();
 
   const [width, setWidth] = useState(0);
@@ -72,85 +71,6 @@ const RiskManagement = () => {
     window.addEventListener("resize", debounced);
     return window.removeEventListener("resize", () => {});
   }, [debounced]);
-
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     setLoading(true);
-
-  //     ////
-  //     const { data: updateDateData } = await api.getUpdateDate();
-  //     const fechaUTC = updateDateData?.[0].etl_fecha;
-  //     if (fechaUTC) {
-  //       const fechaObj = new Date(fechaUTC);
-
-  //       if (!isNaN(fechaObj.getTime())) {
-  //         // Formatea la fecha personalizada "30 Nov 2023 | 20:23:19"
-  //         const formattedDate = dayjs(fechaObj).format(
-  //           "DD MMM YYYY | HH:mm:ss"
-  //         );
-  //         setLastUpdated(formattedDate);
-  //       } else {
-  //         console.error(
-  //           "Fecha inválida después de crear el objeto Date:",
-  //           fechaUTC
-  //         );
-  //       }
-  //     } else {
-  //       console.error(
-  //         "La propiedad etl_fecha no está presente o es undefined en la respuesta de la API"
-  //       );
-  //     }
-
-  //     // assets
-  //     const { data } = await api.getSiteAssets(siteId);
-  //     const assets = parseAssets(data);
-
-  //     const risksByLevel = {};
-  //     assets.forEach(({ risk_score }) => {
-  //       const riskLevel = getRiskLevel(risk_score);
-  //       if (risksByLevel[riskLevel]) {
-  //         risksByLevel[riskLevel]++;
-  //       } else {
-  //         risksByLevel[riskLevel] = 1;
-  //       }
-  //     });
-  //     setRiskByLevel(risksByLevel);
-
-  //     setAssets(assets);
-
-  //     // shops
-  //     const { data: shopsData } = siteId
-  //       ? await api.getSiteShops(siteId)
-  //       : await api.getShops();
-  //     const shops = parseShops(shopsData);
-  //     setShops(shops);
-
-  //     // alerts
-  //     const { data: alertsData } = await api.getAlertsView(siteId);
-  //     const alerts = alertsData || [];
-  //     setAlerts(alerts);
-
-  //     // risks
-  //     const { data: risks } = await api.getRisks(siteId);
-  //     setRisks(risks);
-
-  //     // incidents
-  //     const { data: incidentsData } = await api.getIncidents();
-  //     setIncidents(incidentsData);
-
-  //     setAverageRisk(
-  //       Math.ceil(
-  //         siteId
-  //           ? risks[0]?.total_risk_score_by_site
-  //           : risks[0]?.total_risk_score
-  //       )
-  //     );
-  //     setLoading(false);
-  //   };
-  //   fetch();
-  // }, [siteId]);
-
-
 
   useEffect(() => {
     const fetch = async () => {
@@ -192,6 +112,13 @@ const RiskManagement = () => {
         // Incidents
         const { data: incidentsData } = await api.getIncidents();
         setIncidents(incidentsData);
+
+        // vulnerabilities
+        const { data: vulnerabilitiesData } = await api.getVulnerabilities();
+        setVulnerabilities(vulnerabilitiesData);
+
+        // TODO: insights. (currently the api is not returning any data so we need to wait for the api to be ready)
+
   
         // Average Risk
         setAverageRisk(
@@ -229,7 +156,6 @@ const RiskManagement = () => {
     });
     return risksByLevel;
   };
-  
 
   return (
     <Fragment>
@@ -256,14 +182,13 @@ const RiskManagement = () => {
               <TabRisk key="risk" value={averageRisk} />,
               <TabAlerts key="alerts" value={alerts.length} />,
               <TabShops key="shops" value={shops.length} />,
-              // <TabInsights key="insights" value={3} />,
               <TabIncidents key="incidents" value={incidents.length} />,
+              <TabVulnerabilities key="vulnerabilities" value={vulnerabilities.length} />,
             ]}
             tabPanels={[
               <PanelRisk key="risk" risks={risks} />,
               <PanelAlerts key="alerts" alerts={alerts} />,
               <PanelShops key="shops" shops={shops} />,
-              // <PanelInsights key="insights" />,
               <PanelIncidents key="incidents" incidents={incidents}/>,
             ]}
             tabListClassName="overflow-x-hidden overflow-y-hidden"
