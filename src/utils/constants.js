@@ -27,9 +27,9 @@ export const SortDirection = {
 };
 
 export const COMPLIANCE_ITEMS = [
-  "Detect",
   "Identify",
+  "Detect",
   "Protect",
-  "Recover",
   "Respond",
+  "Recover",
 ];
