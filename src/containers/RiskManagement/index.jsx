@@ -57,6 +57,8 @@ const RiskManagement = () => {
   const [risks, setRisks] = useState([]);
   const [incidents, setIncidents] = useState([]);
   const [ vulnerabilities, setVulnerabilities ] = useState([]);
+  const [unassignedAssets, setUnassignedAssets] = useState(0);
+
   const { siteId } = useParams();
 
   const [width, setWidth] = useState(0);
@@ -84,7 +86,34 @@ const RiskManagement = () => {
           const formattedDate = formatDate(fechaUTC);
           setLastUpdated(formattedDate);
         } else {
-          console.error("Invalid date after creating Date object:", fechaUTC);
+          console.error(
+            "Fecha inválida después de crear el objeto Date:",
+            fechaUTC
+          );
+        }
+      } else {
+        console.error(
+          "La propiedad etl_fecha no está presente o es undefined en la respuesta de la API"
+        );
+      }
+
+      // assets
+      const { data } = await api.getSiteAssets(siteId);
+      const assets = parseAssets(data);
+
+      setUnassignedAssets(
+        assets.filter(
+          (asset) => asset.asset_id === "99999" || asset.id === "99999"
+        ).length
+      );
+
+      const risksByLevel = {};
+      assets.forEach(({ risk_score }) => {
+        const riskLevel = getRiskLevel(risk_score);
+        if (risksByLevel[riskLevel]) {
+          risksByLevel[riskLevel]++;
+        } else {
+          risksByLevel[riskLevel] = 1;
         }
   
         // Assets
@@ -220,9 +249,7 @@ const RiskManagement = () => {
                 <span className="mr-1 text-[2.75rem] font-light">
                   {assets.length}
                 </span>
-                <span className="text-[1.5rem] font-light">
-                  /{assets.length}
-                </span>
+                <span className="text-[1.5rem] font-light">Assets</span>
               </div>
             </div>
             <ColorBar
@@ -237,6 +264,10 @@ const RiskManagement = () => {
           </div>
           <div className="mb-8 text-base font-normal">
             Review the affected assets.
+          </div>
+          <div className="mb-8 flex flex-row items-center gap-x-2 text-base text-link">
+            <span className="text-5xl">{unassignedAssets}</span>
+            <span>Unassigned assets</span>
           </div>
           <AffectAssetsTable data={assets} />
           <Button

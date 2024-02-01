@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { useLocation } from "react-router-dom";
 
 import useCommon from "../../hooks/useCommon";
@@ -13,12 +14,9 @@ const MyAccountSidebar = () => {
       {MY_ACCOUNT_SIDEBAR_ITEMS.map(({ Icon, ...item }) => {
         const isActive = location.pathname.indexOf(item.path) > -1;
         return (
-          <>
+          <Fragment key={item.title.replace(/\s+/, "_")}>
             {item.path && (
-              <NormalButton
-                key={item.path}
-                href={`/dashboard/my-account/${item.path}`}
-              >
+              <NormalButton href={`/dashboard/my-account/${item.path}`}>
                 <div className="flex w-full justify-between py-3 text-left text-base font-light text-gray-4">
                   <div className="flex flex-row items-center gap-2">
                     {isActive &&
@@ -34,7 +32,6 @@ const MyAccountSidebar = () => {
             )}
             {item.onClick && (
               <NormalButton
-                key={item.onClick}
                 onClick={() => {
                   if (item.onClick === "signout") {
                     setShowSignoutModal(true);
@@ -51,7 +48,7 @@ const MyAccountSidebar = () => {
                 </div>
               </NormalButton>
             )}
-          </>
+          </Fragment>
         );
       })}
     </div>

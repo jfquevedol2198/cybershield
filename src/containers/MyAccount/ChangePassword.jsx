@@ -11,9 +11,9 @@ import snack from "../../utils/snack";
 
 const schema = z
   .object({
-    oldPassword: z.string().min(1, "Old password is required"),
-    newPassword: z.string().min(1, "New password is required"),
-    confirmPassword: z.string().min(1, "Confirm password is required"),
+    oldPassword: z.string().min(8, "Old password is required"),
+    newPassword: z.string().min(8, "New password is required"),
+    confirmPassword: z.string().min(8, "Confirm password is required"),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
     message: "Password doesn't match",

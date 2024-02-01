@@ -39,16 +39,16 @@ const Users = () => {
   const columns = [
     {
       title: "User name",
-      dataIndex: "username",
-      key: "username",
+      dataIndex: "user_name",
+      key: "user_name",
       colSpan: 1,
       className: "",
       align: "left",
     },
     {
       title: "Full Name",
-      dataIndex: "fullName",
-      key: "fullName",
+      dataIndex: "name",
+      key: "name",
       colSpan: 1,
       className: "",
       align: "left",
@@ -101,8 +101,8 @@ const Users = () => {
     },
     {
       title: "MFA",
-      dataIndex: "isMfaEnabled",
-      key: "isMfaEnabled",
+      dataIndex: "enable_multifactor_authn",
+      key: "enable_multifactor_authn",
       render: (value) => (
         <Tag
           variant={value ? TagVariant.positive : TagVariant.inactive}

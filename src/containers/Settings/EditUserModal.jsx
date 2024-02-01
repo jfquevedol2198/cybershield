@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 
+import apiClient8089 from "../../api8089";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import Checkbox from "../../components/Checkbox";
@@ -32,7 +33,6 @@ const schema = z.object({
 
 const EditUserModal = ({ isOpen, user, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
-
   // country, state, city
   const [isCountryLoading, setIsCountryLoading] = useState(false);
   const [isStateLoading, setIsStateLoading] = useState(false);
@@ -45,9 +45,9 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      firstName: _.get(user, "firstName"),
-      middleName: _.get(user, "middleName"),
-      lastName: _.get(user, "lastName"),
+      firstName: _.get(user, "first_name"),
+      middleName: _.get(user, "middle_name"),
+      lastName: _.get(user, "last_name"),
       country: _.get(user, "country"),
       state: _.get(user, "state"),
       city: _.get(user, "city"),
@@ -152,12 +152,10 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
         last_name: lastName,
         middle_name: middleName,
       };
-      const res = await axios.put(
-        `http://3.128.30.222:8080/sys_user/${user.id}`,
-        data
-      );
+      const res = await apiClient8089.updateUser(user.sys_id, data);
       console.log(res);
       snack.success("Updated successfully");
+      onClose();
     } catch (error) {
       console.log(error);
       snack.error("Updated failed");
@@ -169,7 +167,7 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
   const onHandleSubmit = form.handleSubmit(onSubmit);
 
   return (
-    <Modal title="Create user" isOpen={isOpen} closeModal={onClose}>
+    <Modal title="Edit user" isOpen={isOpen} closeModal={onClose}>
       {isLoading && <ActivityIndicator />}
       <form className="min-w-[30rem]" onSubmit={onHandleSubmit}>
         <div className="mb-4 flex w-full flex-row gap-4">

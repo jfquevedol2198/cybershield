@@ -27,11 +27,12 @@ const FormControl = React.forwardRef(
       inputType,
       setValue: setValueForm,
       isDisabled,
+      defaultSelValue,
       ...rest
     },
     ref
   ) => {
-    const [selected, setSelected] = useState(rest.defaultSelValue);
+    const [selected, setSelected] = useState(defaultSelValue);
     const [filter, setFilter] = useState(null);
     const inputRef = useRef(null);
     const hasIcon = inputType === "phone" || inputType === "dropdown";
@@ -105,7 +106,7 @@ const FormControl = React.forwardRef(
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <Listbox.Options className="absolute top-full z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white px-2 py-2 text-base shadow-input sm:text-sm">
+                  <Listbox.Options className="absolute top-full z-[11] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white px-2 py-2 text-base shadow-input sm:text-sm">
                     <div className="relative w-full border-b-[1px] border-gray-1">
                       <input
                         ref={inputRef}
@@ -174,7 +175,7 @@ const FormControl = React.forwardRef(
                     setSelected(v);
                   }}
                 >
-                  <Listbox.Button className="z-9 absolute left-3 flex w-[7rem] cursor-pointer flex-row items-center gap-1 bg-white py-2 text-left sm:text-sm">
+                  <Listbox.Button className="absolute left-3 z-10 flex w-[7rem] cursor-pointer flex-row items-center gap-1 bg-white py-2 text-left sm:text-sm">
                     <span className="bg-transparent text-xl">
                       {selected?.flag}
                     </span>
@@ -294,6 +295,7 @@ FormControl.defaultProps = {
   className: "",
   placeholder: "placeholder",
   isDisabled: false,
+  defaultSelValue: "",
 };
 
 FormControl.propTypes = {
@@ -311,6 +313,7 @@ FormControl.propTypes = {
   ]),
   setValue: PropTypes.func,
   isDisabled: PropTypes.bool,
+  defaultSelValue: PropTypes.string,
 };
 
 export default FormControl;

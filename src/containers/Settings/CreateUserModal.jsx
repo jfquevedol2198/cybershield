@@ -37,6 +37,7 @@ const CreateUserModal = ({ isOpen, onClose }) => {
           email: e.email,
         },
       });
+      onClose();
       snack.success("User created, temporary password is 12345678");
     } catch (error) {
       snack.error(error.message);
