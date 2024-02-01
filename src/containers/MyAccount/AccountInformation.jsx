@@ -1,19 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 
+import apiClient8089 from "../../api8089";
+import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
 import NormalButton from "../../components/NormalButton";
 import config from "../../config";
 import useAuth from "../../hooks/useAuth";
 import { ButtonVariant, SizeVariant } from "../../utils";
+import snack from "../../utils/snack";
 
 const schema = z.object({
   firstName: z.string().min(1, "First name is required"),
-  middleName: z.string(),
+  middleName: z.string().optional(),
   lastName: z.string().min(1, "Last name is required"),
   country: z.string().min(1, "Country is required"),
   state: z.string().min(1, "State is required"),
@@ -21,13 +25,15 @@ const schema = z.object({
   zipCode: z.string().min(1, "Zip code is required"),
   manager: z.string().min(1, "Job manager is required"),
   jobTitle: z.string().min(1, "Job title is required"),
-  phone: z.string().min(1, "Phone number is required"),
+  phone: z.string().optional(),
   email: z.string().min(1, "Email is required"),
 });
 
 const AccountInformation = () => {
   const [editMode, setEditMode] = useState(false);
   const { userInfo } = useAuth();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   // country, state, city
   const [isCountryLoading, setIsCountryLoading] = useState(false);
@@ -56,29 +62,27 @@ const AccountInformation = () => {
     fetch();
   }, []);
 
-  const getDefaultValues = () => {
-    return {
-      firstName: userInfo?.first_name,
-      middleName: userInfo?.middle_name,
-      lastName: userInfo?.last_name,
-      country: userInfo?.country,
-      state: userInfo?.state,
-      city: userInfo?.city,
-      zipCode: userInfo?.zip,
-      manager: userInfo?.manager,
-      jobTitle: userInfo?.title,
-      phone: userInfo?.phone,
-      email: userInfo?.email,
-    };
-  };
-
   const form = useForm({
     resolver: zodResolver(schema),
-    defaultValues: getDefaultValues(),
+    defaultValues: {
+      firstName: _.get(userInfo, "first_name"),
+      middleName: _.get(userInfo, "middle_name"),
+      lastName: _.get(userInfo, "last_name"),
+      country: _.get(userInfo, "country"),
+      state: _.get(userInfo, "state"),
+      city: _.get(userInfo, "city"),
+      zip: _.get(userInfo, "zip"),
+      manager: _.get(userInfo, "manager"),
+      title: _.get(userInfo, "title"),
+      email: _.get(userInfo, "email"),
+      sites: _.get(userInfo, "sites"),
+      isCreateIncidents: _.get(userInfo, "isCreateIncidents") || false,
+    },
   });
 
   const country = useWatch({ control: form.control, name: "country" });
   const state = useWatch({ control: form.control, name: "state" });
+  const city = useWatch({ control: form.control, name: "city" });
 
   useEffect(() => {
     const fetch = async () => {
@@ -138,8 +142,64 @@ const AccountInformation = () => {
     if (country && state) fetch();
   }, [state]);
 
+  const onSubmit = async (e) => {
+    try {
+      setIsLoading(true);
+      const {
+        firstName,
+        middleName,
+        lastName,
+        country,
+        state,
+        city,
+        zipCode,
+        manager,
+        jobTitle,
+        phone,
+        email,
+      } = e;
+      const data = {
+        country,
+        zip: zipCode,
+        active: true,
+        state,
+        city,
+        title: jobTitle,
+        sys_class_name: "sys_user",
+        first_name: firstName,
+        email,
+        manager,
+        last_name: lastName,
+        middle_name: middleName,
+        home_phone: "-",
+        phone: phone,
+        name: "-",
+        mobile_phone: "-",
+        street: "-",
+        company: "Cybersheild",
+        department: "Department",
+        location: country,
+      };
+
+      const res = await apiClient8089.updateUser(userInfo?.sys_id, data);
+      if (res.status === 200) {
+        snack.success("User is updated successfully");
+      } else {
+        snack.error("User update failed");
+      }
+    } catch (error) {
+      console.log(error);
+      snack.error(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onHandleSubmit = form.handleSubmit(onSubmit);
+
   return (
-    <div>
+    <form onSubmit={onHandleSubmit}>
+      {isLoading && <ActivityIndicator />}
       <div className="mb-2 text-[1.625rem] font-bold text-gray-4">
         Account information
       </div>
@@ -156,6 +216,7 @@ const AccountInformation = () => {
               size={SizeVariant.small}
               error={form.formState.errors.firstName?.message}
               {...form.register("firstName")}
+              setValue={form.setValue}
             />
             <FormControl
               id="middleName"
@@ -163,6 +224,7 @@ const AccountInformation = () => {
               size={SizeVariant.small}
               error={form.formState.errors.middleName?.message}
               {...form.register("middleName")}
+              setValue={form.setValue}
             />
             <FormControl
               id="lastName"
@@ -170,6 +232,7 @@ const AccountInformation = () => {
               size={SizeVariant.small}
               error={form.formState.errors.lastName?.message}
               {...form.register("lastName")}
+              setValue={form.setValue}
             />
           </div>
           <div className="mb-4 flex flex-row gap-4">
@@ -180,10 +243,12 @@ const AccountInformation = () => {
                 label="Country"
                 inputType="dropdown"
                 size={SizeVariant.small}
+                defaultSelValue={country}
                 error={form.formState.errors.country?.message}
                 data={countries}
                 {...form.register("country")}
                 isDisabled={isCountryLoading}
+                setValue={form.setValue}
               />
             </div>
             <div className="w-full">
@@ -192,10 +257,12 @@ const AccountInformation = () => {
                 label="State"
                 inputType="dropdown"
                 size={SizeVariant.small}
+                defaultSelValue={state}
                 error={form.formState.errors.state?.message}
                 data={states}
                 {...form.register("state")}
                 isDisabled={isStateLoading}
+                setValue={form.setValue}
               />
             </div>
           </div>
@@ -207,10 +274,12 @@ const AccountInformation = () => {
                 label="City"
                 inputType="dropdown"
                 size={SizeVariant.small}
+                defaultSelValue={city}
                 error={form.formState.errors.city?.message}
                 data={cities}
                 {...form.register("city")}
                 isDisabled={isCityLoading}
+                setValue={form.setValue}
               />
             </div>
             <div className="w-full">
@@ -220,6 +289,7 @@ const AccountInformation = () => {
                 size={SizeVariant.small}
                 error={form.formState.errors.zipCode?.message}
                 {...form.register("zipCode")}
+                setValue={form.setValue}
               />
             </div>
           </div>
@@ -231,6 +301,7 @@ const AccountInformation = () => {
               size={SizeVariant.small}
               error={form.formState.errors.jobTitle?.message}
               {...form.register("jobTitle")}
+              setValue={form.setValue}
             />
           </div>
           <div className="mb-4">
@@ -241,6 +312,7 @@ const AccountInformation = () => {
               size={SizeVariant.small}
               error={form.formState.errors.manager?.message}
               {...form.register("manager")}
+              setValue={form.setValue}
             />
           </div>
           <div className="mb-4">
@@ -252,6 +324,7 @@ const AccountInformation = () => {
               size={SizeVariant.medium}
               error={form.formState.errors.phone?.message}
               {...form.register("phone")}
+              setValue={form.setValue}
             />
           </div>
           <div className="mb-4 text-sm font-light text-secondary-text">
@@ -268,6 +341,7 @@ const AccountInformation = () => {
               error={form.formState.errors.email?.message}
               {...form.register("email")}
               isDisabled
+              setValue={form.setValue}
             />
           </div>
           {editMode && (
@@ -275,7 +349,6 @@ const AccountInformation = () => {
               <Button
                 className="flex-auto"
                 variant={ButtonVariant.filled}
-                onClick={() => {}}
                 isSubmit
               >
                 UPDATE
@@ -301,7 +374,7 @@ const AccountInformation = () => {
           </div>
         )}
       </div>
-    </div>
+    </form>
   );
 };
 

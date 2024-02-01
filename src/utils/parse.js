@@ -45,22 +45,24 @@ export const groupByKey = (data, key, formatKeyFn = (key) => key) => {
 
 export const parseCognitoUsers = (data) =>
   data.map((user) => ({
-    id: user.id,
-    username: user.user_name,
+    ...user,
     status: true,
-    email: user.email,
-    isMfaEnabled: user.enable_multifactor_authn,
     isServiceNowEnabled: true,
-    phone: user.phone,
-    title: user.title,
-    firstName: user.first_name,
-    lastName: user.last_name,
-    middleName: user.middle_name,
-    manager: user.manager,
-    country: user.country,
-    state: user.state,
-    city: user.city,
-    zip: user.zip,
+    // id: user.id,
+    // username: user.user_name,
+    // status: true,
+    // email: user.email,
+    // isMfaEnabled: user.enable_multifactor_authn,
+    // phone: user.phone,
+    // title: user.title,
+    // firstName: user.first_name,
+    // lastName: user.last_name,
+    // middleName: user.middle_name,
+    // manager: user.manager,
+    // country: user.country,
+    // state: user.state,
+    // city: user.city,
+    // zip: user.zip,
   }));
 
 export const parseVulnerabilities = (data) =>
