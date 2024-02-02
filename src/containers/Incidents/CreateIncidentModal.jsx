@@ -9,6 +9,7 @@ import ActivityIndicator from "../../components/ActivityIndicator";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
 import Modal from "../../components/Modal";
+// import MultiSelect from "../../components/MultiSelect";
 import useAuth from "../../hooks/useAuth";
 import { ButtonVariant, SizeVariant } from "../../utils";
 import snack from "../../utils/snack";
@@ -93,6 +94,15 @@ const CreateIncidentModal = ({ isOpen, onClose }) => {
           error={form.formState.errors.description?.message}
           {...form.register("description")}
         />
+        {/* <MultiSelect
+          id="status"
+          label="Status"
+          className="mb-5"
+          size={SizeVariant.small}
+          error={form.formState.errors.status?.message}
+          data={filterOptions["status"]}
+          {...form.register("status")}
+        /> */}
         <div className="flex flex-row items-center justify-end gap-2">
           <Button variant={ButtonVariant.outline} onClick={onClose}>
             CANCEL

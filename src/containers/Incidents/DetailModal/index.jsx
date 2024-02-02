@@ -6,8 +6,8 @@ import Stats from "../../../components/Stats";
 import Tag from "../../../components/Tag";
 import { dateFormat } from "../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
-import { AlertsTab, AlertsTabPanel } from "./TabItems/Alerts";
-import { AssetsTab, AssetsTabPanel } from "./TabItems/Assets";
+// import { AlertsTab, AlertsTabPanel } from "./TabItems/Alerts";
+// import { AssetsTab, AssetsTabPanel } from "./TabItems/Assets";
 import { InformationTab, InformationTabPanel } from "./TabItems/Information";
 
 const DetailModal = ({ isOpen, data, closeModal }) => {
@@ -26,7 +26,7 @@ const DetailModal = ({ isOpen, data, closeModal }) => {
             </span>
             <Tag riskLevel={RiskLevel[getRiskLevel(data?.severity)]} />
           </div>
-          <div className="flex flex-row items-center">
+          {/* <div className="flex flex-row items-center">
             <Stats count={5} label="Related Alerts" />
             <Stats
               count={9}
@@ -35,7 +35,7 @@ const DetailModal = ({ isOpen, data, closeModal }) => {
               isRightBorder
             />
             <Stats count={2} label="Duration Time" />
-          </div>
+          </div> */}
         </div>
         <div className="mb-4 flex w-[56.25rem] flex-row gap-6 bg-white p-4">
           <div className="flex flex-col">
@@ -82,13 +82,13 @@ const DetailModal = ({ isOpen, data, closeModal }) => {
         <CustomTap
           tabs={[
             <InformationTab key="information" data={data} />,
-            <AlertsTab key="alerts" data={data} />,
-            <AssetsTab key="assets" data={data} />,
+            // <AlertsTab key="alerts" data={data} />,
+            // <AssetsTab key="assets" data={data} />,
           ]}
           tabPanels={[
             <InformationTabPanel key="information" data={data} />,
-            <AlertsTabPanel key="alerts" data={data} />,
-            <AssetsTabPanel key="assets" data={data} />,
+            // <AlertsTabPanel key="alerts" data={data} />,
+            // <AssetsTabPanel key="assets" data={data} />,
           ]}
           tabListClassName="overflow-x-hidden overflow-y-hidden"
           tabPanelClassName="px-1 py-1 bg-gray-1"
