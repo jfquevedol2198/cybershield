@@ -2,7 +2,7 @@ export const RiskLevel = {
   none: {
     order: 0,
     label: "None",
-    color: "gray-1",
+    color: "risk-5",
   },
   low: {
     order: 1,

@@ -106,8 +106,8 @@ const Incidents = () => {
       try {
         setLoading(true);
         const { data } = await api.getIncidents();
-        const incidents = data;
-        setPageData(parseIncident(incidents));
+        const incidents = parseIncident(data);
+        setPageData(incidents);
         setFilterOptions(getFilterOptions(incidents) || {});
 
         setGroupByCveID(groupByKey(incidents, "subcategory"));
@@ -115,6 +115,7 @@ const Incidents = () => {
         const riskData = getRiskDataByCategory(incidents, "severity");
         setRiskData([
           { riskLevel: "low", value: riskData["low"] },
+          { riskLevel: "none", value: riskData["none"] },
           { riskLevel: "medium", value: riskData["medium"] },
           { riskLevel: "high", value: riskData["high"] },
           { riskLevel: "critical", value: riskData["critical"] },
