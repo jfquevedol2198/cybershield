@@ -1,12 +1,10 @@
 import PropTypes from "prop-types";
 
-import Button from "../../../components/Button";
 import CustomTap from "../../../components/CustomTap";
-import ExportButton from "../../../components/ExportButton";
 import RiskModal from "../../../components/RiskModal";
 import Stats from "../../../components/Stats";
 import Tag from "../../../components/Tag";
-import { ButtonVariant, dateFormat } from "../../../utils";
+import { dateFormat } from "../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
 import { AlertsTab, AlertsTabPanel } from "./TabItems/Alerts";
 import { AssetsTab, AssetsTabPanel } from "./TabItems/Assets";
