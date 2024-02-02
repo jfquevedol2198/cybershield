@@ -27,10 +27,10 @@ export const RiskLevel = {
 };
 
 export const getRiskLevel = (score) => {
-  if (score >= 75) return "critical";
-  else if (score >= 50 && score < 75) return "high";
-  else if (score >= 25 && score < 50) return "medium";
-  else if (score > 0 && score < 25) return "low";
+  if (score >= 7.5) return "critical";
+  else if (score >= 5.0 && score < 7.5) return "high";
+  else if (score >= 2.5 && score < 5.0) return "medium";
+  else if (score > 0 && score < 2.5) return "low";
   else return "none";
 };
 
