@@ -86,3 +86,15 @@ export const parseIncident = (data) =>
     severity: parseFloat(d.severity) / 10,
     state: normalizeString(d.state),
   }));
+
+export const parseToScale10 = (number) => {
+  // invalid input
+  if (isNaN(number) || number < 0 || number > 100 ) {
+    console.error("Invalid input passed to parseToScale10");
+    return 0;
+  }
+
+  const clampedNumber = Math.min(Math.max(number, 0), 100);
+  const translatedNumber = (clampedNumber / 10).toFixed(1);
+  return parseFloat(translatedNumber);
+}
