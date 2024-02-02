@@ -32,7 +32,7 @@ const Modal = ({ title, isOpen, children, closeModal }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-fit transform overflow-hidden bg-background p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="max-w-[56.25rem] transform bg-background p-6 text-left align-middle shadow-xl transition-all">
                 <div
                   className="absolute right-4 top-4 flex cursor-pointer flex-row items-center gap-1 active:opacity-50"
                   onClick={closeModal}

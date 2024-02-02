@@ -2,18 +2,36 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import PropTypes from "prop-types";
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import { SizeVariant } from "../../utils/constants";
-import { inputStyles } from "../../utils/input-styles";
+import { multiSelectStyles } from "../../utils/input-styles";
 import { DropdownSelectItemDataType } from "../../utils/types";
 import Tag, { TagVariant } from "../Tag";
 
 const MultiSelect = React.forwardRef(
-  ({ error, className, id, data, label, size, ...rest }, ref) => {
+  (
+    {
+      error,
+      className,
+      id,
+      data,
+      label,
+      size,
+      setValue: setFormValue,
+      ...rest
+    },
+    ref
+  ) => {
     const [selected, setSelected] = useState([]);
     const containerRef = useRef(null);
     const [value, setValue] = useState(null);
+
+    useEffect(() => {
+      if (selected) {
+        setFormValue(rest.name, selected.map((v) => v.value).join(", "));
+      }
+    }, [selected]);
 
     return (
       <div className={className}>
@@ -42,13 +60,13 @@ const MultiSelect = React.forwardRef(
           >
             <Listbox.Button
               className={clsx(
-                "relative flex w-full cursor-pointer flex-row items-center rounded border bg-white shadow-input",
+                "relative flex w-full cursor-pointer flex-row flex-wrap items-center rounded border bg-white shadow-input",
                 "hover:border-hover",
                 "focus:border-focus focus:shadow-none focus:outline-none",
                 "cursor-pointer caret-transparent disabled:border-disabled",
                 error ? "border-error" : "border-transparent",
                 "pr-10",
-                inputStyles[size]
+                multiSelectStyles[size]
               )}
             >
               <input
@@ -72,7 +90,7 @@ const MultiSelect = React.forwardRef(
               >
                 {label}
               </label>
-              <div className="mb-1.5 flex flex-row items-center gap-1">
+              <div className="mb-1.5 flex flex-row flex-wrap gap-1">
                 {selected.map((d) => (
                   <Tag
                     label={typeof d === "string" ? d : d.label}
@@ -163,6 +181,7 @@ MultiSelect.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+  setValue: PropTypes.func,
 };
 
 export default MultiSelect;
