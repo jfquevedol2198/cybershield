@@ -1,6 +1,6 @@
-import Accordion from "../../../components/Accordion";
-import Collapsible from "../../../components/Collapsible";
-import DataRow from "../../../components/DataRow";
+import Accordion from "../../../../../components/Accordion";
+import Collapsible from "../../../../../components/Collapsible";
+import DataRow from "../../../../../components/DataRow";
 
 const PhysicalAdjacentDevicesTab = () => {
   return <div>Physical adjacent devices</div>;

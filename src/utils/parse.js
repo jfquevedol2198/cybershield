@@ -68,6 +68,7 @@ export const parseCognitoUsers = (data) =>
 export const parseVulnerabilities = (data) =>
   data.map((vul) => ({
     ...vul,
+    asset_count: vul[vul.id] || 0,
   }));
 
 export const parseAlerts = (data) =>

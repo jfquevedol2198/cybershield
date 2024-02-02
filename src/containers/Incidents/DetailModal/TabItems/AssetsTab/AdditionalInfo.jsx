@@ -1,5 +1,5 @@
-import Accordion from "../../../components/Accordion";
-import DataRow from "../../../components/DataRow";
+import Accordion from "../../../../../components/Accordion";
+import DataRow from "../../../../../components/DataRow";
 
 const AdditionalInfoTab = () => {
   return <div>Additional info</div>;

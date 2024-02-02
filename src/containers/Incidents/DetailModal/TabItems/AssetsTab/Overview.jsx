@@ -1,4 +1,4 @@
-import DataRow from "../../../components/DataRow";
+import DataRow from "../../../../../components/DataRow";
 
 const OverviewTab = () => {
   return <div>Overview</div>;

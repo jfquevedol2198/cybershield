@@ -5,6 +5,7 @@ import Table from "../../components/Table";
 import Tag from "../../components/Tag";
 import { SortDataType, dateFormat } from "../../utils";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
+import DetailModal from "./DetailModal";
 
 const columns = [
   {
@@ -99,8 +100,10 @@ const columns = [
 ];
 
 const IncidentsTable = ({ currPage, totalPages, data, loading }) => {
-  const [, setIsOpen] = useState(false);
-  const onClickRow = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selData, setSelData] = useState(null);
+  const onClickRow = (record) => {
+    setSelData(record);
     setIsOpen(true);
   };
 
@@ -114,11 +117,11 @@ const IncidentsTable = ({ currPage, totalPages, data, loading }) => {
         loading={loading}
         onClickRow={onClickRow}
       />
-      {/* <DetailModal
-        riskLevel="critical"
+      <DetailModal
         isOpen={isOpen}
         closeModal={() => setIsOpen(false)}
-      /> */}
+        data={selData}
+      />
     </>
   );
 };
