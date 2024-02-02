@@ -12,7 +12,7 @@ import DropdownSelect from "../../components/DropdownSelect";
 import Tag from "../../components/Tag";
 import RiskLineChart from "../../components/d3/RiskLineChart";
 import { ButtonVariant, SizeVariant } from "../../utils";
-import { parseAssets, parseShops, parseToScale10 } from "../../utils/parse";
+import { parseAssets, parseRiskView, parseShops } from "../../utils/parse";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
 import AffectAssetsTable from "./AffectedAssetsTable";
 import {
@@ -121,7 +121,8 @@ const RiskManagement = () => {
         setAlerts(alertsData);
 
         // Risks
-        const { data: risksData } = await api.getRisks(siteId);
+        const { data: _risksData } = await api.getRisks(siteId);
+        const risksData = parseRiskView(_risksData);
         setRisks(risksData);
 
         // Incidents
@@ -135,13 +136,11 @@ const RiskManagement = () => {
         // TODO: insights. (currently the api is not returning any data so we need to wait for the api to be ready)
 
         // Average Risk
-        setAverageRisk(Math.ceil(
+        setAverageRisk(
           siteId
             ? risksData[0]?.total_risk_score_by_site
             : risksData[0]?.total_risk_score
-          )
         );
-
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -179,7 +178,7 @@ const RiskManagement = () => {
           <span className="text-[1.625rem] font-bold text-gray-4">
             Global Risk
           </span>
-          <Tag riskLevel={RiskLevel[getRiskLevel(parseToScale10(averageRisk))]} />
+          <Tag riskLevel={RiskLevel[getRiskLevel(averageRisk)]} />
         </div>
         <div className="text-right text-sm font-medium text-gray-5">
           LAST UPDATED
@@ -193,7 +192,7 @@ const RiskManagement = () => {
         <div>
           <CustomTap
             tabs={[
-              <TabRisk key="risk" value={averageRisk} />,
+              <TabRisk key="risk" value={Math.ceil(averageRisk * 10)} />,
               <TabAlerts key="alerts" value={alerts.length} />,
               <TabShops key="shops" value={shops.length} />,
               <TabIncidents key="incidents" value={incidents.length} />,

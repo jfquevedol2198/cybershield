@@ -89,7 +89,7 @@ export const parseIncident = (data) =>
 
 export const parseToScale10 = (number) => {
   // invalid input
-  if (isNaN(number) || number < 0 || number > 100 ) {
+  if (isNaN(number) || number < 0 || number > 100) {
     console.error("Invalid input passed to parseToScale10");
     return 0;
   }
@@ -97,4 +97,12 @@ export const parseToScale10 = (number) => {
   const clampedNumber = Math.min(Math.max(number, 0), 100);
   const translatedNumber = (clampedNumber / 10).toFixed(1);
   return parseFloat(translatedNumber);
-}
+};
+
+export const parseRiskView = (data) =>
+  data.map((d) => ({
+    ...d,
+    total_risk_score: d.total_risk_score / 10,
+    total_risk_score_by_site: d.total_risk_score_by_site / 10,
+    total_risk_score_by_type_in_site: d.total_risk_score_by_type_in_site / 10,
+  }));
