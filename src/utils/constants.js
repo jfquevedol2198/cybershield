@@ -33,3 +33,7 @@ export const COMPLIANCE_ITEMS = [
   "Respond",
   "Recover",
 ];
+
+export const MESSAGE_TYPES = {
+  notAvailable: "N/A",
+};  
