@@ -80,7 +80,7 @@ const DetailModal = ({ isOpen, data, closeModal }) => {
           </div>
         </div>
       </div>
-      <div className="mb-4 w-[56.25rem]">
+      <div className="w-[56.25rem]">
         <CustomTap
           tabs={[
             <InformationTab key="information" data={data} />,
@@ -97,12 +97,6 @@ const DetailModal = ({ isOpen, data, closeModal }) => {
           tabActiveClassName="bg-gray-1 text-primary-4"
           tabNormalClassName="bg-white text-gray-3"
         />
-      </div>
-      <div className="flex flex-row items-center justify-end gap-2">
-        <ExportButton name="incident" label="EXPORT REPORT" />
-        <Button variant={ButtonVariant.filled} href="/dashboard/incidents">
-          OPEN INCIDENT
-        </Button>
       </div>
     </RiskModal>
   );
