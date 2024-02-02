@@ -164,11 +164,14 @@ const columns = [
   },
 ];
 
-export const PanelAlerts = ({ alerts = [] }) => {
+export const PanelAlerts = ({ alerts = [], assignedIncidents = [] }) => {
+  const { total_incidents, assigned_incidents: assigned } = assignedIncidents[0];
+  
   const assignedAlerts = useMemo(
     () => alerts.filter((alert) => !!alert.assignee_user_id),
     [alerts]
   );
+
   return (
     <div className="flex h-full flex-col">
       <div className="mb-5 flex flex-row items-center justify-between border-b-[1px] border-background pb-5 text-base font-normal text-gray-5">
@@ -178,9 +181,9 @@ export const PanelAlerts = ({ alerts = [] }) => {
           </div>
           <div>
             <span className="text-[1.75rem] text-gray-5">
-              {assignedAlerts.length}
+              {assigned}
             </span>
-            <span className="text-base text-gray-5">/{alerts.length}</span>
+            <span className="text-base text-gray-5">/{total_incidents}</span>
           </div>
         </div>
         <Button

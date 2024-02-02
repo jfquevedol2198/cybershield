@@ -56,6 +56,7 @@ const RiskManagement = () => {
   const [alerts, setAlerts] = useState([]);
   const [risks, setRisks] = useState([]);
   const [incidents, setIncidents] = useState([]);
+  const [assignedIncidents, setAssignedIncidents] = useState([]);
   const [vulnerabilities, setVulnerabilities] = useState([]);
   const [unassignedAssets, setUnassignedAssets] = useState(0);
 
@@ -128,6 +129,9 @@ const RiskManagement = () => {
         // Incidents
         const { data: incidentsData } = await api.getIncidents();
         setIncidents(incidentsData);
+
+        const { data: _assignedIncidents } = await api.getAssignedIncidents();
+        setAssignedIncidents(_assignedIncidents);
 
         // vulnerabilities
         const { data: vulnerabilitiesData } = await api.getVulnerabilities();
@@ -203,7 +207,7 @@ const RiskManagement = () => {
             ]}
             tabPanels={[
               <PanelRisk key="risk" risks={risks} />,
-              <PanelAlerts key="alerts" alerts={alerts} />,
+              <PanelAlerts key="alerts" alerts={alerts} assignedIncidents={assignedIncidents} />,
               <PanelShops key="shops" shops={shops} />,
               <PanelIncidents key="incidents" incidents={incidents} />,
             ]}
