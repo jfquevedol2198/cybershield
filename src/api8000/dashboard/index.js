@@ -70,6 +70,10 @@ export const incidents = (httpClient) => ({
   getIncidents() {
     return httpClient.get("/incident");
   },
+
+  getAssignedIncidents() {
+    return httpClient.get("/assign_incidents_view");
+  },
 });
 
 export const users = (httpClient) => ({
