@@ -36,14 +36,15 @@ const DetailModal = ({ data, closeModal, isOpen, onCreateIncident }) => {
             <Tag riskLevel={RiskLevel[getRiskLevel(data?.risk_score * 10)]} />
           </div>
           <div className="flex flex-row items-center">
-            <Stats count={5} label="Related Alerts" />
+            <Stats count={5} label="Related Alerts" isLink={false}/>
             <Stats
               count={9}
               label="Vulnerabilities"
               isLeftBorder
               isRightBorder
+              isLink={false}
             />
-            <Stats count={2} label="Incidents" />
+            <Stats count={2} label="Incidents" isLink={false} />
           </div>
         </div>
         <div className="mb-4 flex flex-row gap-6 bg-white p-4 ">
