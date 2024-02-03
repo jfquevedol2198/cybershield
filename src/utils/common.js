@@ -1,4 +1,6 @@
 import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+dayjs.extend(duration);
 
 export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -21,19 +23,13 @@ export const stringFormat = (text, defaultValue = "-") => {
   return text || defaultValue;
 };
 
-export const calculateItemAge = (created_at) =>  {
-  const createdAtDate = new Date(created_at);
-  const currentDate = new Date();
+export const calculateItemAge = (value) =>  { 
+  const initialDate = dayjs(value) || dayjs();
+  const creationDate = dayjs(initialDate);
+  const currentDateDayjs = dayjs();
+  const timeDifferenceDayjs = currentDateDayjs.diff(creationDate, "day");
+  const duration = dayjs.duration(currentDateDayjs.diff(creationDate));
+  const hours = duration.hours();
 
-  // Calculate the difference in milliseconds
-  const timeDifference = currentDate - createdAtDate;
-
-  // Convert milliseconds to seconds, minutes, hours, and days
-  const seconds = Math.floor(timeDifference / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-
-  return `${days}d ${hours % 24}h`;
-  
+  return `${timeDifferenceDayjs}d ${hours}h`;
 }

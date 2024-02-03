@@ -68,6 +68,15 @@ const columns = [
     align: "left",
   },
   {
+    title: "Cell",
+    dataIndex: "cell",
+    key: "cell",
+    sortDataType: SortDataType.String,
+    colSpan: 1,
+    className: "",
+    align: "left",
+  },
+  {
     title: "Age",
     dataIndex: "age",
     key: "age",
@@ -88,17 +97,20 @@ const columns = [
 
 // format alert data to match table columns
 const formatAlert = (alert) => ({
-  id: alert.id,
-  type: stringFormat(normalizeString(alert.type_name)),
-  ip: stringFormat(alert.destination_asset_ip),
-  age: stringFormat(calculateItemAge(alert.created_at)),
-  risk: alert.severity,
+  id: alert.idalerts,
+  type: stringFormat(normalizeString(alert.type)),
+  ip: stringFormat(alert.ip),
+  cell: stringFormat(alert.namecells),
+  age: stringFormat(calculateItemAge(alert.fecha_creacion)),
+  // TODO: RISK is a temporary value, 
+  // it should be replaced with the actual risk/severity level which does not come in new endpoint yet
+  risk: alert.severity || "3.5", 
 });
 
-export const PanelAlerts = ({ alerts = [], assignedIncidents = [] }) => {
-  const { total_incidents, assigned_incidents: assigned } = assignedIncidents[0];
-  
-  const alertsDataFormatted = useMemo(() => alerts.map(formatAlert), [alerts]);
+export const PanelAlerts = ({ alerts, assignedIncidents }) => {
+  const { total_incidents, assigned_incidents: assigned } = assignedIncidents?.[0] ?? [];
+  console.log("alerts", alerts);
+  const alertsDataFormatted = useMemo(() => (alerts ?? []).map(formatAlert), [alerts]);
 
   return (
     <div className="flex h-full flex-col">
