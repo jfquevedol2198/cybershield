@@ -7,6 +7,11 @@ import { useMemo } from "react";
 import Button from "../../../components/Button";
 import Table from "../../../components/Table";
 import { ButtonVariant, SortDataType } from "../../../utils";
+import {
+  calculateItemAge,
+  normalizeString,
+  stringFormat,
+} from "../../../utils/common";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
 
 export const TabAlerts = ({ value }) => {
@@ -25,89 +30,6 @@ export const TabAlerts = ({ value }) => {
 TabAlerts.propTypes = {
   value: PropTypes.number,
 };
-
-const data = [
-  {
-    id: 1,
-    type: "Default Cre",
-    ip: "192.168.1.1",
-    cell: "Test",
-    age: 200,
-    risk: 90,
-  },
-  {
-    id: 2,
-    type: "Default Cre",
-    ip: "192.168.1.1",
-    cell: "Test",
-    age: 200,
-    risk: 90,
-  },
-  {
-    id: 3,
-    type: "Default Cre",
-    ip: "192.168.1.1",
-    cell: "Test",
-    age: 200,
-    risk: 90,
-  },
-  {
-    id: 4,
-    type: "Default Cre",
-    ip: "192.168.1.1",
-    cell: "Test",
-    age: 200,
-    risk: 90,
-  },
-  {
-    id: 5,
-    type: "Default Cre",
-    ip: "192.168.1.1",
-    cell: "Test",
-    age: 200,
-    risk: 90,
-  },
-  {
-    id: 6,
-    type: "Default Cre",
-    ip: "192.168.1.1",
-    cell: "Test",
-    age: 200,
-    risk: 90,
-  },
-  {
-    id: 7,
-    type: "Default Cre",
-    ip: "192.168.1.1",
-    cell: "Test",
-    age: 200,
-    risk: 90,
-  },
-  {
-    id: 8,
-    type: "Default Cre",
-    ip: "192.168.1.1",
-    cell: "Test",
-    age: 200,
-    risk: 90,
-  },
-  {
-    id: 9,
-    type: "Default Cre",
-    ip: "192.168.1.1",
-    cell: "Test",
-    age: 200,
-    risk: 90,
-  },
-  {
-    id: 10,
-    type: "Default Cre",
-    ip: "192.168.1.1",
-    cell: "Test",
-    age: 200,
-    risk: 90,
-  },
-];
 
 const columns = [
   {
@@ -137,10 +59,19 @@ const columns = [
     align: "left",
   },
   {
+    title: "IP",
+    dataIndex: "ip",
+    key: "ip",
+    sortDataType: SortDataType.Number,
+    colSpan: 1,
+    className: "",
+    align: "left",
+  },
+  {
     title: "Cell",
     dataIndex: "cell",
     key: "cell",
-    sortDataType: SortDataType.Number,
+    sortDataType: SortDataType.String,
     colSpan: 1,
     className: "",
     align: "left",
@@ -164,13 +95,22 @@ const columns = [
   },
 ];
 
-export const PanelAlerts = ({ alerts = [], assignedIncidents = [] }) => {
-  const { total_incidents, assigned_incidents: assigned } = assignedIncidents[0];
-  
-  const assignedAlerts = useMemo(
-    () => alerts.filter((alert) => !!alert.assignee_user_id),
-    [alerts]
-  );
+// format alert data to match table columns
+const formatAlert = (alert) => ({
+  id: alert.idalerts,
+  type: stringFormat(normalizeString(alert.type)),
+  ip: stringFormat(alert.ip),
+  cell: stringFormat(alert.namecells),
+  age: stringFormat(calculateItemAge(alert.fecha_creacion)),
+  // TODO: RISK is a temporary value, 
+  // it should be replaced with the actual risk/severity level which does not come in new endpoint yet
+  risk: alert.severity || "3.5", 
+});
+
+export const PanelAlerts = ({ alerts, assignedIncidents }) => {
+  const { total_incidents, assigned_incidents: assigned } = assignedIncidents?.[0] ?? [];
+  console.log("alerts", alerts);
+  const alertsDataFormatted = useMemo(() => (alerts ?? []).map(formatAlert), [alerts]);
 
   return (
     <div className="flex h-full flex-col">
@@ -180,9 +120,7 @@ export const PanelAlerts = ({ alerts = [], assignedIncidents = [] }) => {
             Assigned to users
           </div>
           <div>
-            <span className="text-[1.75rem] text-gray-5">
-              {assigned}
-            </span>
+            <span className="text-[1.75rem] text-gray-5">{assigned}</span>
             <span className="text-base text-gray-5">/{total_incidents}</span>
           </div>
         </div>
@@ -194,7 +132,7 @@ export const PanelAlerts = ({ alerts = [], assignedIncidents = [] }) => {
         </Button>
       </div>
       <div className="h-full flex-auto overflow-y-auto">
-        <Table dataSource={data} columns={columns} />
+        <Table dataSource={alertsDataFormatted} columns={columns} />
       </div>
     </div>
   );

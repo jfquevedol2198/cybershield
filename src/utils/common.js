@@ -1,4 +1,6 @@
 import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+dayjs.extend(duration);
 
 export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -20,3 +22,14 @@ export const dateFormat = (date) => {
 export const stringFormat = (text, defaultValue = "-") => {
   return text || defaultValue;
 };
+
+export const calculateItemAge = (value) =>  { 
+  const initialDate = dayjs(value) || dayjs();
+  const creationDate = dayjs(initialDate);
+  const currentDateDayjs = dayjs();
+  const timeDifferenceDayjs = currentDateDayjs.diff(creationDate, "day");
+  const duration = dayjs.duration(currentDateDayjs.diff(creationDate));
+  const hours = duration.hours();
+
+  return `${timeDifferenceDayjs}d ${hours}h`;
+}
