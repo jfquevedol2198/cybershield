@@ -20,6 +20,7 @@ import { getRiskDataByCategory, getRiskLevel } from "../../../utils/risk";
 import Filter from "./Filter";
 import VulnerabilityTable from "./VulnerabilityTable";
 
+
 // const colors = {
 //   "In Progress": "--secondary-color-1",
 //   Mitigated: "--primary-color-3",
@@ -37,9 +38,9 @@ const Vulnerabilities = () => {
   const [riskData, setRiskData] = useState([]);
   const [selectedTag, setSelectedTag] = useState(PRIORITIZED_TAGS[0]);
   const [prioritizedData, setPrioritizedData] = useState([]);
-  const { setPageData, filterData, addFilter, hasFilterAndSearch } =
-    useSearchAndFilter();
+  const { setPageData, filterData, addFilter, hasFilterAndSearch } = useSearchAndFilter();
   const [filterCellOptions, setFilterCellOptions] = useState([]);
+  const [selectedRiskLevel, setSelectedRiskLevel] = useState(null);
 
   const [vulnerabilitiesAssets, setVulnerabilitiesAssets] = useState([]);
 
@@ -74,7 +75,14 @@ const Vulnerabilities = () => {
         };
       });
 
-      setPageData(combinedData);
+      // Filter data by risk level when user has clicked on the donut chart
+      if (selectedRiskLevel) {
+        const filteredDataByRisk = combinedData.filter((item) => getRiskLevel(item.cvescore) === selectedRiskLevel);
+        setPageData(filteredDataByRisk);
+      } else {
+        setPageData(combinedData);
+      }
+
       setFilterCellOptions(getFilterOptions(combinedData));
 
       const riskData = getRiskDataByCategory(vulnerabilities, "cvescore");
@@ -92,7 +100,7 @@ const Vulnerabilities = () => {
     setWidth(stackAreaChartRef.current.clientWidth);
     window.addEventListener("resize", debounced);
     return window.removeEventListener("resize", () => {});
-  }, []);
+  }, [selectedRiskLevel]);
 
   useEffect(() => {
     if (selectedTag === PRIORITIZED_TAGS[0]) {
@@ -124,6 +132,11 @@ const Vulnerabilities = () => {
     addFilter(data);
     setIsFilterOpen(false);
   };
+
+  const handleChartClick = (e, data) => {
+    setSelectedRiskLevel(data?.riskLevel ?? null);
+  };
+  
 
   return (
     <Fragment>
@@ -166,6 +179,7 @@ const Vulnerabilities = () => {
                 innerRadius={40}
                 outerRadius={50}
                 data={riskData}
+                handleClick={handleChartClick}
               />
               {/* <div className="mt-8 flex flex-row items-center justify-center gap-1 text-base text-green">
                 <ArrowDownIcon className="h-3" />
