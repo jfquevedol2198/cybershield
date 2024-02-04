@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { RiskLevel } from "../../../utils/risk";
 import { DonutChartDataType } from "../../../utils/types";
 
-const DonutChart = ({ width, height, data, innerRadius, outerRadius }) => {
+const DonutChart = ({ width, height, data, innerRadius, outerRadius, handleClick }) => {
   const svgRef = useRef();
   const arc = d3.arc().padAngle(Math.PI / 200);
 
@@ -46,7 +46,11 @@ const DonutChart = ({ width, height, data, innerRadius, outerRadius }) => {
       .attr(
         "fill",
         (d) => `var(--risk-color-${RiskLevel[d.riskLevel].color.slice(-1)})`
-      );
+      )
+      .style("cursor", "pointer")
+      .on("click", (event, data) => {
+        handleClick(event, data);
+      });
     svg
       .append("text")
       .attr("x", width / 2)
@@ -56,6 +60,10 @@ const DonutChart = ({ width, height, data, innerRadius, outerRadius }) => {
       .attr("font-size", "1.5rem")
       .attr("font-family", "Roboto")
       .attr("font-weight", "300")
+      .style("cursor", "pointer")
+      .on("click", (event, data) => {
+        handleClick(event, data);
+      })
       .text(() => `${totalValue}`);
     svg
       .append("text")
@@ -66,6 +74,10 @@ const DonutChart = ({ width, height, data, innerRadius, outerRadius }) => {
       .attr("font-size", "0.625rem")
       .attr("font-family", "Roboto")
       .attr("font-weight", "300")
+      .style("cursor", "pointer")
+      .on("click", (event, data) => {
+        handleClick(event, data);
+      })
       .text(() => "Vulnerabilities");
   }, [data]);
 
