@@ -12,7 +12,8 @@ const NormalButton = React.forwardRef(
       <Comp
         ref={ref}
         className={clsx(
-          "flex cursor-pointer flex-row items-center gap-2 active:opacity-50",
+          "flex cursor-pointer flex-row items-center gap-2",
+          !disabled && "active:opacity-50",
           className
         )}
         onClick={() => !disabled && onClick()}
