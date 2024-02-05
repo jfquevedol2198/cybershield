@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import _ from "lodash";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 
@@ -62,9 +62,8 @@ const AccountInformation = () => {
     fetch();
   }, []);
 
-  const form = useForm({
-    resolver: zodResolver(schema),
-    defaultValues: {
+  const defaultValues = useMemo(
+    () => ({
       firstName: _.get(userInfo, "first_name"),
       middleName: _.get(userInfo, "middle_name"),
       lastName: _.get(userInfo, "last_name"),
@@ -77,8 +76,18 @@ const AccountInformation = () => {
       email: _.get(userInfo, "email"),
       sites: _.get(userInfo, "sites"),
       isCreateIncidents: _.get(userInfo, "isCreateIncidents") || false,
-    },
+    }),
+    [editMode, userInfo]
+  );
+
+  const form = useForm({
+    resolver: zodResolver(schema),
+    defaultValues,
   });
+
+  useEffect(() => {
+    form.reset();
+  }, [editMode]);
 
   const country = useWatch({ control: form.control, name: "country" });
   const state = useWatch({ control: form.control, name: "state" });
@@ -122,8 +131,10 @@ const AccountInformation = () => {
       }));
 
       // sort states alphabetically
-      const sortedStatesData = statesData.slice().sort((a, b) => a.label.localeCompare(b.label));
-      
+      const sortedStatesData = statesData
+        .slice()
+        .sort((a, b) => a.label.localeCompare(b.label));
+
       setStates(sortedStatesData);
       setCities([]);
       setIsStateLoading(false);
@@ -223,6 +234,7 @@ const AccountInformation = () => {
               error={form.formState.errors.firstName?.message}
               {...form.register("firstName")}
               setValue={form.setValue}
+              isDisabled={!editMode}
             />
             <FormControl
               id="middleName"
@@ -231,6 +243,7 @@ const AccountInformation = () => {
               error={form.formState.errors.middleName?.message}
               {...form.register("middleName")}
               setValue={form.setValue}
+              isDisabled={!editMode}
             />
             <FormControl
               id="lastName"
@@ -239,6 +252,7 @@ const AccountInformation = () => {
               error={form.formState.errors.lastName?.message}
               {...form.register("lastName")}
               setValue={form.setValue}
+              isDisabled={!editMode}
             />
           </div>
           <div className="mb-4 flex flex-row gap-4">
@@ -253,7 +267,7 @@ const AccountInformation = () => {
                 error={form.formState.errors.country?.message}
                 data={countries}
                 {...form.register("country")}
-                isDisabled={isCountryLoading}
+                isDisabled={isCountryLoading || !editMode}
                 setValue={form.setValue}
               />
             </div>
@@ -267,7 +281,7 @@ const AccountInformation = () => {
                 error={form.formState.errors.state?.message}
                 data={states}
                 {...form.register("state")}
-                isDisabled={isStateLoading}
+                isDisabled={isStateLoading || !editMode}
                 setValue={form.setValue}
               />
             </div>
@@ -284,7 +298,7 @@ const AccountInformation = () => {
                 error={form.formState.errors.city?.message}
                 data={cities}
                 {...form.register("city")}
-                isDisabled={isCityLoading}
+                isDisabled={isCityLoading || !editMode}
                 setValue={form.setValue}
               />
             </div>
@@ -296,6 +310,7 @@ const AccountInformation = () => {
                 error={form.formState.errors.zipCode?.message}
                 {...form.register("zipCode")}
                 setValue={form.setValue}
+                isDisabled={!editMode}
               />
             </div>
           </div>
@@ -308,6 +323,7 @@ const AccountInformation = () => {
               error={form.formState.errors.jobTitle?.message}
               {...form.register("jobTitle")}
               setValue={form.setValue}
+              isDisabled={!editMode}
             />
           </div>
           <div className="mb-4">
@@ -319,6 +335,7 @@ const AccountInformation = () => {
               error={form.formState.errors.manager?.message}
               {...form.register("manager")}
               setValue={form.setValue}
+              isDisabled={!editMode}
             />
           </div>
           <div className="mb-4">
@@ -331,6 +348,7 @@ const AccountInformation = () => {
               error={form.formState.errors.phone?.message}
               {...form.register("phone")}
               setValue={form.setValue}
+              isDisabled={!editMode}
             />
           </div>
           <div className="mb-4 text-sm font-light text-secondary-text">

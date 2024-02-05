@@ -60,16 +60,17 @@ const FormControl = React.forwardRef(
                 setValue(typeof v === "string" ? v : v.value);
                 setValueForm(rest.name, typeof v === "string" ? v : v.value);
               }}
-              disabled={!data}
+              disabled={!data || isDisabled}
             >
               <Listbox.Button
                 className={clsx(
-                  "relative flex w-full cursor-pointer flex-row items-center rounded border bg-white shadow-input",
+                  "relative flex w-full cursor-pointer flex-row items-center rounded border shadow-input",
                   "hover:border-hover",
                   "focus:border-focus focus:shadow-none focus:outline-none",
                   "cursor-pointer caret-transparent disabled:border-disabled",
                   error ? "border-error" : "border-transparent",
                   hasIcon ? "pr-10" : "",
+                  isDisabled ? "bg-gray-1" : "bg-white",
                   inputStyles[size]
                 )}
               >
@@ -174,8 +175,14 @@ const FormControl = React.forwardRef(
                   onChange={(v) => {
                     setSelected(v);
                   }}
+                  disabled={isDisabled}
                 >
-                  <Listbox.Button className="absolute left-3 z-10 flex w-[7rem] cursor-pointer flex-row items-center gap-1 bg-white py-2 text-left sm:text-sm">
+                  <Listbox.Button
+                    className={clsx(
+                      "absolute left-3 z-10 flex w-[7rem] cursor-pointer flex-row items-center gap-1 py-2 text-left sm:text-sm",
+                      isDisabled ? "bg-gray-1" : "bg-white"
+                    )}
+                  >
                     <span className="bg-transparent text-xl">
                       {selected?.flag}
                     </span>
@@ -246,13 +253,14 @@ const FormControl = React.forwardRef(
                 ref={inputRef}
                 type={inputType === "phone" ? "text" : inputType}
                 className={clsx(
-                  "relative flex w-full items-center rounded border bg-white shadow-input",
+                  "relative flex w-full items-center rounded border shadow-input",
                   "hover:border-hover",
                   "focus:border-focus focus:shadow-none focus:outline-none",
                   "disabled:border-disabled",
                   error ? "border-error" : "border-transparent",
                   inputType === "phone" ? "pl-[8.3rem]" : "",
                   hasIcon ? "pr-10" : "",
+                  isDisabled ? "bg-gray-1" : "bg-white",
                   inputStyles[size]
                 )}
                 disabled={isDisabled}
