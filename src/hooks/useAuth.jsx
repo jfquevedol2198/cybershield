@@ -68,6 +68,13 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  const updateUserInfo = (updated) => {
+    setUserInfo({
+      ...userInfo,
+      ...updated,
+    });
+  };
+
   const updateConfiguration = async (config) => {
     try {
       const data = {
@@ -96,6 +103,7 @@ export const AuthProvider = ({ children }) => {
         authToken,
         updateConfiguration,
         fetchUserInfo,
+        updateUserInfo,
       }}
     >
       {children}

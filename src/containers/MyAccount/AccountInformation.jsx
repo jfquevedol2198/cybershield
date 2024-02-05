@@ -31,7 +31,7 @@ const schema = z.object({
 
 const AccountInformation = () => {
   const [editMode, setEditMode] = useState(false);
-  const { userInfo } = useAuth();
+  const { userInfo, updateUserInfo } = useAuth();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -200,6 +200,7 @@ const AccountInformation = () => {
 
       const res = await apiClient8089.updateUser(userInfo?.sys_id, data);
       if (res.status === 200) {
+        updateUserInfo(data);
         snack.success("User is updated successfully");
       } else {
         snack.error("User update failed");
@@ -364,7 +365,7 @@ const AccountInformation = () => {
               size={SizeVariant.small}
               error={form.formState.errors.email?.message}
               {...form.register("email")}
-              isDisabled
+              isDisabled={!editMode}
               setValue={form.setValue}
             />
           </div>
