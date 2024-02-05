@@ -44,7 +44,7 @@ const Header = () => {
               <Cog8ToothIcon className="h-6 w-6" />
             </NormalButton>
           </div>
-          <div className="mr-4 h-full">
+          <div className="mr-4 hidden h-full">
             <DropdownButton
               buttonContent={
                 <NormalButton variant={ButtonVariant.icon} className="h-full">

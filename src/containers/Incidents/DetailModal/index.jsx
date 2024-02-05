@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 
 import CustomTap from "../../../components/CustomTap";
 import RiskModal from "../../../components/RiskModal";
-import Stats from "../../../components/Stats";
 import Tag from "../../../components/Tag";
 import { dateFormat } from "../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
