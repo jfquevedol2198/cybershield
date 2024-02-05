@@ -86,17 +86,17 @@ const DetailModal = ({ data, ...rest }) => {
           <CustomTap
             tabs={[
               <AlertInfoTab key="alert_info" />,
-              <MitigationTab key="mitigation" />,
-              <MitreTab key="mitre" />,
-              <RelatedToTab key="related_to" />,
-              <AlertStatusTab key="alert_status" />,
+              // <MitigationTab key="mitigation" />,
+              // <MitreTab key="mitre" />,
+              // <RelatedToTab key="related_to" />,
+              // <AlertStatusTab key="alert_status" />,
             ]}
             tabPanels={[
               <AlertInfoTabPanel key="alert_info" data={data} />,
-              <MitigationTabPanel key="mitigation" />,
-              <MitreTabPanel key="mitre" />,
-              <RelatedToTabPanel key="related_to" />,
-              <AlertStatusTabPanel key="alert_status" data={data} />,
+              // <MitigationTabPanel key="mitigation" />,
+              // <MitreTabPanel key="mitre" />,
+              // <RelatedToTabPanel key="related_to" />,
+              // <AlertStatusTabPanel key="alert_status" data={data} />,
             ]}
             tabListClassName="overflow-x-hidden overflow-y-hidden"
             tabPanelClassName="px-1 py-1 bg-gray-1"

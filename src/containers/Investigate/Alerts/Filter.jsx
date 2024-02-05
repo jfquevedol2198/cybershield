@@ -66,7 +66,7 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
       <form className="flex h-full flex-col" onSubmit={onHandleSubmit}>
         <div className="flex-auto overflow-hidden hover:overflow-y-auto">
           <div className="mb-5 flex flex-col gap-5 bg-gray-1 px-4 py-5">
-            <div className="text-base text-gray-4">Alert types</div>
+            <div className="text-base text-gray-4">Alert Types</div>
             <FormControl
               id="category_name"
               label="Category"

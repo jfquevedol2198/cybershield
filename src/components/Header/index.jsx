@@ -52,7 +52,7 @@ const Header = () => {
                 </NormalButton>
               }
               dropdownContent={
-                <div className="w-64">
+                <div className="w-80">
                   <div className="border-b-[1px] border-gray-1  pb-2 text-xs text-gray-1">
                     PLATFORM SUPPORT
                   </div>
@@ -82,7 +82,7 @@ const Header = () => {
                       <div className="text-gray-1">
                         <div className="text-xs">AGENT SUPPORT:</div>
                         <div className="text-base font-bold">
-                          support@cybershield.com
+                          +1(234) 453 3356
                         </div>
                       </div>
                     </Menu.Item>
@@ -95,7 +95,7 @@ const Header = () => {
                       <div className="text-gray-1">
                         <div className="text-xs font-light">MAIL TO:</div>
                         <div className="text-base font-bold">
-                          support@cybershield.com
+                          SekurionTest@w-industries.com
                         </div>
                       </div>
                     </Menu.Item>

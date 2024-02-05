@@ -70,7 +70,7 @@ const Alerts = () => {
 
     setWidth(stackAreaChartRef.current.clientWidth);
     window.addEventListener("resize", debounced);
-    return window.removeEventListener("resize", () => { });
+    return window.removeEventListener("resize", () => {});
   }, []);
 
   /**
@@ -158,7 +158,7 @@ const Alerts = () => {
             </div>
             <div className="flex h-[12.25rem] w-[33.25rem] min-w-fit flex-col items-center bg-white p-4 pb-3">
               <div className="flex w-full flex-row items-center justify-between">
-                <span className="text-base font-bold">Alert types</span>
+                <span className="text-base font-bold">Alert Types</span>
               </div>
               {loading && (
                 <div className="flex h-full w-full items-center justify-center">
