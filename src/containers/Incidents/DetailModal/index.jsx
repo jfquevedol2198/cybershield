@@ -14,7 +14,7 @@ const DetailModal = ({ isOpen, data, closeModal }) => {
     <RiskModal
       isOpen={isOpen}
       riskLevel={RiskLevel[getRiskLevel(data?.severity)]}
-      title="Oil Wells/South Well"
+      title=""
       closeModal={closeModal}
     >
       <div className="w-[56.25rem]">

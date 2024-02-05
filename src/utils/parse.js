@@ -86,6 +86,8 @@ export const parseIncident = (data) =>
     ...d,
     severity: parseFloat(d.severity) / 10,
     state: normalizeString(d.state),
+    cell_name: d.location ? d.location.split(",")[0].trim() : "",
+    shop_name: d.location ? d.location.split(",")[1]?.trim() : "",
   }));
 
 export const parseToScale10 = (number) => {

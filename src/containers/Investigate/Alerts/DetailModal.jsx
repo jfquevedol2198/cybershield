@@ -8,10 +8,11 @@ import Tag from "../../../components/Tag";
 import { ButtonVariant, dateFormat } from "../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
 import { AlertInfoTab, AlertInfoTabPanel } from "./TabItems/AlertInfo";
-import { AlertStatusTab, AlertStatusTabPanel } from "./TabItems/AlertStatus";
-import { MitigationTab, MitigationTabPanel } from "./TabItems/Mitigation";
-import { MitreTab, MitreTabPanel } from "./TabItems/Mitre";
-import { RelatedToTab, RelatedToTabPanel } from "./TabItems/RelatedTo";
+
+// import { AlertStatusTab, AlertStatusTabPanel } from "./TabItems/AlertStatus";
+// import { MitigationTab, MitigationTabPanel } from "./TabItems/Mitigation";
+// import { MitreTab, MitreTabPanel } from "./TabItems/Mitre";
+// import { RelatedToTab, RelatedToTabPanel } from "./TabItems/RelatedTo";
 
 const DetailModal = ({ data, ...rest }) => {
   if (!data) return <div>Data Error</div>;

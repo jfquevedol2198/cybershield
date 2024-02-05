@@ -42,12 +42,14 @@ const RiskModal = ({ riskLevel, title, isOpen, children, closeModal }) => {
                   >
                     <XMarkIcon className="h-6 w-6" /> Close
                   </div>
-                  <Dialog.Title
-                    as="h3"
-                    className="mb-2 text-lg font-bold text-gray-3"
-                  >
-                    {title}
-                  </Dialog.Title>
+                  {title && (
+                    <Dialog.Title
+                      as="h3"
+                      className="mb-2 text-lg font-bold text-gray-3"
+                    >
+                      {title}
+                    </Dialog.Title>
+                  )}
                   <div>{children}</div>
                 </div>
               </Dialog.Panel>
