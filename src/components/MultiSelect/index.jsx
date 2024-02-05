@@ -73,7 +73,7 @@ const MultiSelect = React.forwardRef(
                 ref={ref}
                 {...rest}
                 className={clsx(
-                  "absolute -left-full flex w-0 items-center rounded border bg-white shadow-input"
+                  "absolute -left-full flex w-0 items-center rounded border bg-white opacity-0 shadow-input"
                 )}
                 value={selected
                   .map((d) => (typeof d === "string" ? d : d.value))

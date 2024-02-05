@@ -46,14 +46,9 @@ const Header = () => {
           </div>
           <div className="mr-4 h-full">
             <DropdownButton
-              disabled
               buttonContent={
-                <NormalButton
-                  variant={ButtonVariant.icon}
-                  className="h-full"
-                  disabled
-                >
-                  <QuestionMarkCircleIcon className="h-6 w-6 text-gray-2" />
+                <NormalButton variant={ButtonVariant.icon} className="h-full">
+                  <QuestionMarkCircleIcon className="h-6 w-6" />
                 </NormalButton>
               }
               dropdownContent={
@@ -63,25 +58,28 @@ const Header = () => {
                   </div>
                   <Menu.Items>
                     <Menu.Item
-                      className="px-2 py-3 text-gray-4"
+                      className="px-2 py-3 text-gray-1"
                       as={NormalButton}
+                      disabled
                     >
-                      <KnowledgeSvg className="h-7 w-6" />
+                      <KnowledgeSvg className="h-7 w-6 text-gray-1" />
                       Knowledge base
                     </Menu.Item>
                     <Menu.Item
-                      className="px-2 py-3 text-gray-4"
+                      className="px-2 py-3 text-gray-1"
                       as={NormalButton}
+                      disabled
                     >
-                      <ChatSupportSvg className="h-7 w-6" />
+                      <ChatSupportSvg className="h-7 w-6 text-gray-1" />
                       Chat Support
                     </Menu.Item>
                     <Menu.Item
-                      className="px-2 py-3 text-gray-4"
+                      className="px-2 py-3 text-gray-1"
                       as={NormalButton}
+                      disabled
                     >
                       <PhoneIcon className="h-7 w-6" />
-                      <div className="text-gray-4">
+                      <div className="text-gray-1">
                         <div className="text-xs">AGENT SUPPORT:</div>
                         <div className="text-base font-bold">
                           support@cybershield.com
@@ -89,11 +87,12 @@ const Header = () => {
                       </div>
                     </Menu.Item>
                     <Menu.Item
-                      className="px-2 py-3 text-gray-4"
+                      className="px-2 py-3 text-gray-1"
                       as={NormalButton}
+                      disabled
                     >
                       <EnvelopeIcon className="h-7 w-6" />
-                      <div className="text-gray-4">
+                      <div className="text-gray-1">
                         <div className="text-xs font-light">MAIL TO:</div>
                         <div className="text-base font-bold">
                           support@cybershield.com
