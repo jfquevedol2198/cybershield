@@ -21,7 +21,7 @@ const DetailModal = ({ isOpen, data, closeModal }) => {
         <div className="mb-3 flex flex-row items-center justify-between">
           <div className="flex flex-row items-center gap-2">
             <span className="text-[1.625rem] font-bold text-gray-4">
-              Siemens
+              {data?.short_description}
             </span>
             <Tag riskLevel={RiskLevel[getRiskLevel(data?.severity)]} />
           </div>

@@ -23,7 +23,6 @@ const DetailModal = ({ data, closeModal, isOpen, onCreateIncident }) => {
   return (
     <RiskModal
       riskLevel={RiskLevel[getRiskLevel(data?.risk_score * 10)]}
-      title="Oil Wells/South Well"
       isOpen={isOpen}
       closeModal={closeModal}
     >
@@ -48,7 +47,11 @@ const DetailModal = ({ data, closeModal, isOpen, onCreateIncident }) => {
               isRightBorder
               isLink={false}
             />
-            <Stats count={2} label="Incidents" isLink={false} />
+            <Stats
+              count={data?.count_incident}
+              label="Incidents"
+              isLink={false}
+            />
           </div>
         </div>
         <div className="mb-4 flex flex-row gap-6 bg-white p-4 ">
