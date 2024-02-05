@@ -50,7 +50,6 @@ const CompleteProfile = () => {
   const [isCityLoading, setIsCityLoading] = useState(false);
 
   const email = tempUser?.email || '';
-  console.log("tempuser:::", tempUser);
 
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
@@ -105,9 +104,16 @@ const CompleteProfile = () => {
           },
         }
       );
-      setStates(
-        data.map((state) => ({ label: state.name, value: state.iso2 }))
-      );
+
+      const statesData = data.map((state) => ({
+        label: state.name,
+        value: state.iso2,
+      }));
+
+      // sort states alphabetically
+      const sortedStatesData = statesData.slice().sort((a, b) => a.label.localeCompare(b.label));
+
+      setStates(sortedStatesData);
       setCities([]);
       setIsStateLoading(false);
     };
