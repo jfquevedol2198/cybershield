@@ -58,6 +58,8 @@ const RiskManagement = () => {
   const [incidents, setIncidents] = useState([]);
   const [assignedIncidents, setAssignedIncidents] = useState([]);
   const [vulnerabilities, setVulnerabilities] = useState([]);
+  const [ riskOverTime, setRiskOverTime] = useState([]);
+  const [ filteredRiskOverTime, setFilteredRiskOverTime] = useState(riskOverTime);
   const [unassignedAssets, setUnassignedAssets] = useState(0);
 
   const { siteId } = useParams();
@@ -137,7 +139,18 @@ const RiskManagement = () => {
         const { data: vulnerabilitiesData } = await api.getVulnerabilities();
         setVulnerabilities(vulnerabilitiesData);
 
-        // TODO: insights. (currently the api is not returning any data so we need to wait for the api to be ready)
+        // riskOverTime
+        const { data: riskOverTimeData } = await api.getRiskOverTime(siteId);
+
+        if (siteId) {
+          // filter riskOverTimeData by siteId
+          const filteredBySiteIdData = riskOverTimeData.filter((item) => item.sites_id === siteId);
+          setRiskOverTime(filteredBySiteIdData);
+        } else {
+          setRiskOverTime(riskOverTimeData);
+        }
+
+         
 
         // Average Risk
         setAverageRisk(
@@ -154,6 +167,10 @@ const RiskManagement = () => {
 
     fetch();
   }, [siteId]);
+
+  useEffect(() => {
+    setFilteredRiskOverTime(riskOverTime);
+  }, [riskOverTime]);
 
   const formatDate = (fechaUTC) => {
     const fechaObj = new Date(fechaUTC);
@@ -173,6 +190,42 @@ const RiskManagement = () => {
     });
     return risksByLevel;
   };
+
+  const handleRiskOverTimeDate = (selectedPeriod) => {
+    if (!riskOverTime || riskOverTime.length === 0) {
+      return [];
+    }
+  
+    if (!selectedPeriod) {
+      setFilteredRiskOverTime(riskOverTime);
+      return;
+    }
+  
+    const filteredData = filterRiskOverTime(riskOverTime, selectedPeriod);
+    setFilteredRiskOverTime(filteredData);
+  };
+
+  const filterRiskOverTime = (data, selectedPeriod) => {
+    const currentDate = new Date();
+    return data.filter((item) => {
+      const itemDate = new Date(item.date_recorded);
+  
+      switch (selectedPeriod.value) {
+        case 'last_7_days':
+          return itemDate >= new Date(currentDate - 7 * 24 * 60 * 60 * 1000);
+        case 'last_15_days':
+          return itemDate >= new Date(currentDate - 15 * 24 * 60 * 60 * 1000);
+        case 'last_month':
+          return itemDate >= new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, currentDate.getDate());
+        case 'last_2_months':
+          return itemDate >= new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, currentDate.getDate());
+        default:
+          return true;
+      }
+    });
+  };
+  
+  
 
   return (
     <Fragment>
@@ -217,14 +270,14 @@ const RiskManagement = () => {
           <div className="mt-4 bg-white p-7">
             <div className="flex flex-row items-center justify-between">
               <span className="text-xl font-bold text-gray-4">
-                Risk over time
+                Risk Over Time
               </span>
               <div className="w-50">
-                <DropdownSelect data={Period} onSelect={() => {}} />
+                <DropdownSelect data={Period} onSelect={(e) => handleRiskOverTimeDate(e)} />
               </div>
             </div>
             <div className="mt-6 overflow-hidden" ref={riskLineChartRef}>
-              <RiskLineChart width={width} height={250} />
+              <RiskLineChart width={width} height={250} riskLineData={filteredRiskOverTime}/>
             </div>
           </div>
         </div>

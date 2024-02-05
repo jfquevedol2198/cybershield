@@ -117,8 +117,14 @@ export const updateDate = (httpClient) => ({
 
 export const risks = (httpClient) => ({
   getRisks(siteId) {
-    return httpClient.get(siteId ? `/risk_view/${siteId}` : "/risk_all_view");
+    const endpoint = siteId ? `/risk_view/${siteId}` : "/risk_all_view";
+    return httpClient.get(`${endpoint}`);
   },
+
+  getRiskOverTime(siteId) {
+    const endpoint = siteId ? "/historical_risk_view" : "/sum_risk_by_date";
+    return httpClient.get(`${endpoint}`);
+  }
 });
 
 export const configuration = (httpClient) => ({

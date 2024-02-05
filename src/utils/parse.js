@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { normalizeString } from "./common";
 
 export const parseShops = (data) =>
