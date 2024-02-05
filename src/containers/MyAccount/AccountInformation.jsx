@@ -116,9 +116,15 @@ const AccountInformation = () => {
           },
         }
       );
-      setStates(
-        data.map((state) => ({ label: state.name, value: state.iso2 }))
-      );
+      const statesData = data.map((state) => ({
+        label: state.name,
+        value: state.iso2,
+      }));
+
+      // sort states alphabetically
+      const sortedStatesData = statesData.slice().sort((a, b) => a.label.localeCompare(b.label));
+      
+      setStates(sortedStatesData);
       setCities([]);
       setIsStateLoading(false);
     };
