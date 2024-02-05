@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { ChildrenType } from "../../utils/types";
 
 const NormalButton = React.forwardRef(
-  ({ label, href, children, onClick, className }, ref) => {
+  ({ label, href, children, onClick, disabled, className }, ref) => {
     const Comp = href ? Link : "div";
     return (
       <Comp
@@ -15,7 +15,7 @@ const NormalButton = React.forwardRef(
           "flex cursor-pointer flex-row items-center gap-2 active:opacity-50",
           className
         )}
-        onClick={onClick}
+        onClick={() => !disabled && onClick()}
         to={href}
       >
         {label !== undefined && <>{label}</>}
@@ -31,6 +31,7 @@ NormalButton.defaultProps = {
   label: undefined,
   href: undefined,
   onClick: () => {},
+  disabled: false,
 };
 
 NormalButton.propTypes = {
@@ -39,6 +40,7 @@ NormalButton.propTypes = {
   label: PropTypes.string,
   href: PropTypes.string,
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 NormalButton.displayName = "NormalButton";

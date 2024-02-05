@@ -44,16 +44,21 @@ const Header = () => {
               <Cog8ToothIcon className="h-6 w-6" />
             </NormalButton>
           </div>
-          <div className="mr-4 hidden h-full">
+          <div className="mr-4 h-full">
             <DropdownButton
+              disabled
               buttonContent={
-                <NormalButton variant={ButtonVariant.icon} className="h-full">
-                  <QuestionMarkCircleIcon className="h-6 w-6" />
+                <NormalButton
+                  variant={ButtonVariant.icon}
+                  className="h-full"
+                  disabled
+                >
+                  <QuestionMarkCircleIcon className="h-6 w-6 text-gray-2" />
                 </NormalButton>
               }
               dropdownContent={
                 <div className="w-64">
-                  <div className="border-b-[1px] border-gray-1  pb-2 text-xs text-gray-3">
+                  <div className="border-b-[1px] border-gray-1  pb-2 text-xs text-gray-1">
                     PLATFORM SUPPORT
                   </div>
                   <Menu.Items>
