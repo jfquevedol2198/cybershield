@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
@@ -12,7 +11,7 @@ import Button from "../../components/Button";
 import Checkbox from "../../components/Checkbox";
 import FormControl from "../../components/FormControl";
 import Modal from "../../components/Modal";
-import config from "../../config";
+import useCountryStateCity from "../../hooks/useCountryStateCity";
 import { ButtonVariant, SizeVariant } from "../../utils";
 import snack from "../../utils/snack";
 
@@ -33,14 +32,19 @@ const schema = z.object({
 
 const EditUserModal = ({ isOpen, user, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
-  // country, state, city
-  const [isCountryLoading, setIsCountryLoading] = useState(false);
-  const [isStateLoading, setIsStateLoading] = useState(false);
-  const [isCityLoading, setIsCityLoading] = useState(false);
 
-  const [countries, setCountries] = useState([]);
-  const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
+  // country, state, city
+  const {
+    isCountryLoading,
+    isStateLoading,
+    isCityLoading,
+    countries,
+    states,
+    cities,
+    setCountry,
+    setState,
+    setCity,
+  } = useCountryStateCity();
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -65,62 +69,22 @@ const EditUserModal = ({ isOpen, user, onClose }) => {
   const city = useWatch({ control: form.control, name: "city" });
 
   useEffect(() => {
-    const fetch = async () => {
-      setIsCountryLoading(true);
-      const { data } = await axios.get(
-        "https://api.countrystatecity.in/v1/countries",
-        {
-          headers: {
-            "X-CSCAPI-KEY": config.countryStateCityApiKey,
-          },
-        }
-      );
-      setCountries(
-        data.map((country) => ({ label: country.name, value: country.iso2 }))
-      );
-      setStates([]);
-      setCities([]);
-      setIsCountryLoading(false);
-    };
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    const fetch = async () => {
-      setIsStateLoading(true);
-      const { data } = await axios.get(
-        `https://api.countrystatecity.in/v1/countries/${country}/states`,
-        {
-          headers: {
-            "X-CSCAPI-KEY": config.countryStateCityApiKey,
-          },
-        }
-      );
-      setStates(
-        data.map((state) => ({ label: state.name, value: state.iso2 }))
-      );
-      setCities([]);
-      setIsStateLoading(false);
-    };
-    if (country) fetch();
+    if (country) {
+      setCountry(country);
+    }
   }, [country]);
 
   useEffect(() => {
-    const fetch = async () => {
-      setIsCityLoading(true);
-      const { data } = await axios.get(
-        `https://api.countrystatecity.in/v1/countries/${country}/states/${state}/cities`,
-        {
-          headers: {
-            "X-CSCAPI-KEY": config.countryStateCityApiKey,
-          },
-        }
-      );
-      setCities(data.map((city) => ({ label: city.name, value: city.name })));
-      setIsCityLoading(false);
-    };
-    if (country && state) fetch();
+    if (state) {
+      setState(state);
+    }
   }, [state]);
+
+  useEffect(() => {
+    if (city) {
+      setCity(city);
+    }
+  }, [city]);
 
   const onSubmit = async (e) => {
     try {
