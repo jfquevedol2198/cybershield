@@ -1,17 +1,6 @@
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
-
 import { RiskLineChartDataType } from "../../../utils/types";
-
-const data = [
-  { date: "04/09", close: 50 },
-  { date: "05/09", close: 60 },
-  { date: "06/09", close: 80 },
-  { date: "07/09", close: 40 },
-  { date: "08/09", close: 20 },
-  { date: "09/09", close: 30 },
-  { date: "10/09", close: 50 },
-];
 
 const yAxisDomains = [
   {
@@ -37,7 +26,17 @@ const yAxisDomains = [
 ];
 
 //chart component
-const RiskLineChart = ({ width, height }) => {
+const RiskLineChart = ({ width, height, riskLineData }) => {
+
+  // this function transforms the riskLineData objects into the format that d3 expects
+  // { date: "30-01", close: 100 }
+  const formattedData = riskLineData.map((d) => {
+    return {
+      date: removeYearFromDate(d.date_recorded),
+      close: d.total_risk || d.total_risk_score_by_site || 0,
+    };
+  });
+
   //refs
   const svgRef = useRef();
 
@@ -80,11 +79,11 @@ const RiskLineChart = ({ width, height }) => {
     svg.call(createGradient);
 
     const parseTime = d3.timeParse("%d/%m");
-
-    const parsedData = data.map((d) => ({
+    const parsedData = formattedData.map((d) => ({
       close: d.close,
       date: parseTime(d.date),
     }));
+    
     const xScale = d3
       .scaleTime()
       .domain([
@@ -143,7 +142,7 @@ const RiskLineChart = ({ width, height }) => {
 
     svg
       .selectAll("xLabel")
-      .data(data.map((d) => d.date))
+      .data(formattedData.map((d) => d.date))
       .enter()
       .append("text")
       .attr("x", (d) => xScale(parseTime(d)))
@@ -167,11 +166,33 @@ const RiskLineChart = ({ width, height }) => {
       .attr("font-family", "Roboto")
       .attr("font-weight", "300")
       .text((d) => d.label);
-  }, [width]);
+  }, [width, riskLineData]);
+
+  if (!riskLineData || riskLineData.length === 0) {
+    return <div style={{ color: 'red' }}>No risk data available.</div>;
+  }
 
   return <svg ref={svgRef}></svg>;
 };
 
 RiskLineChart.propTypes = RiskLineChartDataType;
+RiskLineChart.defaultProps = {
+  width: 500,
+  height: 250,
+  riskLineData: [],
+};
 
 export default RiskLineChart;
+
+
+function removeYearFromDate(dateString) {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+    // eslint-disable-next-line no-unused-vars
+    const [year, month, day] = dateString.split('-');
+    return `${day}/${month}`;
+  } else {
+    // Handle invalid date format
+    console.error('Invalid date format. Please use "YYYY-MM-DD".');
+    return null;
+  }
+}

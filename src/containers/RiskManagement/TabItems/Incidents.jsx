@@ -12,7 +12,7 @@ export const TabIncidents = ({ value }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/dashboard/investigate/vulnerabilities");
+    navigate("/dashboard/incidents");
   };
 
   return (
