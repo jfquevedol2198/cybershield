@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import Table from "../../components/Table";
 import Tag from "../../components/Tag";
-import { SortDataType } from "../../utils";
+import { SortDataType, SortDirection } from "../../utils";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
 import CreateIncidentModal from "../Incidents/CreateIncidentModal";
 import DetailModal from "./DetailModal";
@@ -108,6 +108,23 @@ const columns = [
   },
 ];
 
+const DEFAULT_SORTS = [
+  {
+    direction: SortDirection.ASC,
+    key: "type",
+    type: SortDataType.String,
+  },
+  {
+    direction: SortDirection.ASC,
+    key: "numeric_id",
+    type: SortDataType.Number,
+  },
+  {
+    direction: SortDirection.ASC,
+    key: "risk_score",
+    type: SortDataType.Number,
+  },
+];
 const AssetsTable = ({ data, loading }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCreateIncident, setIsCreateIncident] = useState(false);
@@ -125,6 +142,7 @@ const AssetsTable = ({ data, loading }) => {
         loading={loading}
         onClickRow={onClickRow}
         rowsPerPage={20}
+        defaultSorts={DEFAULT_SORTS}
       />
       <DetailModal
         data={selData}
