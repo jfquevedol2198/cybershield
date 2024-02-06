@@ -138,6 +138,7 @@ const Alerts = () => {
                 innerRadius={40}
                 outerRadius={50}
                 data={riskData}
+                handleClick={(e, d) => addFilter({ severity: d.riskLevel })}
               />
               {/* <div className="mt-8 flex flex-row items-center justify-center gap-1 text-base text-green">
                 {/* <ArrowDownIcon className="h-3" />
