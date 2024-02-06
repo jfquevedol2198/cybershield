@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 import apiClient8089 from "../../api8089";
-import api from "../../api8000";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
 import useAuth from "../../hooks/useAuth";
 import useCountryStateCity from "../../hooks/useCountryStateCity";
+import useManagers from "../../hooks/useManagers";
 import { ButtonVariant, SizeVariant } from "../../utils/constants";
 import snack from "../../utils/snack";
 
@@ -57,7 +57,7 @@ const CompleteProfile = () => {
     setCountry,
     setState,
   } = useCountryStateCity();
-  const [managers, setManagers] = useState([]);
+  const { managers, isLoading: isManagersLoading } = useManagers();
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -87,30 +87,6 @@ const CompleteProfile = () => {
       setState(state);
     }
   }, [state]);
-
-  // add useEffect to fetch the managers data from api getManagers
-  useEffect(() => { 
-    const fetchManagers = async () => {
-      try {
-        setIsLoading(true);
-        const { data } = await api.getManagers();
-        
-        setManagers(parsedManagersData(data));
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchManagers();
-  }, []);
-
-  const parsedManagersData = (data) => {
-    return data.map((item) => ({
-      label: item.name,
-      value: item.sys_id,
-    }));
-  };
 
   const onSubmit = async (e) => {
     setIsLoading(true);
@@ -149,7 +125,10 @@ const CompleteProfile = () => {
       location: country,
     };
 
+    console.log('data submitted', data);
+
     const res = await apiClient8089.createUser(data);
+    setIsLoading(false);
     if (res.status === 200) {
       snack.success("User is created successfully, please login");
       navigate("/login");
@@ -267,16 +246,6 @@ const CompleteProfile = () => {
             setValue={form.setValue}
           />
         </div>
-        {/* <div className="mb-4">
-          <span className="sr-only">Job Manager</span>
-          <FormControl
-            id="manager"
-            label="Job Manager"
-            size={SizeVariant.small}
-            error={form.formState.errors.manager?.message}
-            {...form.register("manager")}
-          />
-        </div> */}
         <div className="mb-4">
           <span className="sr-only">Job Manager</span>
           <FormControl
@@ -288,6 +257,7 @@ const CompleteProfile = () => {
             data={managers}
             {...form.register("manager")}
             setValue={form.setValue}
+            isDisabled={isManagersLoading}
           />
         </div>
         <p className="mb-4 mt-2 text-[1.625rem] font-bold not-italic text-gray-4">
