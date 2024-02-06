@@ -84,7 +84,7 @@ export const parseAlerts = (data) =>
 export const parseIncident = (data) =>
   data.map((d) => ({
     ...d,
-    severity: parseFloat(d.severity) / 10,
+    severity: d.severity !== null ? parseFloat(d.severity) / 10 : 0,
     state: normalizeString(d.state),
     cell_name: d.location ? d.location.split(",")[0].trim() : "",
     shop_name: d.location ? d.location.split(",")[1]?.trim() : "",

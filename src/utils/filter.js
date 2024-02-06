@@ -92,12 +92,11 @@ export const applySearch = (data, search) => {
 
 export const applyFilter = (data, filterOptions) => {
   let filteredData = data;
-  console.log(filterOptions);
   filterOptions.forEach((option) => {
     if (option.value) {
       const type = typeof option.value;
       filteredData = filteredData.filter((d) => {
-        if (!d[option.key]) return false;
+        if (!d[option.key] && d[option.key] !== 0) return false;
         if (type === "string") {
           if (option.value.indexOf("date_range_") === 0) {
             const { min, max } = DateFilterRangeData[option.value];

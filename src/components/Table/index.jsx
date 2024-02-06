@@ -1,6 +1,6 @@
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { SortDirection } from "../../utils";
 import { sortFunc } from "../../utils/sort";
@@ -18,6 +18,10 @@ const Table = ({
   expandedRowRender,
 }) => {
   const [sorts, setSorts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  ///////// pagination /////////
+  const [paginatedData, setPaginatedData] = useState([]);
 
   const { totalColSpan } = useMemo(() => {
     const totalColSpan = columns.reduce((sum, col) => sum + col.colSpan, 0);
@@ -29,8 +33,11 @@ const Table = ({
     for (const sort of sorts) {
       data = sortFunc(data, sort);
     }
+    setPaginatedData(
+      data.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
+    );
     return data;
-  }, [dataSource, sorts]);
+  }, [dataSource, currentPage, sorts]);
 
   const onSort = (key, sortType, sortDirection) => {
     const prevSort = sorts.filter((sort) => sort.key === key)[0];
@@ -53,19 +60,15 @@ const Table = ({
     setSorts(_sorts);
   };
 
-  ///////// pagination /////////
-  const [paginatedData, setPaginatedData] = useState([]);
-  const onChangePage = useCallback(
-    (currentPage) => {
-      setPaginatedData(
-        sortedData.slice(
-          (currentPage - 1) * rowsPerPage,
-          currentPage * rowsPerPage
-        )
-      );
-    },
-    [sortedData, rowsPerPage]
-  );
+  const onChangePage = (currentPage) => {
+    setCurrentPage(currentPage);
+    setPaginatedData(
+      sortedData.slice(
+        (currentPage - 1) * rowsPerPage,
+        currentPage * rowsPerPage
+      )
+    );
+  };
   //////////////////////////////
 
   return (
@@ -151,7 +154,7 @@ const Table = ({
 
 Table.defaultProps = {
   pagination: true,
-  rowsPerPage: 10,
+  rowsPerPage: 20,
 };
 
 Table.propTypes = TablePropType;

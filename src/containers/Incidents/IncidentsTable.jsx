@@ -99,7 +99,7 @@ const columns = [
   },
 ];
 
-const IncidentsTable = ({ currPage, totalPages, data, loading }) => {
+const IncidentsTable = ({ data, loading }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selData, setSelData] = useState(null);
   const onClickRow = (record) => {
@@ -112,8 +112,6 @@ const IncidentsTable = ({ currPage, totalPages, data, loading }) => {
       <Table
         columns={columns}
         dataSource={data}
-        currPage={currPage}
-        totalPages={totalPages}
         loading={loading}
         onClickRow={onClickRow}
       />
