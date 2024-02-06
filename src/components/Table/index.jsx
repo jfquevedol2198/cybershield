@@ -16,8 +16,9 @@ const Table = ({
   loading,
   onClickRow,
   expandedRowRender,
+  defaultSorts,
 }) => {
-  const [sorts, setSorts] = useState([]);
+  const [sorts, setSorts] = useState(defaultSorts);
   const [currentPage, setCurrentPage] = useState(1);
 
   ///////// pagination /////////
@@ -155,6 +156,7 @@ const Table = ({
 Table.defaultProps = {
   pagination: true,
   rowsPerPage: 20,
+  defaultSorts: [],
 };
 
 Table.propTypes = TablePropType;

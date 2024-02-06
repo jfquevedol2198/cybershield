@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { normalizeString } from "./common";
+import { MESSAGE_TYPES } from "./constants";
 
 export const parseShops = (data) =>
   data
@@ -22,6 +23,7 @@ export const parseAssets = (data) =>
   data.map((asset) => ({
     ...asset,
     risk_score: parseFloat(asset.risk_score || "0") * 10,
+    type: asset.type || MESSAGE_TYPES.notAvailable,
   }));
 
 export const groupByKey = (data, key, formatKeyFn = (key) => key) => {

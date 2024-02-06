@@ -23,4 +23,5 @@ export const TablePropType = {
   rowClassName: PropTypes.string,
   title: PropTypes.string,
   onClickRow: PropTypes.func,
+  defaultSorts: PropTypes.arrayOf(PropTypes.any),
 };
