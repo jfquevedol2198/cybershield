@@ -58,8 +58,9 @@ const RiskManagement = () => {
   const [incidents, setIncidents] = useState([]);
   const [assignedIncidents, setAssignedIncidents] = useState([]);
   const [vulnerabilities, setVulnerabilities] = useState([]);
-  const [ riskOverTime, setRiskOverTime] = useState([]);
-  const [ filteredRiskOverTime, setFilteredRiskOverTime] = useState(riskOverTime);
+  const [riskOverTime, setRiskOverTime] = useState([]);
+  const [filteredRiskOverTime, setFilteredRiskOverTime] =
+    useState(riskOverTime);
   const [unassignedAssets, setUnassignedAssets] = useState(0);
 
   const { siteId } = useParams();
@@ -144,13 +145,13 @@ const RiskManagement = () => {
 
         if (siteId) {
           // filter riskOverTimeData by siteId
-          const filteredBySiteIdData = riskOverTimeData.filter((item) => item.sites_id === siteId);
+          const filteredBySiteIdData = riskOverTimeData.filter(
+            (item) => item.sites_id === siteId
+          );
           setRiskOverTime(filteredBySiteIdData);
         } else {
           setRiskOverTime(riskOverTimeData);
         }
-
-         
 
         // Average Risk
         setAverageRisk(
@@ -195,12 +196,12 @@ const RiskManagement = () => {
     if (!riskOverTime || riskOverTime.length === 0) {
       return [];
     }
-  
+
     if (!selectedPeriod) {
       setFilteredRiskOverTime(riskOverTime);
       return;
     }
-  
+
     const filteredData = filterRiskOverTime(riskOverTime, selectedPeriod);
     setFilteredRiskOverTime(filteredData);
   };
@@ -209,23 +210,35 @@ const RiskManagement = () => {
     const currentDate = new Date();
     return data.filter((item) => {
       const itemDate = new Date(item.date_recorded);
-  
+
       switch (selectedPeriod.value) {
-        case 'last_7_days':
+        case "last_7_days":
           return itemDate >= new Date(currentDate - 7 * 24 * 60 * 60 * 1000);
-        case 'last_15_days':
+        case "last_15_days":
           return itemDate >= new Date(currentDate - 15 * 24 * 60 * 60 * 1000);
-        case 'last_month':
-          return itemDate >= new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, currentDate.getDate());
-        case 'last_2_months':
-          return itemDate >= new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, currentDate.getDate());
+        case "last_month":
+          return (
+            itemDate >=
+            new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth() - 1,
+              currentDate.getDate()
+            )
+          );
+        case "last_2_months":
+          return (
+            itemDate >=
+            new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth() - 2,
+              currentDate.getDate()
+            )
+          );
         default:
           return true;
       }
     });
   };
-  
-  
 
   return (
     <Fragment>
@@ -260,7 +273,11 @@ const RiskManagement = () => {
             ]}
             tabPanels={[
               <PanelRisk key="risk" risks={risks} />,
-              <PanelAlerts key="alerts" alerts={alerts} assignedIncidents={assignedIncidents} />,
+              <PanelAlerts
+                key="alerts"
+                alerts={alerts}
+                assignedIncidents={assignedIncidents}
+              />,
               <PanelShops key="shops" shops={shops} />,
               <PanelIncidents key="incidents" incidents={incidents} />,
             ]}
@@ -273,11 +290,18 @@ const RiskManagement = () => {
                 Risk Over Time
               </span>
               <div className="w-50">
-                <DropdownSelect data={Period} onSelect={(e) => handleRiskOverTimeDate(e)} />
+                <DropdownSelect
+                  data={Period}
+                  onSelect={(e) => handleRiskOverTimeDate(e)}
+                />
               </div>
             </div>
             <div className="mt-6 overflow-hidden" ref={riskLineChartRef}>
-              <RiskLineChart width={width} height={250} riskLineData={filteredRiskOverTime}/>
+              <RiskLineChart
+                width={width}
+                height={250}
+                riskLineData={filteredRiskOverTime}
+              />
             </div>
           </div>
         </div>
@@ -309,7 +333,7 @@ const RiskManagement = () => {
           <div className="mb-8 text-base font-normal">
             Review the affected assets.
           </div>
-          <div className="mb-8 flex flex-row items-center gap-x-2 text-base text-link">
+          <div className="mb-8 flex flex-row items-center gap-x-2 text-base">
             <span className="text-5xl">{unassignedAssets}</span>
             <span>Unassigned assets</span>
           </div>
