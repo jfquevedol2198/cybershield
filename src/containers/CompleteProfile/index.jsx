@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 import apiClient8089 from "../../api8089";
+import api from "../../api8000";
 import ActivityIndicator from "../../components/ActivityIndicator";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
@@ -56,6 +57,7 @@ const CompleteProfile = () => {
     setCountry,
     setState,
   } = useCountryStateCity();
+  const [managers, setManagers] = useState([]);
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -85,6 +87,30 @@ const CompleteProfile = () => {
       setState(state);
     }
   }, [state]);
+
+  // add useEffect to fetch the managers data from api getManagers
+  useEffect(() => { 
+    const fetchManagers = async () => {
+      try {
+        setIsLoading(true);
+        const { data } = await api.getManagers();
+        
+        setManagers(parsedManagersData(data));
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchManagers();
+  }, []);
+
+  const parsedManagersData = (data) => {
+    return data.map((item) => ({
+      label: item.name,
+      value: item.sys_id,
+    }));
+  };
 
   const onSubmit = async (e) => {
     setIsLoading(true);
@@ -241,7 +267,7 @@ const CompleteProfile = () => {
             setValue={form.setValue}
           />
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <span className="sr-only">Job Manager</span>
           <FormControl
             id="manager"
@@ -249,6 +275,19 @@ const CompleteProfile = () => {
             size={SizeVariant.small}
             error={form.formState.errors.manager?.message}
             {...form.register("manager")}
+          />
+        </div> */}
+        <div className="mb-4">
+          <span className="sr-only">Job Manager</span>
+          <FormControl
+            id="manager"
+            label="Job Manager"
+            inputType="dropdown"
+            size={SizeVariant.small}
+            error={form.formState.errors.manager?.message}
+            data={managers}
+            {...form.register("manager")}
+            setValue={form.setValue}
           />
         </div>
         <p className="mb-4 mt-2 text-[1.625rem] font-bold not-italic text-gray-4">

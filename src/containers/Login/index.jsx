@@ -35,8 +35,8 @@ const Login = () => {
 
   const getDefaultValues = () => {
     return {
-      email: "fernando",
-      password: "fernando",
+      email: "",
+      password: "",
     };
   };
   const form = useForm({
