@@ -20,7 +20,6 @@ import { getRiskDataByCategory, getRiskLevel } from "../../../utils/risk";
 import Filter from "./Filter";
 import VulnerabilityTable from "./VulnerabilityTable";
 
-
 // const colors = {
 //   "In Progress": "--secondary-color-1",
 //   Mitigated: "--primary-color-3",
@@ -38,7 +37,8 @@ const Vulnerabilities = () => {
   const [riskData, setRiskData] = useState([]);
   const [selectedTag, setSelectedTag] = useState(PRIORITIZED_TAGS[0]);
   const [prioritizedData, setPrioritizedData] = useState([]);
-  const { setPageData, filterData, addFilter, hasFilterAndSearch } = useSearchAndFilter();
+  const { setPageData, filterData, addFilter, hasFilterAndSearch } =
+    useSearchAndFilter();
   const [filterCellOptions, setFilterCellOptions] = useState([]);
   const [selectedRiskLevel, setSelectedRiskLevel] = useState(null);
 
@@ -67,17 +67,25 @@ const Vulnerabilities = () => {
         },
         {}
       );
+      const venderByVulId = dataVulnerabilitiesAssets.reduce((acc, asset) => {
+        const vulId = asset.idvul;
+        acc[vulId] = asset.vendor_name;
+        return acc;
+      }, {});
       const combinedData = vulnerabilities.map((vul) => {
         return {
           ...vul,
           asset_count: assetsCountByVulId[vul.id] || 0,
+          vendor: venderByVulId[vul.id],
           isExpanded: false,
         };
       });
 
       // Filter data by risk level when user has clicked on the donut chart
       if (selectedRiskLevel) {
-        const filteredDataByRisk = combinedData.filter((item) => getRiskLevel(item.cvescore) === selectedRiskLevel);
+        const filteredDataByRisk = combinedData.filter(
+          (item) => getRiskLevel(item.cvescore) === selectedRiskLevel
+        );
         setPageData(filteredDataByRisk);
       } else {
         setPageData(combinedData);
@@ -136,7 +144,6 @@ const Vulnerabilities = () => {
   const handleChartClick = (e, data) => {
     setSelectedRiskLevel(data?.riskLevel ?? null);
   };
-  
 
   return (
     <Fragment>

@@ -1,7 +1,6 @@
 import { SortDataType, SortDirection } from "./constants";
 
 export const sortFunc = (arr, sort) => {
-  console.log(sort);
   return arr.sort((a, b) => {
     if (sort.type === SortDataType.Number) {
       return sort.direction === SortDirection.ASC
