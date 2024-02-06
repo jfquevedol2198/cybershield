@@ -25,6 +25,7 @@ const DetailModal = ({ data, closeModal, isOpen, onCreateIncident }) => {
       riskLevel={RiskLevel[getRiskLevel(data?.risk_score * 10)]}
       isOpen={isOpen}
       closeModal={closeModal}
+      title={`${data?.shops_name} / ${data?.cellsname}`}
     >
       <div className="w-[56.25rem]">
         <div className="mb-3 flex flex-row items-center justify-between">

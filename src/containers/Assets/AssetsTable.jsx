@@ -70,8 +70,8 @@ const columns = [
   },
   {
     title: "Cell",
-    dataIndex: "cell_name",
-    key: "cell_name",
+    dataIndex: "cellsname",
+    key: "cellsname",
     colSpan: 1,
     className: "",
     align: "left",

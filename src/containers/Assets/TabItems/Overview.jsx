@@ -22,13 +22,16 @@ const OverviewTabPanel = ({ data }) => {
             Summary
           </div>
           <div>
-            <DataRow property="Shop" value="Oil Wells" />
-            <DataRow property="Cell" value="South Well" />
+            <DataRow property="Shop" value={data?.shops_name} />
+            <DataRow property="Cell" value={data?.cellsname} />
             <DataRow
               property="Asset owner"
               value={stringFormat(data?.owner_user)}
             />
-            <DataRow property="Location" value={stringFormat(data?.location)} />
+            <DataRow
+              property="Location"
+              value={stringFormat(data?.location_sites)}
+            />
             <DataRow property="State" value={stringFormat(data?.state)} />
             <DataRow
               property="First Seen"
