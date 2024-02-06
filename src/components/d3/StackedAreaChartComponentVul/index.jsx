@@ -23,7 +23,7 @@ const StackedAreaChartComponentVul = () => {
   const [data, setData] = useState([]);
   const chartRef = useRef();
   const legendRef = useRef();
-  const containerRef = useRef();  // Nuevo ref para el contenedor
+  const containerRef = useRef(); // Nuevo ref para el contenedor
   const [selectedPeriod, setSelectedPeriod] = useState(Period[0].value); // Estado para el periodo seleccionado
 
   useEffect(() => {
@@ -60,12 +60,11 @@ const StackedAreaChartComponentVul = () => {
         return dataset;
     }
 
-    return dataset.filter(d => {
+    return dataset.filter((d) => {
       const date = new Date(d.archive_date);
       return date >= startDate && date <= endDate;
     });
   };
-
 
   const containerWidth = 780;
   const containerHeight = 140;
@@ -90,7 +89,7 @@ const StackedAreaChartComponentVul = () => {
     if (!chartRef.current || data.length === 0 || !containerRef.current) return;
 
     const getTickValuesForLastMonth = (dates) => {
-      const startDate = new Date(dates[0]);  // Utilizar la primera fecha como inicio
+      const startDate = new Date(dates[0]); // Utilizar la primera fecha como inicio
       const endDate = d3.max(dates, (d) => new Date(d));
       const tickValues = [];
 
@@ -98,7 +97,11 @@ const StackedAreaChartComponentVul = () => {
       tickValues.push(endDate);
 
       // Restar fechas de 5 en 5 días hasta la primera fecha
-      for (let date = new Date(endDate); date > startDate; date.setDate(date.getDate() - 5)) {
+      for (
+        let date = new Date(endDate);
+        date > startDate;
+        date.setDate(date.getDate() - 5)
+      ) {
         tickValues.push(new Date(date));
       }
 
@@ -107,7 +110,7 @@ const StackedAreaChartComponentVul = () => {
         tickValues.push(startDate);
       }
 
-      return tickValues.reverse();  // Invertir el orden para que sea ascendente
+      return tickValues.reverse(); // Invertir el orden para que sea ascendente
     };
 
     // Filtrar los datos basándose en el periodo seleccionado
@@ -126,8 +129,8 @@ const StackedAreaChartComponentVul = () => {
 
     const legendSvg = d3
       .select(legendRef.current)
-      .attr("width", width)
-      .attr("height", height);
+      .attr("width", 290)
+      .attr("height", 30);
 
     // Agrupar y acumular por fecha y status
     const groupedData = Array.from(
@@ -164,14 +167,15 @@ const StackedAreaChartComponentVul = () => {
 
     // Configurar las marcas del eje X
     let tickValues;
-    if (selectedPeriod === 'last_month') {
+    if (selectedPeriod === "last_month") {
       tickValues = getTickValuesForLastMonth(uniqueDates);
     } else {
       tickValues = uniqueDates;
     }
 
     // Configurar las marcas del eje X
-    const xAxis = d3.axisBottom(xScale)
+    const xAxis = d3
+      .axisBottom(xScale)
       .tickValues(tickValues)
       .tickFormat((d) => formatTime(d)); // Aplicar el formato personalizado
 
@@ -247,14 +251,19 @@ const StackedAreaChartComponentVul = () => {
     let accumulatedWidth = 0; // Inicia con un valor mayor
 
     // Calcular y almacenar los anchos de los textos de la leyenda
-    const textWidths = uniqueStatusValues.map(status => {
-      const tempText = legendSvg.append("text").text(status).style("font-size", "16px").style("font-family", "Roboto");
+    const textWidths = uniqueStatusValues.map((status) => {
+      const tempText = legendSvg
+        .append("text")
+        .text(status)
+        .style("font-size", "16px")
+        .style("font-family", "Roboto");
       const textWidth = tempText.node().getComputedTextLength();
       tempText.remove(); // Eliminar el texto temporal
       return textWidth;
     });
 
-    const legend = legendSvg.selectAll(".legend")
+    const legend = legendSvg
+      .selectAll(".legend")
       .data(uniqueStatusValues)
       .enter()
       .append("g")
@@ -264,7 +273,8 @@ const StackedAreaChartComponentVul = () => {
         const xPos = accumulatedWidth;
         // Añadir el ancho del texto actual y el espacio entre leyendas al ancho acumulado
         // para el próximo elemento
-        accumulatedWidth += (i < textWidths.length - 1) ? textWidths[i] + legendGap : 0;
+        accumulatedWidth +=
+          i < textWidths.length - 1 ? textWidths[i] + legendGap : 0;
         return `translate(${xPos}, 0)`;
       });
 
@@ -285,8 +295,6 @@ const StackedAreaChartComponentVul = () => {
       .attr("cy", 7.5)
       .attr("r", 5)
       .attr("fill", (d) => getColorByStatus(d));
-
-
   }, [data, containerRef, containerWidth, containerHeight, selectedPeriod]);
 
   // Función para manejar la selección del periodo desde el menú desplegable
@@ -309,7 +317,10 @@ const StackedAreaChartComponentVul = () => {
       <svg ref={chartRef} width={containerWidth} height={containerHeight}></svg>
       <div className="w-50" style={dropdownContainerStyle}>
         <svg ref={legendRef} style={legendStyle}></svg>
-        <DropdownSelect data={Period} onSelect={e => handleSelectPeriod(e.value)} />
+        <DropdownSelect
+          data={Period}
+          onSelect={(e) => handleSelectPeriod(e.value)}
+        />
       </div>
     </div>
   );

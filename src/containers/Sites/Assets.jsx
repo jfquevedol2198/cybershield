@@ -1,22 +1,23 @@
 import { Fragment, useEffect, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 import api from "../../api8000";
 import ActivityIndicator from "../../components/ActivityIndicator";
+import BreadCrumb from "../../components/BreadCrumb";
 import ExportButton from "../../components/ExportButton";
 import SearchAndFilter from "../../components/SearchAndFilter";
 import SearchInput from "../../components/SearchInput";
-import useCommon from "../../hooks/useCommon";
 import useSearchAndFilter from "../../hooks/useSearchAndFilter";
 import { parseAssets } from "../../utils/parse";
 import AssetsTable from "../Assets/AssetsTable";
 
 const Assets = () => {
   const [searchParams] = useSearchParams();
+  const shopId = searchParams.get("shopId");
+  const shopName = searchParams.get("shopName");
   const cellId = searchParams.get("cellId");
   const cellName = searchParams.get("cellName");
   const { siteId } = useParams();
-  const { sites } = useCommon();
 
   const [loading, setLoading] = useState(false);
 
@@ -37,25 +38,28 @@ const Assets = () => {
       {loading && <ActivityIndicator />}
       {/* Header */}
       <div className="mb-3 flex flex-row items-center justify-between bg-background px-8">
-        <div className="flex flex-row items-center gap-2">
-          <span className="text-[1.625rem] font-bold text-gray-4">
-            {cellId && cellName ? (
-              <>
-                <Link
-                  to={`/dashboard/site/${siteId}/cells`}
-                  className="text-link"
-                >
-                  All Cells
-                </Link>
-                {" > "}
-                <span>{cellName}</span>{" "}
-              </>
-            ) : (
-              <>{sites.find((site) => site.id === siteId)?.name_}</>
-            )}
-            &gt; Assets ({filterData.length})
-          </span>
-        </div>
+        <BreadCrumb
+          data={[
+            cellId && cellName
+              ? {
+                  label: "All Cells",
+                  url: `/dashboard/site/${siteId}/cells`,
+                }
+              : undefined,
+            shopId && shopName
+              ? {
+                  label: shopName,
+                  url: `/dashboard/site/${siteId}/cells?shopId=${shopId}&shopName=${shopName}`,
+                }
+              : undefined,
+            cellId && cellName
+              ? {
+                  label: cellName,
+                }
+              : undefined,
+            { label: `Assets (${filterData.length})` },
+          ].filter((v) => v !== undefined)}
+        />
 
         <div className="flex flex-row items-center gap-4">
           <ExportButton name="shops" label="EXPORT SHOPS LIST" />

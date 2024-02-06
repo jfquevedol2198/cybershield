@@ -125,6 +125,11 @@ const FormControl = React.forwardRef(
                                 .indexOf(filter.toLowerCase()) > -1
                             : true
                         )
+                        .sort((a, b) =>
+                          typeof a === "string"
+                            ? a.localeCompare(b)
+                            : a.label.localeCompare(b.label)
+                        )
                         .map((d) => (
                           <Listbox.Option
                             key={typeof d === "string" ? d : d.key || d.value}

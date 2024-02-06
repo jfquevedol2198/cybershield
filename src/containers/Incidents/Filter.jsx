@@ -93,6 +93,7 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
                 value: state,
               }))}
               {...form.register("state")}
+              setValue={form.setValue}
             />
           </div>
           <FormControl

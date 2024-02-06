@@ -4,6 +4,7 @@ import { Link, useParams, useSearchParams } from "react-router-dom";
 
 import api from "../../api8000";
 import ActivityIndicator from "../../components/ActivityIndicator";
+import BreadCrumb from "../../components/BreadCrumb";
 import ExportButton from "../../components/ExportButton";
 import FactoryShopCell from "../../components/FactoryShopCell";
 import NormalButton from "../../components/NormalButton";
@@ -50,24 +51,19 @@ const Cells = () => {
     <Fragment>
       {/* Header */}
       <div className="mb-3 flex flex-row items-center justify-between bg-background px-8">
-        <div className="flex flex-row items-center gap-2">
-          <span className="text-[1.625rem] font-bold text-gray-4">
-            {shopId && shopName ? (
-              <>
-                <Link
-                  to={`/dashboard/site/${siteId}/shops`}
-                  className="text-link"
-                >
-                  All Shops
-                </Link>
-                {" > "}
-                <>{shopName}</>
-              </>
-            ) : (
-              <>Cells</>
-            )}
-          </span>
-        </div>
+        <BreadCrumb
+          data={
+            shopId && shopName
+              ? [
+                  {
+                    label: "All Shops",
+                    url: `/dashboard/site/${siteId}/shops`,
+                  },
+                  { label: shopName },
+                ]
+              : [{ label: "Cells" }]
+          }
+        />
         <div className="flex flex-row items-center gap-4">
           <ExportButton name="cells" label="EXPORT CELLS LIST" />
           <SearchInput />
@@ -89,11 +85,11 @@ const Cells = () => {
 
       <div className="mt-4 grid w-full grid-cols-1 gap-4 overflow-x-auto px-5 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {filterData.map((cell) => {
+          let url = `/dashboard/site/${siteId}/assets?cellId=${cell.cell_id}&cellName=${cell.cell_name}`;
+          if (shopId && shopName)
+            url = `${url}&shopId=${shopId}&shopName=${shopName}`;
           return (
-            <Link
-              key={cell.description}
-              to={`/dashboard/site/${siteId}/assets?cellId=${cell.cell_id}&cellName=${cell.cell_name}`}
-            >
+            <Link key={cell.description} to={url}>
               <FactoryShopCell
                 name={cell.cell_name}
                 description={cell.description}

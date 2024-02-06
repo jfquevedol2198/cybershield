@@ -17,10 +17,10 @@ const schema = z.object({
   risk_score: z.string().optional(),
   interfaces_mac: z.string().optional(),
   interfaces_ip: z.string().optional(),
-  cell_name: z.string().optional(),
+  cellsname: z.string().optional(),
   vendor_name: z.string().optional(),
   location: z.string().optional(),
-  shop: z.string().optional(),
+  shops_name: z.string().optional(),
   model: z.string().optional(),
   firmware: z.string().optional(),
   state: z.string().optional(),
@@ -123,15 +123,15 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
             setValue={form.setValue}
           />
           <FormControl
-            id="cell_name"
+            id="cellsname"
             label="Cell"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.cell_name?.message}
-            data={filterOptions["cell_name"]}
+            error={form.formState.errors.cellsname?.message}
+            data={filterOptions["cellsname"]}
             setValue={form.setValue}
-            {...form.register("cell_name")}
+            {...form.register("cellsname")}
           />
           <FormControl
             id="vendor_name"
@@ -156,15 +156,15 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
             {...form.register("location")}
           />
           <FormControl
-            id="shop"
+            id="shops_name"
             label="Shop"
             inputType="dropdown"
             className="mb-5"
             size={SizeVariant.small}
-            error={form.formState.errors.shop?.message}
-            data={filterOptions["shop"]}
+            error={form.formState.errors.shops_name?.message}
+            data={filterOptions["shops_name"]}
             setValue={form.setValue}
-            {...form.register("shop")}
+            {...form.register("shops_name")}
           />
           <FormControl
             id="model"
