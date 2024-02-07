@@ -17,6 +17,7 @@ import {
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
 import snack from "../../../utils/snack";
 import DetailModal from "../../Investigate/Alerts/DetailModal";
+import CreateIncidentModal from "../../Incidents/CreateIncidentModal";
 
 export const TabAlerts = ({ value }) => {
   return (
@@ -105,6 +106,7 @@ export const PanelAlerts = ({ alerts, assignedIncidents }) => {
   const [alertDetails, setAlertDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateIncident, setIsCreateIncident] = useState(false);
   const { total_incidents, assigned_incidents: assigned } =
     assignedIncidents?.[0] ?? [];
   const alertsDataFormatted = useMemo(
@@ -115,7 +117,9 @@ export const PanelAlerts = ({ alerts, assignedIncidents }) => {
   const handleClickRow = async (record) => {
     try {
       setIsLoading(true);
-      const { data: [data] } = await apiClient.getAlertById(record.id);
+      const {
+        data: [data],
+      } = await apiClient.getAlertById(record.id);
       setAlertDetails(data);
       setIsModalOpen(true);
     } catch (error) {
@@ -158,8 +162,12 @@ export const PanelAlerts = ({ alerts, assignedIncidents }) => {
           closeModal={() => setIsModalOpen(false)}
           onCreateIncident={() => {
             setIsModalOpen(false);
-            // setIsCreateIncident(true);
+            setIsCreateIncident(true);
           }}
+        />
+        <CreateIncidentModal
+          isOpen={isCreateIncident}
+          onClose={() => setIsCreateIncident(false)}
         />
       </div>
     </div>
