@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import _, { } from "lodash";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 
@@ -11,10 +11,11 @@ import FormControl from "../../components/FormControl";
 import NormalButton from "../../components/NormalButton";
 import useAuth from "../../hooks/useAuth";
 import useCountryStateCity from "../../hooks/useCountryStateCity";
+import useManagers from "../../hooks/useManagers";
 import { ButtonVariant, SizeVariant } from "../../utils";
 import snack from "../../utils/snack";
 import createUserData from "../../utils/userDataFactory";
-import useManagers from "../../hooks/useManagers";
+import Checkbox from "../../components/Checkbox";
 
 const schema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -33,7 +34,8 @@ const schema = z.object({
 const AccountInformation = () => {
   const [editMode, setEditMode] = useState(false);
   const { userInfo, updateUserInfo } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);    
+  const [isLoading, setIsLoading] = useState(false);
+  const [ isManager, setIsManager ] = useState(userInfo?.is_manager || false);
 
   // country, state, city
   const {
@@ -62,8 +64,10 @@ const AccountInformation = () => {
       jobTitle: _.get(userInfo, "title"),
       email: _.get(userInfo, "email"),
       sites: _.get(userInfo, "sites"),
+      isManager: _.get(userInfo, "is_manager"),
       isCreateIncidents: _.get(userInfo, "isCreateIncidents") || false,
-    }),[userInfo]
+    }),
+    [userInfo]
   );
 
   const form = useForm({
@@ -74,6 +78,15 @@ const AccountInformation = () => {
   const country = useWatch({ control: form.control, name: "country" });
   const state = useWatch({ control: form.control, name: "state" });
   const city = useWatch({ control: form.control, name: "city" });
+
+
+  // Update isManager state when userInfo changes
+  useEffect(() => {
+    if (userInfo) {
+      setIsManager(userInfo.is_manager || false);
+    }
+  }, [userInfo]);
+
 
   useEffect(() => {
     if (country) {
@@ -96,9 +109,10 @@ const AccountInformation = () => {
   const onSubmit = async (e) => {
     try {
       setIsLoading(true);
-      
+
+      const is_manager = isManager;
       // user data obj is created using a factory function
-      const userData = createUserData(e);
+      const userData = createUserData({...e, is_manager});
 
       const res = await apiClient8089.updateUser(userInfo?.sys_id, userData);
       if (res.status === 200) {
@@ -231,19 +245,29 @@ const AccountInformation = () => {
             />
           </div>
           <div className="mb-4">
-          <span className="sr-only">Job Manager</span>
-          <FormControl
-            id="manager"
-            label="Job Manager"
-            inputType="dropdown"
-            size={SizeVariant.small}
-            error={form.formState.errors.manager?.message}
-            data={managers}
-            {...form.register("manager")}
-            setValue={form.setValue}
-            isDisabled={isManagersLoading || !editMode}
-          />
-        </div>
+            <Checkbox
+              defaultChecked={isManager}
+              label={ isManager ? `I am a manager` : `I am not a manager`} 
+              id="isManager" 
+              onChange={(e) => setIsManager(e.target.checked)} 
+              isSwitch 
+              disabled={!editMode}
+            />
+          </div>
+          <div className="mb-4">
+            <span className="sr-only">Job Manager</span>
+            <FormControl
+              id="manager"
+              label="Job Manager"
+              inputType="dropdown"
+              size={SizeVariant.small}
+              error={form.formState.errors.manager?.message}
+              data={managers}
+              {...form.register("manager")}
+              setValue={form.setValue}
+              isDisabled={isManagersLoading || !editMode}
+            />
+          </div>
           <div className="mb-4">
             <FormControl
               className="mb-4"

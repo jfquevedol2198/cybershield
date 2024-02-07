@@ -9,6 +9,7 @@ import ActivityIndicator from "../../components/ActivityIndicator";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
+import Checkbox from "../../components/Checkbox";
 import useAuth from "../../hooks/useAuth";
 import useCountryStateCity from "../../hooks/useCountryStateCity";
 import useManagers from "../../hooks/useManagers";
@@ -42,6 +43,7 @@ const schema = z
 
 const CompleteProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [ isManager, setIsManager ] = useState(false);
   const navigate = useNavigate();
   const { tempUser } = useAuth();
 
@@ -92,10 +94,9 @@ const CompleteProfile = () => {
   const onSubmit = async (e) => {
     setIsLoading(true);
 
+    const is_manager = isManager;
     // create user data object using a factory function
-    const userData = createUserData({ ...e, email });
-
-    console.log('data submitted', userData);
+    const userData = createUserData({ ...e, email, is_manager });
 
     const res = await apiClient8089.createUser(userData);
     setIsLoading(false);
@@ -216,6 +217,15 @@ const CompleteProfile = () => {
             setValue={form.setValue}
           />
         </div>
+        <div className="mb-4">
+            <Checkbox
+              defaultChecked={isManager}
+              label={ isManager ? `I am a manager` : `I am not a manager`} 
+              id="isManager" 
+              onChange={(e) => setIsManager(e.target.checked)} 
+              isSwitch
+            />
+          </div>
         <div className="mb-4">
           <span className="sr-only">Job Manager</span>
           <FormControl
