@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import _ from "lodash";
-import { useEffect, useMemo, useState } from "react";
+import _, { } from "lodash";
+import { useEffect, useState, useMemo } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 
@@ -13,6 +13,8 @@ import useAuth from "../../hooks/useAuth";
 import useCountryStateCity from "../../hooks/useCountryStateCity";
 import { ButtonVariant, SizeVariant } from "../../utils";
 import snack from "../../utils/snack";
+import createUserData from "../../utils/userDataFactory";
+import useManagers from "../../hooks/useManagers";
 
 const schema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -31,8 +33,7 @@ const schema = z.object({
 const AccountInformation = () => {
   const [editMode, setEditMode] = useState(false);
   const { userInfo, updateUserInfo } = useAuth();
-
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);    
 
   // country, state, city
   const {
@@ -46,6 +47,7 @@ const AccountInformation = () => {
     setState,
     setCity,
   } = useCountryStateCity();
+  const { managers, isLoading: isManagersLoading } = useManagers();
 
   const defaultValues = useMemo(
     () => ({
@@ -55,24 +57,19 @@ const AccountInformation = () => {
       country: _.get(userInfo, "country"),
       state: _.get(userInfo, "state"),
       city: _.get(userInfo, "city"),
-      zip: _.get(userInfo, "zip"),
-      manager: _.get(userInfo, "manager"),
-      title: _.get(userInfo, "title"),
+      zipCode: _.get(userInfo, "zip"),
+      manager: _.get(userInfo, "manager_id"),
+      jobTitle: _.get(userInfo, "title"),
       email: _.get(userInfo, "email"),
       sites: _.get(userInfo, "sites"),
       isCreateIncidents: _.get(userInfo, "isCreateIncidents") || false,
-    }),
-    [editMode, userInfo]
+    }),[userInfo]
   );
 
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues,
   });
-
-  useEffect(() => {
-    form.reset();
-  }, [editMode]);
 
   const country = useWatch({ control: form.control, name: "country" });
   const state = useWatch({ control: form.control, name: "state" });
@@ -99,45 +96,13 @@ const AccountInformation = () => {
   const onSubmit = async (e) => {
     try {
       setIsLoading(true);
-      const {
-        firstName,
-        middleName,
-        lastName,
-        country,
-        state,
-        city,
-        zipCode,
-        manager,
-        jobTitle,
-        phone,
-        email,
-      } = e;
-      const data = {
-        country,
-        zip: zipCode,
-        active: true,
-        state,
-        city,
-        title: jobTitle,
-        sys_class_name: "sys_user",
-        first_name: firstName,
-        email,
-        manager,
-        last_name: lastName,
-        middle_name: middleName,
-        home_phone: "-",
-        phone: phone,
-        name: "-",
-        mobile_phone: "-",
-        street: "-",
-        company: "Cybersheild",
-        department: "Department",
-        location: country,
-      };
+      
+      // user data obj is created using a factory function
+      const userData = createUserData(e);
 
-      const res = await apiClient8089.updateUser(userInfo?.sys_id, data);
+      const res = await apiClient8089.updateUser(userInfo?.sys_id, userData);
       if (res.status === 200) {
-        updateUserInfo(data);
+        updateUserInfo(userData);
         snack.success("User is updated successfully");
       } else {
         snack.error("User update failed");
@@ -147,6 +112,7 @@ const AccountInformation = () => {
       snack.error(error.message);
     } finally {
       setIsLoading(false);
+      setEditMode(false);
     }
   };
 
@@ -265,17 +231,19 @@ const AccountInformation = () => {
             />
           </div>
           <div className="mb-4">
-            <span className="sr-only">Job Manager</span>
-            <FormControl
-              id="manager"
-              label="Job Manager"
-              size={SizeVariant.small}
-              error={form.formState.errors.manager?.message}
-              {...form.register("manager")}
-              setValue={form.setValue}
-              isDisabled={!editMode}
-            />
-          </div>
+          <span className="sr-only">Job Manager</span>
+          <FormControl
+            id="manager"
+            label="Job Manager"
+            inputType="dropdown"
+            size={SizeVariant.small}
+            error={form.formState.errors.manager?.message}
+            data={managers}
+            {...form.register("manager")}
+            setValue={form.setValue}
+            isDisabled={isManagersLoading || !editMode}
+          />
+        </div>
           <div className="mb-4">
             <FormControl
               className="mb-4"

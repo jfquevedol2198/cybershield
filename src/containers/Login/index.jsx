@@ -23,7 +23,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { authToken, user, setUser, setTempUser, fetchUserInfo } = useAuth();
+  const { authToken, user, setUser, setTempUser, fetchUserInfo, updateUserInfo } = useAuth();
   useEffect(() => {
     console.log("____ login");
   }, []);
@@ -74,6 +74,8 @@ const Login = () => {
         return;
       }
       setUser(data);
+      // todo: updateUserInfo for th auth hook
+      updateUserInfo(userInfo);
       snack.success("Successfully logged in!");
 
       await delay(1000);

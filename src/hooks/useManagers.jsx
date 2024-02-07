@@ -30,7 +30,12 @@ const useManagers = () => {
     return () => {};
   }, []);
 
-  return { managers, isLoading, error };
+  // Function to get manager object based on manager_id
+  const getManagerById = (managerId) => {
+    return managers.find((manager) => manager.value === managerId);
+  }
+
+  return { managers, isLoading, error, getManagerById };
 };
 
 export default useManagers;

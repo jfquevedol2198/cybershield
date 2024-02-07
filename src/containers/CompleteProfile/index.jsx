@@ -14,6 +14,7 @@ import useCountryStateCity from "../../hooks/useCountryStateCity";
 import useManagers from "../../hooks/useManagers";
 import { ButtonVariant, SizeVariant } from "../../utils/constants";
 import snack from "../../utils/snack";
+import createUserData from "../../utils/userDataFactory";
 
 const schema = z
   .object({
@@ -90,44 +91,13 @@ const CompleteProfile = () => {
 
   const onSubmit = async (e) => {
     setIsLoading(true);
-    const {
-      firstName,
-      middleName,
-      lastName,
-      country,
-      state,
-      city,
-      zip,
-      manager,
-      jobTitle,
-    } = e;
-    const data = {
-      country,
-      zip,
-      active: true,
-      state,
-      city,
-      title: jobTitle,
-      sys_class_name: "sys_user",
-      first_name: firstName,
-      email,
-      manager,
-      last_name: lastName,
-      middle_name: middleName,
-      home_phone: "-",
-      phone: "-",
-      name: "-",
-      user_name: email.slice(0, email.indexOf("@")),
-      mobile_phone: "-",
-      street: "-",
-      company: "Cybersheild",
-      department: "Department",
-      location: country,
-    };
 
-    console.log('data submitted', data);
+    // create user data object using a factory function
+    const userData = createUserData({ ...e, email });
 
-    const res = await apiClient8089.createUser(data);
+    console.log('data submitted', userData);
+
+    const res = await apiClient8089.createUser(userData);
     setIsLoading(false);
     if (res.status === 200) {
       snack.success("User is created successfully, please login");
