@@ -31,14 +31,20 @@ export const PanelRisk = ({ risks = [] }) => {
         your mitigation efforts.
       </div>
       <div className="h-full flex-auto overflow-y-auto">
-        {risks.map((risk, index) => (
-          <EventCard
-            key={`${risk.type}-${index}`}
-            title={risk.type}
-            description="Events that occurs on one host, including vulnerabilities."
-            score={Math.ceil(risk.total_risk_score_by_type_in_site * 10)}
-          />
-        ))}
+        {risks
+          .sort(
+            (a, b) =>
+              b.total_risk_score_by_type_in_site -
+              a.total_risk_score_by_type_in_site
+          )
+          .map((risk, index) => (
+            <EventCard
+              key={`${risk.type}-${index}`}
+              title={risk.type}
+              description="Events that occurs on one host, including vulnerabilities."
+              score={Math.ceil(risk.total_risk_score_by_type_in_site * 10)}
+            />
+          ))}
       </div>
     </div>
   );
