@@ -56,8 +56,13 @@ export const alerts = (httpClient) => ({
     return httpClient.get("/dw_alerts_view");
   },
   getAlertsView(siteId) {
-    return httpClient.get(`/alerts_assets_cells_shops_view${siteId ? "/" + siteId : ""}`);
+    const endpoint = siteId ? `/alerts_assets_cells_shops_view/${siteId}` : "/alerts_assets_cells_shops_view";
+    return httpClient.get(endpoint);
   },
+  getAlertById(alertId) {
+    return httpClient.get(`/alerts/${alertId}`);
+  }
+
 });
 
 export const insights = (httpClient) => ({

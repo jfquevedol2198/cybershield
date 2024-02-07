@@ -2,8 +2,10 @@
 // import { ArrowUpIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import PropTypes from "prop-types";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
+import apiClient from "../../../api8000";
+import ActivityIndicator from "../../../components/ActivityIndicator";
 import Button from "../../../components/Button";
 import Table from "../../../components/Table";
 import { ButtonVariant, SortDataType } from "../../../utils";
@@ -13,6 +15,8 @@ import {
   stringFormat,
 } from "../../../utils/common";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
+import snack from "../../../utils/snack";
+import DetailModal from "../../Investigate/Alerts/DetailModal";
 
 export const TabAlerts = ({ value }) => {
   return (
@@ -85,14 +89,6 @@ const columns = [
     className: "",
     align: "left",
   },
-  {
-    title: "",
-    dataIndex: "",
-    key: "action",
-    colSpan: 1,
-    render: () => <Button variant={ButtonVariant.outline}>GO TO ALERT</Button>,
-    align: "center",
-  },
 ];
 
 // format alert data to match table columns
@@ -102,15 +98,32 @@ const formatAlert = (alert) => ({
   ip: stringFormat(alert.ip),
   cell: stringFormat(alert.namecells),
   age: stringFormat(calculateItemAge(alert.fecha_creacion)),
-  // TODO: RISK is a temporary value, 
-  // it should be replaced with the actual risk/severity level which does not come in new endpoint yet
-  risk: alert.severity || "3.5", 
+  risk: alert.severity || "0",
 });
 
 export const PanelAlerts = ({ alerts, assignedIncidents }) => {
-  const { total_incidents, assigned_incidents: assigned } = assignedIncidents?.[0] ?? [];
-  console.log("alerts", alerts);
-  const alertsDataFormatted = useMemo(() => (alerts ?? []).map(formatAlert), [alerts]);
+  const [alertDetails, setAlertDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { total_incidents, assigned_incidents: assigned } =
+    assignedIncidents?.[0] ?? [];
+  const alertsDataFormatted = useMemo(
+    () => (alerts ?? []).map(formatAlert),
+    [alerts]
+  );
+
+  const handleClickRow = async (record) => {
+    try {
+      setIsLoading(true);
+      const { data: [data] } = await apiClient.getAlertById(record.id);
+      setAlertDetails(data);
+      setIsModalOpen(true);
+    } catch (error) {
+      snack.error("Failed to get alert details");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="flex h-full flex-col">
@@ -132,7 +145,22 @@ export const PanelAlerts = ({ alerts, assignedIncidents }) => {
         </Button>
       </div>
       <div className="h-full flex-auto overflow-y-auto">
-        <Table dataSource={alertsDataFormatted} columns={columns} />
+        {isLoading && <ActivityIndicator />}
+        <Table
+          dataSource={alertsDataFormatted}
+          columns={columns}
+          onClickRow={handleClickRow}
+        />
+        <DetailModal
+          riskLevel="low"
+          isOpen={isModalOpen}
+          data={alertDetails}
+          closeModal={() => setIsModalOpen(false)}
+          onCreateIncident={() => {
+            setIsModalOpen(false);
+            // setIsCreateIncident(true);
+          }}
+        />
       </div>
     </div>
   );
