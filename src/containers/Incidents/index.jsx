@@ -197,7 +197,7 @@ const Incidents = () => {
             >
               <div className="flex w-full flex-row items-center justify-between">
                 <span className="text-base font-bold">
-                  Vulnerabilities status timeline
+                  Incidents status timeline
                 </span>
                 <div className="flex flex-row items-center gap-2 text-sm font-light">
                   {Object.keys(colors).map((key) => {
