@@ -139,6 +139,7 @@ const Filter = ({ filterOptions, isOpen, onSubmit, onClose }) => {
             error={form.formState.errors.status?.message}
             data={filterOptions["status"]}
             {...form.register("status")}
+            setValue={form.setValue}
           />
           <FormControl
             id="alertTime"

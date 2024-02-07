@@ -152,6 +152,7 @@ const Filter = ({ isOpen, onSubmit, onClose, filterOptions }) => {
               error={form.formState.errors.status?.message}
               data={StatusOptions}
               {...form.register("status")}
+              setValue={form.setValue}
             />
           </div>
           <FormControl

@@ -337,7 +337,7 @@ const RiskManagement = () => {
             <span className="text-5xl">{unassignedAssets}</span>
             <span>Unassigned assets</span>
           </div>
-          <AffectAssetsTable data={assets} />
+          <AffectAssetsTable data={assets} isGlobal={!!siteId} />
           <Button
             className="mt-4"
             variant={ButtonVariant.outline}

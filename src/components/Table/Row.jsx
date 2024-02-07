@@ -44,7 +44,9 @@ const Row = ({
             {column.render &&
               column.render(data[column.dataIndex], data, expanded, onExpand)}
             {!column.render && (
-              <span className="truncate">{data[column.dataIndex]}</span>
+              <span className="truncate">
+                {data[column.dataIndex] || "N/A"}
+              </span>
             )}
           </div>
         ))}
