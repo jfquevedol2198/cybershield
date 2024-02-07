@@ -135,3 +135,9 @@ export const configuration = (httpClient) => ({
     return httpClient.put("/update_configuration/1", data);
   },
 });
+
+export const managers = (httpClient) => ({
+  getManagers() {
+    return httpClient.get("/sys_user_manager_view");
+  },
+});

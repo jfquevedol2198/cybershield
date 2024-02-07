@@ -9,10 +9,13 @@ import ActivityIndicator from "../../components/ActivityIndicator";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
+import Checkbox from "../../components/Checkbox";
 import useAuth from "../../hooks/useAuth";
 import useCountryStateCity from "../../hooks/useCountryStateCity";
+import useManagers from "../../hooks/useManagers";
 import { ButtonVariant, SizeVariant } from "../../utils/constants";
 import snack from "../../utils/snack";
+import createUserData from "../../utils/userDataFactory";
 
 const schema = z
   .object({
@@ -40,6 +43,7 @@ const schema = z
 
 const CompleteProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [ isManager, setIsManager ] = useState(false);
   const navigate = useNavigate();
   const { tempUser } = useAuth();
 
@@ -56,6 +60,7 @@ const CompleteProfile = () => {
     setCountry,
     setState,
   } = useCountryStateCity();
+  const { managers, isLoading: isManagersLoading } = useManagers();
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -88,42 +93,13 @@ const CompleteProfile = () => {
 
   const onSubmit = async (e) => {
     setIsLoading(true);
-    const {
-      firstName,
-      middleName,
-      lastName,
-      country,
-      state,
-      city,
-      zip,
-      manager,
-      jobTitle,
-    } = e;
-    const data = {
-      country,
-      zip,
-      active: true,
-      state,
-      city,
-      title: jobTitle,
-      sys_class_name: "sys_user",
-      first_name: firstName,
-      email,
-      manager,
-      last_name: lastName,
-      middle_name: middleName,
-      home_phone: "-",
-      phone: "-",
-      name: "-",
-      user_name: email.slice(0, email.indexOf("@")),
-      mobile_phone: "-",
-      street: "-",
-      company: "Cybersheild",
-      department: "Department",
-      location: country,
-    };
 
-    const res = await apiClient8089.createUser(data);
+    const is_manager = isManager;
+    // create user data object using a factory function
+    const userData = createUserData({ ...e, email, is_manager });
+
+    const res = await apiClient8089.createUser(userData);
+    setIsLoading(false);
     if (res.status === 200) {
       snack.success("User is created successfully, please login");
       navigate("/login");
@@ -242,13 +218,26 @@ const CompleteProfile = () => {
           />
         </div>
         <div className="mb-4">
+            <Checkbox
+              defaultChecked={isManager}
+              label={ isManager ? `I am a manager` : `I am not a manager`} 
+              id="isManager" 
+              onChange={(e) => setIsManager(e.target.checked)} 
+              isSwitch
+            />
+          </div>
+        <div className="mb-4">
           <span className="sr-only">Job Manager</span>
           <FormControl
             id="manager"
             label="Job Manager"
+            inputType="dropdown"
             size={SizeVariant.small}
             error={form.formState.errors.manager?.message}
+            data={managers}
             {...form.register("manager")}
+            setValue={form.setValue}
+            isDisabled={isManagersLoading}
           />
         </div>
         <p className="mb-4 mt-2 text-[1.625rem] font-bold not-italic text-gray-4">

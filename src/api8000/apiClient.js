@@ -18,6 +18,7 @@ import {
   updateDate,
   users,
   vulnerabilities,
+  managers,
 } from "./dashboard";
 
 export const createApiClient = (httpClient) => {
@@ -39,6 +40,7 @@ export const createApiClient = (httpClient) => {
     ...updateDate(httpClient),
     ...risks(httpClient),
     ...configuration(httpClient),
+    ...managers(httpClient),
   };
   return apiClient;
 };

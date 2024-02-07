@@ -32,6 +32,7 @@ export const AuthProvider = ({ children }) => {
       const {
         data: [userInfo],
       } = await apiClient.getSysUserView(username);
+
       return userInfo;
     } catch (error) {
       console.log(error);
@@ -48,10 +49,12 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         setUser(user);
       }
+
       const userInfo = await fetchUserInfo(user.username);
       if (!userInfo) {
         return redirectToAuth();
       }
+
       setUserInfo(userInfo);
 
       const {

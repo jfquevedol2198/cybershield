@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import _ from "lodash";
+import _, { } from "lodash";
 import { useEffect, useMemo, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
@@ -11,8 +11,11 @@ import FormControl from "../../components/FormControl";
 import NormalButton from "../../components/NormalButton";
 import useAuth from "../../hooks/useAuth";
 import useCountryStateCity from "../../hooks/useCountryStateCity";
+import useManagers from "../../hooks/useManagers";
 import { ButtonVariant, SizeVariant } from "../../utils";
 import snack from "../../utils/snack";
+import createUserData from "../../utils/userDataFactory";
+import Checkbox from "../../components/Checkbox";
 
 const schema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -31,8 +34,8 @@ const schema = z.object({
 const AccountInformation = () => {
   const [editMode, setEditMode] = useState(false);
   const { userInfo, updateUserInfo } = useAuth();
-
   const [isLoading, setIsLoading] = useState(false);
+  const [ isManager, setIsManager ] = useState(userInfo?.is_manager || false);
 
   // country, state, city
   const {
@@ -46,6 +49,7 @@ const AccountInformation = () => {
     setState,
     setCity,
   } = useCountryStateCity();
+  const { managers, isLoading: isManagersLoading } = useManagers();
 
   const defaultValues = useMemo(
     () => ({
@@ -55,14 +59,15 @@ const AccountInformation = () => {
       country: _.get(userInfo, "country"),
       state: _.get(userInfo, "state"),
       city: _.get(userInfo, "city"),
-      zip: _.get(userInfo, "zip"),
-      manager: _.get(userInfo, "manager"),
-      title: _.get(userInfo, "title"),
+      zipCode: _.get(userInfo, "zip"),
+      manager: _.get(userInfo, "manager_id"),
+      jobTitle: _.get(userInfo, "title"),
       email: _.get(userInfo, "email"),
       sites: _.get(userInfo, "sites"),
+      isManager: _.get(userInfo, "is_manager"),
       isCreateIncidents: _.get(userInfo, "isCreateIncidents") || false,
     }),
-    [editMode, userInfo]
+    [userInfo]
   );
 
   const form = useForm({
@@ -70,13 +75,18 @@ const AccountInformation = () => {
     defaultValues,
   });
 
-  useEffect(() => {
-    form.reset();
-  }, [editMode]);
-
   const country = useWatch({ control: form.control, name: "country" });
   const state = useWatch({ control: form.control, name: "state" });
   const city = useWatch({ control: form.control, name: "city" });
+
+
+  // Update isManager state when userInfo changes
+  useEffect(() => {
+    if (userInfo) {
+      setIsManager(userInfo.is_manager || false);
+    }
+  }, [userInfo]);
+
 
   useEffect(() => {
     if (country) {
@@ -99,45 +109,14 @@ const AccountInformation = () => {
   const onSubmit = async (e) => {
     try {
       setIsLoading(true);
-      const {
-        firstName,
-        middleName,
-        lastName,
-        country,
-        state,
-        city,
-        zipCode,
-        manager,
-        jobTitle,
-        phone,
-        email,
-      } = e;
-      const data = {
-        country,
-        zip: zipCode,
-        active: true,
-        state,
-        city,
-        title: jobTitle,
-        sys_class_name: "sys_user",
-        first_name: firstName,
-        email,
-        manager,
-        last_name: lastName,
-        middle_name: middleName,
-        home_phone: "-",
-        phone: phone,
-        name: "-",
-        mobile_phone: "-",
-        street: "-",
-        company: "Cybersheild",
-        department: "Department",
-        location: country,
-      };
 
-      const res = await apiClient8089.updateUser(userInfo?.sys_id, data);
+      const is_manager = isManager;
+      // user data obj is created using a factory function
+      const userData = createUserData({...e, is_manager});
+
+      const res = await apiClient8089.updateUser(userInfo?.sys_id, userData);
       if (res.status === 200) {
-        updateUserInfo(data);
+        updateUserInfo(userData);
         snack.success("User is updated successfully");
       } else {
         snack.error("User update failed");
@@ -147,6 +126,7 @@ const AccountInformation = () => {
       snack.error(error.message);
     } finally {
       setIsLoading(false);
+      setEditMode(false);
     }
   };
 
@@ -265,15 +245,27 @@ const AccountInformation = () => {
             />
           </div>
           <div className="mb-4">
+            <Checkbox
+              defaultChecked={isManager}
+              label={ isManager ? `I am a manager` : `I am not a manager`} 
+              id="isManager" 
+              onChange={(e) => setIsManager(e.target.checked)} 
+              isSwitch 
+              disabled={!editMode}
+            />
+          </div>
+          <div className="mb-4">
             <span className="sr-only">Job Manager</span>
             <FormControl
               id="manager"
               label="Job Manager"
+              inputType="dropdown"
               size={SizeVariant.small}
               error={form.formState.errors.manager?.message}
+              data={managers}
               {...form.register("manager")}
               setValue={form.setValue}
-              isDisabled={!editMode}
+              isDisabled={isManagersLoading || !editMode}
             />
           </div>
           <div className="mb-4">
