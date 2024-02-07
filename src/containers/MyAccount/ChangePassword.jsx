@@ -38,6 +38,7 @@ const ChangePassword = () => {
     try {
       await Auth.changePassword(user, e.oldPassword, e.newPassword);
       snack.success("Password changed successfully");
+      form.reset();
     } catch (error) {
       snack.error(error.message);
     }
