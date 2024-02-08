@@ -95,17 +95,23 @@ const Sidebar = () => {
           const answers = category.answered_questions || 0;
           const score =
             questions > 0 ? parseInt((answers / questions) * 100) : 0;
-          return (
-            <Item
-              key={item}
-              title={item}
-              questions={questions}
-              answers={answers}
-              score={score}
-              selected={selIndex === index}
-              onSelect={() => onSelect(item, index)}
-            />
-          );
+
+          // Check if the score is not equal to 0, then render the item
+          if (score !== 0) {
+            return (
+              <Item
+                key={item}
+                title={item}
+                questions={questions}
+                answers={answers}
+                score={score}
+                selected={selIndex === index}
+                onSelect={() => onSelect(item, index)}
+              />
+            );
+          } else {
+            return null;
+          }
         })}
       </div>
     </div>
