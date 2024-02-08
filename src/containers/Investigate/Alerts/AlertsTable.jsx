@@ -107,6 +107,7 @@ const AlertsTable = ({ data = [], loading }) => {
   const [isCreateIncident, setIsCreateIncident] = useState(false);
   const [selData, setSelData] = useState(null);
   const onClickRow = (rowData) => {
+    console.log("rowData in alerts section", rowData);
     setSelData(rowData);
     setIsOpen(true);
   };
