@@ -68,6 +68,16 @@ const Login = () => {
         navigate('/complete-profile');
         return;
       }
+
+      if (data.challengeName === "MFA_SETUP") {
+        setTempUser(data);
+        snack.info("Please setup MFA");
+        navigate("/mfa/scan");
+        return;
+      }
+
+      console.log("userInfo", userInfo);
+      console.log("data", data);
       const token = data.signInUserSession?.accessToken?.jwtToken;
       if (!token) {
         setError("Something went wrong, please try again");
