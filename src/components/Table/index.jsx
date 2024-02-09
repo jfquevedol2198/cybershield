@@ -92,11 +92,11 @@ const Table = ({
                   )}%`,
                 }}
               >
-                <span>{column.title}</span>
+                <span className="flex-grow truncate">{column.title}</span>
                 {column.sort &&
                   (sort && sort.direction === SortDirection.ASC ? (
                     <ArrowUpIcon
-                      className="h-4 cursor-pointer"
+                      className="h-4 flex-shrink-0 cursor-pointer"
                       onClick={() =>
                         onSort(
                           column.dataIndex,
@@ -107,7 +107,7 @@ const Table = ({
                     />
                   ) : (
                     <ArrowDownIcon
-                      className="h-4 cursor-pointer"
+                      className="h-4 flex-shrink-0 cursor-pointer"
                       onClick={() =>
                         onSort(
                           column.dataIndex,

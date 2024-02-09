@@ -23,7 +23,14 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { authToken, user, setUser, setTempUser, fetchUserInfo, updateUserInfo } = useAuth();
+  const {
+    authToken,
+    user,
+    setUser,
+    setTempUser,
+    fetchUserInfo,
+    updateUserInfo,
+  } = useAuth();
   useEffect(() => {
     console.log("____ login");
   }, []);
@@ -65,7 +72,7 @@ const Login = () => {
       if (!userInfo) {
         setTempUser(temporaryUser);
         snack.info("Please complete profile");
-        navigate('/complete-profile');
+        navigate("/complete-profile");
         return;
       }
       const token = data.signInUserSession?.accessToken?.jwtToken;
@@ -84,7 +91,7 @@ const Login = () => {
       let { name, message } = error;
       if (name === "UserNotConfirmedException") {
         setTempUser(temporaryUser);
-        navigate('/confirm-account');
+        navigate("/confirm-account");
         return;
       }
       setError(message);
