@@ -8,7 +8,7 @@ import { z } from "zod";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
 import Modal from "../../components/Modal";
-import { ButtonVariant, SizeVariant } from "../../utils";
+import { ButtonVariant, SizeVariant, generatePassword } from "../../utils";
 import snack from "../../utils/snack";
 
 const schema = z.object({
@@ -29,10 +29,19 @@ const CreateUserModal = ({ isOpen, onClose }) => {
   useEffect(() => form.reset(), [isOpen]);
 
   const onSubmit = async (e) => {
+    const password = generatePassword(
+      {
+        useSymbols: true,
+        useNumbers: true,
+        useLowerCase: true,
+        useUpperCase: true,
+      },
+      8
+    );
     try {
       await Auth.signUp({
         username: e.email,
-        password: "12345678",
+        password,
         attributes: {
           email: e.email,
         },
