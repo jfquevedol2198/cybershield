@@ -62,6 +62,7 @@ const Login = () => {
       setIsLoading(true);
 
       const data = await Auth.signIn(e.email, e.password);
+      console.log("data in sign in", data);
       const userInfo = await fetchUserInfo(e.email);
 
       // user has not completed profile
@@ -111,6 +112,7 @@ const Login = () => {
       await delay(1000);
       navigate("/dashboard");
     } catch (error) {
+      console.log("error in sign in", error);
       let { name, message } = error;
       if (name === "UserNotConfirmedException") {
         setTempUser(temporaryUser);

@@ -47,7 +47,8 @@ const CreateUserModal = ({ isOpen, onClose }) => {
         },
       });
       onClose();
-      snack.success("User created, temporary password is 12345678");
+      console.log(`user created successfully, password: ${password}`);
+      snack.success(`user created successfully, password: ${password}`);
     } catch (error) {
       snack.error(error.message);
     }
