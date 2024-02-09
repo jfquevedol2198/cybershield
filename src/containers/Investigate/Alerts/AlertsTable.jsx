@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import Table from "../../../components/Table";
 import Tag from "../../../components/Tag";
-import { SortDataType, dateFormat } from "../../../utils";
+import { SortDataType, SortDirection, dateFormat } from "../../../utils";
 import { RiskLevel, getRiskLevel } from "../../../utils/risk";
 import CreateIncidentModal from "../../Incidents/CreateIncidentModal";
 import DetailModal from "./DetailModal";
@@ -102,6 +102,24 @@ const columns = [
   },
 ];
 
+const DEFAULT_SORTS = [
+  {
+    direction: SortDirection.ASC,
+    key: "type",
+    type: SortDataType.String,
+  },
+  {
+    direction: SortDirection.ASC,
+    key: "numeric_id",
+    type: SortDataType.Number,
+  },
+  {
+    direction: SortDirection.ASC,
+    key: "severity",
+    type: SortDataType.Number,
+  },
+];
+
 const AlertsTable = ({ data = [], loading }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCreateIncident, setIsCreateIncident] = useState(false);
@@ -120,6 +138,7 @@ const AlertsTable = ({ data = [], loading }) => {
         rowsPerPage={10}
         loading={loading}
         onClickRow={onClickRow}
+        defaultSorts={DEFAULT_SORTS}
       />
       <DetailModal
         riskLevel="low"
