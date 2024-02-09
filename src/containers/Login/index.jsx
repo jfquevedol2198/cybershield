@@ -55,13 +55,9 @@ const Login = () => {
       setIsLoading(true);
 
       const data = await Auth.signIn(e.email, e.password);
-      if (data.challengeName === "NEW_PASSWORD_REQUIRED") {
-        setTempUser(data);
-        navigate("/confirm-password");
-        return;
-      }
-
       const userInfo = await fetchUserInfo(e.email);
+
+      // user has not completed profile
       if (!userInfo) {
         setTempUser(temporaryUser);
         snack.info("Please complete profile");
@@ -69,22 +65,39 @@ const Login = () => {
         return;
       }
 
+
+      console.log("data in sign in", data);
+      if (data.challengeName === "NEW_PASSWORD_REQUIRED") {
+        setTempUser(data);
+        navigate("/confirm-password");
+        return;
+      }
+
+      // user must setup MFA
       if (data.challengeName === "MFA_SETUP") {
         setTempUser(data);
+        updateUserInfo(userInfo);
         snack.info("Please setup MFA");
         navigate("/mfa/scan");
         return;
       }
 
-      console.log("userInfo", userInfo);
-      console.log("data", data);
+      // user must sign in with MFA
+      if (data.challengeName === "SOFTWARE_TOKEN_MFA") {
+        setTempUser(data);
+        updateUserInfo(userInfo);
+        navigate("/mfa/auth-confirm-sign-in");
+        return;
+      }
+
+      
       const token = data.signInUserSession?.accessToken?.jwtToken;
       if (!token) {
         setError("Something went wrong, please try again");
         return;
       }
+      
       setUser(data);
-      // todo: updateUserInfo for th auth hook
       updateUserInfo(userInfo);
       snack.success("Successfully logged in!");
 

@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Auth } from "aws-amplify";
 
-// import api from "../../api8000";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
@@ -35,7 +34,7 @@ const VerifyMode = {
   EMAIL: "EMAIL",
 };
 
-const AuthCodeVerify = () => {
+const AuthConfirmSignIn = () => {
   const navigate = useNavigate();
   const { tempUser, setUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
@@ -103,32 +102,21 @@ const AuthCodeVerify = () => {
   const onSubmit = async (e) => {
     const code = `${e.value1}${e.value2}${e.value3}${e.value4}${e.value5}${e.value6}`;
     try {
-      setIsLoading(true);
-      const user = tempUser;
-      console.log("tempUser in verify", user);
-      
-      const data = await Auth.verifyTotpToken(user, code);
-    
-      // this method returns SUCCESS
-      await Auth.setPreferredMFA(user, 'TOTP');
-      
-      const token = data?.accessToken?.jwtToken;
+      setIsLoading(true);   
+      const data = await Auth.confirmSignIn(tempUser, code, 'SOFTWARE_TOKEN_MFA');
+      const token = data.signInUserSession?.accessToken?.jwtToken;
+
       if (!token) {
         snack.error("Something went wrong, please try again");
         navigate("/login");
         return;
       }
       setUser(data);
-      // todo: updateUserInfo for th auth hook
-      // updateUserInfo(userInfo);
       snack.success("Successfully logged in!");
 
       await delay(1000);
       navigate("/dashboard");
-
-      snack.success("Verified!");
     } catch (error) {
-      console.error("error", error);
       snack.error('error', error.message);
       navigate("/login");
     } finally {
@@ -225,4 +213,4 @@ const AuthCodeVerify = () => {
   );
 };
 
-export default AuthCodeVerify;
+export default AuthConfirmSignIn;

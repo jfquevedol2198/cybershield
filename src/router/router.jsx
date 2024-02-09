@@ -35,6 +35,7 @@ import FactoryCells from "../containers/Sites/Cells";
 import FactoryShops from "../containers/Sites/Shops";
 import UpdatePassword from "../containers/UpdatePassword";
 import { authorizationLoader } from "./authorizationLoader";
+import AuthConfirmSignIn from "../containers/MFA/AuthConfirmSignIn";
 
 export const SIDEBAR_ITEMS = [
   {
@@ -201,6 +202,10 @@ export const createRoutes = () => [
   {
     path: "/mfa/auth-code-verify",
     Component: AuthCodeVerify,
+  },
+  {
+    path: "/mfa/auth-confirm-sign-in",
+    Component: AuthConfirmSignIn,
   },
   {
     path: "/dashboard",

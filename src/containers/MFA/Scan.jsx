@@ -31,10 +31,8 @@ const Scan = () => {
 
   const setupTOTP = async () => {
     try {
-      const user = tempUser;
-      console.log("user", user);
-      const secretKey = await Auth.setupTOTP(user);
-      const qrCodeData = `otpauth://totp/AWSCognito:${user.username}?secret=${secretKey}&issuer=YourApp`;
+      const secretKey = await Auth.setupTOTP(tempUser);
+      const qrCodeData = `otpauth://totp/AWSCognito:${tempUser.username}?secret=${secretKey}&issuer=YourApp`;
       setQRCode(qrCodeData);
     } catch (error) {
       console.error("Error setting up TOTP", error);
@@ -75,7 +73,7 @@ const Scan = () => {
       </div>
       <div className="flex items-center justify-center py-10">
         <Button variant={ButtonVariant.filled} onClick={handleNextButtonClick}>
-          NEXT
+          ENTER VERIFICATION CODE
         </Button>
       </div>
     </AuthLayout>
