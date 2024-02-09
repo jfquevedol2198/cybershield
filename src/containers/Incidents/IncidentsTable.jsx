@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import Table from "../../components/Table";
 import Tag from "../../components/Tag";
-import { SortDataType, dateFormat } from "../../utils";
+import { SortDataType, SortDirection, dateFormat } from "../../utils";
 import { RiskLevel, getRiskLevel } from "../../utils/risk";
 import DetailModal from "./DetailModal";
 
@@ -11,7 +11,7 @@ const columns = [
   {
     title: "Incident ID",
     dataIndex: "origin_id",
-    key: "origin_idid",
+    key: "origin_id",
     sort: true,
     sortDataType: SortDataType.String,
     colSpan: 0.7,
@@ -99,6 +99,24 @@ const columns = [
   },
 ];
 
+const DEFAULT_SORTS = [
+  {
+    direction: SortDirection.ASC,
+    key: "subcategory",
+    type: SortDataType.String,
+  },
+  {
+    direction: SortDirection.ASC,
+    key: "origin_id",
+    type: SortDataType.String,
+  },
+  {
+    direction: SortDirection.ASC,
+    key: "severity",
+    type: SortDataType.Number,
+  },
+];
+
 const IncidentsTable = ({ data, loading }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selData, setSelData] = useState(null);
@@ -114,6 +132,7 @@ const IncidentsTable = ({ data, loading }) => {
         dataSource={data}
         loading={loading}
         onClickRow={onClickRow}
+        defaultSorts={DEFAULT_SORTS}
       />
       <DetailModal
         isOpen={isOpen}
