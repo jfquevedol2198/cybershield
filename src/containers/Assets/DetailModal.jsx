@@ -22,7 +22,7 @@ import {
 const DetailModal = ({ data, closeModal, isOpen, onCreateIncident }) => {
   return (
     <RiskModal
-      riskLevel={RiskLevel[getRiskLevel(data?.risk_score * 10)]}
+      riskLevel={RiskLevel[getRiskLevel(data?.risk_score)]}
       isOpen={isOpen}
       closeModal={closeModal}
       title={`${data?.shops_name} / ${data?.cellsname}`}
@@ -33,7 +33,7 @@ const DetailModal = ({ data, closeModal, isOpen, onCreateIncident }) => {
             <span className="text-[1.625rem] font-bold text-gray-4">
               {data?.vendor_name}
             </span>
-            <Tag riskLevel={RiskLevel[getRiskLevel(data?.risk_score * 10)]} />
+            <Tag riskLevel={RiskLevel[getRiskLevel(data?.risk_score)]} />
           </div>
           <div className="flex flex-row items-center">
             <Stats
