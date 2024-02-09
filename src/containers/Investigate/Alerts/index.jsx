@@ -15,7 +15,7 @@ import useSearchAndFilter from "../../../hooks/useSearchAndFilter";
 import { ButtonVariant } from "../../../utils";
 import { getFilterOptions } from "../../../utils/filter";
 import { groupByKey, parseAlerts } from "../../../utils/parse";
-import { getRiskDataByCategory } from "../../../utils/risk";
+import { getRiskDataByCategory, getRiskLevel } from "../../../utils/risk";
 import AlertsTable from "./AlertsTable";
 import Filter from "./Filter";
 
@@ -37,6 +37,8 @@ const Alerts = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
 
+  const [selectedRiskLevel, setSelectedRiskLevel] = useState(null);
+
   const { setPageData, filterData, addFilter, hasFilterAndSearch } =
     useSearchAndFilter();
 
@@ -49,11 +51,10 @@ const Alerts = () => {
       setLoading(true);
 
       const { data } = await apiClient.getDwAlerts();
-      const alerts = parseAlerts(data);
+      let alerts = parseAlerts(data);
 
-      setPageData(alerts);
-      setGroupByType(groupByKey(alerts, "type_name"));
       setFilterOptions(getFilterOptions(alerts));
+      setGroupByType(groupByKey(alerts, "type_name"));
 
       const riskData = getRiskDataByCategory(alerts, "severity");
       setRiskData([
@@ -63,6 +64,14 @@ const Alerts = () => {
         { riskLevel: "critical", value: riskData["critical"] },
       ]);
 
+      // Filter data by risk level when user has clicked on the donut chart
+      if (selectedRiskLevel) {
+        alerts = alerts.filter(
+          (item) => getRiskLevel(item.severity) === selectedRiskLevel
+        );
+      }
+      setPageData(alerts);
+
       setLoading(false);
     };
 
@@ -71,7 +80,7 @@ const Alerts = () => {
     setWidth(stackAreaChartRef.current.clientWidth);
     window.addEventListener("resize", debounced);
     return window.removeEventListener("resize", () => {});
-  }, []);
+  }, [selectedRiskLevel]);
 
   /**
    * Filter
@@ -138,7 +147,7 @@ const Alerts = () => {
                 innerRadius={40}
                 outerRadius={50}
                 data={riskData}
-                handleClick={(e, d) => addFilter({ severity: d.riskLevel })}
+                handleClick={(e, d) => setSelectedRiskLevel(d.riskLevel)}
               />
               {/* <div className="mt-8 flex flex-row items-center justify-center gap-1 text-base text-green">
                 {/* <ArrowDownIcon className="h-3" />

@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { getRiskLevel } from "./risk";
 
 export const getFilterOptions = (data) => {
-  if (!data) return {};
+  if (!data || (data && data.length === 0)) return {};
   const filterOptions = {};
   Object.keys(data[0]).map((key) => {
     const values = data.map((d) => d[key]);
