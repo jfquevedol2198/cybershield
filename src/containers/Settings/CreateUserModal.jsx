@@ -15,6 +15,12 @@ const schema = z.object({
   email: z.string().min(1, "Email is required"),
 });
 
+const copyToClipboard = (value) => {
+  navigator.clipboard.writeText(value)
+    .then(() => console.log('Copied to clipboard:', value))
+    .catch(err => console.error('Failed to copy:', err));
+}
+
 const CreateUserModal = ({ isOpen, onClose }) => {
   const getDefaultValues = () => {
     return {
@@ -47,8 +53,8 @@ const CreateUserModal = ({ isOpen, onClose }) => {
         },
       });
       onClose();
-      console.log(`user created successfully, password: ${password}`);
-      snack.success(`user created successfully, password: ${password}`);
+      copyToClipboard(password);
+      snack.success(`user created successfully,  Your password: ${password} has been copied to clipboard.`);
     } catch (error) {
       snack.error(error.message);
     }
