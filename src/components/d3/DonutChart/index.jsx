@@ -4,7 +4,14 @@ import { useEffect, useRef } from "react";
 import { RiskLevel } from "../../../utils/risk";
 import { DonutChartDataType } from "../../../utils/types";
 
-const DonutChart = ({ width, height, data, innerRadius, outerRadius, handleClick }) => {
+const DonutChart = ({
+  width,
+  height,
+  data,
+  innerRadius,
+  outerRadius,
+  handleClick,
+}) => {
   const svgRef = useRef();
   const arc = d3.arc().padAngle(Math.PI / 200);
 
