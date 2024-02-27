@@ -8,7 +8,7 @@ import SuccessSvg from "../assets/images/success.svg";
 import config from "../config";
 
 const BASE_CLASSNAME =
-  "shadow-toast border-[1px] rounded p-4 text-base text-primary-text";
+  "shadow-toast border rounded p-4 text-base text-primary-text";
 
 const snack = {
   success: (message) => {

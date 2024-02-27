@@ -16,6 +16,7 @@ export default {
           4: "var(--primary-color-4)",
         },
         "primary-text": "var(--primary-text-color)",
+        "secondary-text": "var(--secondary-text-color)",
         secondary: {
           1: "var(--secondary-color-1)",
           2: "var(--secondary-color-2)",
@@ -28,6 +29,7 @@ export default {
           2: "var(--gray-color-2)",
           3: "var(--gray-color-3)",
           4: "var(--gray-color-4)",
+          5: "var(--gray-color-5)",
         },
         black: "var(--black-color)",
         white: "var(--white-color)",
@@ -37,6 +39,7 @@ export default {
           3: "var(--risk-color-3)",
           4: "var(--risk-color-4)",
         },
+        green: "var(--green-color)",
         link: "var(--link-color)",
         success: "var(--success-color)",
         info: "var(--info-color)",

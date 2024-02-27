@@ -36,7 +36,7 @@ const Alarm = ({ className, message, type }) => {
   return (
     <div
       className={clsx(
-        "shadow-toast flex flex-row items-center gap-2 rounded border-[1px] p-4 text-base text-primary-text",
+        "flex flex-row items-center gap-2 rounded border p-4 text-base text-primary-text shadow-toast",
         className,
         Info[type].className
       )}

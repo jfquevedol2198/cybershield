@@ -1,0 +1,26 @@
+.editor-button {
+  border: none !important;
+}
+.toolbarClassName {
+  border: none !important;
+  background: linear-gradient(to bottom, white 85%, #00000008) !important;
+}
+.wrapperClassName {
+  background: var(--white-color);
+}
+.editorClassName {
+  background: var(--white-color);
+  padding: 0.5rem;
+  padding-top: 0;
+  height: 5.625rem !important;
+  margin-top: 1.8rem;
+  &.rdw-editor-main {
+    overflow: hidden;
+    &:hover {
+      overflow: auto;
+    }
+  }
+}
+.public-DraftStyleDefault-block {
+  margin: 0.2rem !important;
+}

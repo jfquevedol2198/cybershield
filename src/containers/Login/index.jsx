@@ -1,16 +1,17 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { Auth } from "aws-amplify";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
-import api from "../../api";
 import Alarm, { AlarmType } from "../../components/Alarm";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import FormControl from "../../components/FormControl";
-import { setCookieValue } from "../../utils";
-import { AUTH_TOKEN, ButtonVariant, SizeVariant } from "../../utils/constants";
+import useAuth from "../../hooks/useAuth";
+import { delay } from "../../utils";
+import { ButtonVariant, SizeVariant } from "../../utils/constants";
 import snack from "../../utils/snack";
 
 const schema = z.object({
@@ -22,11 +23,27 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const {
+    authToken,
+    user,
+    setUser,
+    setTempUser,
+    fetchUserInfo,
+    updateUserInfo,
+  } = useAuth();
+  useEffect(() => {
+    console.log("____ login");
+  }, []);
+  useEffect(() => {
+    if (authToken && user && user.username) {
+      navigate("/dashboard");
+    }
+  }, [user, authToken]);
 
   const getDefaultValues = () => {
     return {
-      email: "fernando",
-      password: "fernando",
+      email: "",
+      password: "",
     };
   };
   const form = useForm({
@@ -35,28 +52,74 @@ const Login = () => {
   });
 
   const onSubmit = async (e) => {
+    const temporaryUser = {
+      email: e.email,
+      username: e.email,
+    };
+
     try {
       setError(null);
       setIsLoading(true);
 
-      const {
-        data: { token },
-      } = await api.login({
-        email: e.email,
-        password: e.password,
-      });
+      const data = await Auth.signIn(e.email, e.password);
+      console.log("data in sign in", data);
+      const userInfo = await fetchUserInfo(e.email);
 
-      snack.success("Successfully logged in!");
-      setCookieValue(AUTH_TOKEN, token, 2, "hour");
-
-      navigate("/");
-    } catch (error) {
-      const { response } = error;
-      if (response) {
-        setError(response.data.message);
-      } else {
-        setError(error.message);
+      // user has not completed profile
+      if (!userInfo) {
+        setTempUser(temporaryUser);
+        snack.info("Please complete profile");
+        navigate("/complete-profile");
+        return;
       }
+
+
+      console.log("data in sign in", data);
+      if (data.challengeName === "NEW_PASSWORD_REQUIRED") {
+        setTempUser(data);
+        navigate("/confirm-password");
+        return;
+      }
+
+      // user must setup MFA
+      if (data.challengeName === "MFA_SETUP") {
+        setTempUser(data);
+        updateUserInfo(userInfo);
+        snack.info("Please setup MFA");
+        navigate("/mfa/scan");
+        return;
+      }
+
+      // user must sign in with MFA
+      if (data.challengeName === "SOFTWARE_TOKEN_MFA") {
+        setTempUser(data);
+        updateUserInfo(userInfo);
+        navigate("/mfa/auth-confirm-sign-in");
+        return;
+      }
+
+      
+      const token = data.signInUserSession?.accessToken?.jwtToken;
+      if (!token) {
+        setError("Something went wrong, please try again");
+        return;
+      }
+      
+      setUser(data);
+      updateUserInfo(userInfo);
+      snack.success("Successfully logged in!");
+
+      await delay(1000);
+      navigate("/dashboard");
+    } catch (error) {
+      console.log("error in sign in", error);
+      let { name, message } = error;
+      if (name === "UserNotConfirmedException") {
+        setTempUser(temporaryUser);
+        navigate("/confirm-account");
+        return;
+      }
+      setError(message);
     } finally {
       setIsLoading(false);
     }

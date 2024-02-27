@@ -1,6 +1,6 @@
 .header {
   box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.1);
-  @apply flex h-[3.25rem] w-full flex-row items-center justify-between bg-secondary-3 px-5 text-white;
+  @apply sticky top-0 z-10 flex h-[3.25rem] w-full flex-row items-center justify-between bg-secondary-3 px-5 text-white;
   flex: 0 0 3.25rem;
   .right {
     button {

@@ -3,18 +3,22 @@ import {
   InformationCircleIcon,
   PhoneIcon,
 } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Auth } from "aws-amplify";
 
-import api from "../../api";
+// import api from "../../api8000";
 import AuthLayout from "../../components/AuthLayout";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import NormalButton from "../../components/NormalButton";
 import { ButtonVariant } from "../../utils";
 import snack from "../../utils/snack";
+import { delay } from "../../utils";
+import useAuth from "../../hooks/useAuth";
 
 const schema = z.object({
   value1: z.string().min(1),
@@ -32,6 +36,8 @@ const VerifyMode = {
 };
 
 const AuthCodeVerify = () => {
+  const navigate = useNavigate();
+  const { tempUser, setUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [verifyMode, setVerifyMode] = useState(VerifyMode.AUTH_APP);
@@ -98,15 +104,33 @@ const AuthCodeVerify = () => {
     const code = `${e.value1}${e.value2}${e.value3}${e.value4}${e.value5}${e.value6}`;
     try {
       setIsLoading(true);
-      await api.verifyCode(code);
+      const user = tempUser;
+      console.log("tempUser in verify", user);
+      
+      const data = await Auth.verifyTotpToken(user, code);
+    
+      // this method returns SUCCESS
+      await Auth.setPreferredMFA(user, 'TOTP');
+      
+      const token = data?.accessToken?.jwtToken;
+      if (!token) {
+        snack.error("Something went wrong, please try again");
+        navigate("/login");
+        return;
+      }
+      setUser(data);
+      // todo: updateUserInfo for th auth hook
+      // updateUserInfo(userInfo);
+      snack.success("Successfully logged in!");
+
+      await delay(1000);
+      navigate("/dashboard");
+
       snack.success("Verified!");
     } catch (error) {
-      const { response } = error;
-      if (response) {
-        snack.error(response.data.message);
-      } else {
-        snack.error(error.message);
-      }
+      console.error("error", error);
+      snack.error('error', error.message);
+      navigate("/login");
     } finally {
       setIsLoading(false);
     }
@@ -133,7 +157,7 @@ const AuthCodeVerify = () => {
                 <div key={`value${index + 1}`} ref={inputRefs[index]}>
                   <input
                     id={`value${index + 1}`}
-                    className="shadow-input relative mx-[1px] my-[2px] h-12 w-12 text-center text-[1.625rem]"
+                    className="relative mx-[1px] my-[2px] h-12 w-12 text-center text-[1.625rem] shadow-input"
                     onPasteCapture={onPasteCapture}
                     onKeyDown={(e) => onKeyDown(e.keyCode, index)}
                     maxLength={1}
@@ -169,12 +193,12 @@ const AuthCodeVerify = () => {
         >
           VERIFY
         </Button>
-        <NormalButton
+        {/* <NormalButton
           className="mb-4 justify-center text-primary-3 underline active:opacity-50"
           onClick={() => setIsModalOpen(true)}
         >
           Change to other verification method
-        </NormalButton>
+        </NormalButton> */}
       </form>
 
       <Modal
